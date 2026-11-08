@@ -237,7 +237,7 @@ export function SurahReader({ meta, prev, next, locale }: { meta: QuranSurahMeta
               </li>
             ))}
           </ol>
-          {!arabicOnly && <p className="text-xs text-muted-foreground">{t("reader.translationSource", { edition: t(`reader.editions.${edition}`) })}</p>}
+          {!arabicOnly && <p className="text-xs text-muted-foreground">{t("reader.translationSource", { edition: t(`reader.editions.${edition.replace(".", "_")}`) })}</p>}
         </>
       )}
 

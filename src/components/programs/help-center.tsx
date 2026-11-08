@@ -8,13 +8,13 @@ import {
   Lightbulb,
   Mail,
   MapPin,
-  MessageCircle,
   MessageCircleQuestionMark,
   Phone,
   Siren,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/social-icons";
 import type { Locale } from "@/lib/types";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -112,7 +112,7 @@ export function HelpCenter({ locale, whatsapp, mapsUrl, email }: { locale: Local
           <li>
             <a href={buildWhatsAppUrl(whatsapp, t("whatsapp.greeting"))} target="_blank" rel="noopener noreferrer" className={cardClass}>
               <IconCircle tone="soft" shape="square">
-                <MessageCircle />
+                <WhatsAppIcon />
               </IconCircle>
               <span className="min-w-0 flex-1">
                 <span className="block font-bold">{t("cards.whatsapp.title")}</span>

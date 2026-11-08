@@ -97,5 +97,16 @@
     },
     "cta": "Volunteer with us",
     "secondary": "See our programs"
+  },
+  "documentary": {
+    "tag": "Documentary",
+    "title": "Meet Al Muttaqin in a short documentary",
+    "highlight": "short documentary",
+    "description": "A short documentary about Al-Muttaqin Mosque in Chiba: the stories of new Muslims and the mosque's role as an Islamic cultural center in Japanese society.",
+    "watchOnYoutube": "Watch on YouTube",
+    "play": "Play video",
+    "duration": "Duration",
+    "published": "Published",
+    "channel": "Channel"
   }
 }

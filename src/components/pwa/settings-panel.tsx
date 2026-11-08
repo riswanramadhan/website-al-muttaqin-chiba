@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Bell, BellOff, BellRing, CircleCheck, HardDrive, Info, Languages, LocateFixed, Landmark, Monitor, Moon, Send, Smartphone, Sun, SunMoon, TriangleAlert, Type } from "lucide-react";
+import { AudioLines, Bell, BellOff, BellRing, CircleCheck, HardDrive, Info, Languages, LocateFixed, Landmark, Monitor, Moon, Play, Send, Smartphone, Square, Sun, SunMoon, TriangleAlert, Type, Vibrate, Volume1, Volume2, VolumeX } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { localeNames } from "@/i18n/routing";
@@ -20,6 +20,7 @@ import { useStandalone } from "./browser-state";
 import { InstallButton, IosSteps } from "./install-prompt";
 import { clearSiteStorage, useLocalValue, writeLocal } from "./local-store";
 import { usePushSubscription } from "./use-push-subscription";
+import { previewSound, setPlayingVolume, stopAlertSound, triggerAlert, unlockAudio, useAdhanAlert, useSoundSettings, warmAdhanCache, type SoundMode } from "./adhan-sound";
 
 export const QIBLA_LOCATION_KEY = "acc-qibla-location";
 export type QiblaLocationMode = "device" | "mosque";
@@ -30,6 +31,13 @@ const THEMES: { mode: ThemeMode; icon: React.ComponentType<{ className?: string 
   { mode: "dark", icon: Moon },
   { mode: "system", icon: Monitor },
   { mode: "sun", icon: SunMoon },
+];
+
+const SOUND_OPTIONS: { mode: SoundMode; icon: React.ComponentType<{ className?: string }> }[] = [
+  { mode: "adhan", icon: AudioLines },
+  { mode: "chime", icon: Bell },
+  { mode: "vibrate", icon: Vibrate },
+  { mode: "silent", icon: VolumeX },
 ];
 
 function Section({ id, icon, title, description, children }: { id: string; icon: React.ReactNode; title: string; description?: string; children: React.ReactNode }) {
@@ -97,6 +105,9 @@ export function SettingsPanel({ version }: { version: string }) {
   const [clearOpen, setClearOpen] = React.useState(false);
   const [isPending, startTransition] = React.useTransition();
   const arabicClass = useArabicSizeClass();
+  const [sound, setSound] = useSoundSettings();
+  const alert = useAdhanAlert();
+  const previewing = alert.status === "playing" && alert.source === "preview";
 
   const switchLocale = (next: Locale) => {
     if (next === locale) return;
@@ -104,6 +115,7 @@ export function SettingsPanel({ version }: { version: string }) {
   };
 
   const enableNotifications = async () => {
+    unlockAudio();
     const result = await push.enable();
     if (result === "granted") toast({ title: t("notifications.enabledToast"), tone: "success" });
     else if (result === "denied") toast({ title: tpwa("notifications.denied"), tone: "error" });
@@ -116,9 +128,34 @@ export function SettingsPanel({ version }: { version: string }) {
     toast({ title: t("notifications.disabledToast"), tone: "default" });
   };
 
+  /** Uji rantai lengkap: notifikasi sistem lewat service worker + suara & banner di App. */
   const sendTest = async () => {
-    const ok = await push.sendTest(t("notifications.testTitle"), t("notifications.testBody"));
+    unlockAudio();
+    const title = t("notifications.testTitle");
+    const body = t("notifications.testBody");
+    triggerAlert({ title, body, tag: "acc-test", kind: "test" }, sound);
+    const ok = await push.sendTest(title, body);
     toast(ok ? { title: t("notifications.testSent"), tone: "success" } : { title: t("notifications.testFailed"), tone: "error" });
+  };
+
+  const chooseSound = (mode: SoundMode) => {
+    if (previewing) stopAlertSound();
+    setSound({ ...sound, mode });
+    if (mode === "adhan") warmAdhanCache();
+  };
+
+  const changeVolume = (value: number) => {
+    const volume = Math.min(1, Math.max(0, value / 100));
+    setSound({ ...sound, volume });
+    setPlayingVolume(volume);
+  };
+
+  const togglePreview = () => {
+    if (previewing) {
+      stopAlertSound();
+      return;
+    }
+    previewSound(sound, { title: t("sound.previewTitle"), body: "" });
   };
 
   const chooseQibla = (mode: QiblaLocationMode) => {
@@ -219,6 +256,52 @@ export function SettingsPanel({ version }: { version: string }) {
               </Button>
             </div>
           )}
+
+          <div className="space-y-3 border-t border-border pt-4">
+            <div>
+              <h3 className="text-sm font-bold">{t("sound.title")}</h3>
+              <p className="text-xs text-muted-foreground">{t("sound.description")}</p>
+            </div>
+            <div role="group" aria-label={t("sound.title")} className="grid grid-cols-1 gap-2 min-[380px]:grid-cols-2">
+              {SOUND_OPTIONS.map(({ mode, icon: Icon }) => (
+                <ChoiceButton key={mode} pressed={sound.mode === mode} onClick={() => chooseSound(mode)}>
+                  <Icon aria-hidden />
+                  <span className="min-w-0">
+                    <span className="block">{t(`sound.modes.${mode}`)}</span>
+                    <span className="block text-xs font-normal text-muted-foreground">{t(`sound.hints.${mode}`)}</span>
+                  </span>
+                </ChoiceButton>
+              ))}
+            </div>
+            <div className={cn("space-y-1.5", (sound.mode === "silent" || sound.mode === "vibrate") && "opacity-50")}>
+              <label htmlFor="adhan-volume" className="flex items-center justify-between text-sm font-semibold">
+                {t("sound.volume")}
+                <span className="text-xs font-normal text-muted-foreground tabular">{Math.round(sound.volume * 100)}%</span>
+              </label>
+              <div className="flex items-center gap-3">
+                <Volume1 className="size-4 shrink-0 stroke-[1.5] text-muted-foreground" aria-hidden />
+                <input
+                  id="adhan-volume"
+                  type="range"
+                  min={0}
+                  max={100}
+                  step={5}
+                  value={Math.round(sound.volume * 100)}
+                  onChange={(e) => changeVolume(Number(e.target.value))}
+                  disabled={sound.mode === "silent" || sound.mode === "vibrate"}
+                  className="h-2 w-full cursor-pointer accent-primary disabled:cursor-not-allowed"
+                />
+                <Volume2 className="size-4 shrink-0 stroke-[1.5] text-muted-foreground" aria-hidden />
+              </div>
+              <p className="text-xs text-muted-foreground">{t("sound.volumeHint")}</p>
+            </div>
+            <Button variant="outline" className="w-full" onClick={togglePreview} disabled={sound.mode === "silent"} aria-pressed={previewing}>
+              {previewing ? <Square aria-hidden /> : <Play aria-hidden />}
+              {previewing ? t("sound.stop") : sound.mode === "adhan" ? t("sound.previewAdhan") : t("sound.preview")}
+            </Button>
+            <Notice>{t("sound.foregroundNote")}</Notice>
+            <Notice tone="warning">{t("sound.backgroundNote")}</Notice>
+          </div>
 
           <div className={cn("divide-y divide-border", !push.enabled && "opacity-60")}>
             <p className="pb-1 text-xs font-semibold tracking-wide text-muted-foreground uppercase">{t("notifications.prayers")}</p>

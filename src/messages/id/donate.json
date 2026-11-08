@@ -57,7 +57,14 @@
     "qrisAlt": "Kode QRIS resmi Al Muttaqin Cultural Center",
     "downloadQris": "Unduh QRIS",
     "scanHint": "Pindai dengan e-wallet atau m-banking Indonesia mana pun, masukkan nominal unik, lalu konfirmasi di bawah.",
-    "empty": "Belum ada rekening untuk mata uang ini."
+    "empty": "Belum ada rekening untuk mata uang ini.",
+    "logos": {
+      "title": "Pindai dari aplikasi berlogo QRIS",
+      "ewallet": "E-wallet",
+      "banks": "M-banking",
+      "more": "dan semua bank atau e-wallet lain yang berlogo QRIS.",
+      "alt": "Logo {name}"
+    }
   },
   "unique": {
     "tag": "Nominal unik",

@@ -33,9 +33,9 @@ export const donationAccounts: DonationAccount[] = [
     accountName: "Al Muttaqin Cultural Center",
     qrImage: "/images/qris-placeholder.svg",
     note: {
-      ja: "GoPay、OVO、DANA、ShopeePay、インドネシアのモバイルバンキングで読み取れます。",
-      en: "Scan with GoPay, OVO, DANA, ShopeePay, or any Indonesian mobile banking app.",
-      id: "Pindai dengan GoPay, OVO, DANA, ShopeePay, atau m-banking bank Indonesia.",
+      ja: "GoPay・OVO・DANA・ShopeePay、インドネシア各銀行のモバイルバンキングに対応。",
+      en: "Works with GoPay, OVO, DANA, ShopeePay and Indonesian mobile banking.",
+      id: "Bisa lewat GoPay, OVO, DANA, ShopeePay, dan m-banking bank Indonesia.",
     },
     primary: true,
   },

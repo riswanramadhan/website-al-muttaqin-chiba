@@ -4,79 +4,102 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ------------------------------------------------------------------
-   Token desain Al Muttaqin Cultural Center (PRD §8 / PRD-01)
-   Palet: merah gelap #7F1D1D, hitam #0A0A0A, putih #FFFFFF, abu #F5F5F5.
+   Token desain Al Muttaqin Cultural Center
+   Mengikuti DESIGN GUIDELINES - ACC: cream #FFF5E6 dominan, maroon #800000 untuk judul,
+   highlight & ornamen, coklat tua lembut #4B3832 untuk teks isi, ornamen maroon transparan.
    Semua komponen memakai token ini; tidak ada hex di komponen.
 ------------------------------------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --card: #ffffff;
-  --card-foreground: #0a0a0a;
-  --surface: #f5f5f5;
-  --surface-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --muted: #f5f5f5;
-  --muted-foreground: #5c5c5c;
-  --primary: #7f1d1d;
-  --primary-foreground: #ffffff;
-  --primary-hover: #6b1717;
-  --brand: #7f1d1d;
-  --accent: #fdf2f2;
-  --accent-foreground: #7f1d1d;
-  --secondary: #0a0a0a;
-  --secondary-foreground: #ffffff;
-  --border: #e6e6e6;
-  --input: #e6e6e6;
-  --ring: #7f1d1d;
+  --background: #fff5e6;
+  --foreground: #4b3832;
+  --heading: #3a2620;
+  --card: #fffbf4;
+  --card-foreground: #4b3832;
+  --surface: #f8ead4;
+  --surface-foreground: #3a2620;
+  --popover: #fffbf4;
+  --popover-foreground: #4b3832;
+  --muted: #f5e4ca;
+  --muted-foreground: #765d53;
+  --primary: #800000;
+  --primary-foreground: #fff5e6;
+  --primary-hover: #660000;
+  --brand: #800000;
+  --gold: #b8862b;
+  --gold-soft: #f3cf8a;
+  --accent: #f7e0d3;
+  --accent-foreground: #800000;
+  --secondary: #4b3832;
+  --secondary-foreground: #fff5e6;
+  --border: #ecd9bd;
+  --ornament: rgb(128 0 0 / 0.5);
+  --input: #e6d0b0;
+  --ring: #800000;
   --success: #15803d;
   --success-foreground: #ffffff;
   --warning: #b45309;
   --warning-foreground: #ffffff;
   --destructive: #b91c1c;
   --destructive-foreground: #ffffff;
-  --hero: #0a0a0a;
-  --hero-foreground: #ffffff;
-  --hero-muted: #a3a3a3;
+  --hero: #2a0707;
+  --hero-2: #5a0c0c;
+  --hero-foreground: #fff5e6;
+  --hero-muted: #ead6c6;
   --radius: 1.25rem;
-  --shadow-soft: 0 1px 2px rgb(10 10 10 / 0.04), 0 8px 24px -12px rgb(10 10 10 / 0.12);
-  --pattern-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.09' stroke-width='1'%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Crect x='24' y='24' width='48' height='48' transform='rotate(45 48 48)'/%3E%3Cpath d='M0 48h24M72 48h24M48 0v24M48 72v24'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3C/g%3E%3C/svg%3E");
-  --pattern-shippo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'%3E%3Ccircle cx='24' cy='24' r='24'/%3E%3Ccircle cx='0' cy='0' r='24'/%3E%3Ccircle cx='48' cy='0' r='24'/%3E%3Ccircle cx='0' cy='48' r='24'/%3E%3Ccircle cx='48' cy='48' r='24'/%3E%3C/g%3E%3C/svg%3E");
-  --pattern-star-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%230a0a0a' stroke-opacity='0.06' stroke-width='1'%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Crect x='24' y='24' width='48' height='48' transform='rotate(45 48 48)'/%3E%3Cpath d='M0 48h24M72 48h24M48 0v24M48 72v24'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  --shadow-soft: 0 1px 2px rgb(75 56 50 / 0.05), 0 10px 28px -14px rgb(75 56 50 / 0.22);
+  --pattern-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23fff5e6' stroke-opacity='0.08' stroke-width='1'%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Crect x='24' y='24' width='48' height='48' transform='rotate(45 48 48)'/%3E%3Cpath d='M0 48h24M72 48h24M48 0v24M48 72v24'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  --pattern-shippo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23fff5e6' stroke-opacity='0.07' stroke-width='1'%3E%3Ccircle cx='24' cy='24' r='24'/%3E%3Ccircle cx='0' cy='0' r='24'/%3E%3Ccircle cx='48' cy='0' r='24'/%3E%3Ccircle cx='0' cy='48' r='24'/%3E%3Ccircle cx='48' cy='48' r='24'/%3E%3C/g%3E%3C/svg%3E");
+  --pattern-star-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23800000' stroke-opacity='0.07' stroke-width='1'%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Crect x='24' y='24' width='48' height='48' transform='rotate(45 48 48)'/%3E%3Cpath d='M0 48h24M72 48h24M48 0v24M48 72v24'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3C/g%3E%3C/svg%3E");
+
+  /* Ikon 3D (gradien terang, tengah, gelap) */
+  --i3d-maroon-1: #e8736b; --i3d-maroon-2: #a81c1c; --i3d-maroon-3: #6a0808;
+  --i3d-rose-1: #ff9db0; --i3d-rose-2: #e8476d; --i3d-rose-3: #9c1640;
+  --i3d-coral-1: #ffab84; --i3d-coral-2: #f0643c; --i3d-coral-3: #ad3816;
+  --i3d-amber-1: #ffd977; --i3d-amber-2: #f2a52a; --i3d-amber-3: #a96404;
+  --i3d-emerald-1: #7beab1; --i3d-emerald-2: #1fae6b; --i3d-emerald-3: #0a6a40;
+  --i3d-teal-1: #7ae3df; --i3d-teal-2: #15a8a2; --i3d-teal-3: #0a625e;
+  --i3d-sky-1: #96d6ff; --i3d-sky-2: #2f95e8; --i3d-sky-3: #12529f;
+  --i3d-indigo-1: #aeb7ff; --i3d-indigo-2: #5c63e6; --i3d-indigo-3: #2c2d9c;
+  --i3d-violet-1: #d8aeff; --i3d-violet-2: #9b51e0; --i3d-violet-3: #5a1d9c;
+  --i3d-slate-1: #b5aca7; --i3d-slate-2: #6f6560; --i3d-slate-3: #3b3330;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #f5f5f5;
-  --card: #141414;
-  --card-foreground: #f5f5f5;
-  --surface: #161616;
-  --surface-foreground: #f5f5f5;
-  --popover: #171717;
-  --popover-foreground: #f5f5f5;
-  --muted: #1c1c1c;
-  --muted-foreground: #a3a3a3;
-  --primary: #991b1b;
-  --primary-foreground: #ffffff;
-  --primary-hover: #b91c1c;
-  --brand: #f87171;
-  --accent: #2a1313;
-  --accent-foreground: #fca5a5;
-  --secondary: #f5f5f5;
-  --secondary-foreground: #0a0a0a;
-  --border: #262626;
-  --input: #2a2a2a;
-  --ring: #ef4444;
+  --background: #140b09;
+  --foreground: #efe2d2;
+  --heading: #fff5e6;
+  --card: #1d1210;
+  --card-foreground: #efe2d2;
+  --surface: #221613;
+  --surface-foreground: #efe2d2;
+  --popover: #221613;
+  --popover-foreground: #efe2d2;
+  --muted: #2b1c18;
+  --muted-foreground: #bea89a;
+  --primary: #9e1b1b;
+  --primary-foreground: #fff5e6;
+  --primary-hover: #b82626;
+  --brand: #f0a093;
+  --gold: #e2b65c;
+  --gold-soft: #f3cf8a;
+  --accent: #3a1714;
+  --accent-foreground: #f6b6a9;
+  --secondary: #efe2d2;
+  --secondary-foreground: #140b09;
+  --border: #33231e;
+  --ornament: rgb(240 160 147 / 0.35);
+  --input: #3a2a24;
+  --ring: #f0a093;
   --success: #22c55e;
   --success-foreground: #052e16;
   --warning: #f59e0b;
   --warning-foreground: #1c1917;
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --hero: #050505;
-  --hero-foreground: #ffffff;
-  --hero-muted: #a3a3a3;
+  --hero: #120504;
+  --hero-2: #3a0909;
+  --hero-foreground: #fff5e6;
+  --hero-muted: #dcc6b8;
   --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
   --pattern-star-dark: var(--pattern-star);
 }
@@ -112,6 +135,11 @@
   --color-hero: var(--hero);
   --color-hero-foreground: var(--hero-foreground);
   --color-hero-muted: var(--hero-muted);
+  --color-hero-2: var(--hero-2);
+  --color-heading: var(--heading);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-ornament: var(--ornament);
 
   --font-sans: var(--font-jakarta), var(--font-noto-jp), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-jp: var(--font-noto-jp), var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
@@ -187,6 +215,19 @@
     @apply font-bold tracking-tight;
     text-wrap: balance;
   }
+  /* Judul memakai warna judul guideline ACC (font tetap Plus Jakarta Sans, modern & simpel). */
+  h1,
+  h2 {
+    color: var(--heading);
+  }
+  .hero-surface h1,
+  .hero-surface h2,
+  .bg-hero h1,
+  .bg-hero h2,
+  .bg-primary h1,
+  .bg-primary h2 {
+    color: inherit;
+  }
   p {
     text-wrap: pretty;
   }
@@ -235,7 +276,20 @@
 }
 
 @utility hero-surface {
-  @apply bg-hero text-hero-foreground pattern-star relative overflow-hidden;
+  @apply text-hero-foreground relative overflow-hidden;
+  background-color: var(--hero);
+  background-image: var(--pattern-star), radial-gradient(120% 90% at 85% 10%, var(--hero-2) 0%, var(--hero) 62%);
+  background-size: 96px 96px, 100% 100%;
+}
+
+/* Garis ornamen tipis (guideline ACC: ornamen maroon transparan). */
+@utility ornament-line {
+  height: 1px;
+  background-image: linear-gradient(90deg, transparent, var(--ornament) 20%, var(--ornament) 80%, transparent);
+}
+
+@utility safe-top {
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 @utility card-surface {
@@ -287,4 +341,81 @@
   background: #ffffff;
   color: #0a0a0a;
   border-radius: 0.75rem;
+}
+
+/* ------------------------------------------------------------------
+   Ikon 3D gaya aplikasi super (dipakai <Icon3D> dan <IconCircle>)
+------------------------------------------------------------------- */
+@layer components {
+  .icon-3d {
+    --i3d-1: var(--i3d-maroon-1);
+    --i3d-2: var(--i3d-maroon-2);
+    --i3d-3: var(--i3d-maroon-3);
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: radial-gradient(130% 125% at 28% 16%, var(--i3d-1) 0%, var(--i3d-2) 52%, var(--i3d-3) 100%);
+    box-shadow:
+      inset 0 1.5px 0.5px rgb(255 255 255 / 0.55),
+      inset 0 -3px 6px rgb(0 0 0 / 0.22),
+      0 8px 16px -6px color-mix(in oklab, var(--i3d-3) 70%, transparent),
+      0 1px 2px rgb(0 0 0 / 0.14);
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s ease;
+  }
+  .icon-3d::before {
+    content: "";
+    position: absolute;
+    left: 13%;
+    right: 13%;
+    top: 5%;
+    height: 44%;
+    border-radius: 999px 999px 45% 45% / 100% 100% 60% 60%;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0));
+    z-index: -1;
+    pointer-events: none;
+  }
+  .icon-3d > svg {
+    position: relative;
+    filter: drop-shadow(0 1.5px 0 var(--i3d-3)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.25));
+  }
+  .icon-3d > svg:not(.lucide) {
+    stroke-width: 2;
+  }
+  .icon-3d > svg.lucide {
+    stroke-width: 2.1;
+    fill: rgb(255 255 255 / 0.16);
+  }
+  .icon-3d[data-tone="rose"] { --i3d-1: var(--i3d-rose-1); --i3d-2: var(--i3d-rose-2); --i3d-3: var(--i3d-rose-3); }
+  .icon-3d[data-tone="coral"] { --i3d-1: var(--i3d-coral-1); --i3d-2: var(--i3d-coral-2); --i3d-3: var(--i3d-coral-3); }
+  .icon-3d[data-tone="amber"] { --i3d-1: var(--i3d-amber-1); --i3d-2: var(--i3d-amber-2); --i3d-3: var(--i3d-amber-3); }
+  .icon-3d[data-tone="emerald"] { --i3d-1: var(--i3d-emerald-1); --i3d-2: var(--i3d-emerald-2); --i3d-3: var(--i3d-emerald-3); }
+  .icon-3d[data-tone="teal"] { --i3d-1: var(--i3d-teal-1); --i3d-2: var(--i3d-teal-2); --i3d-3: var(--i3d-teal-3); }
+  .icon-3d[data-tone="sky"] { --i3d-1: var(--i3d-sky-1); --i3d-2: var(--i3d-sky-2); --i3d-3: var(--i3d-sky-3); }
+  .icon-3d[data-tone="indigo"] { --i3d-1: var(--i3d-indigo-1); --i3d-2: var(--i3d-indigo-2); --i3d-3: var(--i3d-indigo-3); }
+  .icon-3d[data-tone="violet"] { --i3d-1: var(--i3d-violet-1); --i3d-2: var(--i3d-violet-2); --i3d-3: var(--i3d-violet-3); }
+  .icon-3d[data-tone="slate"] { --i3d-1: var(--i3d-slate-1); --i3d-2: var(--i3d-slate-2); --i3d-3: var(--i3d-slate-3); }
+  .group:hover .icon-3d {
+    transform: translateY(-2px) rotate(-3deg);
+  }
+  .group:active .icon-3d {
+    transform: scale(0.94);
+  }
+}
+
+/* Highlight judul di permukaan gelap (hero, footer, kartu maroon): maroon tidak terbaca di sana,
+   jadi pakai gradasi emas lembut ke cream yang modern dan kontras. */
+:is(.hero-surface, .bg-hero, .bg-primary) .text-brand {
+  color: var(--gold-soft);
+}
+:is(.hero-surface, .bg-hero, .bg-primary) :is(h1, h2, h3) .text-brand {
+  background-image: linear-gradient(100deg, var(--gold-soft) 0%, #ffe9c2 45%, var(--gold-soft) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

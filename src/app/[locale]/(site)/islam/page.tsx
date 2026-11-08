@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowRight, BookOpenText, Camera, DoorOpen, Footprints, Hand, HeartHandshake, Mail, MessageCircle, Shirt, UsersRound, type LucideIcon } from "lucide-react";
+import { ArrowRight, BookOpenText, Camera, CircleQuestionMark, DoorOpen, Footprints, Hand, HeartHandshake, Mail, Shirt, UsersRound, type LucideIcon } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/social-icons";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
 import { getProfile } from "@/lib/data";
@@ -35,7 +36,7 @@ const LEARN: { key: "1" | "2" | "3" | "4"; icon: LucideIcon; href?: string }[] =
   { key: "1", icon: HeartHandshake, href: "/programs/kelas-muallaf" },
   { key: "2", icon: DoorOpen, href: "/programs/open-mosque" },
   { key: "3", icon: BookOpenText },
-  { key: "4", icon: MessageCircle, href: "/faq" },
+  { key: "4", icon: CircleQuestionMark, href: "/faq" },
 ];
 
 export default async function IslamPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -218,7 +219,7 @@ export default async function IslamPage({ params }: { params: Promise<{ locale: 
           </div>
           <div className="flex flex-col gap-3 lg:justify-center">
             <a href={buildWhatsAppUrl(profile.whatsapp, t("contact.whatsappText"))} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "inverse", size: "lg" })}>
-              <MessageCircle />
+              <WhatsAppIcon />
               {t("contact.whatsapp")}
             </a>
             <a href={`mailto:${profile.email}`} className={buttonVariants({ variant: "outlineInverse", size: "lg" })}>

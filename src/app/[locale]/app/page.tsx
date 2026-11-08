@@ -3,17 +3,16 @@ import { ArrowRight, Quote } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/lib/types";
 import { Link } from "@/i18n/navigation";
-import { getAnnouncements, getEvents, getHadithOfTheDay, getPrayerConfig, getProfile } from "@/lib/data";
+import { getAnnouncements, getEvents, getHadithOfTheDay, getProfile } from "@/lib/data";
 import { pick } from "@/lib/utils/i18n";
 import { APP_SCREENS } from "@/components/site/nav-config";
-import { SCREEN_ICONS } from "@/components/app/screen-icons";
+import { SCREEN_ICONS, SCREEN_TONES } from "@/components/app/screen-icons";
 import { IconCircle } from "@/components/ui/primitives";
 import { HijriDateBadge, JumuahCard, PrayerTodayCard } from "@/components/prayer";
 import { AnnouncementList, LiveStatusBanner } from "@/components/activities";
 import { DonateCta } from "@/components/donate";
 import { InstallPrompt } from "@/components/pwa/install-prompt";
 import { OfflineBadge } from "@/components/pwa/offline-badge";
-import { LocalAdhanReminder } from "@/components/pwa/local-adhan-reminder";
 
 export const dynamic = "force-dynamic";
 
@@ -28,11 +27,10 @@ export default async function AppHomePage({ params }: { params: Promise<{ locale
   const { locale: raw } = await params;
   setRequestLocale(raw);
   const locale = raw as Locale;
-  const [t, tp, profile, config, announcements, hadith, nextKajian] = await Promise.all([
+  const [t, tp, profile, announcements, hadith, nextKajian] = await Promise.all([
     getTranslations({ locale, namespace: "app" }),
     getTranslations({ locale, namespace: "pwa" }),
     getProfile(),
-    getPrayerConfig(),
     getAnnouncements({ limit: 3 }),
     getHadithOfTheDay(),
     getEvents({ upcoming: true, category: "kajian", limit: 1 }),
@@ -43,7 +41,6 @@ export default async function AppHomePage({ params }: { params: Promise<{ locale
 
   return (
     <div className="space-y-6">
-      <LocalAdhanReminder config={config} coordinates={profile.coordinates} />
       <OfflineBadge />
 
       <section className="hero-surface rounded-3xl p-5" aria-labelledby="app-home-greeting">
@@ -69,7 +66,7 @@ export default async function AppHomePage({ params }: { params: Promise<{ locale
             return (
               <li key={s.key}>
                 <Link href={s.href} className="group flex flex-col items-center gap-2 rounded-xl text-center text-[0.7rem] font-semibold">
-                  <IconCircle tone="soft" shape="square" className="transition-transform group-hover:-translate-y-0.5 group-active:scale-95">
+                  <IconCircle tone="soft" shape="square" color={SCREEN_TONES[s.key]}>
                     {Icon ? <Icon /> : null}
                   </IconCircle>
                   <span className="line-clamp-2 leading-tight">{t(`screens.${s.key}`)}</span>

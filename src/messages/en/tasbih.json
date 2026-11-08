@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Digital tasbih",
-    "description": "A simple dhikr counter with targets, rounds, optional vibration and click sound, and a daily record kept on your device."
+    "description": "A modern tasbih: a ring of beads that turns with every tap, targets of 33, 99, or 100, haptic feedback, a soft click, dhikr presets, and a daily record kept on your device."
   },
   "title": "Digital tasbih",
   "description": "Tap, count, and keep a daily record",
   "countLabel": "Current count",
-  "tapHint": "Tap the circle or press Space",
+  "tapHint": "Tap the circle, or press Space or Enter",
   "tapButton": "Count dhikr",
   "targetLabel": "Target",
   "targetReached": "Target reached",
@@ -26,7 +26,10 @@
   },
   "settings": {
     "vibrate": "Vibrate on tap",
-    "sound": "Click sound"
+    "sound": "Click sound",
+    "autoAdvance": "Move to the next dhikr",
+    "autoAdvanceHint": "After the target: Subhanallah, Alhamdulillah, Allahu Akbar, and so on.",
+    "soundHint": "A soft bead click, generated on the device."
   },
   "reset": {
     "button": "Reset",
@@ -40,6 +43,12 @@
     "week": "Last 7 days",
     "weekTotal": "{count} in total",
     "empty": "No dhikr recorded yet. Your counts are saved on this device.",
-    "dayTotal": "{count, plural, one {# count} other {# counts}}"
-  }
+    "dayTotal": "{count, plural, one {# count} other {# counts}}",
+    "recent": "Recent rounds",
+    "roundItem": "{count, plural, one {# time} other {# times}}"
+  },
+  "progressLabel": "{count} of {target}",
+  "next": "Next: {name}",
+  "prevDhikr": "Previous dhikr",
+  "nextDhikr": "Next dhikr"
 }

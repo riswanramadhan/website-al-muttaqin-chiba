@@ -79,6 +79,39 @@
     "iqamahTitle": "Iqamah {prayer} in {minutes} minutes",
     "iqamahBody": "Iqamah at Al Muttaqin is at {time}.",
     "jumuahTitle": "Friday prayer at {time}",
-    "jumuahBody": "Jumuah at Al Muttaqin starts in {minutes} minutes."
+    "jumuahBody": "Jumuah at Al Muttaqin starts in {minutes} minutes.",
+    "actionOpen": "Open schedule",
+    "actionDismiss": "Dismiss"
+  },
+  "sound": {
+    "title": "Reminder sound",
+    "description": "What happens at prayer time while the app is open.",
+    "modes": {
+      "adhan": "Full adhan",
+      "chime": "Short chime",
+      "vibrate": "Vibration only",
+      "silent": "Silent"
+    },
+    "hints": {
+      "adhan": "Adhan recording at prayer time; chime for iqamah",
+      "chime": "A soft three-note bell",
+      "vibrate": "No sound, phone vibrates",
+      "silent": "Notification only"
+    },
+    "volume": "Volume",
+    "volumeHint": "On iPhone the volume follows the side buttons.",
+    "previewAdhan": "Preview adhan",
+    "preview": "Preview sound",
+    "previewTitle": "Sound preview",
+    "stop": "Stop",
+    "foregroundNote": "While the app is open (even in another tab), the reminder fires right at the adhan time with the sound above and a Stop button. Browsers only allow sound after you have tapped the app once, so tap anywhere after opening it.",
+    "backgroundNote": "When the app is closed, your phone shows the notification with its standard notification sound. Browsers do not allow a custom sound such as the adhan for background notifications. On iPhone, notifications need the app added to the Home Screen (iOS 16.4 or later)."
+  },
+  "alert": {
+    "label": "Prayer reminder",
+    "play": "Play adhan",
+    "stop": "Stop",
+    "close": "Close",
+    "blocked": "Your browser blocked the sound. Tap Play adhan to hear it."
   }
 }

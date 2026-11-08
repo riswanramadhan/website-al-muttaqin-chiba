@@ -9,7 +9,11 @@
     "highlight": "Matsudo, Chiba.",
     "description": "Pray together, learn in Japanese, English, and Indonesian, and find your community. Everyone is welcome, whether you have lived here for years or arrived last week.",
     "prayerCta": "Prayer times",
-    "appCta": "Open the Jamaah app"
+    "appCta": "Open the Jamaah app",
+    "photoAlt": "The Al Muttaqin Cultural Center building in Matsudo, Chiba, at dusk",
+    "photoTitle": "Al Muttaqin Cultural Center",
+    "photoCaption": "Mosque & Islamic cultural center",
+    "openDaily": "Open daily for the five prayers"
   },
   "pinned": {
     "label": "Live status and pinned announcements",

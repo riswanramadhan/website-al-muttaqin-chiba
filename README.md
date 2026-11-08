@@ -41,23 +41,69 @@ Salin `.env.example` ke `.env.local`. Semua variabel opsional:
 - Tambahkan `<NEXT_PUBLIC_SITE_URL>/admin/auth/callback` ke daftar Redirect URLs di Supabase Auth
   agar magic link dan undangan bisa masuk.
 - Bahasa UI admin: Indonesia atau Jepang (tombol ID/JA di header).
-- Web Push memerlukan kunci VAPID (`npx web-push generate-vapid-keys`) dan pemicu tiap 5 menit ke
+- Web Push memerlukan kunci VAPID (`npx web-push generate-vapid-keys`) dan pemicu tiap menit ke
   `/api/push/send` (lihat bagian berikut).
 - Anti-spam: Cloudflare Turnstile (`NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`).
 
-## Pengingat adzan (pemicu tiap 5 menit)
+## Pengingat adzan (pemicu tiap menit)
 
-Paket Vercel Hobby hanya mengizinkan cron harian, jadi `vercel.json` sengaja tanpa `crons`.
-Pengingat adzan, iqamah, dan Jumat dipicu dari penjadwal luar yang gratis, misalnya
+Ada dua jalur, keduanya memakai perhitungan yang sama (`src/components/pwa/reminders.ts`):
+adzan tepat pada menit adzan, iqamah 10 menit sebelum iqamah, Jumat 30 menit sebelum Jumatan.
+
+**Saat App terbuka** (layar mana pun di `/app`, juga di tab latar belakang): `AdhanReminderHost` di
+`src/app/[locale]/app/layout.tsx` mencocokkan jadwal dengan jam setiap 20 detik (plus timer presisi
+menjelang waktunya, dan saat tab aktif kembali), lalu menampilkan notifikasi sistem lewat service
+worker, memutar suara pilihan di Pengaturan (adzan penuh dari `public/audio/adhan.mp3`, chime
+Web Audio, getar saja, atau senyap), dan menampilkan banner dengan tombol Hentikan. Tiap kejadian
+diklaim lewat tag di localStorage (`acc-reminder-fired`) sehingga hanya berbunyi sekali walau ada
+beberapa tab atau push server ikut tiba. Browser memblokir suara sebelum ada interaksi; App membuka
+kunci audio pada ketukan pertama, dan banner menampilkan tombol Putar bila suara tetap diblokir.
+
+**Saat App tertutup** (Web Push dari server): paket Vercel Hobby hanya mengizinkan cron harian, jadi
+`vercel.json` sengaja tanpa `crons`. Pengingat dipicu dari penjadwal luar yang gratis, misalnya
 [cron-job.org](https://cron-job.org):
 
 1. Isi `PUSH_CRON_SECRET` di Environment Variables Vercel dengan string acak panjang, lalu redeploy.
-2. Di cron-job.org buat job baru: URL `https://<domain>/api/push/send`, metode `GET`, jadwal tiap 5 menit.
+2. Di cron-job.org buat job baru: URL `https://<domain>/api/push/send`, metode `GET`,
+   jadwal **tiap menit** (`* * * * *`). Zona waktu job tidak berpengaruh.
 3. Di tab Advanced tambahkan header `Authorization` bernilai `Bearer <PUSH_CRON_SECRET>`.
 4. Klik "Test run". Respons yang benar berbentuk `{"ok":true,"sent":0,...}`; `401` berarti header salah.
 
+Setiap panggilan mengirim kejadian yang waktu tampilnya jatuh di menit berjalan
+(`[awal menit, +1 menit)`; waktu salat dibulatkan ke menit), sehingga notifikasi tiba beberapa detik
+setelah menit adzan dimulai. Jendela berurutan tidak tumpang tindih dan retry di menit yang sama
+diabaikan, jadi tiap kejadian terkirim sekali. Bila penjadwal hanya bisa tiap 5 menit, pakai URL
+`/api/push/send?interval=5` (atau env `PUSH_CRON_INTERVAL_MIN=5`): kejadian dikirim paling awal
+5 menit sebelum waktunya, tidak pernah terlambat. TTL push adzan 5 menit agar perangkat yang lama
+offline tidak menerima pengingat basi.
+
+Service worker (`src/app/sw.ts`) menampilkan notifikasi adzan dengan `requireInteraction`, pola getar,
+`renotify`, dan tombol "Buka jadwal" / "Tutup"; bila jendela App sedang terbuka, SW juga mengirim
+pesan agar halaman memutar suara adzan. **Batasan browser:** notifikasi push latar belakang tidak bisa
+memakai suara kustom (adzan); perangkat memakai suara notifikasi standarnya. Di iPhone, notifikasi
+hanya bekerja setelah App ditambahkan ke Layar Utama (iOS 16.4+).
+
+Alternatif tanpa cron-job.org, memakai Supabase `pg_cron` + `pg_net` (aktifkan kedua ekstensi di
+Database > Extensions, lalu jalankan di SQL Editor):
+
+```sql
+select cron.schedule(
+  'acc-push-adhan',
+  '* * * * *',
+  $$
+  select net.http_get(
+    url := 'https://<domain>/api/push/send',
+    headers := jsonb_build_object('Authorization', 'Bearer <PUSH_CRON_SECRET>')
+  );
+  $$
+);
+-- Menghentikan: select cron.unschedule('acc-push-adhan');
+```
+
 Bila nanti memakai Vercel Pro, cron bawaan bisa dipakai lagi dengan menambahkan ke `vercel.json`:
-`"crons": [{ "path": "/api/push/send", "schedule": "*/5 * * * *" }]` dan mengisi `CRON_SECRET`.
+`"crons": [{ "path": "/api/push/send", "schedule": "* * * * *" }]` dan mengisi `CRON_SECRET`.
+
+Rekaman adzan: Wikimedia Commons, CC BY-SA 4.0 (lihat `public/audio/CREDITS.md`).
 
 ## Struktur
 

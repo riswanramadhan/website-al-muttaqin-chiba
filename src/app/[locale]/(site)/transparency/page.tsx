@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { BadgeCheck, CalendarCheck, MessageCircle, Users } from "lucide-react";
+import { BadgeCheck, CalendarCheck, CircleQuestionMark, Users } from "lucide-react";
 import type { Locale } from "@/lib/types";
 import { getTransparencyReports } from "@/lib/data";
 import { EmptyState, IconCircle } from "@/components/ui/primitives";
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return { title: t("meta.title"), description: t("meta.description") };
 }
 
-const PRINCIPLE_ICONS = { "1": BadgeCheck, "2": Users, "3": CalendarCheck, "4": MessageCircle } as const;
+const PRINCIPLE_ICONS = { "1": BadgeCheck, "2": Users, "3": CalendarCheck, "4": CircleQuestionMark } as const;
 
 export default async function TransparencyPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: raw } = await params;

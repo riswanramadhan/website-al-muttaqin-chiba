@@ -12,13 +12,13 @@ import {
   Hospital,
   Landmark,
   Mail,
-  MessageCircle,
   Phone,
   Recycle,
   Siren,
   TrainFront,
   UtensilsCrossed,
 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/social-icons";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
 import { getProfile } from "@/lib/data";
@@ -48,7 +48,7 @@ const TOC: { key: "firstSteps" | "garbage" | "transport" | "halal" | "emergency"
   { key: "halal", icon: UtensilsCrossed },
   { key: "emergency", icon: Siren },
   { key: "work", icon: Briefcase },
-  { key: "contact", icon: MessageCircle },
+  { key: "contact", icon: WhatsAppIcon },
 ];
 
 export default async function NewcomersPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -77,7 +77,7 @@ export default async function NewcomersPage({ params }: { params: Promise<{ loca
           <div className="mt-8 flex flex-wrap gap-3 print:hidden">
             <PrintButton label={t("hero.print")} variant="inverse" />
             <a href={whatsappUrl} target="_blank" rel="noreferrer" className={buttonVariants({ variant: "outlineInverse" })}>
-              <MessageCircle />
+              <WhatsAppIcon />
               {t("hero.whatsapp")}
             </a>
             <Link href="/halal" className={buttonVariants({ variant: "outlineInverse" })}>
@@ -315,7 +315,7 @@ export default async function NewcomersPage({ params }: { params: Promise<{ loca
           <SectionHeading tone="inverse" tag={t("contact.tag")} title={t("contact.title")} description={t("contact.description")} />
           <div className="mt-8 flex flex-wrap gap-3 print:hidden">
             <a href={whatsappUrl} target="_blank" rel="noreferrer" className={buttonVariants({ variant: "inverse" })}>
-              <MessageCircle />
+              <WhatsAppIcon />
               {t("contact.whatsapp")}
             </a>
             <a href={`mailto:${profile.email}`} className={buttonVariants({ variant: "outlineInverse" })}>

@@ -79,6 +79,39 @@
     "iqamahTitle": "Iqamah {prayer} {minutes} menit lagi",
     "iqamahBody": "Iqamah di Al Muttaqin pukul {time}.",
     "jumuahTitle": "Salat Jumat pukul {time}",
-    "jumuahBody": "Salat Jumat di Al Muttaqin dimulai {minutes} menit lagi."
+    "jumuahBody": "Salat Jumat di Al Muttaqin dimulai {minutes} menit lagi.",
+    "actionOpen": "Buka jadwal",
+    "actionDismiss": "Tutup"
+  },
+  "sound": {
+    "title": "Suara pengingat",
+    "description": "Yang terjadi saat waktu salat ketika App terbuka.",
+    "modes": {
+      "adhan": "Adzan penuh",
+      "chime": "Chime singkat",
+      "vibrate": "Getar saja",
+      "silent": "Senyap"
+    },
+    "hints": {
+      "adhan": "Rekaman adzan saat waktu salat; chime untuk iqamah",
+      "chime": "Bunyi lonceng lembut tiga nada",
+      "vibrate": "Tanpa suara, ponsel bergetar",
+      "silent": "Hanya notifikasi"
+    },
+    "volume": "Volume",
+    "volumeHint": "Di iPhone volume mengikuti tombol samping.",
+    "previewAdhan": "Dengarkan adzan",
+    "preview": "Dengarkan suara",
+    "previewTitle": "Pratinjau suara",
+    "stop": "Hentikan",
+    "foregroundNote": "Selama App terbuka (meski di tab lain), pengingat berbunyi tepat pada waktu adzan dengan suara di atas dan tombol Hentikan. Browser hanya mengizinkan suara setelah App diketuk sekali, jadi ketuk di mana saja setelah membukanya.",
+    "backgroundNote": "Saat App tertutup, ponsel menampilkan notifikasi dengan suara notifikasi standarnya. Browser tidak mengizinkan suara khusus seperti adzan untuk notifikasi latar belakang. Di iPhone, notifikasi memerlukan App ditambahkan ke Layar Utama (iOS 16.4 ke atas)."
+  },
+  "alert": {
+    "label": "Pengingat salat",
+    "play": "Putar adzan",
+    "stop": "Hentikan",
+    "close": "Tutup",
+    "blocked": "Browser memblokir suara. Ketuk Putar adzan untuk mendengarkannya."
   }
 }

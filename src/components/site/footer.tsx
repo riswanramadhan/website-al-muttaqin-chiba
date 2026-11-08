@@ -12,6 +12,8 @@ import { LogoMark } from "@/components/site/logo";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils/cn";
 
+const DEKATLOKAL_URL = "https://dekatlokal.com";
+
 export async function SiteFooter({ locale }: { locale: Locale }) {
   const [t, tn, tc, profile, config] = await Promise.all([
     getTranslations({ locale, namespace: "footer" }),
@@ -30,9 +32,9 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3">
-              <LogoMark className="size-11" />
+              <LogoMark tone="inverse" className="size-14" />
               <div>
-                <p className="font-bold">{pick(profile.name, locale)}</p>
+                <p className="text-xl font-bold">{pick(profile.name, locale)}</p>
                 <p className="text-sm text-hero-muted">{pick(profile.tagline, locale)}</p>
               </div>
             </div>
@@ -125,6 +127,11 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
                   )}
                 </li>
               ))}
+              <li>
+                <a href={DEKATLOKAL_URL} target="_blank" rel="noreferrer" className="hover:underline" title={t("techPartner")}>
+                  dekatlokal
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -132,13 +139,19 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
         <div className="mt-12 flex flex-col gap-4 border-t border-hero-foreground/10 pt-6 text-xs text-hero-muted md:flex-row md:items-center md:justify-between">
           <p>{t("copyright", { year })}</p>
           <p className="max-w-xl">{t("prayerNote", { method: METHOD_LABELS[config.method] })}</p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <Link href="/privacy" className="hover:text-hero-foreground">
               {tn("privacy")}
             </Link>
             <Link href="/faq" className="hover:text-hero-foreground">
               {tn("faq")}
             </Link>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-hero-foreground/15 bg-hero-foreground/5 px-3 py-1">
+              <span>{t("poweredBy")}</span>
+              <a href={DEKATLOKAL_URL} target="_blank" rel="noreferrer" className="font-bold text-hero-foreground hover:text-gold">
+                dekatlokal
+              </a>
+            </span>
           </div>
         </div>
       </div>

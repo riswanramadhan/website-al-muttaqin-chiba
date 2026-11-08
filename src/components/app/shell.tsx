@@ -13,6 +13,12 @@ import { cn } from "@/lib/utils/cn";
 /**
  * Kerangka App Jamaah: bilah atas ringkas, konten selebar HP (maks 28rem) di desktop,
  * dan navigasi bawah. Layar lain cukup merender isinya.
+ *
+ * Safe area iPhone: layout akar memakai `viewportFit: "cover"` + status bar `black-translucent`,
+ * jadi konten digambar di belakang jam/notch. Header diberi `safe-top` (padding
+ * env(safe-area-inset-top)) agar isinya turun di bawah status bar, sementara latarnya tetap
+ * memanjang ke belakang status bar. Pita setinggi inset itu berwarna gelap (`bg-hero`) karena
+ * teks status bar `black-translucent` selalu putih. Inset kiri/kanan dipakai saat lanskap.
  */
 export async function AppShell({ locale, children }: { locale: Locale; children: React.ReactNode }) {
   const [t, tc] = await Promise.all([getTranslations({ locale, namespace: "app" }), getTranslations({ locale, namespace: "common" })]);
@@ -20,13 +26,14 @@ export async function AppShell({ locale, children }: { locale: Locale; children:
 
   return (
     <div className="min-h-dvh bg-surface/60">
-      <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-border bg-background/90 pr-[env(safe-area-inset-right)] pl-[env(safe-area-inset-left)] backdrop-blur-md safe-top">
+        <span aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-[env(safe-area-inset-top,0px)] bg-hero" />
         <div className="mx-auto flex h-14 max-w-md items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2" aria-label={tc("siteName")}>
-            <LogoMark className="size-8" />
-            <span className="text-sm font-bold">{t("title")}</span>
+          <Link href="/" className="flex min-w-0 items-center gap-2" aria-label={tc("siteName")}>
+            <LogoMark className="size-8 shrink-0" />
+            <span className="truncate text-sm font-bold text-heading">{t("title")}</span>
           </Link>
-          <div className="flex items-center gap-1">
+          <div className="flex shrink-0 items-center gap-1">
             <Link href="/" className={cn(buttonVariants({ variant: "ghost", size: "iconSm" }), "hidden sm:inline-flex")} aria-label={t("backToWeb")}>
               <ArrowLeft />
             </Link>
@@ -37,7 +44,10 @@ export async function AppShell({ locale, children }: { locale: Locale; children:
           </div>
         </div>
       </header>
-      <main id="content" className="mx-auto w-full max-w-md px-4 pt-4 pb-28">
+      <main
+        id="content"
+        className="mx-auto w-full max-w-md pt-4 pr-[max(1rem,env(safe-area-inset-right))] pb-[calc(6.5rem+env(safe-area-inset-bottom,0px))] pl-[max(1rem,env(safe-area-inset-left))]"
+      >
         {children}
       </main>
       <BottomNav tabs={tabs} label={t("navLabel")} />
@@ -58,5 +68,17 @@ export function AppScreenHeader({ title, description, backHref = "/app", backLab
       </div>
       {action}
     </div>
+  );
+}
+
+/** Kredit pengembang di bagian bawah layar Pengaturan & Menu App. */
+export function PoweredBy({ className }: { className?: string }) {
+  return (
+    <p className={cn("mt-8 text-center text-xs text-muted-foreground", className)}>
+      Powered by{" "}
+      <a href="https://dekatlokal.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand hover:underline">
+        dekatlokal
+      </a>
+    </p>
   );
 }

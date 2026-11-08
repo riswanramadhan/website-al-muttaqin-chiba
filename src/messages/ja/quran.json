@@ -48,9 +48,9 @@
     "ayah": "第{n}節",
     "basmalah": "慈悲あまねく慈愛深きアッラーの御名において",
     "editions": {
-      "en.sahih": "Saheeh International",
-      "id.indonesian": "インドネシア宗教省",
-      "ja.ryoichi": "三田了一 訳"
+      "en_sahih": "Saheeh International",
+      "id_indonesian": "インドネシア宗教省",
+      "ja_ryoichi": "三田了一 訳"
     }
   },
   "revelation": {

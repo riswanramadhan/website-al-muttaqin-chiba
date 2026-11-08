@@ -48,9 +48,9 @@
     "ayah": "Ayah {n}",
     "basmalah": "In the name of Allah, the Most Gracious, the Most Merciful",
     "editions": {
-      "en.sahih": "Saheeh International",
-      "id.indonesian": "Kementerian Agama RI",
-      "ja.ryoichi": "Ryoichi Mita"
+      "en_sahih": "Saheeh International",
+      "id_indonesian": "Kementerian Agama RI",
+      "ja_ryoichi": "Ryoichi Mita"
     }
   },
   "revelation": {

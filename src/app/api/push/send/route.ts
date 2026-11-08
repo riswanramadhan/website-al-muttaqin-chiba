@@ -5,14 +5,27 @@ import type { Locale, ObligatoryPrayer } from "@/lib/types";
 import { getPrayerConfig, getProfile } from "@/lib/data";
 import { getServiceClient } from "@/lib/supabase/server";
 import { pick } from "@/lib/utils/i18n";
-import { buildReminderMessage, getCronEvents, normalizePreferences, reminderTag, wantsEvent, type ReminderEvent } from "@/components/pwa/reminders";
+import {
+  CRON_INTERVAL_MIN,
+  buildReminderMessage,
+  getCronEvents,
+  normalizePreferences,
+  reminderTag,
+  wantsEvent,
+  type ReminderEvent,
+  type ReminderPushPayload,
+} from "@/components/pwa/reminders";
 
 /**
  * Pengirim Web Push (PRD-07b).
  * Otorisasi: `Authorization: Bearer <PUSH_CRON_SECRET | CRON_SECRET>`.
  *
- * Mode cron (GET tiap 5 menit dari penjadwal luar seperti cron-job.org, atau POST tanpa body / { mode: "cron" }):
- *   adzan, iqamah, dan Jumatan yang jatuh 5-10 menit ke depan, dikirim sesuai preferensi & bahasa.
+ * Mode cron (GET tiap menit dari penjadwal luar seperti cron-job.org, atau POST tanpa body / { mode: "cron" }):
+ *   kejadian yang waktu tampilnya jatuh di menit berjalan [awal menit, + interval) dikirim sesuai
+ *   preferensi & bahasa: adzan tepat pada menit adzan, iqamah 10 menit sebelumnya, Jumat 30 menit
+ *   sebelumnya. Interval bawaan 1 menit; penjadwal yang lebih jarang memakai `?interval=5`
+ *   (atau env PUSH_CRON_INTERVAL_MIN) agar tidak ada yang terlewat (dikirim lebih awal).
+ *   Pemanggilan ganda di menit yang sama (retry penjadwal) diabaikan lewat catatan tag di memori.
  * Mode broadcast (POST dari admin):
  *   { mode: "broadcast", title: { ja, en, id }, body: { ja, en, id }, url } ke semua langganan.
  *
@@ -23,7 +36,7 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 type Row = { id: string; endpoint: string; keys: { p256dh?: string; auth?: string } | null; locale: string | null; preferences: unknown };
-type Payload = { title: string; body: string; url: string; tag: string };
+type Payload = ReminderPushPayload;
 type SendResult = { ok: true; sent: number; failed?: number; removed?: number; mode?: "cron" | "broadcast"; reason?: string };
 
 const localized = z.object({ ja: z.string().max(300).optional(), en: z.string().max(300).optional(), id: z.string().max(300).optional() });
@@ -33,6 +46,30 @@ const broadcastSchema = z.object({
   body: localized,
   url: z.string().max(500).optional(),
 });
+
+/** Tag yang baru saja dikirim (tag -> epoch ms) agar retry penjadwal tidak mengirim dua kali. */
+const recentlySent = new Map<string, number>();
+const DEDUPE_MS = 15 * 60_000;
+
+function claimEvents(events: ReminderEvent[], now: number): ReminderEvent[] {
+  for (const [tag, at] of recentlySent) if (now - at > DEDUPE_MS) recentlySent.delete(tag);
+  const fresh = events.filter((e) => !recentlySent.has(reminderTag(e)));
+  for (const e of fresh) recentlySent.set(reminderTag(e), now);
+  return fresh;
+}
+
+function cronInterval(request: Request): number {
+  const raw = new URL(request.url).searchParams.get("interval") ?? process.env.PUSH_CRON_INTERVAL_MIN ?? "";
+  const n = Number.parseInt(raw, 10);
+  return Number.isFinite(n) && n >= 1 && n <= 15 ? n : CRON_INTERVAL_MIN;
+}
+
+/** TTL push: pengingat adzan yang tertunda lebih dari beberapa menit tidak lagi berguna. */
+function ttlFor(payload: Payload): number {
+  if (payload.kind === "adhan") return 5 * 60;
+  if (payload.kind === "iqamah" || payload.kind === "jumuah") return 10 * 60;
+  return 60 * 60;
+}
 
 function isAuthorized(request: Request): boolean {
   const secrets = [process.env.PUSH_CRON_SECRET, process.env.CRON_SECRET].filter((s): s is string => Boolean(s));
@@ -76,7 +113,7 @@ async function sendAll(rows: Row[], payloadFor: (row: Row, locale: Locale) => Pa
     const results = await Promise.allSettled(
       jobs.slice(i, i + BATCH).map(({ row, payload }) => {
         const sub: WebPushSubscription = { endpoint: row.endpoint, keys: { p256dh: row.keys?.p256dh ?? "", auth: row.keys?.auth ?? "" } };
-        return webpush.sendNotification(sub, JSON.stringify(payload), { TTL: 15 * 60, urgency: "high", topic: payload.tag.replace(/[^A-Za-z0-9_-]/g, "").slice(0, 32) });
+        return webpush.sendNotification(sub, JSON.stringify(payload), { TTL: ttlFor(payload), urgency: "high", topic: payload.tag.replace(/[^A-Za-z0-9_-]/g, "").slice(0, 32) });
       }),
     );
     results.forEach((r, idx) => {
@@ -117,7 +154,8 @@ async function handle(request: Request, body: unknown): Promise<Response> {
   let events: ReminderEvent[] = [];
   if (!broadcast) {
     const [config, profile] = await Promise.all([getPrayerConfig(), getProfile()]);
-    events = getCronEvents(config, profile.coordinates, new Date());
+    const now = new Date();
+    events = claimEvents(getCronEvents(config, profile.coordinates, now, cronInterval(request)), now.getTime());
     if (events.length === 0) return Response.json({ ok: true, sent: 0, mode, reason: "no-events" } satisfies SendResult);
   }
 
@@ -130,13 +168,14 @@ async function handle(request: Request, body: unknown): Promise<Response> {
     const title = toLocalizedText(broadcast.title);
     const text = toLocalizedText(broadcast.body);
     const tag = `broadcast-${Date.now()}`;
-    const result = await sendAll(rows, (_row, locale) => ({ title: pick(title, locale) || "Al Muttaqin", body: pick(text, locale), url: localizeUrl(broadcast.url, locale), tag }));
+    const result = await sendAll(rows, (_row, locale) => ({ title: pick(title, locale) || "Al Muttaqin", body: pick(text, locale), url: localizeUrl(broadcast.url, locale), tag, kind: "broadcast" }));
     return Response.json({ ok: true, mode, ...result } satisfies SendResult);
   }
 
   // Teks per bahasa (dimuat sekali per locale yang dipakai).
   const locales = Array.from(new Set(rows.map((r) => toLocale(r.locale))));
   const messages = new Map<Locale, Map<string, { title: string; body: string }>>();
+  const actionLabels = new Map<Locale, { open: string; dismiss: string }>();
   await Promise.all(
     locales.map(async (locale) => {
       const [t, tp] = await Promise.all([getTranslations({ locale, namespace: "settings" }), getTranslations({ locale, namespace: "prayer" })]);
@@ -148,6 +187,7 @@ async function handle(request: Request, body: unknown): Promise<Response> {
         );
       }
       messages.set(locale, map);
+      actionLabels.set(locale, { open: t("notify.actionOpen"), dismiss: t("notify.actionDismiss") });
     }),
   );
 
@@ -158,7 +198,7 @@ async function handle(request: Request, body: unknown): Promise<Response> {
     return wanted.map((e) => {
       const tag = reminderTag(e);
       const msg = messages.get(locale)?.get(tag) ?? { title: "Al Muttaqin", body: "" };
-      return { ...msg, url: `/${locale}/app/prayer`, tag };
+      return { ...msg, url: `/${locale}/app/prayer`, tag, kind: e.kind, prayer: e.prayer, at: e.time.toISOString(), actions: actionLabels.get(locale) };
     });
   });
   return Response.json({ ok: true, mode, ...result } satisfies SendResult);

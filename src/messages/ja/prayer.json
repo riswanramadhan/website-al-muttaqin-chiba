@@ -47,7 +47,20 @@
   },
   "arc": {
     "label": "日の出から日の入りまでの一日の弧と今日の礼拝時間",
-    "now": "現在"
+    "now": "現在",
+    "interactiveLabel": "今日の礼拝時間を示す一日の弧。礼拝を選ぶと、アザーン・イカーマの時刻と残り時間を表示します。",
+    "select": "{prayer}、アザーン {time}。詳細を表示",
+    "hint": "弧の上の礼拝時間をタップすると詳細を表示します",
+    "reset": "現在に戻る",
+    "untilIqamah": "{prayer}のイカーマまで",
+    "passed": "{prayer}は過ぎました",
+    "agoMinutes": "{count, plural, =0 {たった今} other {#分前}}",
+    "agoHours": "{hours}時間{minutes}分前",
+    "nowJst": "現在（JST）",
+    "nextAt": "次は{prayer} {time}",
+    "iqamahIn": "{prayer}のイカーマまで {time}",
+    "announce": "{prayer}：アザーン {adhan}、イカーマ {iqamah}",
+    "announceSunrise": "{prayer}：{time}"
   },
   "table": {
     "tag": "月間スケジュール",

@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { CircleCheck, ExternalLink, Landmark, LoaderCircle, LocateFixed, MapPin, MessageCircle, ShoppingBasket, Store, UtensilsCrossed } from "lucide-react";
+import { CircleCheck, ExternalLink, Landmark, LoaderCircle, LocateFixed, MapPin, ShoppingBasket, Store, UtensilsCrossed } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/social-icons";
 import type { GeoPoint, HalalPlace, HalalPlaceType, Locale } from "@/lib/types";
 import { pick } from "@/lib/utils/i18n";
 import { buildWhatsAppUrl, composeMessage } from "@/lib/whatsapp";
@@ -136,7 +137,7 @@ export function HalalRadar({ places, locale, center, whatsapp, variant = "site" 
         </p>
         {suggestUrl && (
           <a href={suggestUrl} target="_blank" rel="noreferrer" className={cn(buttonVariants({ variant: "outline", size: "sm" }), "print:hidden")}>
-            <MessageCircle />
+            <WhatsAppIcon />
             {t("suggest")}
           </a>
         )}

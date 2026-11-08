@@ -14,6 +14,7 @@ import type {
   Facility,
   FaqCategory,
   FaqItem,
+  FeaturedVideo,
   GalleryItem,
   HadithOfTheDay,
   HalalPlace,
@@ -36,7 +37,7 @@ import { profile, board, timeline, facilities } from "@/data/profile";
 import { prayerConfig, jumuahSchedules } from "@/data/prayer-config";
 import { announcements } from "@/data/announcements";
 import { events } from "@/data/events";
-import { lectures } from "@/data/lectures";
+import { documentary, lectures } from "@/data/lectures";
 import { news } from "@/data/news";
 import { donationAccounts, donationPrograms, transparencyReports } from "@/data/donations";
 import { faqs } from "@/data/faq";
@@ -147,6 +148,11 @@ export async function getLectures(opts: { limit?: number; series?: string; langu
 export async function getLectureBySlug(slug: string): Promise<Lecture | undefined> {
   const list = await getLectures();
   return list.find((l) => l.slug === slug);
+}
+
+/** Video dokumenter Al Muttaqin (beranda dan halaman Tentang kami). */
+export async function getDocumentary(): Promise<FeaturedVideo> {
+  return documentary;
 }
 
 export async function getNews(opts: { limit?: number; category?: NewsPost["category"] } = {}): Promise<NewsPost[]> {

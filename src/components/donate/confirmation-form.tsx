@@ -4,7 +4,8 @@ import * as React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { CircleCheck, LoaderCircle, MessageCircle, Send } from "lucide-react";
+import { CircleCheck, LoaderCircle, Send } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/social-icons";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
 import { tokyoDateKey } from "@/lib/utils/i18n";
@@ -118,7 +119,7 @@ export function ConfirmationForm({
         <div className="flex flex-wrap justify-center gap-3">
           {outcome.kind === "whatsapp" && (
             <a href={outcome.url} target="_blank" rel="noopener noreferrer" className={buttonVariants({ size: "lg" })}>
-              <MessageCircle />
+              <WhatsAppIcon />
               {t("success.whatsapp")}
             </a>
           )}

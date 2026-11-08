@@ -13,6 +13,7 @@ import { CopyButton } from "@/components/ui/copy-button";
 import { IconCircle } from "@/components/ui/primitives";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { DonationCurrency } from "@/components/donate/unique-amount";
+import { PaymentLogos } from "@/components/donate/payment-logos";
 
 const CURRENCIES: DonationCurrency[] = ["JPY", "IDR"];
 
@@ -99,6 +100,8 @@ function AccountCard({ account, locale, compact }: { account: DonationAccount; l
           <p className="text-center text-xs text-muted-foreground">{t("scanHint")}</p>
         </div>
       )}
+
+      {account.method === "qris" && <PaymentLogos />}
 
       <dl className="divide-y divide-border text-sm">
         {account.branch && (

@@ -171,6 +171,16 @@ export type Lecture = {
   tags: string[];
 };
 
+/** Video unggulan tunggal (mis. dokumenter masjid). `title` = judul asli di YouTube. */
+export type FeaturedVideo = {
+  youtubeId: string;
+  title: string;
+  channelName: string;
+  channelUrl: string;
+  publishedAt: string;
+  durationSeconds: number;
+};
+
 export type NewsCategory = "news" | "report" | "article" | "press";
 
 export type NewsPost = {

@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Tasbih digital",
-    "description": "Penghitung dzikir sederhana dengan target, putaran, getar dan suara klik opsional, serta catatan harian yang tersimpan di perangkat."
+    "description": "Tasbih modern: untaian butir yang berputar setiap ketukan, target 33, 99, atau 100, getar, bunyi klik lembut, pilihan dzikir, dan catatan harian yang tersimpan di perangkat."
   },
   "title": "Tasbih digital",
   "description": "Ketuk, hitung, dan simpan catatan harian",
   "countLabel": "Hitungan saat ini",
-  "tapHint": "Ketuk lingkaran atau tekan Spasi",
+  "tapHint": "Ketuk lingkaran, atau tekan Spasi atau Enter",
   "tapButton": "Hitung dzikir",
   "targetLabel": "Target",
   "targetReached": "Target tercapai",
@@ -26,7 +26,10 @@
   },
   "settings": {
     "vibrate": "Getar saat ketuk",
-    "sound": "Suara klik"
+    "sound": "Suara klik",
+    "autoAdvance": "Lanjut ke dzikir berikutnya",
+    "autoAdvanceHint": "Setelah target: Subhanallah, Alhamdulillah, Allahu Akbar, dan seterusnya.",
+    "soundHint": "Bunyi klik butir yang lembut, dibuat langsung di perangkat."
   },
   "reset": {
     "button": "Reset",
@@ -40,6 +43,12 @@
     "week": "7 hari terakhir",
     "weekTotal": "Total {count}",
     "empty": "Belum ada dzikir tercatat. Hitungan disimpan di perangkat ini.",
-    "dayTotal": "{count} hitungan"
-  }
+    "dayTotal": "{count} hitungan",
+    "recent": "Putaran terakhir",
+    "roundItem": "{count} kali"
+  },
+  "progressLabel": "{count} dari {target}",
+  "next": "Berikutnya: {name}",
+  "prevDhikr": "Dzikir sebelumnya",
+  "nextDhikr": "Dzikir berikutnya"
 }

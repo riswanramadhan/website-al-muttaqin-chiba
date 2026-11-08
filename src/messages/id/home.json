@@ -9,7 +9,11 @@
     "highlight": "Matsudo, Chiba.",
     "description": "Salat berjamaah, belajar dalam bahasa Jepang, Inggris, dan Indonesia, dan temukan komunitas Anda. Semua disambut, baik yang sudah lama tinggal maupun yang baru tiba pekan lalu.",
     "prayerCta": "Jadwal salat",
-    "appCta": "Buka App Jamaah"
+    "appCta": "Buka App Jamaah",
+    "photoAlt": "Gedung Al Muttaqin Cultural Center di Matsudo, Chiba, saat senja",
+    "photoTitle": "Al Muttaqin Cultural Center",
+    "photoCaption": "Masjid & pusat budaya Islam",
+    "openDaily": "Buka setiap hari untuk salat lima waktu"
   },
   "pinned": {
     "label": "Status siaran langsung dan pengumuman tersemat",

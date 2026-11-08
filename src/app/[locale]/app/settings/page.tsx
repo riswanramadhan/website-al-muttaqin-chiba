@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/lib/types";
-import { AppScreenHeader } from "@/components/app/shell";
+import { AppScreenHeader, PoweredBy } from "@/components/app/shell";
 import { SettingsPanel } from "@/components/pwa/settings-panel";
 import pkg from "../../../../../package.json";
 
@@ -21,6 +21,7 @@ export default async function SettingsPage({ params }: { params: Promise<{ local
     <div>
       <AppScreenHeader title={t("title")} description={t("description")} backLabel={ta("back")} />
       <SettingsPanel version={pkg.version} />
+      <PoweredBy />
     </div>
   );
 }

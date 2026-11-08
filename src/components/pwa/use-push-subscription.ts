@@ -127,7 +127,14 @@ export function usePushSubscription() {
   /** Notifikasi uji lewat registration.showNotification (fallback: Notification biasa). */
   const sendTest = React.useCallback(async (title: string, body: string): Promise<boolean> => {
     if (typeof window === "undefined" || !("Notification" in window) || Notification.permission !== "granted") return false;
-    const options: NotificationOptions = { body, icon: "/icons/icon-192.png", badge: "/icons/icon-192.png", tag: "acc-test" };
+    const options: NotificationOptions & { renotify?: boolean; vibrate?: number[] } = {
+      body,
+      icon: "/icons/icon-192.png",
+      badge: "/icons/icon-192.png",
+      tag: "acc-test",
+      renotify: true,
+      vibrate: [600, 250, 600],
+    };
     try {
       const reg = await getSwRegistration(3000);
       if (reg) await reg.showNotification(title, options);
