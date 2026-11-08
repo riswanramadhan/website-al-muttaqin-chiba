@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "title": "Doa dan dzikir",
+    "description": "Dzikir pagi dan petang, doa harian, salat, perjalanan, Ramadan, dan Jumat dengan teks Arab, transliterasi, dan terjemahan."
+  },
+  "title": "Doa dan dzikir",
+  "description": "Teks Arab, transliterasi, terjemahan, dan sumber",
+  "categories": {
+    "morning": "Pagi",
+    "evening": "Petang",
+    "daily": "Harian",
+    "prayer": "Salat",
+    "travel": "Perjalanan",
+    "ramadan": "Ramadan",
+    "jumuah": "Jumat"
+  },
+  "categoriesLabel": "Kategori doa",
+  "autoHint": "Dzikir pagi ditampilkan sebelum Zuhur dan dzikir petang sesudahnya (waktu Tokyo).",
+  "search": {
+    "placeholder": "Cari di kategori ini",
+    "empty": "Tidak ada doa yang cocok.",
+    "count": "{count} doa"
+  },
+  "arabicSize": {
+    "label": "Ukuran teks Arab",
+    "sm": "Kecil",
+    "md": "Sedang",
+    "lg": "Besar"
+  },
+  "transliteration": {
+    "show": "Tampilkan transliterasi",
+    "hide": "Sembunyikan transliterasi"
+  },
+  "counter": {
+    "label": "Penghitung ketuk",
+    "tap": "Ketuk untuk menghitung",
+    "progress": "{count} dari {total}",
+    "done": "Selesai",
+    "reset": "Reset penghitung"
+  },
+  "repeat": "{count, plural, one {1 kali} other {# kali}}",
+  "source": "Sumber",
+  "actions": {
+    "copy": "Salin",
+    "share": "Bagikan",
+    "copied": "Doa tersalin"
+  }
+}

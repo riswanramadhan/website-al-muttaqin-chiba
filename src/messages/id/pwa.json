@@ -1,0 +1,33 @@
+{
+  "installTitle": "Pasang App Jamaah",
+  "installBody": "Jadwal salat, notifikasi adzan, kiblat, doa, dan Al-Qur'an, tetap bisa dibuka saat offline.",
+  "installButton": "Pasang",
+  "installed": "App sudah terpasang",
+  "later": "Nanti saja",
+  "iosTitle": "Di iPhone atau iPad",
+  "iosSteps": "Ketuk tombol Bagikan di Safari, lalu pilih \"Tambah ke Layar Utama\". Notifikasi hanya aktif setelah App ditambahkan ke Layar Utama.",
+  "androidTitle": "Di Android",
+  "androidSteps": "Ketuk Pasang, atau buka menu browser dan pilih \"Tambahkan ke layar utama\".",
+  "updateAvailable": "Versi baru tersedia.",
+  "reload": "Muat ulang",
+  "offlineReady": "Siap dipakai offline.",
+  "offlineNow": "Anda sedang offline. Menampilkan konten tersimpan.",
+  "notifications": {
+    "title": "Notifikasi adzan",
+    "body": "Dapatkan notifikasi setiap masuk waktu salat dan menjelang iqamah.",
+    "enable": "Aktifkan notifikasi",
+    "enabled": "Notifikasi aktif",
+    "denied": "Notifikasi diblokir di pengaturan browser Anda.",
+    "unsupported": "Browser ini belum mendukung notifikasi. Di iPhone, tambahkan App ke Layar Utama dulu.",
+    "test": "Kirim notifikasi uji"
+  },
+  "iosStep1": "Ketuk tombol Bagikan di Safari.",
+  "iosStep2": "Pilih \"Tambah ke Layar Utama\", lalu ketuk Tambah.",
+  "home": {
+    "shortcuts": "Pintasan",
+    "live": "Kajian live dan terbaru",
+    "announcements": "Pengumuman terbaru",
+    "seeAll": "Lihat semua",
+    "hadith": "Hadis hari ini"
+  }
+}

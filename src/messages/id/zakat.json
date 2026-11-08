@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Kalkulator zakat",
+    "description": "Hitung zakat maal, zakat penghasilan, dan zakat fitrah dalam yen atau rupiah dengan harga emas, beras, dan kurs yang bisa diubah. Semua dihitung di perangkat Anda."
+  },
+  "tag": "Kalkulator zakat",
+  "title": "Hitung zakat Anda dalam semenit",
+  "highlight": "dalam semenit",
+  "description": "Nisab mengikuti 85 gram emas dan kadarnya 2,5 persen. Sesuaikan harga emas, harga beras, dan kurs dengan nilai hari ini. Tidak ada data yang disimpan.",
+  "settings": {
+    "currency": "Mata uang",
+    "JPY": "Yen",
+    "IDR": "Rupiah",
+    "rate": "Kurs (1 JPY dalam IDR)",
+    "rateHint": "Kurs manual, bawaan 1 JPY = Rp105. Cek kurs hari ini sebelum membayar.",
+    "reset": "Kembalikan nilai awal"
+  },
+  "tabs": {
+    "maal": "Zakat maal",
+    "income": "Zakat penghasilan",
+    "fitrah": "Zakat fitrah"
+  },
+  "maal": {
+    "title": "Harta yang dimiliki selama satu tahun hijriah",
+    "description": "Emas, perak, tabungan, piutang yang diharapkan tertagih, dan barang dagangan, dikurangi utang yang jatuh tempo.",
+    "gold": "Emas (gram)",
+    "goldPrice": "Harga emas per gram",
+    "silver": "Nilai perak",
+    "savings": "Tabungan dan uang tunai",
+    "receivables": "Piutang",
+    "trade": "Barang dagangan",
+    "debts": "Utang jatuh tempo",
+    "nisab": "Nisab (85 g emas)",
+    "total": "Total harta",
+    "net": "Harta bersih",
+    "belowNisab": "Harta bersih Anda belum mencapai nisab. Zakat maal belum wajib, tetapi sedekah selalu terbuka.",
+    "aboveNisab": "Harta bersih Anda mencapai nisab. Zakat maal wajib ditunaikan.",
+    "dalil": "Ambillah zakat dari harta mereka untuk membersihkan dan menyucikan mereka (At-Taubah 9:103). Kadar 2,5 persen dan nisab emas mengikuti hadis tentang zakat emas dan perak riwayat Abu Dawud."
+  },
+  "income": {
+    "title": "Zakat gaji dan penghasilan profesi",
+    "description": "Masukkan penghasilan kotor. Nisab setara 85 gram emas per tahun; banyak ulama juga membolehkan mengurangi kebutuhan pokok terlebih dahulu.",
+    "amount": "Penghasilan",
+    "period": "Periode",
+    "periods": {
+      "monthly": "Per bulan",
+      "yearly": "Per tahun"
+    },
+    "goldPrice": "Harga emas per gram",
+    "annual": "Penghasilan setahun",
+    "nisabYearly": "Nisab setahun (85 g emas)",
+    "belowNisab": "Penghasilan setahun Anda di bawah nisab, sehingga zakat penghasilan belum wajib.",
+    "aboveNisab": "Penghasilan Anda mencapai nisab. Zakat 2,5 persen wajib ditunaikan.",
+    "monthly": "Per bulan",
+    "yearly": "Per tahun",
+    "dalil": "Wahai orang-orang yang beriman, infakkanlah sebagian dari hasil usahamu yang baik (Al-Baqarah 2:267). Zakat penghasilan ditunaikan bulanan atau tahunan sebesar 2,5 persen, dianalogikan dengan zakat harta."
+  },
+  "fitrah": {
+    "title": "Zakat fitrah sebelum salat Id",
+    "description": "Satu sha makanan pokok, sekitar 2,5 kg beras, untuk setiap anggota keluarga termasuk bayi.",
+    "persons": "Jumlah jiwa",
+    "ricePrice": "Harga beras per kg",
+    "totalRice": "Total beras",
+    "kg": "{kg} kg",
+    "perPerson": "Per jiwa",
+    "result": "Total zakat fitrah",
+    "dalil": "Rasulullah mewajibkan zakat fitrah satu sha kurma atau gandum atas setiap muslim, merdeka maupun hamba sahaya, laki-laki maupun perempuan, kecil maupun besar (Bukhari dan Muslim)."
+  },
+  "result": {
+    "label": "Zakat yang harus ditunaikan",
+    "equivalent": "Sekitar {amount}",
+    "cta": "Salurkan sekarang",
+    "disclaimer": "Kalkulator ini hanya panduan. Untuk kasus yang rumit, tanyakan kepada imam masjid atau ulama tepercaya."
+  }
+}

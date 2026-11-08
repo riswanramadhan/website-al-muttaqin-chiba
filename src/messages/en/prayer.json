@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "Prayer times",
+    "description": "Daily adhan and iqamah times at Al Muttaqin Cultural Center, Matsudo, Chiba, with the monthly schedule, sunnah times, Ramadan imsakiyah, and a calendar download."
+  },
+  "names": {
+    "fajr": "Fajr",
+    "sunrise": "Sunrise",
+    "dhuhr": "Dhuhr",
+    "asr": "Asr",
+    "maghrib": "Maghrib",
+    "isha": "Isha"
+  },
+  "arabic": {
+    "fajr": "الفجر",
+    "sunrise": "الشروق",
+    "dhuhr": "الظهر",
+    "asr": "العصر",
+    "maghrib": "المغرب",
+    "isha": "العشاء"
+  },
+  "hero": {
+    "tag": "Prayer times",
+    "title": "Prayer times in Matsudo, Chiba",
+    "highlight": "Matsudo, Chiba",
+    "description": "Adhan and iqamah times at Al Muttaqin, calculated for the mosque's location and reviewed by the committee. All times are Japan Standard Time (JST).",
+    "ics": "Add to calendar",
+    "openApp": "Open the Jamaah app"
+  },
+  "today": {
+    "title": "Today",
+    "adhan": "Adhan",
+    "iqamah": "Iqamah",
+    "ongoing": "In progress",
+    "next": "Next",
+    "tomorrow": "Tomorrow",
+    "listLabel": "Today's prayer times",
+    "jst": "JST"
+  },
+  "countdown": {
+    "toward": "Towards {prayer}",
+    "placeholder": "--:--",
+    "adhanAt": "Adhan {time}",
+    "iqamahAt": "Iqamah {time}",
+    "label": "Time remaining until {prayer}",
+    "progressLabel": "Progress towards the next prayer"
+  },
+  "arc": {
+    "label": "Arc of the day from sunrise to sunset with today's prayer times",
+    "now": "Now"
+  },
+  "table": {
+    "tag": "Monthly schedule",
+    "title": "Schedule for {month}",
+    "description": "Adhan times for each day of the month. Today's row is highlighted and Fridays are marked.",
+    "caption": "Prayer times for {month}, Asia/Tokyo (JST)",
+    "date": "Date",
+    "imsak": "Imsak",
+    "friday": "Fri",
+    "today": "Today",
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "print": "Print",
+    "ics": "Download ICS",
+    "iqamahNote": "Iqamah: {rules}.",
+    "offsetRule": "{prayer} {count, plural, one {# minute} other {# minutes}} after adhan",
+    "fixedRule": "{prayer} at {time}",
+    "imsakNote": "Imsak is 10 minutes before Fajr and is shown only during Ramadan."
+  },
+  "guide": {
+    "tag": "How to read the schedule",
+    "title": "How the times are calculated",
+    "highlight": "calculated",
+    "method": "Calculation method",
+    "madhab": "Madhab for Asr",
+    "shafi": "Shafi'i (shadow equals object length)",
+    "hanafi": "Hanafi (shadow equals twice the object length)",
+    "highLatitude": "High-latitude rule",
+    "adjustments": "Minute corrections",
+    "adjustmentsNone": "No corrections applied",
+    "iqamah": "Iqamah rule",
+    "jumuah": "Jumuah",
+    "jumuahBody": "Khutbah starts at {time} every Friday. Please see the Jumuah page for this week's khatib.",
+    "timezone": "Time zone",
+    "timezoneBody": "Asia/Tokyo (JST, UTC+9). Japan does not observe daylight saving time.",
+    "notifications": "Adhan notifications",
+    "notificationsBody": "Open the Jamaah app to receive adhan and iqamah notifications on your phone and to keep the schedule offline.",
+    "openApp": "Open the Jamaah app",
+    "jumuahLink": "Jumuah page"
+  },
+  "sunnah": {
+    "tag": "Sunnah times",
+    "title": "Night prayer and other times",
+    "highlight": "Night prayer",
+    "description": "Guidance for voluntary prayers today, calculated from today's Maghrib and tomorrow's Fajr.",
+    "midnight": "Middle of the night",
+    "midnightHint": "Halfway between Maghrib and Fajr",
+    "lastThird": "Last third of the night",
+    "lastThirdHint": "The best time for tahajjud and dua",
+    "duha": "Duha",
+    "duhaHint": "From about 15 minutes after sunrise until shortly before Dhuhr",
+    "forbidden": "Times when voluntary prayer is avoided",
+    "forbiddenAfterFajr": "After Fajr until sunrise ({from} to {to})",
+    "forbiddenAfterAsr": "After Asr until Maghrib ({from} to {to})",
+    "forbiddenNoon": "When the sun is at its highest, a few minutes before Dhuhr"
+  },
+  "ramadan": {
+    "tag": "Ramadan",
+    "title": "Today's imsakiyah",
+    "highlight": "imsakiyah",
+    "description": "Imsak is 10 minutes before Fajr. Iftar begins at Maghrib. May Allah accept your fast.",
+    "imsak": "Imsak",
+    "iftar": "Iftar",
+    "countdown": "Time until iftar",
+    "done": "It is time to break the fast. May Allah accept your fast and prayers."
+  },
+  "app": {
+    "title": "Prayer times",
+    "description": "Adhan, iqamah, and the schedule for the coming days.",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "week": "7 days",
+    "fullSchedule": "Monthly schedule",
+    "jumuahLink": "Jumuah details",
+    "offlineTitle": "Schedule saved offline for 30 days",
+    "offlineBody": "The next 30 days are stored on this device, so the schedule still opens without a connection.",
+    "offlineSaved": "Saved {date}",
+    "offlineNow": "You are offline. Showing the saved schedule.",
+    "offlineError": "Could not refresh the schedule. Showing the saved copy.",
+    "offlineNone": "Open this screen once while online to save the schedule.",
+    "offlineSaving": "Saving the schedule for offline use"
+  }
+}

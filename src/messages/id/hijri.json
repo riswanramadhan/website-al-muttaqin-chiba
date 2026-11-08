@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "title": "Kalender Hijriah",
+    "description": "Tampilan bulan Hijriah dengan padanan Masehi, Ayyamul Bidh, puasa Senin Kamis, tanggal penting, dan hitung mundur menuju Ramadan serta dua hari raya."
+  },
+  "title": "Kalender Hijriah",
+  "description": "Kalender Umm al-Qura dengan koreksi dari pengurus masjid",
+  "todayLabel": "Hari ini",
+  "todayButton": "Hari ini",
+  "hijriYear": "{year} H",
+  "view": {
+    "label": "Tampilan kalender",
+    "hijri": "Hijriah",
+    "gregorian": "Masehi"
+  },
+  "nav": {
+    "prev": "Bulan sebelumnya",
+    "next": "Bulan berikutnya"
+  },
+  "gridLabel": "Grid bulan",
+  "legend": {
+    "today": "Hari ini",
+    "ayyamulBidh": "Ayyamul Bidh (13-15)",
+    "monThu": "Senin dan Kamis",
+    "important": "Tanggal penting"
+  },
+  "countdown": {
+    "title": "Hitung mundur",
+    "ramadan": "1 Ramadan",
+    "eidFitr": "Idulfitri",
+    "eidAdha": "Iduladha",
+    "days": "{count, plural, =0 {Hari ini} other {# hari}}",
+    "daysLeft": "{count, plural, =0 {hari ini} other {# hari lagi}}"
+  },
+  "important": {
+    "title": "Tanggal penting bulan ini",
+    "empty": "Tidak ada tanggal khusus bulan ini.",
+    "day": "Tanggal {day}"
+  },
+  "kinds": {
+    "eid": "Hari raya",
+    "fast": "Puasa",
+    "ramadan": "Ramadan",
+    "hajj": "Haji",
+    "other": "Hari penting"
+  },
+  "convert": {
+    "title": "Konversi tanggal",
+    "gregorian": "Tanggal Masehi",
+    "hijri": "Tanggal Hijriah",
+    "year": "Tahun",
+    "month": "Bulan",
+    "day": "Hari",
+    "result": "Hasil"
+  },
+  "note": {
+    "base": "Tanggal mengikuti kalender Umm al-Qura yang dipakai di Arab Saudi. Awal bulan yang sebenarnya bergantung pada pengumuman rukyat hilal; untuk Ramadan dan hari raya ikuti pengumuman masjid.",
+    "adjusted": "Pengurus masjid menerapkan koreksi {count} hari pada kalender.",
+    "notAdjusted": "Saat ini tidak ada koreksi yang diterapkan oleh pengurus masjid."
+  }
+}

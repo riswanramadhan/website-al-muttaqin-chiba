@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "title": "Settings",
+    "description": "Language, theme, adhan notifications, qibla location, Arabic text size, and stored data for the Al Muttaqin Jamaah app."
+  },
+  "title": "Settings",
+  "description": "Everything is saved on this device.",
+  "language": {
+    "title": "Language",
+    "description": "Choose the app language."
+  },
+  "theme": {
+    "description": "Light, dark, follow your device, or switch to dark after Maghrib."
+  },
+  "notifications": {
+    "statusLabel": "Browser permission:",
+    "status": {
+      "granted": "Allowed",
+      "denied": "Blocked",
+      "default": "Not asked yet",
+      "unsupported": "Not supported"
+    },
+    "serverActive": "Push active",
+    "disable": "Turn off notifications",
+    "prayers": "Prayer times",
+    "iqamah": "Iqamah reminder",
+    "iqamahHint": "10 minutes before iqamah at the mosque.",
+    "jumuah": "Jumuah reminder",
+    "jumuahHint": "30 minutes before Friday prayer.",
+    "noVapid": "Server notifications are not active yet. Reminders still appear while the app is open.",
+    "localHint": "Times follow the mosque's schedule in Matsudo (JST).",
+    "enabledToast": "Notifications are on.",
+    "disabledToast": "Notifications are off.",
+    "errorToast": "Could not turn on notifications. Please try again.",
+    "testTitle": "Al Muttaqin",
+    "testBody": "Test notification: adhan notifications are working on this device.",
+    "testSent": "Test notification sent.",
+    "testFailed": "Could not show the test notification."
+  },
+  "qibla": {
+    "title": "Location for qibla",
+    "description": "Used by the qibla compass.",
+    "device": "Use my device location",
+    "deviceHint": "Most accurate when you are away from the mosque.",
+    "mosque": "Use the mosque location",
+    "mosqueHint": "Al Muttaqin, Matsudo. No location permission needed.",
+    "error": "Could not get your location. The mosque location is used instead."
+  },
+  "arabic": {
+    "title": "Arabic text size",
+    "description": "For the Quran, duas, and dhikr.",
+    "sm": "Small",
+    "md": "Medium",
+    "lg": "Large"
+  },
+  "install": {
+    "title": "Install the app",
+    "description": "Add the Jamaah app to your Home Screen for quick, offline access."
+  },
+  "data": {
+    "title": "Stored data",
+    "description": "Saved preferences, last read, tasbih counts, and offline cache on this device.",
+    "clear": "Clear stored data",
+    "confirmTitle": "Clear stored data?",
+    "confirmBody": "This removes your settings, reading history, tasbih counts, and offline content from this device. It cannot be undone.",
+    "confirm": "Clear data",
+    "cleared": "Stored data cleared."
+  },
+  "about": {
+    "title": "About the app",
+    "version": "Version",
+    "language": "Language",
+    "privacy": "Privacy policy",
+    "website": "Open the website"
+  },
+  "notify": {
+    "adhanTitle": "{prayer} adhan",
+    "adhanBody": "It is time for {prayer} at {time} (JST).",
+    "iqamahTitle": "Iqamah {prayer} in {minutes} minutes",
+    "iqamahBody": "Iqamah at Al Muttaqin is at {time}.",
+    "jumuahTitle": "Friday prayer at {time}",
+    "jumuahBody": "Jumuah at Al Muttaqin starts in {minutes} minutes."
+  }
+}

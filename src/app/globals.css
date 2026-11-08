@@ -1,0 +1,290 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------
+   Token desain Al Muttaqin Cultural Center (PRD §8 / PRD-01)
+   Palet: merah gelap #7F1D1D, hitam #0A0A0A, putih #FFFFFF, abu #F5F5F5.
+   Semua komponen memakai token ini; tidak ada hex di komponen.
+------------------------------------------------------------------- */
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --surface: #f5f5f5;
+  --surface-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --muted: #f5f5f5;
+  --muted-foreground: #5c5c5c;
+  --primary: #7f1d1d;
+  --primary-foreground: #ffffff;
+  --primary-hover: #6b1717;
+  --brand: #7f1d1d;
+  --accent: #fdf2f2;
+  --accent-foreground: #7f1d1d;
+  --secondary: #0a0a0a;
+  --secondary-foreground: #ffffff;
+  --border: #e6e6e6;
+  --input: #e6e6e6;
+  --ring: #7f1d1d;
+  --success: #15803d;
+  --success-foreground: #ffffff;
+  --warning: #b45309;
+  --warning-foreground: #ffffff;
+  --destructive: #b91c1c;
+  --destructive-foreground: #ffffff;
+  --hero: #0a0a0a;
+  --hero-foreground: #ffffff;
+  --hero-muted: #a3a3a3;
+  --radius: 1.25rem;
+  --shadow-soft: 0 1px 2px rgb(10 10 10 / 0.04), 0 8px 24px -12px rgb(10 10 10 / 0.12);
+  --pattern-star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.09' stroke-width='1'%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Crect x='24' y='24' width='48' height='48' transform='rotate(45 48 48)'/%3E%3Cpath d='M0 48h24M72 48h24M48 0v24M48 72v24'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3C/g%3E%3C/svg%3E");
+  --pattern-shippo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.08' stroke-width='1'%3E%3Ccircle cx='24' cy='24' r='24'/%3E%3Ccircle cx='0' cy='0' r='24'/%3E%3Ccircle cx='48' cy='0' r='24'/%3E%3Ccircle cx='0' cy='48' r='24'/%3E%3Ccircle cx='48' cy='48' r='24'/%3E%3C/g%3E%3C/svg%3E");
+  --pattern-star-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%230a0a0a' stroke-opacity='0.06' stroke-width='1'%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Crect x='24' y='24' width='48' height='48' transform='rotate(45 48 48)'/%3E%3Cpath d='M0 48h24M72 48h24M48 0v24M48 72v24'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #f5f5f5;
+  --card: #141414;
+  --card-foreground: #f5f5f5;
+  --surface: #161616;
+  --surface-foreground: #f5f5f5;
+  --popover: #171717;
+  --popover-foreground: #f5f5f5;
+  --muted: #1c1c1c;
+  --muted-foreground: #a3a3a3;
+  --primary: #991b1b;
+  --primary-foreground: #ffffff;
+  --primary-hover: #b91c1c;
+  --brand: #f87171;
+  --accent: #2a1313;
+  --accent-foreground: #fca5a5;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #0a0a0a;
+  --border: #262626;
+  --input: #2a2a2a;
+  --ring: #ef4444;
+  --success: #22c55e;
+  --success-foreground: #052e16;
+  --warning: #f59e0b;
+  --warning-foreground: #1c1917;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --hero: #050505;
+  --hero-foreground: #ffffff;
+  --hero-muted: #a3a3a3;
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  --pattern-star-dark: var(--pattern-star);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-brand: var(--brand);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-hero: var(--hero);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-hero-muted: var(--hero-muted);
+
+  --font-sans: var(--font-jakarta), var(--font-noto-jp), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-jp: var(--font-noto-jp), var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-amiri), "Scheherazade New", "Noto Naskh Arabic", "Amiri", serif;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  --shadow-soft: var(--shadow-soft);
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+  }
+  /* Tipografi Jepang: Noto Sans JP lebih dulu, pemenggalan baris ketat (PRD §7). */
+  :lang(ja) {
+    font-family: var(--font-jp);
+    line-break: strict;
+    word-break: normal;
+    overflow-wrap: anywhere;
+  }
+  :lang(ja) h1,
+  :lang(ja) h2,
+  :lang(ja) h3 {
+    letter-spacing: 0;
+    font-feature-settings: "palt";
+  }
+  [dir="rtl"],
+  .font-arabic {
+    font-family: var(--font-arabic);
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-bold tracking-tight;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 20%, transparent);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------
+   Utilitas khusus proyek
+------------------------------------------------------------------- */
+@utility container-site {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility container-narrow {
+  @apply mx-auto w-full max-w-3xl px-4 sm:px-6;
+}
+
+@utility pattern-star {
+  background-image: var(--pattern-star);
+  background-size: 96px 96px;
+}
+
+@utility pattern-shippo {
+  background-image: var(--pattern-shippo);
+  background-size: 48px 48px;
+}
+
+@utility pattern-star-subtle {
+  background-image: var(--pattern-star-dark);
+  background-size: 96px 96px;
+}
+
+@utility hero-surface {
+  @apply bg-hero text-hero-foreground pattern-star relative overflow-hidden;
+}
+
+@utility card-surface {
+  @apply bg-card rounded-xl border border-border shadow-soft;
+}
+
+@utility card-muted {
+  @apply bg-surface rounded-xl border border-transparent;
+}
+
+@utility lift {
+  @apply transition-transform duration-300 ease-out hover:-translate-y-0.5;
+}
+
+@utility headline {
+  @apply font-bold tracking-tight text-balance;
+}
+
+@utility text-brand {
+  color: var(--brand);
+}
+
+@utility safe-bottom {
+  padding-bottom: max(env(safe-area-inset-bottom), 0px);
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Leaflet perlu z-index di bawah header & dialog; ubin dibalik warnanya di mode gelap. */
+.leaflet-container {
+  z-index: 0;
+  font-family: inherit;
+  background: var(--surface);
+}
+.dark .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.9) saturate(0.6);
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-radius: 0.75rem;
+}

@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "Panduan halal: kanji haram dan tempat halal",
+    "description": "Cari kanji babi, alkohol, dan bahan syubhat pada label makanan Jepang, serta temukan masjid, musala, restoran halal, dan toko di sekitar Matsudo, Kashiwa, Chiba, dan Tokyo timur."
+  },
+  "tag": "Panduan halal",
+  "title": "Baca label Jepang mana pun dengan percaya diri.",
+  "highlight": "dengan percaya diri.",
+  "description": "Babi, lemak babi, sake, dan gelatin bersembunyi di balik beberapa kanji yang berulang. Cari di sini, pelajari cara membaca kotak komposisi, dan temukan makanan halal di dekat Anda.",
+  "hero": {
+    "radar": "Buka radar halal",
+    "dictionary": "Frasa untuk bertanya",
+    "disclaimer": "Panduan ini disusun jamaah dan bukan sertifikasi. Jika ragu, tanyakan ke produsen atau pilih produk bersertifikat."
+  },
+  "search": {
+    "tag": "Kanji haram",
+    "title": "Cari bahan berdasarkan kanji, kana, romaji, atau arti",
+    "description": "Ketik apa yang tertulis di label, misalnya 豚, ゼラチン, atau shortening.",
+    "placeholder": "Cari kanji, bacaan, atau arti",
+    "filters": { "all": "Semua", "haram": "Haram", "syubhat": "Syubhat" },
+    "status": { "haram": "Haram", "syubhat": "Syubhat (meragukan)" },
+    "copy": "Salin kanji",
+    "count": "{count} bahan",
+    "empty": "Tidak ada bahan yang cocok. Coba kata lebih pendek atau satu kanji saja.",
+    "noteLabel": "Catatan"
+  },
+  "labels": {
+    "tag": "Membaca label",
+    "title": "Cara membaca label makanan Jepang",
+    "description": "Label Jepang punya tata letak baku. Temukan judul-judul ini dulu, lalu telusuri baris komposisi untuk kanji di atas.",
+    "items": {
+      "0": { "term": "成分", "reading": "seibun", "meaning": "Komponen atau nilai gizi. Biasanya tabel kalori, protein, lemak, dan garam." },
+      "1": { "term": "原材料名", "reading": "genzairyō-mei", "meaning": "Daftar bahan, diurutkan dari jumlah terbanyak. Baris inilah yang harus dibaca teliti." },
+      "2": { "term": "アレルギー", "reading": "arerugī", "meaning": "Keterangan alergen. Teks dalam kurung seperti 一部に豚肉を含む mengungkap babi meski tidak terlihat." },
+      "3": { "term": "豚由来", "reading": "buta yurai", "meaning": "Berasal dari babi. Sering ditulis setelah gelatin atau pengemulsi." },
+      "4": { "term": "ゼラチン", "reading": "zerachin", "meaning": "Gelatin. Haram kecuali label menyebut ikan (魚) atau nabati (植物性)." },
+      "5": { "term": "乳化剤", "reading": "nyūkazai", "meaning": "Pengemulsi. Syubhat; dari kedelai (大豆由来) boleh." },
+      "6": { "term": "ショートニング", "reading": "shōtoningu", "meaning": "Shortening. Syubhat; hanya nabati (植物油脂) boleh." },
+      "7": { "term": "酒精", "reading": "shusei", "meaning": "Alkohol yang ditambahkan sebagai pengawet, umum pada miso, kecap asin, dan acar." }
+    },
+    "tip": "Keterangan alergen mencantumkan 豚肉 jika ada babi dalam jumlah berapa pun. Membaca satu baris itu menangkap sebagian besar babi tersembunyi."
+  },
+  "phrases": {
+    "tag": "Bertanya dalam bahasa Jepang",
+    "title": "Frasa untuk bertanya soal makanan",
+    "description": "Tunjukkan kalimat Jepangnya ke pelayan, atau buka kamus untuk mendengar pengucapannya.",
+    "link": "Semua frasa makanan di kamus",
+    "show": "Tunjukkan"
+  },
+  "radar": {
+    "tag": "Radar halal",
+    "title": "Masjid, musala, dan makanan halal di dekat Anda",
+    "description": "Diurutkan berdasarkan jarak dari masjid, atau dari lokasi Anda jika diizinkan. Tempat bertanda belum terverifikasi menunggu pengecekan pengurus."
+  },
+  "cards": {
+    "tag": "Sumber lainnya",
+    "title": "Kuliner halal dan aplikasi",
+    "culinary": {
+      "title": "Kuliner halal Chiba dan Tokyo timur",
+      "description": "Kawasan yang biasa didatangi jamaah untuk makanan halal.",
+      "items": {
+        "0": { "name": "Sekitar Otsuka dan Ikebukuro", "detail": "Restoran Pakistan, Bangladesh, dan Indonesia dekat Masjid Otsuka.", "url": "https://www.google.com/maps/search/halal+restaurant+otsuka+tokyo" },
+        "1": { "name": "Asakusa dan Kinshicho", "detail": "Warung Indonesia dan kebab Turki dekat masjid Asakusa.", "url": "https://www.google.com/maps/search/halal+restaurant+asakusa" },
+        "2": { "name": "Kashiwa dan Funabashi", "detail": "Rumah makan kari halal dan toko bahan di sepanjang jalur Joban dan Sobu.", "url": "https://www.google.com/maps/search/halal+restaurant+kashiwa" }
+      }
+    },
+    "apps": {
+      "title": "Aplikasi dan situs",
+      "description": "Peta restoran halal dan musala se-Jepang yang dirawat komunitas.",
+      "items": {
+        "0": { "name": "Halal Navi", "detail": "Aplikasi dengan ulasan pengguna, musala, dan restoran bersertifikat.", "url": "https://www.halalnavi.com" },
+        "1": { "name": "Halal Gourmet Japan", "detail": "Direktori restoran dengan detail sertifikasi dan menu.", "url": "https://www.halalgourmet.jp" },
+        "2": { "name": "Halal Media Japan", "detail": "Berita, cek produk, dan daftar musala.", "url": "https://www.halalmedia.jp" }
+      }
+    },
+    "open": "Buka"
+  }
+}

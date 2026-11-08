@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "Kajian dan ceramah",
+    "description": "Rekaman dan siaran langsung kajian Al Muttaqin Cultural Center dalam bahasa Indonesia, Jepang, Inggris, dan Arab."
+  },
+  "tag": "Kajian",
+  "title": "Belajar bersama di",
+  "highlight": "kajian",
+  "description": "Rekaman kajian pekanan, kelas muallaf, dan ceramah khusus. Saring berdasarkan bahasa atau seri, atau cari tema dan pemateri.",
+  "filters": {
+    "search": "Cari",
+    "searchPlaceholder": "Judul, pemateri, atau tag",
+    "language": "Bahasa",
+    "allLanguages": "Semua bahasa",
+    "series": "Seri",
+    "allSeries": "Semua seri",
+    "results": "{count, plural, =0 {Tidak ada kajian} other {# kajian}}",
+    "empty": "Tidak ada kajian yang cocok dengan filter ini.",
+    "clear": "Hapus filter"
+  },
+  "languages": {
+    "ja": "Jepang",
+    "en": "Inggris",
+    "id": "Indonesia",
+    "ar": "Arab"
+  },
+  "card": {
+    "duration": "{count} menit",
+    "watch": "Tonton"
+  },
+  "detail": {
+    "back": "Semua kajian",
+    "about": "Tentang kajian ini",
+    "series": "Seri",
+    "tags": "Topik",
+    "speaker": "Pemateri",
+    "published": "Direkam",
+    "duration": "Durasi",
+    "language": "Bahasa",
+    "related": "Kajian terkait",
+    "relatedDescription": "Dari seri yang sama atau topik serupa.",
+    "share": "Bagikan",
+    "openChannel": "Buka kanal YouTube",
+    "watchOnYouTube": "Tonton di YouTube"
+  },
+  "channels": {
+    "tag": "Kanal rujukan",
+    "title": "Kajian dari",
+    "highlight": "para asatidz",
+    "description": "Kanal para asatidz yang rutin mengisi kajian di Al Muttaqin dan komunitas Chiba. Isi kanal dikelola oleh pemiliknya masing-masing.",
+    "visit": "Buka kanal",
+    "items": {
+      "1": {
+        "name": "Al Muttaqin Chiba",
+        "description": "Kanal resmi: kajian pekanan, khutbah Jumat, dan siaran langsung dari masjid.",
+        "url": "https://www.youtube.com/@almuttaqinchiba"
+      },
+      "2": {
+        "name": "Chiba Islamic Culture Center",
+        "description": "Ceramah dakwah berbahasa Jepang dan Indonesia dari pusat yang mengelola masjid.",
+        "url": "https://www.youtube.com/@ciccjapan"
+      },
+      "3": {
+        "name": "Ust. Ahmad Fauzi",
+        "description": "Seri tafsir dan sirah berbahasa Indonesia untuk komunitas di Jepang.",
+        "url": "https://www.youtube.com/@ustahmadfauzi"
+      }
+    }
+  },
+  "materials": {
+    "tag": "Materi",
+    "title": "Materi dan slide",
+    "description": "Materi cetak, slide, dan daftar bacaan tiap kajian dikumpulkan di satu folder Google Drive bersama.",
+    "cta": "Buka folder materi",
+    "url": "https://drive.google.com/drive/folders/placeholder-al-muttaqin-materials",
+    "note": "Tautan sementara: pengurus akan menggantinya dengan folder resmi."
+  }
+}

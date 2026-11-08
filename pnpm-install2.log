@@ -1,0 +1,122 @@
+[WARN] The "pnpm" field in package.json is no longer read by pnpm. The following keys were ignored: "pnpm.onlyBuiltDependencies". See https://pnpm.io/settings for the new home of each setting.
+? Verifying lockfile against supply-chain policies (746 entries)...
+[WARN] Request took 27918ms: https://registry.npmmirror.com/@next%2Fswc-darwin-x64
+[WARN] Request took 26687ms: https://registry.npmmirror.com/@next%2Fswc-win32-arm64-msvc
+[WARN] Request took 27923ms: https://registry.npmmirror.com/@next%2Fswc-linux-arm64-musl
+[WARN] Request took 27890ms: https://registry.npmmirror.com/@next%2Fswc-win32-x64-msvc
+[WARN] Request took 33621ms: https://registry.npmmirror.com/@next%2Fswc-linux-arm64-gnu
+[WARN] Request took 35910ms: https://registry.npmmirror.com/@next%2Fswc-darwin-arm64
+[WARN] Request took 35271ms: https://registry.npmmirror.com/@next%2Fswc-linux-x64-gnu
+[WARN] Request took 35454ms: https://registry.npmmirror.com/@next%2Fswc-linux-x64-musl
+[WARN] Request took 12238ms: https://registry.npmmirror.com/@supabase%2Fauth-js
+[WARN] Request took 11494ms: https://registry.npmmirror.com/@supabase%2Fstorage-js
+[WARN] Request took 13297ms: https://registry.npmmirror.com/@supabase%2Frealtime-js
+[WARN] Request took 27168ms: https://registry.npmmirror.com/@supabase%2Fsupabase-js
+[WARN] Request took 56423ms: https://registry.npmmirror.com/@next%2Feslint-plugin-next
+[WARN] GET https://registry.npmmirror.com/@next%2Fenv error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] Request took 13522ms: https://registry.npmmirror.com/@types%2Fnode
+[WARN] Request took 18894ms: https://registry.npmmirror.com/@tailwindcss%2Fnode
+[WARN] Request took 19314ms: https://registry.npmmirror.com/@tailwindcss%2Foxide
+[WARN] Request took 36943ms: https://registry.npmmirror.com/@typescript-eslint%2Ftypes
+[WARN] Request took 39377ms: https://registry.npmmirror.com/@typescript-eslint%2Ftype-utils
+[WARN] Request took 27098ms: https://registry.npmmirror.com/axe-core
+[WARN] Request took 39517ms: https://registry.npmmirror.com/@typescript-eslint%2Futils
+[WARN] Request took 42072ms: https://registry.npmmirror.com/@typescript-eslint%2Fvisitor-keys
+[WARN] Request took 47811ms: https://registry.npmmirror.com/@typescript-eslint%2Fscope-manager
+[WARN] Request took 37260ms: https://registry.npmmirror.com/@tailwindcss%2Foxide
+[WARN] Request took 54819ms: https://registry.npmmirror.com/@typescript-eslint%2Fparser
+[WARN] Request took 57384ms: https://registry.npmmirror.com/@typescript-eslint%2Ftypescript-estree
+[WARN] GET https://registry.npmmirror.com/@typescript-eslint%2Feslint-plugin error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] Request took 26249ms: https://registry.npmmirror.com/electron-to-chromium
+[WARN] Request took 21657ms: https://registry.npmmirror.com/eslint-plugin-react-hooks
+[WARN] Request took 42954ms: https://registry.npmmirror.com/@next%2Fenv
+[WARN] Request took 25425ms: https://registry.npmmirror.com/eslint-config-next
+[WARN] Request took 27272ms: https://registry.npmmirror.com/axe-core
+[WARN] Request took 11444ms: https://registry.npmmirror.com/react-is
+[WARN] Request took 12089ms: https://registry.npmmirror.com/tailwindcss
+[WARN] Request took 19806ms: https://registry.npmmirror.com/@typescript-eslint%2Feslint-plugin
+[WARN] Request took 15949ms: https://registry.npmmirror.com/typescript
+[WARN] Request took 12980ms: https://registry.npmmirror.com/tailwindcss
+[WARN] Request took 12437ms: https://registry.npmmirror.com/typescript
+[WARN] Request took 41584ms: https://registry.npmmirror.com/next
+✓ Lockfile passes supply-chain policies (746 entries in 3m 0.4s)
+Progress: resolved 1, reused 0, downloaded 0, added 0
+[WARN] deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+Progress: resolved 20, reused 0, downloaded 0, added 0
+Progress: resolved 37, reused 5, downloaded 0, added 0
+Progress: resolved 38, reused 10, downloaded 0, added 0
+Progress: resolved 51, reused 14, downloaded 0, added 0
+Progress: resolved 80, reused 18, downloaded 0, added 0
+Progress: resolved 110, reused 21, downloaded 0, added 0
+Progress: resolved 138, reused 25, downloaded 0, added 0
+Progress: resolved 151, reused 25, downloaded 0, added 0
+Progress: resolved 171, reused 30, downloaded 0, added 0
+Progress: resolved 190, reused 36, downloaded 0, added 0
+Progress: resolved 194, reused 36, downloaded 0, added 0
+Progress: resolved 208, reused 37, downloaded 0, added 0
+Progress: resolved 234, reused 41, downloaded 0, added 0
+Progress: resolved 249, reused 43, downloaded 0, added 0
+Progress: resolved 267, reused 48, downloaded 0, added 0
+Progress: resolved 281, reused 51, downloaded 0, added 0
+Progress: resolved 306, reused 56, downloaded 0, added 0
+Progress: resolved 327, reused 61, downloaded 0, added 0
+Progress: resolved 342, reused 66, downloaded 0, added 0
+Progress: resolved 352, reused 70, downloaded 0, added 0
+Progress: resolved 371, reused 77, downloaded 0, added 0
+Progress: resolved 390, reused 81, downloaded 0, added 0
+Progress: resolved 409, reused 85, downloaded 0, added 0
+Progress: resolved 428, reused 88, downloaded 0, added 0
+Progress: resolved 453, reused 92, downloaded 0, added 0
+Progress: resolved 455, reused 99, downloaded 0, added 0
+Progress: resolved 459, reused 105, downloaded 0, added 0
+Progress: resolved 459, reused 110, downloaded 0, added 0
+Progress: resolved 459, reused 114, downloaded 0, added 0
+Progress: resolved 459, reused 120, downloaded 0, added 0
+Progress: resolved 459, reused 127, downloaded 0, added 0
+Progress: resolved 459, reused 135, downloaded 0, added 0
+Progress: resolved 459, reused 174, downloaded 0, added 0
+Progress: resolved 460, reused 189, downloaded 0, added 0
+Progress: resolved 488, reused 209, downloaded 0, added 0
+Progress: resolved 527, reused 226, downloaded 0, added 0
+Progress: resolved 530, reused 231, downloaded 0, added 0
+Progress: resolved 538, reused 238, downloaded 0, added 0
+Progress: resolved 549, reused 242, downloaded 0, added 0
+Progress: resolved 562, reused 247, downloaded 0, added 0
+Progress: resolved 570, reused 250, downloaded 0, added 0
+Progress: resolved 573, reused 252, downloaded 0, added 0
+Progress: resolved 593, reused 258, downloaded 0, added 0
+Progress: resolved 620, reused 264, downloaded 0, added 0
+Progress: resolved 624, reused 271, downloaded 0, added 0
+Progress: resolved 640, reused 276, downloaded 0, added 0
+Progress: resolved 642, reused 279, downloaded 0, added 0
+Progress: resolved 658, reused 285, downloaded 0, added 0
+Progress: resolved 659, reused 289, downloaded 0, added 0
+Progress: resolved 664, reused 302, downloaded 0, added 0
+Progress: resolved 669, reused 317, downloaded 0, added 0
+Progress: resolved 684, reused 325, downloaded 0, added 0
+Progress: resolved 690, reused 330, downloaded 0, added 0
+Progress: resolved 710, reused 339, downloaded 0, added 0
+Progress: resolved 717, reused 355, downloaded 0, added 0
+Progress: resolved 730, reused 361, downloaded 0, added 0
+[WARN] 1 deprecated subdependencies found: glob@10.5.0
+Progress: resolved 747, reused 371, downloaded 0, added 0
+Progress: resolved 747, reused 392, downloaded 0, added 0
+Packages: +19 -18
++++++++++++++++++++------------------
+Progress: resolved 747, reused 427, downloaded 0, added 0
+Progress: resolved 747, reused 497, downloaded 0, added 0
+Progress: resolved 747, reused 512, downloaded 0, added 0
+Progress: resolved 747, reused 592, downloaded 0, added 0
+Progress: resolved 747, reused 592, downloaded 0, added 2
+Progress: resolved 747, reused 592, downloaded 0, added 12
+Progress: resolved 747, reused 592, downloaded 0, added 18
+Progress: resolved 747, reused 592, downloaded 1, added 18
+Progress: resolved 747, reused 592, downloaded 1, added 19, done
+
+devDependencies:
+- typescript 5.0.2
++ typescript 5.9.3 (7.0.2 is available)
+
+[ERR_PNPM_IGNORED_BUILDS] Ignored build scripts: @parcel/watcher@2.6.0, @swc/core@1.16.13, @swc/core@1.16.21, esbuild@0.28.2, sharp@0.34.0
+
+Run "pnpm approve-builds" to pick which dependencies should be allowed to run scripts.

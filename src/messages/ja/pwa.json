@@ -1,0 +1,33 @@
+{
+  "installTitle": "ジャマーアアプリをインストール",
+  "installBody": "礼拝時間、アザーン通知、キブラ、ドゥアー、クルアーンをオフラインでも。",
+  "installButton": "インストール",
+  "installed": "インストール済み",
+  "later": "あとで",
+  "iosTitle": "iPhone・iPadの場合",
+  "iosSteps": "Safariの共有ボタンをタップし、「ホーム画面に追加」を選んでください。通知はホーム画面に追加した後に有効になります。",
+  "androidTitle": "Androidの場合",
+  "androidSteps": "「インストール」をタップするか、ブラウザのメニューから「ホーム画面に追加」を選んでください。",
+  "updateAvailable": "新しいバージョンがあります。",
+  "reload": "再読み込み",
+  "offlineReady": "オフラインでも使えます。",
+  "offlineNow": "オフラインです。保存済みの内容を表示しています。",
+  "notifications": {
+    "title": "アザーン通知",
+    "body": "各礼拝時間とイカーマ前に通知を受け取れます。",
+    "enable": "通知を有効にする",
+    "enabled": "通知は有効です",
+    "denied": "ブラウザの設定で通知がブロックされています。",
+    "unsupported": "このブラウザは通知に対応していません。iPhoneでは先にホーム画面に追加してください。",
+    "test": "テスト通知を送る"
+  },
+  "iosStep1": "Safariの共有ボタンをタップします。",
+  "iosStep2": "「ホーム画面に追加」を選び、「追加」をタップします。",
+  "home": {
+    "shortcuts": "ショートカット",
+    "live": "ライブと最新の勉強会",
+    "announcements": "最新のお知らせ",
+    "seeAll": "すべて見る",
+    "hadith": "今日のハディース"
+  }
+}

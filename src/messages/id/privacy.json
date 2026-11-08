@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "title": "Kebijakan privasi",
+    "description": "Cara Al Muttaqin Cultural Center mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi sesuai Undang-Undang Perlindungan Informasi Pribadi Jepang."
+  },
+  "hero": {
+    "tag": "Kebijakan privasi",
+    "title": "Data Anda hanya dipakai untuk keperluan masjid.",
+    "highlight": "hanya dipakai untuk keperluan masjid.",
+    "description": "Kebijakan ini menjelaskan data pribadi apa yang dikumpulkan situs ini, untuk apa, di mana disimpan, dan hak apa yang Anda miliki, sejalan dengan Undang-Undang Perlindungan Informasi Pribadi Jepang (APPI, 個人情報保護法)."
+  },
+  "effective": "Berlaku sejak {date}",
+  "intro": "{name} (\"Pusat\", \"kami\") mengelola situs almuttaqinculturalcenter.org dan App Jamaah. Kami menangani data pribadi sesuai Undang-Undang Perlindungan Informasi Pribadi Jepang (UU No. 57 Tahun 2003 beserta perubahannya) dan prinsip-prinsip di bawah ini.",
+  "aside": {
+    "title": "Pertanyaan tentang data Anda",
+    "body": "Permintaan akses, perbaikan, atau penghapusan ditangani sekretariat. Kami membalas dalam dua minggu.",
+    "operator": "Pengelola data",
+    "address": "Alamat",
+    "mailSubject": "Permintaan data pribadi",
+    "cta": "Email sekretariat"
+  },
+  "sections": {
+    "operator": {
+      "title": "1. Pengelola data pribadi",
+      "body": "Pengelola yang bertanggung jawab atas data pribadi yang dikumpulkan lewat situs dan aplikasi ini adalah {name}, {address}, {postalCode}, Jepang. Kontak: {email}."
+    },
+    "collected": {
+      "title": "2. Data pribadi yang kami kumpulkan",
+      "body": "Kami hanya mengumpulkan data yang Anda berikan sendiri atau yang secara teknis diperlukan untuk layanan yang Anda minta.",
+      "items": {
+        "0": "Formulir kontak: nama, alamat email, subjek, dan isi pesan.",
+        "1": "Formulir pendaftaran acara dan peminjaman ruang: nama, kontak (email, telepon, atau WhatsApp), jumlah peserta, dan catatan yang Anda tambahkan.",
+        "2": "Formulir konfirmasi donasi: nama, kontak, nominal, tanggal transfer, dan permintaan bukti donasi (opsional). Kami tidak pernah meminta nomor kartu atau kata sandi.",
+        "3": "Notifikasi push: endpoint langganan dan kunci enkripsi yang dibuat peramban Anda, bahasa, serta preferensi notifikasi. Data ini tidak mengidentifikasi nama Anda.",
+        "4": "Analitik: statistik halaman agregat tanpa cookie (URL halaman, sumber rujukan, negara, jenis perangkat). Alamat IP atau sidik jari peramban tidak disimpan.",
+        "5": "Log server: alamat IP dan user agent diproses sebentar untuk pembatasan laju dan perlindungan spam, dan tidak disimpan di basis data."
+      }
+    },
+    "purpose": {
+      "title": "3. Tujuan penggunaan",
+      "body": "Sesuai Pasal 17 APPI, kami menetapkan tujuan penggunaan sejelas mungkin. Data pribadi hanya digunakan untuk tujuan berikut, bukan untuk iklan atau dijual.",
+      "items": {
+        "0": "Menjawab pertanyaan serta mengatur kunjungan, permintaan media, relawan, atau kerja sama.",
+        "1": "Mengelola pendaftaran acara, daftar tunggu, dan peminjaman ruang, serta menghubungi Anda bila ada perubahan.",
+        "2": "Mencatat donasi, menerbitkan bukti donasi bila diminta, dan menyusun laporan keuangan bulanan (dipublikasikan hanya sebagai total, tanpa nama donatur kecuali Anda menyetujuinya secara tegas).",
+        "3": "Mengirim notifikasi waktu salat, Jumat, dan pengumuman yang Anda aktifkan.",
+        "4": "Memahami halaman mana yang bermanfaat agar situs dapat kami perbaiki.",
+        "5": "Mencegah spam, penyalahgunaan, dan akses tidak sah."
+      }
+    },
+    "legalBasis": {
+      "title": "4. Persetujuan dan penanganan yang sah",
+      "body": "Setiap formulir meminta persetujuan tegas Anda sebelum dikirim. Kami tidak memperoleh data pribadi dengan tipu daya atau cara tidak patut lainnya, dan tidak menggunakannya di luar tujuan yang disebutkan tanpa persetujuan Anda terlebih dahulu, kecuali bila diizinkan undang-undang (misalnya atas permintaan pengadilan atau otoritas publik)."
+    },
+    "storage": {
+      "title": "5. Tempat dan lama penyimpanan",
+      "body": "Kiriman formulir dan langganan push disimpan di basis data Supabase yang dihosting di pusat data kawasan Asia-Pasifik, dan situs disajikan oleh Vercel. Keduanya menerapkan enkripsi standar industri saat transit dan saat disimpan. Karena server ini mungkin berada di luar Jepang, kami mengandalkan perlindungan kontraktual penyedia sebagaimana disyaratkan Pasal 28 APPI untuk transfer lintas negara.",
+      "items": {
+        "0": "Pesan kontak: dihapus dalam 12 bulan setelah pertanyaan selesai.",
+        "1": "Pendaftaran acara dan peminjaman: dihapus dalam 6 bulan setelah acara.",
+        "2": "Konfirmasi donasi: disimpan 7 tahun untuk keperluan pembukuan sesuai aturan akuntansi Jepang.",
+        "3": "Langganan push: dihapus saat Anda mematikan notifikasi, atau otomatis setelah 90 hari tanpa pengiriman yang berhasil."
+      }
+    },
+    "thirdParties": {
+      "title": "6. Layanan pihak ketiga",
+      "body": "Sebagian situs memuat konten dari penyedia lain. Saat Anda memakai fitur ini, penyedia tersebut dapat memproses alamat IP dan informasi peramban Anda menurut kebijakan privasinya sendiri.",
+      "items": {
+        "0": "YouTube (Google): video kajian dan siaran langsung dimuat dalam mode privasi yang ditingkatkan dan hanya setelah Anda menekan putar.",
+        "1": "OpenStreetMap: ubin peta untuk peta akses dan panduan halal.",
+        "2": "Cloudflare Turnstile: perlindungan spam pada formulir, memproses sinyal peramban tanpa cookie pelacak.",
+        "3": "WhatsApp (Meta): hanya jika Anda memilih mengirim pesan lewat tombol WhatsApp; teks pesan disusun di perangkat Anda."
+      }
+    },
+    "sharing": {
+      "title": "7. Pemberian kepada pihak ketiga",
+      "body": "Kami tidak menjual, menyewakan, atau membagikan data pribadi kepada pihak ketiga. Data hanya diungkapkan kepada pengurus relawan yang membutuhkannya untuk membalas Anda, kepada penyedia layanan yang bertindak atas instruksi kami (Supabase, Vercel), atau bila diwajibkan undang-undang."
+    },
+    "cookies": {
+      "title": "8. Cookie dan penyimpanan lokal",
+      "body": "Situs ini tidak memakai cookie iklan atau pelacakan. Peramban Anda hanya menyimpan beberapa preferensi secara lokal.",
+      "items": {
+        "0": "Preferensi bahasa (ja, en, id), agar situs terbuka dalam bahasa Anda saat berikutnya.",
+        "1": "Preferensi tema (terang, gelap, atau otomatis setelah Magrib).",
+        "2": "Cache offline jadwal salat dan halaman untuk App Jamaah, disimpan di perangkat Anda oleh service worker.",
+        "3": "Penghitung zikir dan pengaturan aplikasi, hanya disimpan di perangkat Anda."
+      }
+    },
+    "rights": {
+      "title": "9. Hak Anda",
+      "body": "Berdasarkan Pasal 33-35 APPI, Anda dapat meminta kami mengungkapkan, memperbaiki, menambah, menghapus, atau berhenti menggunakan data pribadi yang mengidentifikasi Anda. Anda juga dapat menarik persetujuan kapan saja; penarikan tidak memengaruhi pemrosesan yang sudah terjadi.",
+      "items": {
+        "0": "Kirim permintaan ke {email} dengan subjek \"Permintaan data pribadi\".",
+        "1": "Kami mungkin meminta verifikasi sederhana, misalnya membalas dari alamat email yang sama dengan yang Anda pakai.",
+        "2": "Kami membalas dalam dua minggu. Tidak ada biaya.",
+        "3": "Notifikasi push dapat dimatikan kapan saja di pengaturan App atau peramban Anda."
+      }
+    },
+    "security": {
+      "title": "10. Langkah keamanan",
+      "body": "Kami mengambil langkah organisasi dan teknis yang wajar untuk mencegah kebocoran, kehilangan, atau kerusakan data pribadi.",
+      "items": {
+        "0": "Semua koneksi memakai HTTPS; basis data dienkripsi saat disimpan.",
+        "1": "Akses ke data kiriman dibatasi pada pengurus yang ditunjuk dengan akun dan peran masing-masing.",
+        "2": "Pembatasan laju, kolom honeypot, dan Turnstile mengurangi penyalahgunaan otomatis.",
+        "3": "Relawan yang menangani data pribadi diberi pengarahan tentang kebijakan ini dan APPI."
+      }
+    },
+    "children": {
+      "title": "11. Anak-anak",
+      "body": "Pendaftaran TPA dan program remaja diajukan oleh orang tua atau wali. Kami tidak secara sengaja mengumpulkan data pribadi langsung dari anak di bawah 13 tahun."
+    },
+    "changes": {
+      "title": "12. Perubahan kebijakan",
+      "body": "Kami dapat memperbarui kebijakan ini ketika situs mendapat fitur baru atau undang-undang berubah. Tanggal berlaku di bagian atas halaman menunjukkan versi terbaru, dan perubahan penting diumumkan di halaman berita."
+    },
+    "contact": {
+      "title": "13. Kontak urusan data pribadi",
+      "body": "{name}, {address}, {postalCode}. Email: {email}. Anda dapat menulis dalam bahasa Jepang, Inggris, atau Indonesia."
+    }
+  }
+}

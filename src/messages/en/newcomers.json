@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "title": "New in Chiba: a guide for Muslims",
+    "description": "First steps in Matsudo, garbage rules, transport, halal food, emergencies, and Muslim life at work and school. A practical guide from Al Muttaqin Cultural Center."
+  },
+  "tag": "New in Chiba",
+  "title": "A practical guide for Muslims new to Matsudo and Chiba.",
+  "highlight": "Matsudo and Chiba.",
+  "description": "Everything we wish someone had told us in the first month: city hall, garbage, trains, halal food, emergency numbers, and how to ask for prayer time at work. Written by the congregation, for the congregation.",
+  "hero": {
+    "print": "Print summary",
+    "whatsapp": "Ask the committee on WhatsApp",
+    "halal": "Halal guide",
+    "dictionary": "Dawah dictionary",
+    "note": "The committee updates this page as rules change. If something is out of date, let us know."
+  },
+  "toc": {
+    "title": "On this page",
+    "firstSteps": "First steps",
+    "garbage": "Garbage rules",
+    "transport": "Getting around",
+    "halal": "Everyday halal",
+    "emergency": "Emergencies",
+    "work": "Work and school",
+    "contact": "Contact the committee"
+  },
+  "firstSteps": {
+    "tag": "Section 1",
+    "title": "First steps in your first two weeks",
+    "description": "Do these in order. Most of them happen at Matsudo City Hall (松戸市役所), a short walk from Matsudo Station. Bring your passport and residence card to every visit."
+  },
+  "checklist": {
+    "title": "Your checklist",
+    "description": "Tick each step when it is done. Your progress is saved on this device only.",
+    "progress": "{done} of {total} done",
+    "complete": "All done. Welcome home to Matsudo.",
+    "reset": "Reset checklist",
+    "detailsLabel": "Details",
+    "items": {
+      "0": "Register your address at Matsudo City Hall (転入届) within 14 days",
+      "1": "Apply for your My Number card (マイナンバーカード)",
+      "2": "Join National Health Insurance (国民健康保険) or confirm employer insurance",
+      "3": "Open a bank account (Japan Post Bank / ゆうちょ is the easiest)",
+      "4": "Get a Suica or PASMO IC card, and convert your driver's license if you drive",
+      "5": "Join the jamaah WhatsApp group and introduce yourself"
+    },
+    "details": {
+      "0": "Go to the Citizens' Division (市民課) at Matsudo City Hall with your passport, residence card (在留カード), and the address of your new home. If you moved from another Japanese city, bring the moving-out certificate (転出証明書). Your new address is printed on the back of your residence card on the spot.",
+      "1": "The city hall gives you a notification of your individual number. Apply for the plastic card online or at the counter; it takes about a month and makes banking, insurance, and tax much easier. Bring a passport-style photo.",
+      "2": "If your employer does not enroll you in Social Insurance (社会保険), you must join National Health Insurance at the same counter. Premiums depend on last year's income and are low in your first year. You pay 30 percent of medical costs with the card.",
+      "3": "Japan Post Bank (ゆうちょ銀行) accepts new residents without a long stay history. Bring your residence card, a Japanese phone number, and a hanko or signature. Online banks such as Sony Bank and SMBC also accept foreigners; ask the group for the latest experiences.",
+      "4": "Buy a Suica or PASMO at any JR or Shin-Keisei ticket machine (500 yen deposit) or add it to your phone. It works on trains, buses, convenience stores, and vending machines. If you want to drive, Indonesian licenses can be converted at the Chiba Driver's License Center in Makuhari with a translation from JAF.",
+      "5": "The congregation group shares prayer times, Jumuah changes, halal finds, and help with paperwork. Ask the committee on WhatsApp to be added, and say where you live so neighbors can reach out."
+    }
+  },
+  "garbage": {
+    "tag": "Section 2",
+    "title": "Garbage rules in Matsudo",
+    "description": "Matsudo separates garbage strictly, and collection days differ by neighborhood. Put bags out before 8 a.m. on the correct day at your building's collection point, never the night before.",
+    "types": {
+      "0": { "name": "Burnable garbage (燃やせるごみ)", "detail": "Kitchen waste, paper scraps, diapers, small plastics with food residue. Use the city's designated bags. Collected twice a week." },
+      "1": { "name": "Non-burnable garbage (燃やせないごみ)", "detail": "Metal, ceramics, glass, small appliances, batteries in a separate clear bag. Usually once or twice a month." },
+      "2": { "name": "PET bottles (ペットボトル)", "detail": "Remove the cap and label, rinse, crush lightly. Caps and labels go in plastic containers or burnable." },
+      "3": { "name": "Cans and bottles (缶・びん)", "detail": "Rinse. Spray cans must be empty. Sort by material where the collection point has separate crates." },
+      "4": { "name": "Paper and cardboard (紙類・段ボール)", "detail": "Tie newspapers, magazines, and flattened cardboard with string. Milk cartons rinsed, opened, and dried." },
+      "5": { "name": "Large items (粗大ごみ)", "detail": "Furniture, bicycles, futons. Book online or by phone, buy a sticker at a convenience store, and put the item out on the agreed day." }
+    },
+    "scheduleTitle": "Find your collection days",
+    "schedule": "Collection days depend on your district. Check the Matsudo garbage calendar, use the city's garbage app, or ask your landlord for the leaflet. Many apartment buildings also post the schedule next to the collection point.",
+    "link": "Matsudo City garbage page",
+    "linkUrl": "https://www.city.matsudo.chiba.jp/kurashi/gomi_recycle/index.html",
+    "tipsTitle": "Language tips",
+    "tips": {
+      "0": "燃やせる (moyaseru) means burnable, 燃やせない (moyasenai) means non-burnable.",
+      "1": "If you see the sign 分別 (bunbetsu), it is reminding you to separate.",
+      "2": "A sticker on your bag with 違反 (ihan) means it was rejected. Check the type and the day and put it out again correctly."
+    }
+  },
+  "transport": {
+    "tag": "Section 3",
+    "title": "Getting around from Matsudo",
+    "description": "Matsudo sits on the JR Joban Line and the Shin-Keisei Line, 20 minutes from Ueno and 30 from Tokyo Station. The mosque is a 12 minute walk from Matsudo Station.",
+    "items": {
+      "0": { "name": "JR Joban Line (常磐線)", "detail": "Rapid trains stop at Matsudo and run to Kashiwa, Ueno, Tokyo, and Shinagawa. Local trains continue to Kita-Senju and through to the Chiyoda subway line." },
+      "1": { "name": "Shin-Keisei Line (新京成線)", "detail": "Runs from Matsudo to Yabashira, Kamagaya, and Tsudanuma. Handy for Funabashi and LaLaport TOKYO-BAY." },
+      "2": { "name": "IC cards (Suica, PASMO)", "detail": "Tap in and out at the gates. Top up at any machine with cash. Children's cards are discounted. Mobile Suica works on most phones." },
+      "3": { "name": "Reaching the mosque", "detail": "From Tokyo or Ueno take the Joban Rapid to Matsudo (east exit). From Kashiwa it is one stop by rapid train. From the station follow the map on the Contact page; allow 12 minutes on foot." },
+      "4": { "name": "Bicycle parking", "detail": "Register your bicycle (防犯登録) at the shop when you buy it. Use the paid bicycle parking near the station; parked bikes on the street are towed. The mosque has bicycle parking for visitors." }
+    }
+  },
+  "halal": {
+    "tag": "Section 4",
+    "title": "Everyday halal in Chiba",
+    "description": "Pork and alcohol hide in many Japanese foods. Learn the kanji, know the shops, and when in doubt, ask.",
+    "link": "Open the halal guide and radar",
+    "supermarketsTitle": "Supermarkets with a halal corner",
+    "supermarkets": {
+      "0": "Gyomu Super (業務スーパー): halal-certified chicken and frozen food in some branches.",
+      "1": "Halal grocery stores near Matsudo, Kashiwa, and Otsuka stations for meat, rice, and spices.",
+      "2": "Online shops deliver halal meat to Chiba within a day; ask the group for the ones families use."
+    },
+    "labelsTitle": "Labels to check every time",
+    "labels": {
+      "0": "原材料名 (ingredients): look for 豚, ポーク, ラード, ゼラチン.",
+      "1": "酒, 料理酒, みりん, 酒精: any form of alcohol.",
+      "2": "乳化剤, ショートニング, 動物油脂: ask the maker if the source is animal.",
+      "3": "ハラール認証 or a halal mark means the product has been certified."
+    }
+  },
+  "emergency": {
+    "tag": "Section 5",
+    "title": "Emergencies",
+    "description": "Save these numbers now. Calls to 110 and 119 are free from any phone, including a locked phone, and interpreters are available.",
+    "numbers": {
+      "police": { "label": "Police", "number": "110", "detail": "Accidents, theft, lost items. Say 事故 (jiko, accident) or 泥棒 (dorobō, thief) and your location." },
+      "fire": { "label": "Ambulance and fire", "number": "119", "detail": "Say 救急 (kyūkyū) for an ambulance or 火事 (kaji) for a fire, then your address slowly." },
+      "disaster": { "label": "Disaster message line", "number": "171", "detail": "After a large earthquake, record and listen to voice messages for family when phone lines are jammed." }
+    },
+    "call": "Call {number}",
+    "earthquakeTitle": "Earthquake basics",
+    "earthquake": {
+      "0": "Drop, cover, and hold under a sturdy table until shaking stops. Do not run outside while it shakes.",
+      "1": "Know your nearest evacuation shelter (避難所), usually the local elementary school. Check the Matsudo hazard map.",
+      "2": "Keep an emergency bag: water for three days, food, flashlight, copies of passport and residence card, medicine, a power bank.",
+      "3": "Turn off the gas after a strong quake and use the 171 line or the WhatsApp group to tell people you are safe."
+    },
+    "consulateTitle": "Indonesian Embassy (KBRI Tokyo)",
+    "consulate": "Passport, consular help, and emergencies for Indonesian citizens. 5-2-9 Higashi-Gotanda, Shinagawa-ku, Tokyo. Main line +81-3-3441-4201. For citizens of other countries, search your embassy in Tokyo.",
+    "consulatePhone": "+81-3-3441-4201",
+    "hospitalsTitle": "Hospitals with foreign-language support",
+    "hospitals": {
+      "0": "Matsudo City General Hospital (松戸市立総合医療センター): emergency care, interpreter tablets.",
+      "1": "Chiba University Hospital (千葉大学医学部附属病院): specialist care with English support.",
+      "2": "Chiba Prefecture medical information line for foreigners: multilingual guidance on where to go."
+    }
+  },
+  "work": {
+    "tag": "Section 6",
+    "title": "Muslim life at work and school",
+    "description": "Most Japanese employers and schools have never had a Muslim before and simply do not know what to offer. Ask clearly, early, and politely, and bring the sentences from the dictionary.",
+    "items": {
+      "0": { "name": "Asking for a prayer space", "detail": "Ask for a quiet unused room or corner for about ten minutes, twice during the workday. Show the sentence from the dictionary; most companies agree once they understand it is short and quiet." },
+      "1": { "name": "Friday prayer", "detail": "Ask to use your lunch break on Friday and make up the time. If the mosque is far, the Jumuah times page lists nearby mosques and prayer rooms." },
+      "2": { "name": "Fasting in Ramadan", "detail": "Tell your manager before Ramadan starts. Explain that you work as usual but skip lunch and may need a short break at sunset. Many colleagues are curious and supportive." },
+      "3": { "name": "School lunch (給食)", "detail": "Japanese school lunch often contains pork. Ask the school for the monthly menu (献立表) and agree whether your child brings a lunch box (お弁当) on certain days. Hand the teacher the letter template below." }
+    },
+    "letterTitle": "Letter template for the school",
+    "letter": "I am the parent of (child's name). Our family is Muslim, and for religious reasons we do not eat pork, pork-derived ingredients, or food containing alcohol. We would be grateful if you could share the monthly lunch menu so that we can send a packed lunch on days when the menu contains these ingredients. Thank you for your understanding and cooperation.",
+    "letterJa": "私は（お子様の名前）の保護者です。私たちの家族はムスリム（イスラム教徒）で、宗教上の理由により豚肉、豚由来の原材料、アルコールを含む食品を口にしません。該当する献立の日には弁当を持参させたいと考えておりますので、毎月の献立表をご共有いただけますと幸いです。ご理解とご協力のほど、よろしくお願いいたします。",
+    "copyLetter": "Copy the Japanese letter",
+    "dictionaryLink": "Open the dawah dictionary for more phrases"
+  },
+  "contact": {
+    "tag": "Section 7",
+    "title": "Contact the committee",
+    "description": "We answer questions about paperwork, halal food, school, and anything else about settling in. WhatsApp is fastest.",
+    "whatsapp": "Chat on WhatsApp",
+    "whatsappMessage": "Assalamu'alaikum, I am new in Chiba and would like some help with settling in.",
+    "email": "Email the committee",
+    "phone": "Call the mosque",
+    "print": "Print this guide",
+    "printHint": "The printed version fits on a few pages and keeps the emergency numbers on the first page."
+  }
+}

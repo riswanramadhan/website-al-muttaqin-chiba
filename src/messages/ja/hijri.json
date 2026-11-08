@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "title": "ヒジュラ暦カレンダー",
+    "description": "西暦の日付つきヒジュラ暦の月表示、アイヤームル・ビード、月曜と木曜の断食、重要な日付、ラマダーンと二つのイードまでの日数を確認できます。"
+  },
+  "title": "ヒジュラ暦",
+  "description": "ウンム・アル＝クラー暦にモスクの補正を加えて表示",
+  "todayLabel": "今日",
+  "todayButton": "今日へ",
+  "hijriYear": "ヒジュラ暦{year}年",
+  "view": {
+    "label": "表示の切り替え",
+    "hijri": "ヒジュラ暦",
+    "gregorian": "西暦"
+  },
+  "nav": {
+    "prev": "前の月",
+    "next": "次の月"
+  },
+  "gridLabel": "月のカレンダー",
+  "legend": {
+    "today": "今日",
+    "ayyamulBidh": "アイヤームル・ビード（13〜15日）",
+    "monThu": "月曜日と木曜日",
+    "important": "重要な日"
+  },
+  "countdown": {
+    "title": "カウントダウン",
+    "ramadan": "ラマダーン初日",
+    "eidFitr": "イード・アル＝フィトル",
+    "eidAdha": "イード・アル＝アドハー",
+    "days": "{count, plural, =0 {今日} other {あと#日}}",
+    "daysLeft": "{count, plural, =0 {今日} other {あと#日}}"
+  },
+  "important": {
+    "title": "今月の重要な日",
+    "empty": "今月は特別な日付はありません。",
+    "day": "{day}日"
+  },
+  "kinds": {
+    "eid": "イード",
+    "fast": "断食",
+    "ramadan": "ラマダーン",
+    "hajj": "ハッジ",
+    "other": "イスラームの記念日"
+  },
+  "convert": {
+    "title": "日付の変換",
+    "gregorian": "西暦の日付",
+    "hijri": "ヒジュラ暦の日付",
+    "year": "年",
+    "month": "月",
+    "day": "日",
+    "result": "結果"
+  },
+  "note": {
+    "base": "日付はサウジアラビアで用いられるウンム・アル＝クラー暦に基づきます。実際の月初めは新月の観測発表によって決まります。ラマダーンとイードについてはモスクの発表に従ってください。",
+    "adjusted": "モスク運営委員会により{count}日の補正が適用されています。",
+    "notAdjusted": "現在、モスク運営委員会による補正は適用されていません。"
+  }
+}

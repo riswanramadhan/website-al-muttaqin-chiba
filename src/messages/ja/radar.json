@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "ハラールレーダー",
+    "description": "松戸周辺のモスク、礼拝室、ハラールレストラン、食材店を現在地からの距離順に表示します。"
+  },
+  "title": "ハラールレーダー",
+  "description": "近くのモスク、礼拝室、レストラン、食材店。",
+  "mapLabel": "ハラールな場所の地図",
+  "listTitle": "近くの場所",
+  "filters": {
+    "all": "すべて",
+    "mosque": "モスク",
+    "prayer-room": "礼拝室",
+    "restaurant": "レストラン",
+    "mart": "食材店",
+    "service": "サービス"
+  },
+  "types": {
+    "mosque": "モスク",
+    "prayer-room": "礼拝室",
+    "restaurant": "レストラン",
+    "mart": "食材店",
+    "service": "サービス"
+  },
+  "verified": "確認済み",
+  "unverified": "未確認",
+  "distance": "{distance}",
+  "fromMosque": "モスクからの距離",
+  "fromYou": "現在地からの距離",
+  "myLocation": "現在地を使う",
+  "locating": "現在地を取得中",
+  "locationDenied": "現在地を取得できませんでした。距離はモスクからのままです。",
+  "locationUnsupported": "この端末では位置情報を利用できません。",
+  "youAreHere": "現在地",
+  "openMaps": "Googleマップ",
+  "count": "{count}件",
+  "empty": "この種類の場所はまだありません。提案していただければ運営が追加します。",
+  "suggest": "場所を提案する",
+  "suggestTitle": "ハラールレーダーへの提案",
+  "suggestName": "場所の名前",
+  "suggestType": "種類（モスク、礼拝室、レストラン、食材店）",
+  "suggestAddress": "住所またはGoogleマップのリンク",
+  "suggestNote": "メモ（ハラール認証、取扱商品など）",
+  "suggestFill": "（ご記入ください）",
+  "note": "メモ",
+  "placeholderHint": "住所にPLACEHOLDERとある項目は運営の確認待ちです。"
+}

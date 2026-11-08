@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Dawah dictionary: Japanese phrases for Muslim life",
+    "description": "Japanese words and ready-made sentences for prayer, halal food, daily errands, and emergencies. Show the big Japanese text to the person you are talking to, copy it, or hear it spoken."
+  },
+  "tag": "Dawah dictionary",
+  "title": "Say what you need, in Japanese, without hesitation.",
+  "highlight": "without hesitation.",
+  "description": "Each entry has the word, its reading, and a polite sentence you can show on your screen. Tap Show for a full-screen version readable from a meter away.",
+  "search": {
+    "placeholder": "Search Japanese, reading, or meaning",
+    "label": "Search the dictionary",
+    "count": "{count, plural, one {# entry} other {# entries}}",
+    "empty": "Nothing matches. Try another word or switch category.",
+    "seeAll": "See all entries",
+    "showingLimited": "Showing the first {count} results"
+  },
+  "categories": {
+    "all": "All",
+    "worship": "Worship",
+    "food": "Food",
+    "daily": "Daily life",
+    "emergency": "Emergency",
+    "phrases": "Phrases"
+  },
+  "entry": {
+    "example": "Sentence to show",
+    "show": "Show",
+    "copy": "Copy",
+    "speak": "Listen",
+    "speaking": "Playing",
+    "reading": "Reading"
+  },
+  "show": {
+    "title": "Show this screen",
+    "hint": "Turn your phone to the person you are talking to.",
+    "close": "Close",
+    "next": "Next phrase",
+    "previous": "Previous phrase"
+  },
+  "tips": {
+    "tag": "How to use",
+    "title": "Three ways to use an entry",
+    "items": {
+      "0": { "name": "Show", "detail": "Opens the Japanese sentence in very large text with the translation underneath, so you can simply hold up your phone." },
+      "1": { "name": "Copy", "detail": "Copies the Japanese sentence to paste into a message, a form, or a translation app." },
+      "2": { "name": "Listen", "detail": "Plays the sentence with your device's Japanese voice when it is available, so you can practice the pronunciation." }
+    }
+  }
+}

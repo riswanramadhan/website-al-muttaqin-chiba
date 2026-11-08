@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "News and announcements",
+    "description": "Official announcements, news, and activity reports from Al Muttaqin Cultural Center, Matsudo."
+  },
+  "tag": "News",
+  "title": "Announcements and",
+  "highlight": "reports",
+  "description": "Official announcements from the committee, news from the mosque, and reports on what we have done together.",
+  "tabs": {
+    "all": "All",
+    "announcements": "Announcements",
+    "news": "News",
+    "reports": "Reports"
+  },
+  "labels": {
+    "pinned": "Pinned",
+    "new": "New",
+    "announcement": "Announcement",
+    "author": "By {name}",
+    "published": "Published {date}",
+    "expired": "No longer current",
+    "readMore": "Read more",
+    "empty": "Nothing to show here yet.",
+    "back": "All news",
+    "share": "Share",
+    "related": "Related",
+    "relatedDescription": "More from the same category.",
+    "announcementsHeading": "Announcements",
+    "newsHeading": "News and reports"
+  },
+  "app": {
+    "title": "Announcements",
+    "description": "Official information from the committee",
+    "empty": "No announcements right now.",
+    "readOnWeb": "Read on the website"
+  }
+}

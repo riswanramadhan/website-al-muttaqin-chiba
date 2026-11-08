@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "title": "Gallery",
+    "description": "Photos of the mosque building, study circles, Open Mosque Day, Ramadan, and Eid at Al Muttaqin Cultural Center."
+  },
+  "hero": {
+    "tag": "Gallery",
+    "title": "Moments from the mosque and its people.",
+    "highlight": "its people.",
+    "description": "A look inside the center: the prayer hall, classes, community days, and the nights of Ramadan. Tap any photo to view it larger."
+  },
+  "filters": {
+    "label": "Filter by category",
+    "all": "All"
+  },
+  "categories": {
+    "building": "Building",
+    "activity": "Activities",
+    "community": "Community",
+    "ramadan": "Ramadan",
+    "eid": "Eid"
+  },
+  "lightbox": {
+    "open": "Open photo",
+    "previous": "Previous photo",
+    "next": "Next photo",
+    "counter": "{current} of {total}",
+    "keyboardHint": "Use the left and right arrow keys to move between photos, and Escape to close."
+  },
+  "empty": {
+    "title": "No photos in this category yet",
+    "body": "Photos are added after each event. Please check back soon."
+  },
+  "placeholderNote": "Sample images are shown until the committee uploads official photos.",
+  "instagram": {
+    "tag": "Follow along",
+    "title": "More photos every week on Instagram",
+    "body": "We post event photos, short reminders, and announcements. Follow us to see the latest from the center.",
+    "cta": "Open Instagram"
+  }
+}

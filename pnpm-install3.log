@@ -1,0 +1,32 @@
+[WARN] The "pnpm" field in package.json is no longer read by pnpm. The following keys were ignored: "pnpm.onlyBuiltDependencies". See https://pnpm.io/settings for the new home of each setting.
+? Verifying lockfile against supply-chain policies (747 entries)...
+[WARN] Request took 22409ms: https://registry.npmmirror.com/axe-core
+[WARN] Request took 30735ms: https://registry.npmmirror.com/@tailwindcss%2Foxide
+[WARN] Request took 35046ms: https://registry.npmmirror.com/@typescript-eslint%2Ftypes
+[WARN] Request took 38490ms: https://registry.npmmirror.com/@typescript-eslint%2Ftype-utils
+[WARN] Request took 38713ms: https://registry.npmmirror.com/@typescript-eslint%2Futils
+[WARN] Request took 56412ms: https://registry.npmmirror.com/@next%2Fenv
+[WARN] Request took 41774ms: https://registry.npmmirror.com/@typescript-eslint%2Fvisitor-keys
+[WARN] Request took 46189ms: https://registry.npmmirror.com/@typescript-eslint%2Fscope-manager
+[WARN] Request took 53429ms: https://registry.npmmirror.com/@typescript-eslint%2Fparser
+[WARN] Request took 33938ms: https://registry.npmmirror.com/electron-to-chromium
+[WARN] Request took 57708ms: https://registry.npmmirror.com/@typescript-eslint%2Ftypescript-estree
+[WARN] Request took 34406ms: https://registry.npmmirror.com/eslint-plugin-react-hooks
+[WARN] GET https://registry.npmmirror.com/@typescript-eslint%2Feslint-plugin error (23). Will retry in 10 seconds. 2 retries left.
+[WARN] Request took 13947ms: https://registry.npmmirror.com/lucide-react
+[WARN] Request took 15065ms: https://registry.npmmirror.com/react-is
+[WARN] Request took 50177ms: https://registry.npmmirror.com/eslint-config-next
+[WARN] Request took 10608ms: https://registry.npmmirror.com/typescript-eslint
+[WARN] Request took 52551ms: https://registry.npmmirror.com/axe-core
+[WARN] Request took 16867ms: https://registry.npmmirror.com/tailwindcss
+[WARN] Request took 19316ms: https://registry.npmmirror.com/typescript
+[WARN] Request took 22073ms: https://registry.npmmirror.com/@typescript-eslint%2Feslint-plugin
+[WARN] Request took 14803ms: https://registry.npmmirror.com/tailwindcss
+[WARN] Request took 17187ms: https://registry.npmmirror.com/typescript
+[WARN] Request took 49735ms: https://registry.npmmirror.com/next
+✗ Lockfile failed supply-chain policy check (747 entries in 2m 14.5s)
+[ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION] 2 lockfile entries failed verification:
+  @hookform/resolvers@7.0.2 was published at 2026-11-03T15:46:30.639Z, within the minimumReleaseAge cutoff (2026-11-02T18:13:14.086Z)
+  lucide-react@1.67.0 was published at 2026-11-03T06:12:32.280Z, within the minimumReleaseAge cutoff (2026-11-02T18:13:14.086Z)
+
+The lockfile contains entries that the active policies reject. This can mean the lockfile is stale, or that someone committed a lockfile that bypassed the policy locally — inspect recent changes to pnpm-lock.yaml before trusting it. If the changes look expected, run "pnpm clean --lockfile" and then "pnpm install" to rebuild from a fresh resolution. Alternatively, relax the policy that flagged them.

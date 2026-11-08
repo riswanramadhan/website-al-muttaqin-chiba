@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "title": "Laporan keuangan",
+    "description": "Laporan pemasukan dan pengeluaran bulanan Al Muttaqin Cultural Center, diverifikasi bendahara dan diumumkan untuk setiap donatur."
+  },
+  "tag": "Transparansi",
+  "title": "Setiap yen dilaporkan setiap bulan",
+  "highlight": "setiap bulan",
+  "description": "Infaq Anda berhak mendapat pertanggungjawaban yang jelas. Setiap bulan bendahara mengumumkan saldo awal, pemasukan, pengeluaran, dan saldo akhir yang ditinjau oleh dewan pengurus.",
+  "principles": {
+    "tag": "Komitmen kami",
+    "title": "Cara laporan ini disusun",
+    "1": {
+      "title": "Diverifikasi bendahara",
+      "text": "Setiap angka dicocokkan dengan mutasi bank dan settlement QRIS sebelum diumumkan."
+    },
+    "2": {
+      "title": "Ditandatangani dua orang",
+      "text": "Bendahara menyusun laporan dan ketua pengurus menyetujuinya."
+    },
+    "3": {
+      "title": "Dirilis paling lambat tanggal 5",
+      "text": "Laporan bulan sebelumnya diumumkan paling lambat tanggal lima bulan berikutnya."
+    },
+    "4": {
+      "title": "Terbuka untuk pertanyaan",
+      "text": "Donatur dapat meminta buku besar rinci di sekretariat pada jam buka."
+    }
+  },
+  "chart": {
+    "title": "Pemasukan dan pengeluaran",
+    "description": "Enam bulan terakhir yang telah diumumkan, dalam yen.",
+    "income": "Pemasukan",
+    "expense": "Pengeluaran",
+    "aria": "Grafik batang pemasukan dan pengeluaran bulanan untuk {count} bulan terakhir",
+    "bar": "{month}: {label} {amount}"
+  },
+  "report": {
+    "latest": "Laporan terbaru",
+    "archive": "Bulan sebelumnya",
+    "opening": "Saldo awal",
+    "income": "Pemasukan",
+    "expense": "Pengeluaran",
+    "closing": "Saldo akhir",
+    "incomeDetail": "Rincian pemasukan",
+    "expenseDetail": "Rincian pengeluaran",
+    "total": "Total",
+    "verified": "Diverifikasi bendahara",
+    "download": "Unduh PDF",
+    "publishedAt": "Diumumkan {date}",
+    "note": "Catatan bendahara",
+    "empty": "Belum ada laporan yang diumumkan."
+  }
+}

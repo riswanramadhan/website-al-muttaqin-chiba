@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "title": "Al Muttaqin Cultural Center | Mosque in Matsudo, Chiba",
+    "description": "A mosque and Islamic cultural center in Matsudo, Chiba: today's prayer times, Jumuah, study circles in three languages, programs for new Muslims and children, infaq, and help for newcomers to Japan."
+  },
+  "hero": {
+    "tag": "Masjid",
+    "title": "A mosque and learning home in Matsudo, Chiba.",
+    "highlight": "Matsudo, Chiba.",
+    "description": "Pray together, learn in Japanese, English, and Indonesian, and find your community. Everyone is welcome, whether you have lived here for years or arrived last week.",
+    "prayerCta": "Prayer times",
+    "appCta": "Open the Jamaah app"
+  },
+  "pinned": {
+    "label": "Live status and pinned announcements",
+    "seeAll": "All announcements"
+  },
+  "portal": {
+    "tag": "Start here",
+    "title": "Find what you need in one step.",
+    "highlight": "one step.",
+    "description": "Choose the door that fits you. Each one leads straight to the pages and tools made for you.",
+    "items": {
+      "jamaah": {
+        "eyebrow": "For the congregation",
+        "title": "Jamaah app",
+        "description": "Prayer times with reminders, qibla, Quran, duas, and this week's agenda on your phone.",
+        "cta": "Open the app"
+      },
+      "newcomers": {
+        "eyebrow": "New in Chiba",
+        "title": "Newcomer guide",
+        "description": "City hall registration, garbage sorting, halal food, trains, and useful Japanese phrases.",
+        "cta": "Read the guide"
+      },
+      "donors": {
+        "eyebrow": "For donors",
+        "title": "Give infaq",
+        "description": "Support the mosque, its programs, and its community, with transparent monthly reports.",
+        "cta": "Donate now"
+      }
+    },
+    "help": {
+      "title": "Need help?",
+      "description": "Funerals, illness, emergencies, or questions about Islam: contact the board directly.",
+      "cta": "Help center"
+    }
+  },
+  "jumuah": {
+    "tag": "This week",
+    "title": "Jumuah and the week ahead.",
+    "highlight": "the week ahead.",
+    "description": "This Friday's khatib and time, plus the next gatherings at the mosque.",
+    "seeAll": "All events",
+    "agendaTitle": "Upcoming agenda",
+    "empty": "No upcoming events yet. Check back soon."
+  },
+  "services": {
+    "tag": "Our services",
+    "title": "What we offer the community.",
+    "highlight": "the community.",
+    "description": "From daily prayers to guidance for those new to Islam and new to Japan, all in three languages.",
+    "cta": "Explore all programs",
+    "items": {
+      "prayer": {
+        "title": "Congregational prayer and Jumuah",
+        "description": "The five daily prayers in congregation and the Friday prayer with its sermon."
+      },
+      "lectures": {
+        "title": "Study circles in three languages",
+        "description": "Regular kajian in Japanese, English, and Indonesian, also shared on YouTube."
+      },
+      "muallaf": {
+        "title": "Guidance for new Muslims",
+        "description": "A gentle class and mentors for those who have recently embraced Islam."
+      },
+      "tpa": {
+        "title": "Quran school and education",
+        "description": "Quran reading, good character, and Islamic studies for children."
+      },
+      "openMosque": {
+        "title": "Open mosque and visits",
+        "description": "Guided visits for neighbors, schools, and groups curious about Islam."
+      },
+      "newcomers": {
+        "title": "Support for newcomers",
+        "description": "Practical help for Muslims settling into life in Chiba and Japan."
+      }
+    }
+  },
+  "programs": {
+    "tag": "Programs",
+    "title": "Learn and grow together.",
+    "highlight": "grow together.",
+    "description": "Regular classes and activities for children, youth, new Muslims, and the wider community.",
+    "seeAll": "See all programs"
+  },
+  "lectures": {
+    "tag": "Latest lectures",
+    "title": "Listen to the latest kajian.",
+    "highlight": "latest kajian.",
+    "description": "Recorded study circles you can watch anytime, in Japanese, English, and Indonesian.",
+    "seeAll": "All lectures",
+    "channel": "YouTube channel",
+    "empty": "No recordings yet."
+  },
+  "donate": {
+    "tag": "Infaq",
+    "title": "Every gift keeps the mosque alive.",
+    "highlight": "the mosque alive.",
+    "description": "Your infaq covers rent, utilities, education, and community care. Every yen is reported openly.",
+    "programsTitle": "Current campaigns",
+    "accountsTitle": "Bank accounts",
+    "accountsDescription": "Transfer directly to the official accounts below.",
+    "accountsCta": "All ways to give"
+  },
+  "stats": {
+    "tag": "In numbers",
+    "title": "A growing community.",
+    "highlight": "community.",
+    "description": "A home for worship and learning in Matsudo."
+  },
+  "hadith": {
+    "tag": "Hadith of the day",
+    "title": "A reminder for today.",
+    "highlight": "for today.",
+    "description": "A short hadith chosen each day, in Arabic with a translation.",
+    "more": "Learn about Islam",
+    "source": "Source"
+  },
+  "news": {
+    "tag": "News",
+    "title": "News and announcements.",
+    "highlight": "announcements.",
+    "description": "Stories from the community and important notices from the board.",
+    "seeAll": "All news",
+    "empty": "No news yet.",
+    "announcementsTitle": "Announcements",
+    "announcementsDescription": "Schedule changes, notices, and urgent information from the mosque board."
+  },
+  "newcomers": {
+    "tag": "New in Chiba",
+    "title": "Just arrived? Start with the basics.",
+    "highlight": "the basics.",
+    "description": "Short guides for your first weeks in Japan, written for Muslim residents.",
+    "guideCta": "Open the newcomer guide",
+    "shortcuts": {
+      "cityHall": {
+        "title": "Register at city hall",
+        "description": "Resident registration, My Number, and health insurance in your first 14 days."
+      },
+      "garbage": {
+        "title": "Garbage sorting",
+        "description": "Burnable, non-burnable, and recycling days in Matsudo."
+      },
+      "halal": {
+        "title": "Halal food",
+        "description": "Halal shops and restaurants near the mosque."
+      },
+      "transport": {
+        "title": "Getting around",
+        "description": "IC cards, trains, and buses to reach the mosque."
+      }
+    },
+    "dictionaryTitle": "Japanese for daily life",
+    "dictionaryDescription": "Search key words and show them to people around you.",
+    "dictionaryCta": "Open the full dictionary"
+  },
+  "gallery": {
+    "tag": "Gallery",
+    "title": "Moments at the mosque.",
+    "highlight": "the mosque.",
+    "description": "Photos from prayers, classes, and community events.",
+    "seeAll": "View gallery"
+  },
+  "faq": {
+    "tag": "FAQ",
+    "title": "Questions people often ask.",
+    "highlight": "often ask.",
+    "description": "Quick answers about visiting, prayer, donations, and programs.",
+    "seeAll": "All questions",
+    "ask": "Ask us"
+  },
+  "contact": {
+    "tag": "Contact and access",
+    "title": "Visit us in Matsudo.",
+    "highlight": "Matsudo.",
+    "description": "The mosque is open every day. Message us on WhatsApp or find the way on the map.",
+    "whatsapp": "Chat on WhatsApp",
+    "maps": "Open in Google Maps",
+    "stationsTitle": "Nearest stations",
+    "walk": "{count, plural, one {# min walk} other {# min walk}}",
+    "form": "Send a message through the contact form",
+    "partnersTitle": "Our partners"
+  }
+}

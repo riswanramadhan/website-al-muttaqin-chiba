@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "Berita dan pengumuman",
+    "description": "Pengumuman resmi, berita, dan laporan kegiatan Al Muttaqin Cultural Center, Matsudo."
+  },
+  "tag": "Berita",
+  "title": "Pengumuman dan",
+  "highlight": "laporan",
+  "description": "Pengumuman resmi pengurus, berita dari masjid, dan laporan kegiatan yang kita jalankan bersama.",
+  "tabs": {
+    "all": "Semua",
+    "announcements": "Pengumuman",
+    "news": "Berita",
+    "reports": "Laporan"
+  },
+  "labels": {
+    "pinned": "Tersemat",
+    "new": "Baru",
+    "announcement": "Pengumuman",
+    "author": "Oleh {name}",
+    "published": "Terbit {date}",
+    "expired": "Sudah tidak berlaku",
+    "readMore": "Baca selengkapnya",
+    "empty": "Belum ada yang bisa ditampilkan.",
+    "back": "Semua berita",
+    "share": "Bagikan",
+    "related": "Terkait",
+    "relatedDescription": "Dari kategori yang sama.",
+    "announcementsHeading": "Pengumuman",
+    "newsHeading": "Berita dan laporan"
+  },
+  "app": {
+    "title": "Pengumuman",
+    "description": "Informasi resmi dari pengurus",
+    "empty": "Belum ada pengumuman.",
+    "readOnWeb": "Baca di situs web"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "title": "Events and agenda",
+    "description": "Upcoming study circles, classes, open mosque days, and community events at Al Muttaqin Cultural Center, Matsudo."
+  },
+  "tag": "Agenda",
+  "title": "What is happening",
+  "highlight": "at the mosque",
+  "description": "Study circles, classes, open days, and gatherings. Times are in Japan Standard Time. Some events need registration; the quota is shown on each card.",
+  "tabs": {
+    "upcoming": "Upcoming",
+    "past": "Past"
+  },
+  "filters": {
+    "category": "Category",
+    "all": "All categories",
+    "emptyUpcoming": "No upcoming events in this category yet. Check back soon or follow our announcements.",
+    "emptyPast": "No past events in this category."
+  },
+  "card": {
+    "registrationOpen": "Registration open",
+    "waitlist": "Waiting list",
+    "full": "Full",
+    "noRegistration": "No registration needed",
+    "deadline": "Register by {date}",
+    "finished": "Finished",
+    "free": "Free",
+    "fee": "Fee {amount}",
+    "details": "Details"
+  },
+  "detail": {
+    "back": "All events",
+    "about": "About this event",
+    "practical": "Practical information",
+    "date": "Date",
+    "time": "Time",
+    "location": "Location",
+    "openMaps": "Open in Google Maps",
+    "languages": "Languages",
+    "speaker": "Speaker",
+    "fee": "Fee",
+    "free": "Free of charge",
+    "quota": "Capacity",
+    "quotaValue": "{registered} of {quota} registered",
+    "remaining": "{count, plural, =0 {No spots left} one {# spot left} other {# spots left}}",
+    "recurring": "Recurring",
+    "registrationRequired": "Registration required",
+    "noRegistration": "No registration needed. Just come.",
+    "addToCalendar": "Add to calendar",
+    "googleCalendar": "Google Calendar",
+    "downloadIcs": "Download .ics",
+    "share": "Share",
+    "pastEvent": "This event has finished.",
+    "deadlinePassed": "The registration deadline has passed.",
+    "others": "Other upcoming events",
+    "othersDescription": "You may also be interested in these."
+  },
+  "form": {
+    "title": "Register for this event",
+    "description": "Fill in the form and we will confirm by WhatsApp or email. One form per family or group is enough.",
+    "name": "Full name",
+    "namePlaceholder": "Your name",
+    "contact": "Phone, WhatsApp, or email",
+    "contactPlaceholder": "+81 90 1234 5678 or name@example.com",
+    "participants": "Number of participants",
+    "participantsHint": "Including yourself, up to 10 people.",
+    "notes": "Notes",
+    "notesPlaceholder": "Children's ages, dietary needs, questions",
+    "submit": "Register",
+    "submitWaitlist": "Join the waiting list",
+    "submitting": "Sending",
+    "fullNotice": "This event is full. You can still join the waiting list and we will contact you if a spot opens.",
+    "successTitle": "Registration received",
+    "successRegistered": "Thank you, {name}. Your registration for {participants, plural, one {# person} other {# people}} is recorded. We will confirm shortly.",
+    "successWaitlist": "Thank you, {name}. You are on the waiting list for {participants, plural, one {# person} other {# people}}. We will contact you if a spot opens.",
+    "fallbackTitle": "Send your registration by WhatsApp",
+    "fallbackBody": "Online registration is not connected yet. Tap the button to send the same details to the committee on WhatsApp.",
+    "whatsapp": "Send via WhatsApp",
+    "errorTitle": "Could not send the registration",
+    "rateLimit": "Too many attempts. Please wait a minute and try again.",
+    "waMessageTitle": "Event registration: {title}",
+    "waName": "Name",
+    "waContact": "Contact",
+    "waParticipants": "Participants",
+    "waNotes": "Notes",
+    "waDate": "Date",
+    "waStatus": "Status"
+  },
+  "routine": {
+    "tag": "Regular activities",
+    "title": "Every week,",
+    "highlight": "all year round",
+    "description": "These programs run weekly without registration for each session. See the program page for details and enrolment.",
+    "more": "Program details"
+  },
+  "calendar": {
+    "description": "{title} at Al Muttaqin Cultural Center, Matsudo. Details: {url}"
+  },
+  "app": {
+    "title": "Agenda",
+    "description": "Upcoming events at the mosque",
+    "empty": "No upcoming events right now.",
+    "addToCalendar": "Add to calendar",
+    "seeAll": "Full agenda on the website"
+  }
+}

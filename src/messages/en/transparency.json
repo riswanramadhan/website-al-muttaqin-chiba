@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "title": "Financial reports",
+    "description": "Monthly income and expense reports of Al Muttaqin Cultural Center, verified by the treasurer and published for every donor."
+  },
+  "tag": "Transparency",
+  "title": "Every yen, reported every month",
+  "highlight": "every month",
+  "description": "Your infaq deserves a clear account. Each month the treasurer publishes opening balance, income, expenses, and closing balance, reviewed by the board.",
+  "principles": {
+    "tag": "Our commitment",
+    "title": "How the reports are made",
+    "1": {
+      "title": "Verified by the treasurer",
+      "text": "Every figure is reconciled with the bank statement and the QRIS settlement before publishing."
+    },
+    "2": {
+      "title": "Signed by two people",
+      "text": "The treasurer prepares the report and the chairperson approves it."
+    },
+    "3": {
+      "title": "Released by the 5th",
+      "text": "The report for the previous month is published by the fifth day of the following month."
+    },
+    "4": {
+      "title": "Open to questions",
+      "text": "Donors may request the detailed ledger at the office during opening hours."
+    }
+  },
+  "chart": {
+    "title": "Income versus expenses",
+    "description": "The last six published months, in yen.",
+    "income": "Income",
+    "expense": "Expenses",
+    "aria": "Bar chart of monthly income and expenses for the last {count} months",
+    "bar": "{month}: {label} {amount}"
+  },
+  "report": {
+    "latest": "Latest report",
+    "archive": "Previous months",
+    "opening": "Opening balance",
+    "income": "Income",
+    "expense": "Expenses",
+    "closing": "Closing balance",
+    "incomeDetail": "Income breakdown",
+    "expenseDetail": "Expense breakdown",
+    "total": "Total",
+    "verified": "Verified by the treasurer",
+    "download": "Download PDF",
+    "publishedAt": "Published {date}",
+    "note": "Treasurer note",
+    "empty": "No report has been published yet."
+  }
+}

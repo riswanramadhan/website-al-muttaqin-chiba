@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "title": "Infaq and donations",
+    "description": "Official accounts of Al Muttaqin Cultural Center: Japan Post Bank for yen, QRIS for rupiah. Confirm your transfer, become a monthly donor, and calculate zakat."
+  },
+  "hero": {
+    "tag": "Infaq",
+    "title": "The mosque is built. Now let us keep it alive.",
+    "highlight": "keep it alive.",
+    "description": "Thanks to the waqf of hundreds of donors, the land and building are fully paid. Your infaq now covers what keeps the doors open every day: utilities, cleaning, the imam, and education for children and new Muslims.",
+    "primaryCta": "See official accounts",
+    "secondaryCta": "Financial reports",
+    "points": {
+      "1": "Transparent: every month we publish income and expenses.",
+      "2": "Simple: pay by yen transfer or QRIS, then confirm in one minute.",
+      "3": "Safe: no card data is stored on this website."
+    }
+  },
+  "programs": {
+    "tag": "Programs",
+    "title": "Where your infaq goes",
+    "highlight": "goes",
+    "description": "Choose a program or simply give to operations. Progress is updated by the treasurer each month.",
+    "target": "Target",
+    "raised": "Raised",
+    "ofTarget": "{raised} of {target}",
+    "percent": "{percent}% reached",
+    "noTarget": "Ongoing, no fixed target",
+    "status": {
+      "open": "Open",
+      "closed": "Closed",
+      "completed": "Paid off"
+    }
+  },
+  "accounts": {
+    "tag": "Official accounts",
+    "title": "Transfer to the mosque account",
+    "highlight": "mosque account",
+    "description": "These are the only official accounts. The committee never asks for transfers to personal accounts.",
+    "tabs": {
+      "JPY": "Yen (Japan)",
+      "IDR": "Rupiah (Indonesia)"
+    },
+    "labels": {
+      "bank": "Bank",
+      "branch": "Branch",
+      "branchCode": "Branch code",
+      "accountType": "Account type",
+      "accountNumber": "Account number",
+      "accountName": "Account name",
+      "note": "Note"
+    },
+    "copyNumber": "Copy number",
+    "copyName": "Copy name",
+    "copyBranch": "Copy code",
+    "primary": "Recommended",
+    "qrisAlt": "Official QRIS code of Al Muttaqin Cultural Center",
+    "downloadQris": "Download QRIS",
+    "scanHint": "Scan with any Indonesian e-wallet or mobile banking app, enter the unique amount, then confirm below.",
+    "empty": "No account available for this currency yet."
+  },
+  "unique": {
+    "tag": "Unique amount",
+    "title": "Pick an amount, we add a unique code",
+    "highlight": "unique code",
+    "description": "The last three digits are a random code that lets the treasurer match your transfer automatically. Please transfer the exact amount shown.",
+    "currency": "Currency",
+    "presets": "Quick amounts",
+    "custom": "Other amount",
+    "customPlaceholder": "Enter an amount",
+    "customHint": "Rounded to the nearest thousand before the code is added.",
+    "result": "Transfer exactly",
+    "code": "Unique code {code}",
+    "base": "Base amount {amount}",
+    "regenerate": "New code",
+    "copy": "Copy amount",
+    "empty": "Choose an amount to generate your unique code.",
+    "filled": "This amount is already filled in the confirmation form below."
+  },
+  "form": {
+    "tag": "Confirmation",
+    "title": "Tell us about your transfer",
+    "highlight": "your transfer",
+    "description": "After transferring, fill in this short form so the treasurer can record your infaq in the monthly report. All fields except the amount and date are optional.",
+    "fields": {
+      "program": "Program",
+      "account": "Account or method",
+      "currency": "Currency",
+      "amount": "Amount transferred",
+      "amountHint": "Use the unique amount shown above if you have one.",
+      "date": "Transfer date",
+      "name": "Your name",
+      "nameHint": "Leave empty to stay anonymous.",
+      "contact": "Contact",
+      "contactHint": "WhatsApp, phone, or email, for a thank-you and the receipt.",
+      "onBehalf": "On behalf of",
+      "onBehalfHint": "For example a parent, a late family member, or a group.",
+      "message": "Message or prayer request",
+      "selectPlaceholder": "Choose"
+    },
+    "submit": "Send confirmation",
+    "submitting": "Sending",
+    "success": {
+      "title": "Thank you, jazakumullahu khairan",
+      "saved": "Your confirmation has been recorded. The treasurer will match it with the bank statement within a few days.",
+      "fallback": "The online database is not active yet. Tap the button below to send the same confirmation to the committee on WhatsApp.",
+      "whatsapp": "Send via WhatsApp",
+      "another": "Send another confirmation"
+    },
+    "errors": {
+      "generic": "The confirmation could not be sent. Please try again or contact us on WhatsApp.",
+      "rateLimit": "Too many submissions. Please wait a minute and try again."
+    }
+  },
+  "recurring": {
+    "tag": "Monthly donor",
+    "title": "Become a steady pillar of the mosque",
+    "highlight": "steady pillar",
+    "description": "A fixed amount every month, however small, lets the committee plan utilities and salaries with confidence. Register once, then set a reminder in your calendar.",
+    "benefits": {
+      "1": "Predictable income for monthly running costs",
+      "2": "You can pause or stop at any time by messaging us",
+      "3": "Optional: your name listed in the monthly report"
+    },
+    "fields": {
+      "name": "Full name",
+      "contact": "Contact",
+      "contactHint": "WhatsApp or email",
+      "amount": "Monthly amount",
+      "currency": "Currency",
+      "day": "Payment day each month",
+      "dayHint": "Between the 1st and the 28th.",
+      "method": "Method",
+      "methods": {
+        "bank": "Bank transfer",
+        "qris": "QRIS",
+        "ewallet": "E-wallet"
+      },
+      "publishName": "You may list my name as a monthly donor in the report."
+    },
+    "submit": "Register as monthly donor",
+    "calendar": "Add calendar reminder",
+    "calendarTitle": "Monthly infaq for Al Muttaqin Cultural Center",
+    "calendarDetails": "Monthly infaq of {amount}. Transfer to the official account listed at {url} and send the confirmation form.",
+    "success": {
+      "title": "Welcome to the monthly donor family",
+      "saved": "Your registration is recorded. The committee will contact you before the first payment day.",
+      "fallback": "The online database is not active yet. Send your registration to the committee on WhatsApp with the button below.",
+      "whatsapp": "Send via WhatsApp"
+    }
+  },
+  "zakatTeaser": {
+    "tag": "Zakat",
+    "title": "Need to calculate your zakat?",
+    "highlight": "zakat?",
+    "description": "Zakat maal, income zakat, and zakat al-fitr in yen or rupiah, with adjustable gold and rice prices. Nothing is stored.",
+    "cta": "Open the zakat calculator"
+  },
+  "faq": {
+    "tag": "FAQ",
+    "title": "Questions about giving",
+    "highlight": "giving"
+  },
+  "gateway": {
+    "tag": "Automatic payment",
+    "title": "Pay by card or e-wallet",
+    "description": "Automatic payment through a licensed gateway is being prepared. Until then, please use the accounts above.",
+    "soon": "Coming soon"
+  },
+  "whatsapp": {
+    "confirmTitle": "Infaq confirmation - Al Muttaqin Cultural Center",
+    "recurringTitle": "Monthly donor registration - Al Muttaqin Cultural Center",
+    "labels": {
+      "program": "Program",
+      "account": "Account",
+      "currency": "Currency",
+      "amount": "Amount",
+      "uniqueCode": "Unique code",
+      "date": "Transfer date",
+      "name": "Name",
+      "contact": "Contact",
+      "onBehalf": "On behalf of",
+      "message": "Message",
+      "monthlyAmount": "Monthly amount",
+      "paymentDay": "Payment day",
+      "method": "Method",
+      "publishName": "Publish name",
+      "yes": "Yes",
+      "no": "No",
+      "anonymous": "Anonymous"
+    }
+  },
+  "cta": {
+    "title": "Support the mosque with your infaq",
+    "description": "Yen via Japan Post Bank, rupiah via QRIS. Confirm in one minute and see the monthly report.",
+    "primary": "Give infaq",
+    "secondary": "See the reports"
+  },
+  "app": {
+    "title": "Infaq",
+    "description": "Official accounts, unique amount, and confirmation.",
+    "confirmTitle": "Confirm your transfer",
+    "zakatLink": "Zakat calculator",
+    "transparencyLink": "Monthly financial reports",
+    "moreOnWeb": "Programs and monthly donor on the website"
+  }
+}

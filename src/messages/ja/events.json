@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "title": "イベント・予定",
+    "description": "松戸のアルムッタキーン文化センターで行われる勉強会、講座、オープンモスクデー、地域イベントの予定です。"
+  },
+  "tag": "予定",
+  "title": "モスクの",
+  "highlight": "これからの予定",
+  "description": "勉強会、講座、見学会、集いの予定です。時刻は日本時間です。申し込みが必要なイベントは、カードに定員を表示しています。",
+  "tabs": {
+    "upcoming": "これから",
+    "past": "終了分"
+  },
+  "filters": {
+    "category": "カテゴリー",
+    "all": "すべてのカテゴリー",
+    "emptyUpcoming": "このカテゴリーの予定はまだありません。お知らせをご確認ください。",
+    "emptyPast": "このカテゴリーの終了したイベントはありません。"
+  },
+  "card": {
+    "registrationOpen": "申し込み受付中",
+    "waitlist": "キャンセル待ち",
+    "full": "満席",
+    "noRegistration": "申し込み不要",
+    "deadline": "{date}までにお申し込みください",
+    "finished": "終了",
+    "free": "無料",
+    "fee": "参加費 {amount}",
+    "details": "詳細"
+  },
+  "detail": {
+    "back": "イベント一覧へ",
+    "about": "このイベントについて",
+    "practical": "ご案内",
+    "date": "日付",
+    "time": "時間",
+    "location": "場所",
+    "openMaps": "Googleマップで開く",
+    "languages": "言語",
+    "speaker": "講師",
+    "fee": "参加費",
+    "free": "無料",
+    "quota": "定員",
+    "quotaValue": "{quota}名中{registered}名が申し込み済み",
+    "remaining": "{count, plural, =0 {残席はありません} other {残り#席}}",
+    "recurring": "開催周期",
+    "registrationRequired": "要申し込み",
+    "noRegistration": "申し込みは不要です。そのままお越しください。",
+    "addToCalendar": "カレンダーに追加",
+    "googleCalendar": "Googleカレンダー",
+    "downloadIcs": ".icsをダウンロード",
+    "share": "共有する",
+    "pastEvent": "このイベントは終了しました。",
+    "deadlinePassed": "申し込み期限を過ぎています。",
+    "others": "その他の予定",
+    "othersDescription": "こちらもご覧ください。"
+  },
+  "form": {
+    "title": "このイベントに申し込む",
+    "description": "フォームにご記入ください。WhatsAppまたはメールで確認のご連絡をします。ご家族やグループは1つのフォームで結構です。",
+    "name": "お名前",
+    "namePlaceholder": "お名前",
+    "contact": "電話、WhatsApp、またはメール",
+    "contactPlaceholder": "+81 90 1234 5678 または name@example.com",
+    "participants": "参加人数",
+    "participantsHint": "ご本人を含め、10名まで。",
+    "notes": "備考",
+    "notesPlaceholder": "お子様の年齢、食事の配慮、ご質問など",
+    "submit": "申し込む",
+    "submitWaitlist": "キャンセル待ちに登録する",
+    "submitting": "送信中",
+    "fullNotice": "このイベントは満席です。キャンセル待ちに登録していただくと、空きが出た際にご連絡します。",
+    "successTitle": "お申し込みを受け付けました",
+    "successRegistered": "{name}様、ありがとうございます。{participants}名でのお申し込みを記録しました。追ってご連絡します。",
+    "successWaitlist": "{name}様、ありがとうございます。{participants}名でキャンセル待ちに登録しました。空きが出た際にご連絡します。",
+    "fallbackTitle": "WhatsAppでお申し込みを送る",
+    "fallbackBody": "オンライン申し込みはまだ接続されていません。ボタンを押すと、同じ内容を運営委員会のWhatsAppに送れます。",
+    "whatsapp": "WhatsAppで送る",
+    "errorTitle": "申し込みを送信できませんでした",
+    "rateLimit": "試行回数が多すぎます。1分ほど待ってからもう一度お試しください。",
+    "waMessageTitle": "イベント申し込み：{title}",
+    "waName": "お名前",
+    "waContact": "連絡先",
+    "waParticipants": "参加人数",
+    "waNotes": "備考",
+    "waDate": "日付",
+    "waStatus": "状態"
+  },
+  "routine": {
+    "tag": "定期活動",
+    "title": "毎週、",
+    "highlight": "一年を通して",
+    "description": "これらのプログラムは毎週行われ、回ごとの申し込みは不要です。詳細と登録はプログラムページをご覧ください。",
+    "more": "プログラムの詳細"
+  },
+  "calendar": {
+    "description": "{title}（アルムッタキーン文化センター・松戸）。詳細：{url}"
+  },
+  "app": {
+    "title": "予定",
+    "description": "モスクのこれからの予定",
+    "empty": "現在、予定されているイベントはありません。",
+    "addToCalendar": "カレンダーに追加",
+    "seeAll": "ウェブサイトで全予定を見る"
+  }
+}

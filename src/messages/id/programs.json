@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "title": "Program",
+    "description": "TPA, kelas muallaf, kelas bahasa Jepang, Open Mosque, kunjungan sekolah, kajian pekanan, dan program remaja di Al Muttaqin Cultural Center, Matsudo."
+  },
+  "tag": "Program",
+  "title": "Belajar, tumbuh,",
+  "highlight": "dan bersaudara",
+  "description": "Kelas dan kegiatan rutin untuk anak-anak, muallaf, keluarga, warga sekitar, dan sekolah. Sebagian besar gratis; pendaftaran membantu kami menyiapkan tempat untuk Anda.",
+  "lang": { "ja": "Bahasa Jepang", "en": "Bahasa Inggris", "id": "Bahasa Indonesia" },
+  "card": {
+    "open": "Pendaftaran dibuka",
+    "closed": "Tanpa pendaftaran",
+    "schedule": "Jadwal",
+    "audience": "Untuk",
+    "languages": "Bahasa",
+    "details": "Selengkapnya"
+  },
+  "detail": {
+    "metaTitle": "{program}",
+    "backToList": "Semua program",
+    "about": "Tentang program ini",
+    "schedule": "Jadwal",
+    "audience": "Untuk",
+    "languages": "Bahasa",
+    "contact": "Pengajar atau kontak",
+    "contactDefault": "Pengurus masjid",
+    "requirements": "Yang perlu disiapkan",
+    "faqTitle": "Pertanyaan yang sering diajukan",
+    "registerTag": "Pendaftaran",
+    "infoTag": "Informasi",
+    "registerTitle": "Daftar program ini",
+    "registerDescription": "Kami akan membalas dalam dua hari kerja dengan jadwal pertemuan berikutnya dan apa yang perlu dibawa.",
+    "closedTitle": "Langsung datang saja",
+    "closedDescription": "Program ini tidak memerlukan pendaftaran. Ada pertanyaan? Hubungi kami, kami siap membantu."
+  },
+  "requirements": {
+    "tpa": {
+      "1": { "title": "Usia 4-12 tahun", "text": "Anak dikelompokkan menurut usia dan tingkat bacaan pada hari pertama." },
+      "2": { "title": "Orang tua atau wali yang mendaftar", "text": "Mohon berikan kontak yang bisa dihubungi pada Minggu pagi." },
+      "3": { "title": "Bawa Iqra atau Al-Qur'an jika ada", "text": "Yang belum punya bisa meminjam. Tanpa biaya; infak dipersilakan." }
+    },
+    "muallaf-class": {
+      "1": { "title": "Terbuka untuk semua", "text": "Tidak harus muslim atau berencana menjadi muslim. Rasa ingin tahu sudah cukup." },
+      "2": { "title": "Tanpa pengetahuan awal", "text": "Kami mulai dari nol dalam bahasa Jepang yang sederhana. Penerjemah bahasa Inggris atau Indonesia tersedia bila diminta." },
+      "3": { "title": "Gratis", "text": "Materi disediakan. Boleh ikut pertemuan mana pun, dengan atau tanpa pemberitahuan." }
+    },
+    "japanese-class": {
+      "1": { "title": "Semua tingkat", "text": "Pemula mulai dari hiragana dan ungkapan harian; tingkat menengah berlatih membaca formulir dan percakapan." },
+      "2": { "title": "Buku catatan dan alat tulis", "text": "Lembar kerja disediakan. Mohon bawa buku catatan." },
+      "3": { "title": "Gratis, diajar relawan", "text": "Kelas diampu relawan Jepang. Kehadiran yang rutin sangat dihargai." }
+    },
+    "open-mosque": {
+      "1": { "title": "Boleh datang langsung", "text": "Perorangan dan keluarga cukup datang pada hari itu. Kelompok sepuluh orang atau lebih mohon mendaftar." },
+      "2": { "title": "Pakaian santai", "text": "Tidak perlu pakaian khusus. Kerudung bisa dipinjam bagi perempuan yang ingin masuk ruang salat." },
+      "3": { "title": "Sekitar 90 menit", "text": "Tur, demo salat, tanya jawab, dan camilan halal. Datang dan pulang sesuka Anda." }
+    },
+    "school-visit": {
+      "1": { "title": "Ajukan dua minggu sebelumnya", "text": "Beri tahu tanggal, jumlah pengunjung, kelompok usia, dan tujuan kunjungan." },
+      "2": { "title": "Maksimal 40 pengunjung per sesi", "text": "Kelompok lebih besar dibagi menjadi dua sesi pada hari yang sama." },
+      "3": { "title": "Hari kerja, 10:00-16:00", "text": "Kunjungan diatur mengikuti waktu salat agar bisa menyaksikan salat berjamaah." }
+    },
+    "weekly-kajian": {
+      "1": { "title": "Semua dipersilakan", "text": "Tanpa pendaftaran. Datang sebelum Maghrib untuk salat bersama, lalu ikuti kajiannya." },
+      "2": { "title": "Tiga bahasa bergantian", "text": "Cek agenda untuk bahasa pekan ini. Ringkasan dibagikan di grup WhatsApp." },
+      "3": { "title": "Rekaman di YouTube", "text": "Jika terlewat, tonton kembali di bagian Kajian." }
+    },
+    "youth": {
+      "1": { "title": "Usia 13-22 tahun", "text": "Siswa SMP, SMA, mahasiswa, serta pekerja muda." },
+      "2": { "title": "Daftar sekali saja", "text": "Peserta di bawah 18 tahun didaftarkan oleh orang tuanya." },
+      "3": { "title": "Gabung grup", "text": "Kegiatan dan jalan-jalan diumumkan di grup WhatsApp youth." }
+    }
+  },
+  "muallaf": {
+    "tag": "Muallaf",
+    "title": "Menemani Anda,",
+    "highlight": "selangkah demi selangkah",
+    "description": "Bagi siapa pun yang ingin tahu tentang Islam atau baru memeluknya, kami menawarkan kebersamaan, bukan tekanan.",
+    "steps": {
+      "1": { "title": "Satu mentor untuk satu orang", "text": "Anda didampingi seorang pendamping yang menjawab pertanyaan, salat di samping Anda, dan tetap berhubungan di antara pertemuan." },
+      "2": { "title": "Materi bahasa Jepang", "text": "Lembar materi singkat dan jelas dalam bahasa Jepang, tersedia juga versi Inggris dan Indonesia." },
+      "3": { "title": "Syahadat, saat Anda siap", "text": "Jika dan ketika Anda memutuskan menjadi muslim, pengucapan syahadat hanya butuh satu menit. Kami bisa menyiapkan saksi dan sertifikat." },
+      "4": { "title": "Langkah setelahnya", "text": "Belajar salat, puasa pertama, berbicara dengan keluarga, dan mencari makanan halal: mentor tetap menemani." }
+    },
+    "cta": "Tentang kelas muallaf"
+  },
+  "visits": {
+    "tag": "Open Mosque dan kunjungan sekolah",
+    "title": "Pintu kami",
+    "highlight": "selalu terbuka",
+    "description": "Warga sekitar, sekolah, pemerintah daerah, dan perusahaan dipersilakan melihat masjid dan bertemu komunitas.",
+    "steps": {
+      "1": { "title": "Kirim permintaan", "text": "Lewat formulir di halaman program atau WhatsApp. Sampaikan tanggal, jumlah peserta, dan apa yang ingin dipelajari." },
+      "2": { "title": "Durasi", "text": "Open Mosque berlangsung 13:00-16:00; kunjungan sekolah 60-90 menit termasuk tanya jawab." },
+      "3": { "title": "Kapasitas", "text": "Maksimal 40 pengunjung per sesi. Kelompok lebih besar dibagi dua sesi." },
+      "4": { "title": "Etika berkunjung", "text": "Lepas sepatu di ruang salat, pakaian santai, dan minta izin sebelum memotret orang. Kerudung bisa dipinjam." }
+    },
+    "ctaOpen": "Open Mosque",
+    "ctaSchool": "Kunjungan sekolah"
+  },
+  "faq": {
+    "1": { "q": "Apakah ada biaya?", "a": "Semua program gratis. Infak sukarela membantu biaya materi dan camilan." },
+    "2": { "q": "Bisakah bergabung di tengah jalan?", "a": "Bisa. Sebagian besar program berjalan berulang dan tiap pertemuan berdiri sendiri. Daftar lalu datang saja." },
+    "3": { "q": "Bahasa apa yang dipakai?", "a": "Tergantung programnya; lihat badge bahasa. Relawan bisa menerjemahkan ke bahasa Jepang, Inggris, dan Indonesia." }
+  },
+  "cta": {
+    "title": "Belum yakin program mana yang cocok?",
+    "body": "Kirim pesan dan kami akan menyarankan kelas atau kunjungan yang tepat untuk Anda atau keluarga.",
+    "button": "Chat WhatsApp"
+  },
+  "whatsapp": {
+    "title": "Pendaftaran program - Al Muttaqin",
+    "program": "Program",
+    "greeting": "Assalamu'alaikum, saya ingin bertanya tentang program di Al Muttaqin."
+  },
+  "form": {
+    "fullName": "Nama Anda",
+    "parentName": "Nama orang tua atau wali",
+    "participantName": "Nama peserta",
+    "participantHint": "Isi hanya jika Anda mendaftarkan orang lain.",
+    "participantAge": "Usia",
+    "contact": "Telepon, WhatsApp, atau email",
+    "contactHint": "Hanya dipakai untuk konfirmasi pendaftaran.",
+    "notes": "Catatan",
+    "notesPlaceholder": "Pertanyaan, waktu luang, atau hal yang perlu kami ketahui.",
+    "submit": "Kirim pendaftaran",
+    "another": "Daftarkan orang lain",
+    "success": { "title": "Pendaftaran diterima", "body": "Terima kasih. Kami akan menghubungi Anda tentang {program} dalam dua hari kerja." },
+    "fallback": { "title": "Satu langkah lagi", "body": "Penyimpanan online belum aktif. Tekan tombol untuk mengirim pendaftaran ke kami lewat WhatsApp; pesannya sudah siap." }
+  },
+  "validation": {
+    "age": "Masukkan usia peserta (1-120)."
+  }
+}

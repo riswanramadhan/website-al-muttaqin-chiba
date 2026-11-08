@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "title": "Salat Jumat",
+    "description": "Salat Jumat di Al Muttaqin Cultural Center, Matsudo: khatib, imam, jam dan bahasa khutbah pekan ini, Jumat mendatang, serta informasi praktis."
+  },
+  "hero": {
+    "triJa": "金曜礼拝",
+    "triAr": "الجمعة",
+    "tag": "Jumat",
+    "title": "Salat Jumat di Al Muttaqin",
+    "highlight": "Al Muttaqin",
+    "description": "Khutbah disampaikan dalam bahasa Jepang, Indonesia, atau Inggris bergantian setiap pekan. Mohon datang lebih awal karena tempat terbatas."
+  },
+  "card": {
+    "title": "Jumat pekan ini",
+    "khatib": "Khatib",
+    "imam": "Imam",
+    "time": "Khutbah",
+    "language": "Bahasa",
+    "topic": "Tema",
+    "countdown": "Khutbah dimulai dalam",
+    "started": "Khutbah sedang berlangsung",
+    "passed": "Salat Jumat pekan ini telah selesai. Sampai jumpa Jumat depan.",
+    "none": "Jadwal pekan ini belum diterbitkan.",
+    "default": "Khutbah dimulai pukul {time} setiap Jumat.",
+    "second": "Jumat gelombang kedua pukul {time}",
+    "details": "Detail Jumat",
+    "prayerTimes": "Jadwal salat"
+  },
+  "languages": {
+    "ja": "Bahasa Jepang",
+    "en": "Bahasa Inggris",
+    "id": "Bahasa Indonesia",
+    "ar": "Bahasa Arab",
+    "mixed": "Campuran"
+  },
+  "upcoming": {
+    "tag": "Mendatang",
+    "title": "Jumat mendatang",
+    "highlight": "mendatang",
+    "description": "Khatib dan tema dapat berubah. Silakan cek kembali pada Kamis malam.",
+    "empty": "Jadwal mendatang akan diterbitkan di sini."
+  },
+  "past": {
+    "tag": "Arsip",
+    "title": "Khutbah sebelumnya",
+    "highlight": "sebelumnya",
+    "description": "Rekaman, bila tersedia, ada di halaman kajian.",
+    "empty": "Belum ada arsip."
+  },
+  "etiquette": {
+    "tag": "Adab",
+    "title": "Adab hari Jumat",
+    "highlight": "Jumat",
+    "description": "Sunnah-sunnah kecil yang menyempurnakan Jumat kita.",
+    "items": {
+      "1": {
+        "title": "Datang lebih awal",
+        "body": "Hadir sebelum khutbah dimulai dan isi saf terdepan lebih dahulu."
+      },
+      "2": {
+        "title": "Mandi dan pakaian bersih",
+        "body": "Mandi, kenakan pakaian terbaik yang bersih, dan pakai wewangian bila memungkinkan."
+      },
+      "3": {
+        "title": "Membaca Surah Al-Kahfi",
+        "body": "Bacalah Surah Al-Kahfi pada malam Jumat atau sepanjang hari Jumat."
+      },
+      "4": {
+        "title": "Memperbanyak salawat",
+        "body": "Perbanyak salawat kepada Nabi shallallahu alaihi wasallam sepanjang hari."
+      },
+      "5": {
+        "title": "Menyimak dengan tenang",
+        "body": "Setelah khutbah dimulai, simaklah dengan saksama dan senyapkan ponsel."
+      }
+    }
+  },
+  "practical": {
+    "tag": "Informasi praktis",
+    "title": "Sebelum Anda datang",
+    "highlight": "datang",
+    "items": {
+      "parking": {
+        "title": "Parkir terbatas",
+        "body": "Mohon datang dengan kereta atau berjalan kaki bila memungkinkan, dan jangan menutup akses rumah tetangga."
+      },
+      "women": {
+        "title": "Area perempuan",
+        "body": "Tersedia area salat khusus perempuan dengan pintu masuk tersendiri."
+      },
+      "shoes": {
+        "title": "Tempat sepatu",
+        "body": "Letakkan sepatu dengan rapi di rak dekat pintu masuk agar lorong tetap lapang."
+      },
+      "children": {
+        "title": "Anak-anak",
+        "body": "Anak-anak disambut dengan baik. Mohon dampingi mereka agar khutbah dapat disimak semua jamaah."
+      }
+    }
+  },
+  "ics": {
+    "title": "Tambahkan jadwal salat ke kalender",
+    "body": "Unduh jadwal salat 30 hari sebagai berkas ICS dan impor ke Google Calendar, Apple Calendar, atau Outlook.",
+    "button": "Unduh ICS"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "Lectures and study circles",
+    "description": "Recorded and live study circles from Al Muttaqin Cultural Center in Indonesian, Japanese, English, and Arabic."
+  },
+  "tag": "Lectures",
+  "title": "Learn with the",
+  "highlight": "study circles",
+  "description": "Recordings of our weekly circles, the New Muslim course, and special talks. Filter by language or series, or search for a topic or speaker.",
+  "filters": {
+    "search": "Search",
+    "searchPlaceholder": "Title, speaker, or tag",
+    "language": "Language",
+    "allLanguages": "All languages",
+    "series": "Series",
+    "allSeries": "All series",
+    "results": "{count, plural, =0 {No lectures} one {# lecture} other {# lectures}}",
+    "empty": "No lectures match these filters.",
+    "clear": "Clear filters"
+  },
+  "languages": {
+    "ja": "Japanese",
+    "en": "English",
+    "id": "Indonesian",
+    "ar": "Arabic"
+  },
+  "card": {
+    "duration": "{count} min",
+    "watch": "Watch"
+  },
+  "detail": {
+    "back": "All lectures",
+    "about": "About this lecture",
+    "series": "Series",
+    "tags": "Topics",
+    "speaker": "Speaker",
+    "published": "Recorded",
+    "duration": "Duration",
+    "language": "Language",
+    "related": "Related lectures",
+    "relatedDescription": "More from the same series or on similar topics.",
+    "share": "Share",
+    "openChannel": "Open the YouTube channel",
+    "watchOnYouTube": "Watch on YouTube"
+  },
+  "channels": {
+    "tag": "Reference channels",
+    "title": "Lectures from",
+    "highlight": "our teachers",
+    "description": "Channels of the asatidz who regularly teach at Al Muttaqin and in the Chiba community. Content on these channels is managed by the owners.",
+    "visit": "Open channel",
+    "items": {
+      "1": {
+        "name": "Al Muttaqin Chiba",
+        "description": "Official channel: weekly circles, Jumuah khutbah, and live broadcasts from the mosque.",
+        "url": "https://www.youtube.com/@almuttaqinchiba"
+      },
+      "2": {
+        "name": "Chiba Islamic Culture Center",
+        "description": "Dawah talks in Japanese and Indonesian from the center that operates the mosque.",
+        "url": "https://www.youtube.com/@ciccjapan"
+      },
+      "3": {
+        "name": "Ust. Ahmad Fauzi",
+        "description": "Tafsir and sirah series in Indonesian for the community in Japan.",
+        "url": "https://www.youtube.com/@ustahmadfauzi"
+      }
+    }
+  },
+  "materials": {
+    "tag": "Materials",
+    "title": "Handouts and slides",
+    "description": "Printed materials, slides, and reading lists from each circle are collected in a shared Google Drive folder.",
+    "cta": "Open the materials folder",
+    "url": "https://drive.google.com/drive/folders/placeholder-al-muttaqin-materials",
+    "note": "Placeholder link: the committee will replace it with the official folder."
+  }
+}

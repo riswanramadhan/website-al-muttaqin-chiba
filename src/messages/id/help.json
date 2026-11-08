@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Pusat bantuan",
+    "description": "Tanya pengurus, lapor fasilitas, kirim saran, tanya ustadz, nomor darurat di Jepang, dan hubungi masjid."
+  },
+  "title": "Pusat bantuan",
+  "description": "Pertanyaan, laporan, dan bantuan darurat di satu tempat.",
+  "sections": {
+    "ask": "Tanya dan lapor",
+    "emergency": "Darurat di Jepang",
+    "contact": "Hubungi masjid"
+  },
+  "cards": {
+    "question": { "title": "Tanya pengurus", "description": "Jadwal salat, acara, keanggotaan, apa pun tentang masjid." },
+    "facility": { "title": "Lapor fasilitas", "description": "Toilet, AC, karpet, lampu, atau apa pun yang rusak." },
+    "suggestion": { "title": "Kirim saran", "description": "Ide agar masjid lebih baik. Boleh anonim." },
+    "ustadz": { "title": "Tanya ustadz", "description": "Pertanyaan seputar ibadah, fikih, atau keseharian sebagai muslim." },
+    "emergency": { "title": "Nomor darurat", "description": "119 ambulans dan pemadam, 110 polisi, dengan kalimat Jepang untuk dibacakan." },
+    "location": { "title": "Lokasi masjid", "description": "Buka di Google Maps untuk petunjuk arah." },
+    "whatsapp": { "title": "WhatsApp pengurus", "description": "Cara tercepat menghubungi kami di siang hari." },
+    "email": { "title": "Email", "description": "Untuk dokumen dan permintaan resmi." }
+  },
+  "emergency": {
+    "title": "Darurat di Jepang",
+    "description": "Panggilan ke 119 dan 110 gratis dari telepon apa pun. Tetap tenang dan bicara perlahan; operator bisa mengalihkan ke penerjemah.",
+    "ambulance": "Ambulans dan pemadam",
+    "police": "Polisi",
+    "confirm": "Telepon {number} sekarang? Gunakan hanya untuk keadaan darurat sungguhan.",
+    "callNow": "Telepon {number}",
+    "phrasesTitle": "Bacakan kalimat ini",
+    "phrases": {
+      "1": { "ja": "救急車をお願いします。場所は松戸市のアルムッタキーンモスクです。", "reading": "Kyuukyuusha o onegaishimasu. Basho wa Matsudo-shi no Al Muttaqin mosuku desu.", "meaning": "Tolong kirim ambulans. Lokasinya di Masjid Al Muttaqin, Matsudo." },
+      "2": { "ja": "けが人がいます。意識があります／ありません。", "reading": "Keganin ga imasu. Ishiki ga arimasu / arimasen.", "meaning": "Ada orang terluka. Dia sadar / tidak sadar." },
+      "3": { "ja": "日本語があまり話せません。英語でお願いします。", "reading": "Nihongo ga amari hanasemasen. Eigo de onegaishimasu.", "meaning": "Saya kurang bisa bahasa Jepang. Mohon bahasa Inggris." }
+    },
+    "tip": "Sebutkan alamat lebih dulu, lalu apa yang terjadi. Jika tidak bisa bicara, biarkan sambungan tetap terbuka; operator bisa melacak panggilan."
+  },
+  "form": {
+    "kind": "Tentang apa?",
+    "kinds": {
+      "suggestion": "Saran",
+      "facility": "Laporan fasilitas",
+      "question": "Pertanyaan untuk pengurus",
+      "ustadz": "Pertanyaan untuk ustadz",
+      "website": "Website atau aplikasi",
+      "other": "Lainnya"
+    },
+    "location": "Lokasi masalah",
+    "locationPlaceholder": "Pilih lokasi",
+    "locations": {
+      "toilet": "Toilet atau tempat wudu",
+      "ac": "AC atau pemanas",
+      "carpet": "Karpet atau ruang salat",
+      "light": "Lampu atau listrik",
+      "other": "Lainnya"
+    },
+    "message": "Pesan Anda",
+    "placeholders": {
+      "suggestion": "Apa yang bisa kami perbaiki?",
+      "facility": "Apa yang rusak, dan sejak kapan?",
+      "question": "Apa yang ingin Anda ketahui?",
+      "ustadz": "Tuliskan pertanyaan Anda. Ustadz akan menjawab secara pribadi atau dalam kajian.",
+      "website": "Halaman atau fitur mana, dan apa yang terjadi?",
+      "other": "Ceritakan apa yang ada di pikiran Anda."
+    },
+    "name": "Nama",
+    "contact": "Telepon, WhatsApp, atau email",
+    "anonymous": "Anonim",
+    "anonymousHint": "Kosongkan nama dan kontak untuk mengirim secara anonim. Isi kontak jika ingin dibalas.",
+    "submit": "Kirim",
+    "another": "Kirim pesan lain",
+    "success": { "title": "Pesan diterima", "body": "Terima kasih. Pengurus membaca setiap pesan dan membalas bila ada kontak." },
+    "fallback": { "title": "Satu langkah lagi", "body": "Penyimpanan online belum aktif. Tekan tombol untuk mengirim pesan lewat WhatsApp; teksnya sudah siap." }
+  },
+  "whatsapp": {
+    "title": "Pesan dari App Jamaah - Al Muttaqin",
+    "greeting": "Assalamu'alaikum, saya ada pertanyaan untuk pengurus Al Muttaqin."
+  }
+}

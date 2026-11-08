@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "title": "Galeri",
+    "description": "Foto bangunan masjid, kajian, Open Mosque Day, Ramadan, dan Idulfitri di Al Muttaqin Cultural Center."
+  },
+  "hero": {
+    "tag": "Galeri",
+    "title": "Momen dari masjid dan jamaahnya.",
+    "highlight": "jamaahnya.",
+    "description": "Suasana di dalam pusat ini: ruang salat, kelas, hari komunitas, dan malam-malam Ramadan. Ketuk foto untuk melihat lebih besar."
+  },
+  "filters": {
+    "label": "Saring menurut kategori",
+    "all": "Semua"
+  },
+  "categories": {
+    "building": "Bangunan",
+    "activity": "Kegiatan",
+    "community": "Komunitas",
+    "ramadan": "Ramadan",
+    "eid": "Hari Raya"
+  },
+  "lightbox": {
+    "open": "Buka foto",
+    "previous": "Foto sebelumnya",
+    "next": "Foto berikutnya",
+    "counter": "{current} dari {total}",
+    "keyboardHint": "Gunakan tombol panah kiri dan kanan untuk berpindah foto, dan Escape untuk menutup."
+  },
+  "empty": {
+    "title": "Belum ada foto di kategori ini",
+    "body": "Foto ditambahkan setelah setiap acara. Silakan cek kembali nanti."
+  },
+  "placeholderNote": "Gambar contoh ditampilkan sampai pengurus mengunggah foto resmi.",
+  "instagram": {
+    "tag": "Ikuti kami",
+    "title": "Lebih banyak foto setiap pekan di Instagram",
+    "body": "Kami mengunggah foto kegiatan, pengingat singkat, dan pengumuman. Ikuti kami untuk kabar terbaru dari masjid.",
+    "cta": "Buka Instagram"
+  }
+}

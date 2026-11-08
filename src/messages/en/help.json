@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Help center",
+    "description": "Ask the committee, report a facility issue, send a suggestion, ask an ustadz, emergency numbers in Japan, and contact the mosque."
+  },
+  "title": "Help center",
+  "description": "Questions, reports, and emergency help in one place.",
+  "sections": {
+    "ask": "Ask and report",
+    "emergency": "Emergency in Japan",
+    "contact": "Reach the mosque"
+  },
+  "cards": {
+    "question": { "title": "Ask the committee", "description": "Prayer times, events, membership, anything about the mosque." },
+    "facility": { "title": "Report a facility issue", "description": "Toilet, air conditioning, carpet, lights, or anything broken." },
+    "suggestion": { "title": "Send a suggestion", "description": "Ideas to make the mosque better. Anonymous is fine." },
+    "ustadz": { "title": "Ask an ustadz", "description": "Questions about worship, fiqh, or daily life as a Muslim." },
+    "emergency": { "title": "Emergency numbers", "description": "119 ambulance and fire, 110 police, with Japanese phrases to read out." },
+    "location": { "title": "Mosque location", "description": "Open in Google Maps for directions." },
+    "whatsapp": { "title": "WhatsApp the committee", "description": "Fastest way to reach us during the day." },
+    "email": { "title": "Email", "description": "For documents and formal requests." }
+  },
+  "emergency": {
+    "title": "Emergency in Japan",
+    "description": "Calls to 119 and 110 are free from any phone. Stay calm and speak slowly; the operator may switch to an interpreter.",
+    "ambulance": "Ambulance and fire",
+    "police": "Police",
+    "confirm": "Call {number} now? Only use this for a real emergency.",
+    "callNow": "Call {number}",
+    "phrasesTitle": "Read this out loud",
+    "phrases": {
+      "1": { "ja": "救急車をお願いします。場所は松戸市のアルムッタキーンモスクです。", "reading": "Kyuukyuusha o onegaishimasu. Basho wa Matsudo-shi no Al Muttaqin mosuku desu.", "meaning": "Please send an ambulance. The location is Al Muttaqin Mosque in Matsudo." },
+      "2": { "ja": "けが人がいます。意識があります／ありません。", "reading": "Keganin ga imasu. Ishiki ga arimasu / arimasen.", "meaning": "Someone is injured. They are conscious / unconscious." },
+      "3": { "ja": "日本語があまり話せません。英語でお願いします。", "reading": "Nihongo ga amari hanasemasen. Eigo de onegaishimasu.", "meaning": "I do not speak much Japanese. English, please." }
+    },
+    "tip": "Give the address first, then what happened. If you cannot speak, keep the line open; the operator can trace the call."
+  },
+  "form": {
+    "kind": "What is this about?",
+    "kinds": {
+      "suggestion": "Suggestion",
+      "facility": "Facility report",
+      "question": "Question for the committee",
+      "ustadz": "Question for an ustadz",
+      "website": "Website or app",
+      "other": "Other"
+    },
+    "location": "Location of the issue",
+    "locationPlaceholder": "Choose a location",
+    "locations": {
+      "toilet": "Toilet or wudu area",
+      "ac": "Air conditioning or heating",
+      "carpet": "Carpet or prayer hall",
+      "light": "Lights or electricity",
+      "other": "Other"
+    },
+    "message": "Your message",
+    "placeholders": {
+      "suggestion": "What could we improve?",
+      "facility": "What is broken, and since when?",
+      "question": "What would you like to know?",
+      "ustadz": "Describe your question. The ustadz will answer privately or in a study circle.",
+      "website": "Which page or feature, and what happened?",
+      "other": "Tell us what is on your mind."
+    },
+    "name": "Name",
+    "contact": "Phone, WhatsApp, or email",
+    "anonymous": "Anonymous",
+    "anonymousHint": "Leave name and contact empty to send anonymously. Add a contact if you would like a reply.",
+    "submit": "Send",
+    "another": "Send another message",
+    "success": { "title": "Message received", "body": "Thank you. The committee reads every message and replies when a contact is given." },
+    "fallback": { "title": "One more step", "body": "Online storage is not active yet. Tap the button to send your message on WhatsApp; the text is ready." }
+  },
+  "whatsapp": {
+    "title": "Message from the Jamaah app - Al Muttaqin",
+    "greeting": "Assalamu'alaikum, I have a question for the Al Muttaqin committee."
+  }
+}

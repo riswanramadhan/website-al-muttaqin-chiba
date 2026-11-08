@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "title": "Pengaturan",
+    "description": "Bahasa, tema, notifikasi adzan, lokasi kiblat, ukuran teks Arab, dan data tersimpan App Jamaah Al Muttaqin."
+  },
+  "title": "Pengaturan",
+  "description": "Semua tersimpan di perangkat ini.",
+  "language": {
+    "title": "Bahasa",
+    "description": "Pilih bahasa aplikasi."
+  },
+  "theme": {
+    "description": "Terang, gelap, ikuti perangkat, atau gelap otomatis setelah Maghrib."
+  },
+  "notifications": {
+    "statusLabel": "Izin browser:",
+    "status": {
+      "granted": "Diizinkan",
+      "denied": "Diblokir",
+      "default": "Belum diminta",
+      "unsupported": "Tidak didukung"
+    },
+    "serverActive": "Push aktif",
+    "disable": "Matikan notifikasi",
+    "prayers": "Waktu salat",
+    "iqamah": "Pengingat iqamah",
+    "iqamahHint": "10 menit sebelum iqamah di masjid.",
+    "jumuah": "Pengingat Jumat",
+    "jumuahHint": "30 menit sebelum salat Jumat.",
+    "noVapid": "Notifikasi dari server belum aktif. Pengingat tetap muncul selama App terbuka.",
+    "localHint": "Waktu mengikuti jadwal masjid di Matsudo (JST).",
+    "enabledToast": "Notifikasi aktif.",
+    "disabledToast": "Notifikasi dimatikan.",
+    "errorToast": "Notifikasi gagal diaktifkan. Silakan coba lagi.",
+    "testTitle": "Al Muttaqin",
+    "testBody": "Notifikasi uji: notifikasi adzan berfungsi di perangkat ini.",
+    "testSent": "Notifikasi uji terkirim.",
+    "testFailed": "Notifikasi uji tidak dapat ditampilkan."
+  },
+  "qibla": {
+    "title": "Lokasi untuk kiblat",
+    "description": "Dipakai oleh kompas kiblat.",
+    "device": "Gunakan lokasi perangkat",
+    "deviceHint": "Paling akurat saat Anda jauh dari masjid.",
+    "mosque": "Gunakan lokasi masjid",
+    "mosqueHint": "Al Muttaqin, Matsudo. Tanpa izin lokasi.",
+    "error": "Lokasi tidak dapat diambil. Lokasi masjid dipakai sebagai gantinya."
+  },
+  "arabic": {
+    "title": "Ukuran teks Arab",
+    "description": "Untuk Al-Qur'an, doa, dan dzikir.",
+    "sm": "Kecil",
+    "md": "Sedang",
+    "lg": "Besar"
+  },
+  "install": {
+    "title": "Pasang aplikasi",
+    "description": "Tambahkan App Jamaah ke Layar Utama agar cepat dibuka, juga saat offline."
+  },
+  "data": {
+    "title": "Data tersimpan",
+    "description": "Preferensi, bacaan terakhir, hitungan tasbih, dan cache offline di perangkat ini.",
+    "clear": "Hapus data tersimpan",
+    "confirmTitle": "Hapus data tersimpan?",
+    "confirmBody": "Pengaturan, riwayat bacaan, hitungan tasbih, dan konten offline di perangkat ini akan dihapus. Tindakan ini tidak dapat dibatalkan.",
+    "confirm": "Hapus data",
+    "cleared": "Data tersimpan sudah dihapus."
+  },
+  "about": {
+    "title": "Tentang aplikasi",
+    "version": "Versi",
+    "language": "Bahasa",
+    "privacy": "Kebijakan privasi",
+    "website": "Buka situs web"
+  },
+  "notify": {
+    "adhanTitle": "Adzan {prayer}",
+    "adhanBody": "Telah masuk waktu {prayer} pukul {time} (JST).",
+    "iqamahTitle": "Iqamah {prayer} {minutes} menit lagi",
+    "iqamahBody": "Iqamah di Al Muttaqin pukul {time}.",
+    "jumuahTitle": "Salat Jumat pukul {time}",
+    "jumuahBody": "Salat Jumat di Al Muttaqin dimulai {minutes} menit lagi."
+  }
+}

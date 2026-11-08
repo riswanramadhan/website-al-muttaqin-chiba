@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "title": "About us",
+    "description": "History, vision, partners, board, and facilities of Al Muttaqin Cultural Center, a mosque and Islamic cultural center in Matsudo, Chiba."
+  },
+  "hero": {
+    "tag": "About us",
+    "title": "A mosque and a home for learning in Matsudo, Chiba.",
+    "highlight": "Matsudo, Chiba.",
+    "description": "Al Muttaqin Cultural Center serves worshippers, new Muslims, families, and neighbors in Japanese, English, and Indonesian. This page explains who we are, where we came from, and how we work.",
+    "primaryCta": "Contact and access",
+    "secondaryCta": "See the gallery"
+  },
+  "profile": {
+    "tag": "Profile",
+    "title": "Who we are",
+    "highlight": "we are",
+    "body": "The center is run by volunteers from the Japanese and Indonesian Muslim communities of Chiba. Daily prayers, the Friday khutbah, weekly study circles, a Quran school for children, a course for new Muslims, and a Japanese language class all take place under one roof, and the doors are open to anyone who wants to learn about Islam."
+  },
+  "vision": {
+    "tag": "Vision and mission",
+    "title": "Four pillars of our work",
+    "highlight": "our work",
+    "statement": "Our vision is a mosque that is calm to pray in, easy to learn in, and welcoming to the neighborhood. We pursue it through four pillars.",
+    "pillars": {
+      "0": {
+        "title": "Worship",
+        "description": "Five daily congregational prayers, Jumuah, tarawih, and Eid, with accurate times and a quiet, clean space for everyone."
+      },
+      "1": {
+        "title": "Support for new Muslims",
+        "description": "Small-group courses in Japanese, mentoring, and a community that stays close after the shahada."
+      },
+      "2": {
+        "title": "Education for the next generation",
+        "description": "Quran school for children, youth circles, and parenting support so faith grows naturally in Japan."
+      },
+      "3": {
+        "title": "Halal economy and cultural dialogue",
+        "description": "A halal guide, a dawah dictionary, open mosque days, and partnerships with schools and local government."
+      }
+    }
+  },
+  "history": {
+    "tag": "History",
+    "title": "From an idea to a mosque",
+    "highlight": "a mosque",
+    "description": "A short timeline of how the center came to be. Dates will be updated by the committee as milestones are reached."
+  },
+  "partners": {
+    "tag": "Partners",
+    "title": "Built together with our partners",
+    "highlight": "our partners",
+    "description": "The center is operated by the Chiba Islamic Culture Center and supported by Dompet Dhuafa in Indonesia and Japan.",
+    "visit": "Visit website"
+  },
+  "board": {
+    "tag": "Board",
+    "title": "The people behind the center",
+    "highlight": "the center",
+    "description": "A volunteer board oversees worship, education, finances, and community programs. Names and photos are added as the committee confirms them.",
+    "placeholder": "To be announced"
+  },
+  "facilities": {
+    "tag": "Facilities",
+    "title": "What you will find here",
+    "highlight": "find here",
+    "description": "A simple building designed for prayer, classes, and gatherings, with separate spaces for men and women."
+  },
+  "stats": {
+    "capacity": "Prayer hall capacity",
+    "programs": "Regular programs",
+    "languages": "Languages served",
+    "founded": "Year established"
+  },
+  "governance": {
+    "tag": "Governance and transparency",
+    "title": "Every yen is accounted for",
+    "highlight": "accounted for",
+    "body": "Donations are held in a dedicated account, and the board publishes a monthly report of all income and expenses. Large purchases are explained, and zakat is tracked separately from infaq and waqf.",
+    "items": {
+      "0": "Monthly income and expense reports published on this site",
+      "1": "Two signatures required for every expense above the approved limit",
+      "2": "Annual summary reviewed by the operating organization"
+    },
+    "cta": "See the financial reports"
+  },
+  "volunteer": {
+    "tag": "Join us",
+    "title": "Become a volunteer",
+    "highlight": "volunteer",
+    "body": "The center runs on volunteers. Whether you can give an hour a month or a day a week, there is a place for you.",
+    "items": {
+      "0": "Teaching at the children's Quran school or the Japanese class",
+      "1": "Guiding visitors on Open Mosque Day and translating",
+      "2": "Cooking for iftar, cleaning, and helping at events"
+    },
+    "cta": "Volunteer with us",
+    "secondary": "See our programs"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "title": "Digital tasbih",
+    "description": "A simple dhikr counter with targets, rounds, optional vibration and click sound, and a daily record kept on your device."
+  },
+  "title": "Digital tasbih",
+  "description": "Tap, count, and keep a daily record",
+  "countLabel": "Current count",
+  "tapHint": "Tap the circle or press Space",
+  "tapButton": "Count dhikr",
+  "targetLabel": "Target",
+  "targetReached": "Target reached",
+  "custom": "Custom",
+  "customPlaceholder": "Target",
+  "customLabel": "Custom target",
+  "rounds": "{count, plural, one {# round} other {# rounds}}",
+  "roundsLabel": "Rounds",
+  "presets": {
+    "label": "Dhikr",
+    "subhanallah": "Glory be to Allah",
+    "alhamdulillah": "Praise be to Allah",
+    "allahuakbar": "Allah is the Greatest",
+    "astaghfirullah": "I seek Allah's forgiveness",
+    "salawat": "Blessings upon the Prophet",
+    "tahlil": "There is no god but Allah"
+  },
+  "settings": {
+    "vibrate": "Vibrate on tap",
+    "sound": "Click sound"
+  },
+  "reset": {
+    "button": "Reset",
+    "title": "Reset the counter?",
+    "description": "The current count and rounds will return to zero. Your daily record stays.",
+    "confirm": "Yes, reset",
+    "cancel": "Cancel"
+  },
+  "stats": {
+    "today": "Today",
+    "week": "Last 7 days",
+    "weekTotal": "{count} in total",
+    "empty": "No dhikr recorded yet. Your counts are saved on this device.",
+    "dayTotal": "{count, plural, one {# count} other {# counts}}"
+  }
+}

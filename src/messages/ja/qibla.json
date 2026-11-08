@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "キブラの方角",
+    "description": "松戸またはご自身の現在地からのキブラを、コンパス、北からの角度、マッカまでの距離とともに確認できます。"
+  },
+  "title": "キブラ",
+  "description": "千葉県松戸市からのカアバの方角",
+  "compassLabel": "キブラコンパス",
+  "cardinal": { "n": "北", "e": "東", "s": "南", "w": "西" },
+  "qiblaLabel": "キブラの方角",
+  "degrees": "北から{deg}°",
+  "headingLabel": "端末の向き",
+  "distanceLabel": "マッカまでの距離",
+  "distance": "{km} km",
+  "aligned": "キブラに合っています",
+  "rotateHint": "カアバのマークが上に来るまで端末を回してください。",
+  "calibration": "方角がずれていると感じたら、端末を8の字に動かしてコンパスを調整してください。",
+  "status": {
+    "label": "センサー",
+    "idle": "コンパスセンサーを確認しています",
+    "needsPermission": "ボタンを押してコンパスの使用を許可してください",
+    "waiting": "センサーの値を待っています",
+    "active": "コンパスが動作しています",
+    "unsupported": "この端末にはコンパスセンサーがありません",
+    "denied": "コンパスの使用が許可されませんでした",
+    "relative": "相対コンパスです。まず北を向いてからマークに従ってください"
+  },
+  "noSensorHint": "コンパスがない場合は、上の角度を方位磁石と合わせるか、Googleマップで経路を開いてください。",
+  "actions": {
+    "enableCompass": "コンパスを有効にする",
+    "useLocation": "現在地を使う",
+    "locating": "現在地を取得しています",
+    "useMosque": "モスクの位置を使う",
+    "openMaps": "Googleマップで開く"
+  },
+  "location": {
+    "label": "計算の基準",
+    "mosque": "アルムッタキーン（松戸）",
+    "yours": "現在地",
+    "error": "現在地を取得できませんでした。モスクからのキブラを表示します。"
+  }
+}

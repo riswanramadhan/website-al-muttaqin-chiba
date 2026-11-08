@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "title": "Al Muttaqin Cultural Center | Masjid di Matsudo, Chiba",
+    "description": "Masjid dan pusat budaya Islam di Matsudo, Chiba: jadwal salat hari ini, Jumat, kajian tiga bahasa, program muallaf dan anak, infaq, serta bantuan bagi pendatang baru di Jepang."
+  },
+  "hero": {
+    "tag": "Masjid",
+    "title": "Masjid dan rumah belajar di Matsudo, Chiba.",
+    "highlight": "Matsudo, Chiba.",
+    "description": "Salat berjamaah, belajar dalam bahasa Jepang, Inggris, dan Indonesia, dan temukan komunitas Anda. Semua disambut, baik yang sudah lama tinggal maupun yang baru tiba pekan lalu.",
+    "prayerCta": "Jadwal salat",
+    "appCta": "Buka App Jamaah"
+  },
+  "pinned": {
+    "label": "Status siaran langsung dan pengumuman tersemat",
+    "seeAll": "Semua pengumuman"
+  },
+  "portal": {
+    "tag": "Mulai di sini",
+    "title": "Temukan yang Anda perlukan dalam satu langkah.",
+    "highlight": "satu langkah.",
+    "description": "Pilih pintu yang sesuai. Masing-masing langsung menuju halaman dan fitur yang dibuat untuk Anda.",
+    "items": {
+      "jamaah": {
+        "eyebrow": "Untuk jamaah",
+        "title": "App Jamaah",
+        "description": "Jadwal salat dengan pengingat, kiblat, Al-Qur'an, doa, dan agenda pekan ini di ponsel Anda.",
+        "cta": "Buka aplikasi"
+      },
+      "newcomers": {
+        "eyebrow": "Baru di Chiba",
+        "title": "Panduan pendatang",
+        "description": "Lapor ke balai kota, pemilahan sampah, makanan halal, kereta, dan frasa Jepang yang berguna.",
+        "cta": "Baca panduan"
+      },
+      "donors": {
+        "eyebrow": "Untuk donatur",
+        "title": "Salurkan infaq",
+        "description": "Dukung masjid, program, dan komunitasnya, dengan laporan bulanan yang transparan.",
+        "cta": "Infaq sekarang"
+      }
+    },
+    "help": {
+      "title": "Butuh bantuan?",
+      "description": "Jenazah, sakit, keadaan darurat, atau pertanyaan seputar Islam: hubungi pengurus langsung.",
+      "cta": "Pusat bantuan"
+    }
+  },
+  "jumuah": {
+    "tag": "Pekan ini",
+    "title": "Jumat dan agenda pekan ini.",
+    "highlight": "agenda pekan ini.",
+    "description": "Khatib dan waktu Jumat ini, ditambah kegiatan terdekat di masjid.",
+    "seeAll": "Semua agenda",
+    "agendaTitle": "Agenda terdekat",
+    "empty": "Belum ada agenda terdekat. Silakan cek kembali nanti."
+  },
+  "services": {
+    "tag": "Layanan kami",
+    "title": "Yang kami hadirkan untuk jamaah.",
+    "highlight": "untuk jamaah.",
+    "description": "Dari salat harian hingga pendampingan bagi yang baru mengenal Islam dan baru tiba di Jepang, semuanya dalam tiga bahasa.",
+    "cta": "Lihat semua program",
+    "items": {
+      "prayer": {
+        "title": "Salat berjamaah dan Jumat",
+        "description": "Salat lima waktu berjamaah serta salat Jumat beserta khotbahnya."
+      },
+      "lectures": {
+        "title": "Kajian tiga bahasa",
+        "description": "Kajian rutin dalam bahasa Jepang, Inggris, dan Indonesia, juga dibagikan di YouTube."
+      },
+      "muallaf": {
+        "title": "Pembinaan muallaf",
+        "description": "Kelas yang ramah dan pendamping bagi saudara yang baru memeluk Islam."
+      },
+      "tpa": {
+        "title": "TPA dan pendidikan",
+        "description": "Belajar membaca Al-Qur'an, akhlak, dan dasar-dasar Islam untuk anak-anak."
+      },
+      "openMosque": {
+        "title": "Open mosque dan kunjungan",
+        "description": "Kunjungan berpemandu untuk warga sekitar, sekolah, dan kelompok yang ingin mengenal Islam."
+      },
+      "newcomers": {
+        "title": "Bantuan muslim pendatang",
+        "description": "Bantuan praktis bagi muslim yang mulai menetap di Chiba dan Jepang."
+      }
+    }
+  },
+  "programs": {
+    "tag": "Program",
+    "title": "Belajar dan tumbuh bersama.",
+    "highlight": "tumbuh bersama.",
+    "description": "Kelas dan kegiatan rutin untuk anak, remaja, muallaf, dan masyarakat luas.",
+    "seeAll": "Lihat semua program"
+  },
+  "lectures": {
+    "tag": "Kajian terbaru",
+    "title": "Simak kajian terbaru.",
+    "highlight": "kajian terbaru.",
+    "description": "Rekaman kajian yang bisa ditonton kapan saja, dalam bahasa Jepang, Inggris, dan Indonesia.",
+    "seeAll": "Semua kajian",
+    "channel": "Kanal YouTube",
+    "empty": "Belum ada rekaman."
+  },
+  "donate": {
+    "tag": "Infaq",
+    "title": "Setiap infaq menghidupkan masjid.",
+    "highlight": "menghidupkan masjid.",
+    "description": "Infaq Anda membiayai sewa, utilitas, pendidikan, dan kepedulian sosial. Setiap yen dilaporkan secara terbuka.",
+    "programsTitle": "Program donasi berjalan",
+    "accountsTitle": "Rekening",
+    "accountsDescription": "Transfer langsung ke rekening resmi berikut.",
+    "accountsCta": "Semua cara berinfaq"
+  },
+  "stats": {
+    "tag": "Dalam angka",
+    "title": "Komunitas yang terus tumbuh.",
+    "highlight": "terus tumbuh.",
+    "description": "Rumah ibadah dan belajar di Matsudo."
+  },
+  "hadith": {
+    "tag": "Hadis hari ini",
+    "title": "Pengingat untuk hari ini.",
+    "highlight": "hari ini.",
+    "description": "Satu hadis pendek setiap hari, dalam bahasa Arab beserta terjemahannya.",
+    "more": "Mengenal Islam",
+    "source": "Sumber"
+  },
+  "news": {
+    "tag": "Berita",
+    "title": "Berita dan pengumuman.",
+    "highlight": "pengumuman.",
+    "description": "Kabar dari komunitas dan pemberitahuan penting dari pengurus.",
+    "seeAll": "Semua berita",
+    "empty": "Belum ada berita.",
+    "announcementsTitle": "Pengumuman",
+    "announcementsDescription": "Perubahan jadwal, pemberitahuan, dan informasi mendesak dari pengurus masjid."
+  },
+  "newcomers": {
+    "tag": "Baru di Chiba",
+    "title": "Baru tiba? Mulai dari yang dasar.",
+    "highlight": "yang dasar.",
+    "description": "Panduan singkat untuk pekan-pekan pertama di Jepang, ditulis untuk warga muslim.",
+    "guideCta": "Buka panduan pendatang",
+    "shortcuts": {
+      "cityHall": {
+        "title": "Lapor ke balai kota",
+        "description": "Pendaftaran penduduk, My Number, dan asuransi kesehatan dalam 14 hari pertama."
+      },
+      "garbage": {
+        "title": "Pemilahan sampah",
+        "description": "Jadwal sampah bakar, tidak bakar, dan daur ulang di Matsudo."
+      },
+      "halal": {
+        "title": "Makanan halal",
+        "description": "Toko dan restoran halal di sekitar masjid."
+      },
+      "transport": {
+        "title": "Transportasi",
+        "description": "Kartu IC, kereta, dan bus untuk sampai ke masjid."
+      }
+    },
+    "dictionaryTitle": "Bahasa Jepang sehari-hari",
+    "dictionaryDescription": "Cari kata penting lalu tunjukkan kepada orang di sekitar Anda.",
+    "dictionaryCta": "Buka kamus lengkap"
+  },
+  "gallery": {
+    "tag": "Galeri",
+    "title": "Momen di masjid.",
+    "highlight": "di masjid.",
+    "description": "Foto salat berjamaah, kelas, dan kegiatan komunitas.",
+    "seeAll": "Lihat galeri"
+  },
+  "faq": {
+    "tag": "FAQ",
+    "title": "Pertanyaan yang sering diajukan.",
+    "highlight": "sering diajukan.",
+    "description": "Jawaban singkat seputar kunjungan, salat, donasi, dan program.",
+    "seeAll": "Semua pertanyaan",
+    "ask": "Tanya kami"
+  },
+  "contact": {
+    "tag": "Kontak dan akses",
+    "title": "Kunjungi kami di Matsudo.",
+    "highlight": "Matsudo.",
+    "description": "Masjid buka setiap hari. Kirim pesan lewat WhatsApp atau temukan rutenya di peta.",
+    "whatsapp": "Chat WhatsApp",
+    "maps": "Buka di Google Maps",
+    "stationsTitle": "Stasiun terdekat",
+    "walk": "{count} menit jalan kaki",
+    "form": "Kirim pesan lewat formulir kontak",
+    "partnersTitle": "Mitra kami"
+  }
+}

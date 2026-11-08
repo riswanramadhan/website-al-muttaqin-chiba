@@ -1,0 +1,41 @@
+{
+  "title": "App Jamaah",
+  "description": "Jadwal salat, iqamah, info Jumat, kiblat, Al-Qur'an, doa, dan infaq untuk jamaah Al Muttaqin. Tetap bisa dibuka offline.",
+  "navLabel": "Navigasi App",
+  "backToWeb": "Kembali ke website",
+  "back": "Kembali",
+  "greeting": "Assalamu'alaikum",
+  "greetingSub": "Selamat datang di Al Muttaqin, Matsudo",
+  "tabs": {
+    "home": "Beranda",
+    "prayer": "Salat",
+    "quran": "Al-Qur'an",
+    "donate": "Infaq",
+    "more": "Lainnya",
+    "settings": "Pengaturan"
+  },
+  "screens": {
+    "prayer": "Jadwal salat",
+    "qibla": "Arah kiblat",
+    "quran": "Al-Qur'an",
+    "dua": "Doa dan dzikir",
+    "tasbih": "Tasbih digital",
+    "hijri": "Kalender Hijriah",
+    "live": "Kajian live",
+    "agenda": "Agenda",
+    "info": "Pengumuman",
+    "donate": "Infaq",
+    "dictionary": "Kamus dakwah",
+    "radar": "Radar halal",
+    "help": "Pusat bantuan",
+    "settings": "Pengaturan"
+  },
+  "menu": {
+    "title": "Semua fitur",
+    "description": "Semua yang ada di App Jamaah, dalam satu tempat."
+  },
+  "placeholder": {
+    "title": "Segera hadir",
+    "body": "Layar ini sedang disiapkan."
+  }
+}

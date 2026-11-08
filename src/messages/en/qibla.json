@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Qibla direction",
+    "description": "Find the qibla from Matsudo or from your own location with a live compass, degrees from north, and distance to Makkah."
+  },
+  "title": "Qibla",
+  "description": "Direction of the Ka'bah from Matsudo, Chiba",
+  "compassLabel": "Qibla compass",
+  "cardinal": { "n": "N", "e": "E", "s": "S", "w": "W" },
+  "qiblaLabel": "Qibla direction",
+  "degrees": "{deg}° from north",
+  "headingLabel": "Phone heading",
+  "distanceLabel": "Distance to Makkah",
+  "distance": "{km} km",
+  "aligned": "Aligned with the qibla",
+  "rotateHint": "Turn your phone until the Ka'bah marker sits at the top.",
+  "calibration": "If the direction seems off, move your phone in a figure-eight to calibrate the compass.",
+  "status": {
+    "label": "Sensor",
+    "idle": "Checking the compass sensor",
+    "needsPermission": "Tap the button to allow compass access",
+    "waiting": "Waiting for sensor data",
+    "active": "Compass active",
+    "unsupported": "No compass sensor on this device",
+    "denied": "Compass access was denied",
+    "relative": "Compass is relative: face north first, then follow the marker"
+  },
+  "noSensorHint": "Without a compass, use the degrees above with a physical compass, or open directions in Google Maps.",
+  "actions": {
+    "enableCompass": "Enable compass",
+    "useLocation": "Use my location",
+    "locating": "Finding your location",
+    "useMosque": "Use mosque location",
+    "openMaps": "Open in Google Maps"
+  },
+  "location": {
+    "label": "Calculated from",
+    "mosque": "Al Muttaqin, Matsudo",
+    "yours": "Your location",
+    "error": "Location is unavailable. Showing the mosque's qibla instead."
+  }
+}

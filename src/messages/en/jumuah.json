@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "title": "Jumuah",
+    "description": "Friday prayer at Al Muttaqin Cultural Center, Matsudo: this week's khatib, imam, khutbah time and language, upcoming Fridays, and practical information."
+  },
+  "hero": {
+    "triJa": "金曜礼拝",
+    "triAr": "الجمعة",
+    "tag": "Jumuah",
+    "title": "Friday prayer at Al Muttaqin",
+    "highlight": "Al Muttaqin",
+    "description": "Khutbah is delivered in Japanese, Indonesian, or English depending on the week. Please arrive early, as space is limited."
+  },
+  "card": {
+    "title": "This Friday",
+    "khatib": "Khatib",
+    "imam": "Imam",
+    "time": "Khutbah",
+    "language": "Language",
+    "topic": "Topic",
+    "countdown": "Khutbah begins in",
+    "started": "Khutbah is underway",
+    "passed": "This week's Jumuah has concluded. See you next Friday.",
+    "none": "This week's schedule has not been published yet.",
+    "default": "Khutbah starts at {time} every Friday.",
+    "second": "Second Jumuah at {time}",
+    "details": "Jumuah details",
+    "prayerTimes": "Prayer times"
+  },
+  "languages": {
+    "ja": "Japanese",
+    "en": "English",
+    "id": "Indonesian",
+    "ar": "Arabic",
+    "mixed": "Mixed"
+  },
+  "upcoming": {
+    "tag": "Upcoming",
+    "title": "Upcoming Fridays",
+    "highlight": "Fridays",
+    "description": "The khatib and topic may change. Check back on Thursday evening.",
+    "empty": "Upcoming schedules will be published here."
+  },
+  "past": {
+    "tag": "Archive",
+    "title": "Previous khutbahs",
+    "highlight": "khutbahs",
+    "description": "Recordings, when available, are on the lectures page.",
+    "empty": "No archive yet."
+  },
+  "etiquette": {
+    "tag": "Etiquette",
+    "title": "The etiquette of Friday",
+    "highlight": "Friday",
+    "description": "Small sunnahs that make Jumuah complete.",
+    "items": {
+      "1": {
+        "title": "Arrive early",
+        "body": "Come before the khutbah begins and fill the front rows first."
+      },
+      "2": {
+        "title": "Ghusl and clean clothes",
+        "body": "Bathe, wear your best clean clothes, and use fragrance if you can."
+      },
+      "3": {
+        "title": "Read Surah Al-Kahf",
+        "body": "Recite Surah Al-Kahf on Thursday night or during Friday."
+      },
+      "4": {
+        "title": "Send salawat",
+        "body": "Increase salawat upon the Prophet, peace be upon him, throughout the day."
+      },
+      "5": {
+        "title": "Listen in silence",
+        "body": "Once the khutbah begins, listen attentively and put your phone on silent."
+      }
+    }
+  },
+  "practical": {
+    "tag": "Practical information",
+    "title": "Before you come",
+    "highlight": "come",
+    "items": {
+      "parking": {
+        "title": "Parking is limited",
+        "body": "Please come by train or on foot where possible, and do not block neighbours' driveways."
+      },
+      "women": {
+        "title": "Women's area",
+        "body": "A separate prayer area for women is available, with its own entrance."
+      },
+      "shoes": {
+        "title": "Shoes",
+        "body": "Place shoes neatly on the racks at the entrance so the corridor stays clear."
+      },
+      "children": {
+        "title": "Children",
+        "body": "Children are welcome. Please keep them close so the khutbah can be heard by all."
+      }
+    }
+  },
+  "ics": {
+    "title": "Add prayer times to your calendar",
+    "body": "Download the 30-day prayer schedule as an ICS file and import it into Google Calendar, Apple Calendar, or Outlook.",
+    "button": "Download ICS"
+  }
+}

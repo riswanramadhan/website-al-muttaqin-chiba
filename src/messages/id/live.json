@@ -1,0 +1,26 @@
+{
+  "banner": {
+    "liveNow": "Sedang live",
+    "liveTitle": "Kajian sedang disiarkan",
+    "liveDescription": "Tonton siarannya di bawah atau buka di YouTube.",
+    "streamTitle": "Siaran langsung Al Muttaqin",
+    "offlineTitle": "Tidak sedang live",
+    "offlineDescription": "Rekaman diunggah setelah tiap kajian. Jadwal kajian berikutnya ada di bawah.",
+    "checking": "Memeriksa status siaran",
+    "nextLecture": "Kajian berikutnya",
+    "noSchedule": "Jadwal berikutnya akan segera diumumkan.",
+    "openChannel": "Kanal YouTube",
+    "watchOnYouTube": "Tonton di YouTube",
+    "viewEvent": "Detail acara",
+    "streamHint": "Bila siaran berlangsung, tampil otomatis di sini."
+  },
+  "app": {
+    "title": "Kajian live",
+    "description": "Siaran langsung dan rekaman terbaru",
+    "latest": "Rekaman terbaru",
+    "latestDescription": "Ketuk rekaman untuk memutarnya di sini.",
+    "openInWeb": "Buka di situs web",
+    "allLectures": "Semua kajian",
+    "empty": "Belum ada rekaman."
+  }
+}

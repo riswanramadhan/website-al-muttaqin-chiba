@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "勉強会・講話",
+    "description": "アルムッタキーン文化センターの勉強会の録画とライブ配信。インドネシア語、日本語、英語、アラビア語でご覧いただけます。"
+  },
+  "tag": "勉強会",
+  "title": "勉強会で",
+  "highlight": "学ぶ",
+  "description": "毎週の勉強会、ムアッラフ講座、特別講話の録画です。言語やシリーズで絞り込んだり、テーマや講師名で検索したりできます。",
+  "filters": {
+    "search": "検索",
+    "searchPlaceholder": "タイトル、講師、タグ",
+    "language": "言語",
+    "allLanguages": "すべての言語",
+    "series": "シリーズ",
+    "allSeries": "すべてのシリーズ",
+    "results": "{count, plural, =0 {該当する講話はありません} other {#件の講話}}",
+    "empty": "条件に合う講話がありません。",
+    "clear": "条件をクリア"
+  },
+  "languages": {
+    "ja": "日本語",
+    "en": "英語",
+    "id": "インドネシア語",
+    "ar": "アラビア語"
+  },
+  "card": {
+    "duration": "{count}分",
+    "watch": "視聴する"
+  },
+  "detail": {
+    "back": "講話一覧へ",
+    "about": "この講話について",
+    "series": "シリーズ",
+    "tags": "テーマ",
+    "speaker": "講師",
+    "published": "収録日",
+    "duration": "長さ",
+    "language": "言語",
+    "related": "関連する講話",
+    "relatedDescription": "同じシリーズや近いテーマの講話です。",
+    "share": "共有する",
+    "openChannel": "YouTubeチャンネルを開く",
+    "watchOnYouTube": "YouTubeで見る"
+  },
+  "channels": {
+    "tag": "参考チャンネル",
+    "title": "先生方の",
+    "highlight": "チャンネル",
+    "description": "アルムッタキーンや千葉の地域で定期的に教えてくださる先生方のチャンネルです。各チャンネルの内容は、それぞれの運営者が管理しています。",
+    "visit": "チャンネルを開く",
+    "items": {
+      "1": {
+        "name": "Al Muttaqin Chiba",
+        "description": "公式チャンネル：毎週の勉強会、金曜礼拝の説教、モスクからのライブ配信。",
+        "url": "https://www.youtube.com/@almuttaqinchiba"
+      },
+      "2": {
+        "name": "千葉イスラム文化センター",
+        "description": "モスクを運営するセンターによる、日本語とインドネシア語のダアワ講話。",
+        "url": "https://www.youtube.com/@ciccjapan"
+      },
+      "3": {
+        "name": "Ust. Ahmad Fauzi",
+        "description": "在日インドネシア人コミュニティ向けの、インドネシア語によるタフスィールとシーラのシリーズ。",
+        "url": "https://www.youtube.com/@ustahmadfauzi"
+      }
+    }
+  },
+  "materials": {
+    "tag": "教材",
+    "title": "配布資料とスライド",
+    "description": "各勉強会の配布資料、スライド、推薦図書リストは、共有のGoogleドライブフォルダにまとめています。",
+    "cta": "教材フォルダを開く",
+    "url": "https://drive.google.com/drive/folders/placeholder-al-muttaqin-materials",
+    "note": "仮のリンクです。運営委員会が正式なフォルダに差し替えます。"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "installTitle": "Install the Jamaah app",
+  "installBody": "Prayer times, adhan notifications, qibla, duas, and the Quran, even when offline.",
+  "installButton": "Install",
+  "installed": "App installed",
+  "later": "Later",
+  "iosTitle": "On iPhone or iPad",
+  "iosSteps": "Tap the Share button in Safari, then choose \"Add to Home Screen\". Notifications only work after the app is added to the Home Screen.",
+  "androidTitle": "On Android",
+  "androidSteps": "Tap Install, or open the browser menu and choose \"Add to Home screen\".",
+  "updateAvailable": "A new version is available.",
+  "reload": "Reload",
+  "offlineReady": "Ready to work offline.",
+  "offlineNow": "You are offline. Showing saved content.",
+  "notifications": {
+    "title": "Adhan notifications",
+    "body": "Get a notification at each prayer time and before iqamah.",
+    "enable": "Enable notifications",
+    "enabled": "Notifications are on",
+    "denied": "Notifications are blocked in your browser settings.",
+    "unsupported": "This browser does not support notifications. On iPhone, add the app to the Home Screen first.",
+    "test": "Send a test notification"
+  },
+  "iosStep1": "Tap the Share button in Safari.",
+  "iosStep2": "Choose \"Add to Home Screen\", then tap Add.",
+  "home": {
+    "shortcuts": "Shortcuts",
+    "live": "Live and latest lectures",
+    "announcements": "Latest announcements",
+    "seeAll": "See all",
+    "hadith": "Hadith of the day"
+  }
+}

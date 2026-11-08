@@ -1,0 +1,47 @@
+{
+  "title": "Search",
+  "placeholder": "Search prayer times, events, halal, dictionary...",
+  "hint": "Press {shortcut} to search",
+  "noResults": "No results for \"{query}\"",
+  "results": "{count, plural, one {# result} other {# results}}",
+  "recent": "Recent",
+  "clear": "Clear",
+  "types": {
+    "page": "Page",
+    "announcement": "Announcement",
+    "event": "Event",
+    "lecture": "Lecture",
+    "news": "News",
+    "faq": "FAQ",
+    "program": "Program",
+    "dictionary": "Dictionary",
+    "dua": "Dua",
+    "halal": "Halal"
+  },
+  "dialogDescription": "Search pages, announcements, events, lectures, FAQ, the dictionary, and halal places.",
+  "searching": "Searching...",
+  "error": "Search is unavailable right now. Check your connection.",
+  "empty": "Type to search the whole site.",
+  "popular": "Popular",
+  "seeAll": "See all results",
+  "removeRecent": "Remove \"{query}\" from recent searches",
+  "submit": "Search",
+  "keys": {
+    "navigate": "to move",
+    "open": "to open"
+  },
+  "meta": {
+    "title": "Search",
+    "titleWithQuery": "Search: {query}",
+    "description": "Search the Al Muttaqin Cultural Center website: prayer times, events, lectures, FAQ, halal guide, and more."
+  },
+  "page": {
+    "tag": "Search",
+    "title": "Search the site",
+    "highlight": "the site",
+    "description": "Find pages, announcements, events, lectures, answers, dictionary entries, and halal places.",
+    "emptyTitle": "What are you looking for?",
+    "emptyBody": "Try \"Jumuah\", \"halal\", \"zakat\", or a lecture topic.",
+    "noResultsHint": "Try a shorter word or another language."
+  }
+}

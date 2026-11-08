@@ -1,0 +1,75 @@
+{
+  "meta": {
+    "title": "Zakat calculator",
+    "description": "Calculate zakat maal, income zakat, and zakat al-fitr in yen or rupiah with adjustable gold, rice, and exchange rates. Everything is calculated on your device."
+  },
+  "tag": "Zakat calculator",
+  "title": "Calculate your zakat in a minute",
+  "highlight": "in a minute",
+  "description": "Nisab follows 85 grams of gold and the rate is 2.5 percent. Adjust the gold price, rice price, and exchange rate to today's values. Nothing you enter is saved.",
+  "settings": {
+    "currency": "Currency",
+    "JPY": "Yen",
+    "IDR": "Rupiah",
+    "rate": "Exchange rate (1 JPY in IDR)",
+    "rateHint": "Manual rate, default 1 JPY = Rp105. Check today's rate before paying.",
+    "reset": "Reset values"
+  },
+  "tabs": {
+    "maal": "Zakat maal",
+    "income": "Income zakat",
+    "fitrah": "Zakat al-fitr"
+  },
+  "maal": {
+    "title": "Wealth held for one lunar year",
+    "description": "Gold, silver, savings, receivables you expect to collect, and trade goods, minus debts due now.",
+    "gold": "Gold (grams)",
+    "goldPrice": "Gold price per gram",
+    "silver": "Silver value",
+    "savings": "Savings and cash",
+    "receivables": "Receivables",
+    "trade": "Trade goods",
+    "debts": "Debts due",
+    "nisab": "Nisab (85 g gold)",
+    "total": "Total assets",
+    "net": "Net assets",
+    "belowNisab": "Your net assets are below the nisab. Zakat maal is not obligatory, but sadaqah is always welcome.",
+    "aboveNisab": "Your net assets reach the nisab. Zakat maal is due.",
+    "dalil": "Take from their wealth a charity to purify and cleanse them (At-Tawbah 9:103). The 2.5 percent rate and the gold nisab follow the hadith on zakat of gold and silver narrated by Abu Dawud."
+  },
+  "income": {
+    "title": "Zakat on salary and professional income",
+    "description": "Enter your gross income. Nisab is 85 grams of gold per year; many scholars also allow deducting basic needs first.",
+    "amount": "Income",
+    "period": "Period",
+    "periods": {
+      "monthly": "Per month",
+      "yearly": "Per year"
+    },
+    "goldPrice": "Gold price per gram",
+    "annual": "Annual income",
+    "nisabYearly": "Annual nisab (85 g gold)",
+    "belowNisab": "Your annual income is below the nisab, so income zakat is not obligatory.",
+    "aboveNisab": "Your income reaches the nisab. Zakat of 2.5 percent is due.",
+    "monthly": "Per month",
+    "yearly": "Per year",
+    "dalil": "O you who believe, spend from the good things you have earned (Al-Baqarah 2:267). Income zakat is paid monthly or yearly at 2.5 percent, by analogy with zakat on wealth."
+  },
+  "fitrah": {
+    "title": "Zakat al-fitr before Eid prayer",
+    "description": "One sa of staple food, about 2.5 kg of rice, for every member of the household, including infants.",
+    "persons": "Number of people",
+    "ricePrice": "Rice price per kg",
+    "totalRice": "Total rice",
+    "kg": "{kg} kg",
+    "perPerson": "Per person",
+    "result": "Total zakat al-fitr",
+    "dalil": "The Messenger of Allah made zakat al-fitr obligatory, one sa of dates or barley, for every Muslim, free or slave, male or female, young or old (Bukhari and Muslim)."
+  },
+  "result": {
+    "label": "Zakat due",
+    "equivalent": "About {amount}",
+    "cta": "Pay now",
+    "disclaimer": "This calculator is a guide. For complex cases, ask the mosque imam or a trusted scholar."
+  }
+}

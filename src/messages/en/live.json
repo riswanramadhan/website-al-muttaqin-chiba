@@ -1,0 +1,26 @@
+{
+  "banner": {
+    "liveNow": "Live now",
+    "liveTitle": "A study circle is being broadcast",
+    "liveDescription": "Watch the stream below or open it on YouTube.",
+    "streamTitle": "Al Muttaqin live stream",
+    "offlineTitle": "Not live right now",
+    "offlineDescription": "Recordings are published after each circle. The next scheduled circle is below.",
+    "checking": "Checking the live status",
+    "nextLecture": "Next study circle",
+    "noSchedule": "The next schedule will be announced soon.",
+    "openChannel": "YouTube channel",
+    "watchOnYouTube": "Watch on YouTube",
+    "viewEvent": "Event details",
+    "streamHint": "If a broadcast is running, it appears here automatically."
+  },
+  "app": {
+    "title": "Live lecture",
+    "description": "Live broadcast and the latest recordings",
+    "latest": "Latest recordings",
+    "latestDescription": "Tap a recording to play it here.",
+    "openInWeb": "Open on the website",
+    "allLectures": "All lectures",
+    "empty": "No recordings yet."
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "meta": {
+    "title": "Halal guide: haram kanji and halal places",
+    "description": "Search the kanji for pork, alcohol, and doubtful ingredients on Japanese food labels, and find mosques, prayer rooms, halal restaurants, and shops around Matsudo, Kashiwa, Chiba, and east Tokyo."
+  },
+  "tag": "Halal guide",
+  "title": "Read any Japanese label with confidence.",
+  "highlight": "with confidence.",
+  "description": "Pork, lard, sake, and gelatin hide behind a few recurring kanji. Search them here, learn how to read the ingredients box, and find halal food near you.",
+  "hero": {
+    "radar": "Open the halal radar",
+    "dictionary": "Phrases for asking",
+    "disclaimer": "This guide is maintained by the congregation and is not a certification. When unsure, ask the maker or choose certified products."
+  },
+  "search": {
+    "tag": "Haram kanji",
+    "title": "Search ingredients by kanji, kana, romaji, or meaning",
+    "description": "Type what you see on the label, for example 豚, ゼラチン, or shortening.",
+    "placeholder": "Search kanji, reading, or meaning",
+    "filters": { "all": "All", "haram": "Haram", "syubhat": "Doubtful" },
+    "status": { "haram": "Haram", "syubhat": "Doubtful (syubhat)" },
+    "copy": "Copy kanji",
+    "count": "{count, plural, one {# ingredient} other {# ingredients}}",
+    "empty": "No ingredient matches. Try a shorter word or a single kanji.",
+    "noteLabel": "Note"
+  },
+  "labels": {
+    "tag": "Reading labels",
+    "title": "How to read a Japanese food label",
+    "description": "Japanese labels follow a fixed layout. Find these headings first, then scan the ingredients line for the kanji above.",
+    "items": {
+      "0": { "term": "成分", "reading": "seibun", "meaning": "Components or nutrition. Usually a table of calories, protein, fat, and salt." },
+      "1": { "term": "原材料名", "reading": "genzairyō-mei", "meaning": "Ingredients list, ordered from the largest amount. This is the line to read carefully." },
+      "2": { "term": "アレルギー", "reading": "arerugī", "meaning": "Allergen notice. Items in parentheses such as 一部に豚肉を含む reveal pork even when it is not obvious." },
+      "3": { "term": "豚由来", "reading": "buta yurai", "meaning": "Derived from pork. Often written after gelatin or emulsifier." },
+      "4": { "term": "ゼラチン", "reading": "zerachin", "meaning": "Gelatin. Haram unless the label says fish (魚) or plant-based (植物性)." },
+      "5": { "term": "乳化剤", "reading": "nyūkazai", "meaning": "Emulsifier. Doubtful; soy-derived (大豆由来) is fine." },
+      "6": { "term": "ショートニング", "reading": "shōtoningu", "meaning": "Shortening. Doubtful; vegetable only (植物油脂) is fine." },
+      "7": { "term": "酒精", "reading": "shusei", "meaning": "Alcohol added as a preservative, common in miso, soy sauce, and pickles." }
+    },
+    "tip": "Allergen notices list 豚肉 when pork is present in any amount. Reading that one line catches most hidden pork."
+  },
+  "phrases": {
+    "tag": "Asking in Japanese",
+    "title": "Phrases for asking about food",
+    "description": "Show the Japanese sentence to the staff, or open the dictionary to hear it spoken.",
+    "link": "All food phrases in the dictionary",
+    "show": "Show"
+  },
+  "radar": {
+    "tag": "Halal radar",
+    "title": "Mosques, prayer rooms, and halal food near you",
+    "description": "Sorted by distance from the mosque, or from your location if you allow it. Places marked unverified are waiting for a committee check."
+  },
+  "cards": {
+    "tag": "More resources",
+    "title": "Halal dining and apps",
+    "culinary": {
+      "title": "Halal dining in Chiba and east Tokyo",
+      "description": "Areas the congregation goes to for halal food.",
+      "items": {
+        "0": { "name": "Around Otsuka and Ikebukuro", "detail": "Pakistani, Bangladeshi, and Indonesian restaurants near Masjid Otsuka.", "url": "https://www.google.com/maps/search/halal+restaurant+otsuka+tokyo" },
+        "1": { "name": "Asakusa and Kinshicho", "detail": "Indonesian warung and Turkish kebab close to the Asakusa mosque.", "url": "https://www.google.com/maps/search/halal+restaurant+asakusa" },
+        "2": { "name": "Kashiwa and Funabashi", "detail": "Halal curry houses and grocery stores along the Joban and Sobu lines.", "url": "https://www.google.com/maps/search/halal+restaurant+kashiwa" }
+      }
+    },
+    "apps": {
+      "title": "Apps and websites",
+      "description": "Community-maintained maps of halal restaurants and prayer rooms across Japan.",
+      "items": {
+        "0": { "name": "Halal Navi", "detail": "App with user reviews, prayer rooms, and certified restaurants.", "url": "https://www.halalnavi.com" },
+        "1": { "name": "Halal Gourmet Japan", "detail": "Restaurant directory with certification details and menus.", "url": "https://www.halalgourmet.jp" },
+        "2": { "name": "Halal Media Japan", "detail": "News, product checks, and prayer room listings.", "url": "https://www.halalmedia.jp" }
+      }
+    },
+    "open": "Open"
+  }
+}

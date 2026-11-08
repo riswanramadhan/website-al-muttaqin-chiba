@@ -1,0 +1,61 @@
+{
+  "meta": {
+    "title": "Hijri calendar",
+    "description": "Hijri month view with Gregorian dates, Ayyamul Bidh, Monday and Thursday fasts, important dates, and countdowns to Ramadan and both Eids."
+  },
+  "title": "Hijri calendar",
+  "description": "Umm al-Qura calendar with the mosque's correction",
+  "todayLabel": "Today",
+  "todayButton": "Today",
+  "hijriYear": "{year} H",
+  "view": {
+    "label": "Calendar view",
+    "hijri": "Hijri",
+    "gregorian": "Gregorian"
+  },
+  "nav": {
+    "prev": "Previous month",
+    "next": "Next month"
+  },
+  "gridLabel": "Month grid",
+  "legend": {
+    "today": "Today",
+    "ayyamulBidh": "Ayyamul Bidh (13 to 15)",
+    "monThu": "Monday and Thursday",
+    "important": "Important date"
+  },
+  "countdown": {
+    "title": "Counting down",
+    "ramadan": "1 Ramadan",
+    "eidFitr": "Eid al-Fitr",
+    "eidAdha": "Eid al-Adha",
+    "days": "{count, plural, =0 {Today} one {# day} other {# days}}",
+    "daysLeft": "{count, plural, =0 {today} one {in # day} other {in # days}}"
+  },
+  "important": {
+    "title": "Important dates this month",
+    "empty": "No special dates this month.",
+    "day": "Day {day}"
+  },
+  "kinds": {
+    "eid": "Eid",
+    "fast": "Fasting",
+    "ramadan": "Ramadan",
+    "hajj": "Hajj",
+    "other": "Islamic date"
+  },
+  "convert": {
+    "title": "Convert a date",
+    "gregorian": "Gregorian date",
+    "hijri": "Hijri date",
+    "year": "Year",
+    "month": "Month",
+    "day": "Day",
+    "result": "Result"
+  },
+  "note": {
+    "base": "Dates follow the Umm al-Qura calendar used in Saudi Arabia. The actual start of a month depends on the moon sighting announcement; follow the mosque's announcement for Ramadan and Eid.",
+    "adjusted": "The mosque committee has applied a correction of {count, plural, one {# day} other {# days}} to the calendar.",
+    "notAdjusted": "No correction is currently applied by the mosque committee."
+  }
+}

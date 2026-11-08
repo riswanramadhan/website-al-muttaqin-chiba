@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "title": "Al-Qur'an",
+    "description": "Baca 114 surah dengan mushaf Utsmani dan terjemahan, lanjutkan dari bacaan terakhir, dan dengarkan murottal."
+  },
+  "title": "Al-Qur'an",
+  "description": "114 surah dengan terjemahan",
+  "search": {
+    "placeholder": "Cari nama atau nomor surah",
+    "empty": "Tidak ada surah yang cocok.",
+    "label": "Cari surah"
+  },
+  "filter": {
+    "label": "Saring menurut tempat turun",
+    "all": "Semua",
+    "meccan": "Makkiyah",
+    "medinan": "Madaniyah"
+  },
+  "ayahs": "{count} ayat",
+  "surahNumber": "Surah ke-{n}",
+  "continue": {
+    "title": "Lanjutkan membaca",
+    "body": "{surah}, ayat {ayah}",
+    "action": "Buka"
+  },
+  "reader": {
+    "loading": "Memuat surah",
+    "error": "Surah tidak dapat dimuat. Periksa koneksi Anda lalu coba lagi.",
+    "retry": "Coba lagi",
+    "offlineCopy": "Menampilkan salinan yang tersimpan di perangkat ini.",
+    "arabicOnly": "Arab saja",
+    "withTranslation": "Dengan terjemahan",
+    "arabicSize": "Ukuran teks Arab",
+    "sizeSm": "Kecil",
+    "sizeMd": "Sedang",
+    "sizeLg": "Besar",
+    "jumpLabel": "Lompat ke ayat",
+    "jumpPlaceholder": "Ayat",
+    "jumpGo": "Lompat",
+    "audioLabel": "Murottal Mishary Rashid Alafasy",
+    "audioHint": "Audio diputar dari cdn.islamic.network dan tidak disimpan offline.",
+    "audioUnsupported": "Browser Anda tidak mendukung pemutaran audio.",
+    "prev": "Sebelumnya",
+    "next": "Berikutnya",
+    "lastRead": "Terakhir dibaca: ayat {ayah}",
+    "goLastRead": "Ke ayat terakhir dibaca",
+    "translationSource": "Terjemahan: {edition}",
+    "ayah": "Ayat {n}",
+    "basmalah": "Dengan nama Allah Yang Maha Pengasih, Maha Penyayang",
+    "editions": {
+      "en.sahih": "Saheeh International",
+      "id.indonesian": "Kementerian Agama RI",
+      "ja.ryoichi": "Ryoichi Mita"
+    }
+  },
+  "revelation": {
+    "Meccan": "Makkiyah",
+    "Medinan": "Madaniyah"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "title": "Programs",
+    "description": "Children's Quran class, new Muslim course, Japanese class, Open Mosque, school visits, weekly study circle, and youth programme at Al Muttaqin Cultural Center, Matsudo."
+  },
+  "tag": "Programs",
+  "title": "Learn, grow,",
+  "highlight": "and belong",
+  "description": "Regular classes and activities for children, new Muslims, families, neighbours, and schools. Most are free; registration helps us prepare a seat for you.",
+  "lang": { "ja": "Japanese", "en": "English", "id": "Indonesian" },
+  "card": {
+    "open": "Registration open",
+    "closed": "No registration needed",
+    "schedule": "Schedule",
+    "audience": "For",
+    "languages": "Languages",
+    "details": "Details"
+  },
+  "detail": {
+    "metaTitle": "{program}",
+    "backToList": "All programs",
+    "about": "About this program",
+    "schedule": "Schedule",
+    "audience": "For",
+    "languages": "Languages",
+    "contact": "Teacher or contact",
+    "contactDefault": "Mosque committee",
+    "requirements": "What you need",
+    "faqTitle": "Frequently asked questions",
+    "registerTag": "Registration",
+    "infoTag": "Information",
+    "registerTitle": "Register for this program",
+    "registerDescription": "We will reply within two working days with the next session and what to bring.",
+    "closedTitle": "Just come along",
+    "closedDescription": "No registration is needed for this program. Questions? Contact us and we will help."
+  },
+  "requirements": {
+    "tpa": {
+      "1": { "title": "Age 4 to 12", "text": "Children are grouped by age and reading level on the first day." },
+      "2": { "title": "A parent or guardian registers", "text": "Please give a contact we can reach on Sunday mornings." },
+      "3": { "title": "Bring an Iqra or Quran if you have one", "text": "We lend books to those who do not. There is no fee; infaq is welcome." }
+    },
+    "muallaf-class": {
+      "1": { "title": "Open to everyone", "text": "You do not need to be Muslim or planning to become one. Curiosity is enough." },
+      "2": { "title": "No prior knowledge", "text": "We start from the beginning in plain Japanese. Interpreters for English or Indonesian are available on request." },
+      "3": { "title": "Free of charge", "text": "Materials are provided. You may join any session, with or without notice." }
+    },
+    "japanese-class": {
+      "1": { "title": "Any level", "text": "Beginners start with hiragana and daily phrases; intermediate learners practise reading forms and conversation." },
+      "2": { "title": "Notebook and pen", "text": "Printed worksheets are provided. Please bring a notebook." },
+      "3": { "title": "Free, by volunteers", "text": "Classes are taught by Japanese volunteers. Steady attendance is appreciated." }
+    },
+    "open-mosque": {
+      "1": { "title": "Walk-ins welcome", "text": "Individuals and families can simply come on the day. Groups of ten or more, please register." },
+      "2": { "title": "Dress comfortably", "text": "No special clothing is required. Scarves are available to borrow for women who would like to enter the prayer hall." },
+      "3": { "title": "Plan about 90 minutes", "text": "Tour, prayer demonstration, Q&A, and halal snacks. Come and go as you like." }
+    },
+    "school-visit": {
+      "1": { "title": "Request two weeks ahead", "text": "Tell us the date, the number of visitors, the age group, and the purpose of the visit." },
+      "2": { "title": "Up to 40 visitors per session", "text": "Larger groups can be split into two sessions on the same day." },
+      "3": { "title": "Weekdays, 10:00 to 16:00", "text": "Visits are scheduled around the prayer times so you can observe a congregational prayer." }
+    },
+    "weekly-kajian": {
+      "1": { "title": "Everyone is welcome", "text": "No registration. Arrive before Maghrib to pray together, then stay for the talk." },
+      "2": { "title": "Three languages in rotation", "text": "Check the agenda for this week's language. Summaries are shared in the WhatsApp group." },
+      "3": { "title": "Recordings on YouTube", "text": "If you miss a session, watch it later in the Lectures section." }
+    },
+    "youth": {
+      "1": { "title": "Age 13 to 22", "text": "Junior high, high school, and university students, as well as young workers." },
+      "2": { "title": "Register once", "text": "Parents of participants under 18 are asked to register on their behalf." },
+      "3": { "title": "Join the group chat", "text": "Activities and outings are announced in the youth WhatsApp group." }
+    }
+  },
+  "muallaf": {
+    "tag": "New Muslims",
+    "title": "Walking with you,",
+    "highlight": "step by step",
+    "description": "For anyone curious about Islam or who has recently embraced it, we offer company rather than pressure.",
+    "steps": {
+      "1": { "title": "A mentor for each person", "text": "You are paired with one companion who answers questions, prays beside you, and stays in touch between sessions." },
+      "2": { "title": "Materials in Japanese", "text": "Short, clear handouts in Japanese, with English and Indonesian available." },
+      "3": { "title": "The shahada, when you are ready", "text": "If and when you decide to become Muslim, the declaration takes a minute. We can arrange witnesses and a certificate." },
+      "4": { "title": "The steps after", "text": "Learning to pray, fasting for the first time, talking with family, and finding halal food: your mentor stays with you." }
+    },
+    "cta": "About the new Muslim course"
+  },
+  "visits": {
+    "tag": "Open Mosque and school visits",
+    "title": "Our doors",
+    "highlight": "are open",
+    "description": "Neighbours, schools, municipalities, and companies are welcome to see the mosque and meet the community.",
+    "steps": {
+      "1": { "title": "Send a request", "text": "Use the form on the program page or WhatsApp. Tell us the date, the group size, and what you would like to learn." },
+      "2": { "title": "Duration", "text": "Open Mosque runs 13:00 to 16:00; school visits take 60 to 90 minutes, including Q&A." },
+      "3": { "title": "Capacity", "text": "Up to 40 visitors per session. Larger groups are split into two sessions." },
+      "4": { "title": "Visiting etiquette", "text": "Shoes off at the prayer hall, comfortable clothing, and ask before taking photos of people. Scarves can be borrowed." }
+    },
+    "ctaOpen": "Open Mosque",
+    "ctaSchool": "School visits"
+  },
+  "faq": {
+    "1": { "q": "Is there a fee?", "a": "All programs are free. Voluntary infaq helps cover materials and snacks." },
+    "2": { "q": "Can I join partway through?", "a": "Yes. Most programs run in cycles and sessions stand on their own. Just register and come." },
+    "3": { "q": "Which language is used?", "a": "It depends on the program; see the language badges. Volunteers can interpret in Japanese, English, and Indonesian." }
+  },
+  "cta": {
+    "title": "Not sure which program fits?",
+    "body": "Send us a message and we will suggest the right class or visit for you or your family.",
+    "button": "Chat on WhatsApp"
+  },
+  "whatsapp": {
+    "title": "Program registration - Al Muttaqin",
+    "program": "Program",
+    "greeting": "Assalamu'alaikum, I would like to ask about programs at Al Muttaqin."
+  },
+  "form": {
+    "fullName": "Your name",
+    "parentName": "Parent or guardian name",
+    "participantName": "Participant name",
+    "participantHint": "Fill in only if you are registering someone else.",
+    "participantAge": "Age",
+    "contact": "Phone, WhatsApp, or email",
+    "contactHint": "We will use this only to confirm your registration.",
+    "notes": "Notes",
+    "notesPlaceholder": "Questions, availability, or anything we should know.",
+    "submit": "Send registration",
+    "another": "Register another person",
+    "success": { "title": "Registration received", "body": "Thank you. We will contact you about {program} within two working days." },
+    "fallback": { "title": "One more step", "body": "Online storage is not active yet. Tap the button to send your registration to us on WhatsApp; the message is ready." }
+  },
+  "validation": {
+    "age": "Please enter the participant's age (1 to 120)."
+  }
+}

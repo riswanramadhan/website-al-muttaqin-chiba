@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "title": "設定",
+    "description": "アル・ムッタキーン ジャマーアアプリの言語、テーマ、アザーン通知、キブラの位置、アラビア語の文字サイズ、保存データの設定。"
+  },
+  "title": "設定",
+  "description": "設定はこの端末に保存されます。",
+  "language": {
+    "title": "言語",
+    "description": "アプリの表示言語を選びます。"
+  },
+  "theme": {
+    "description": "ライト、ダーク、端末に合わせる、またはマグリブ後に自動でダーク。"
+  },
+  "notifications": {
+    "statusLabel": "ブラウザの許可:",
+    "status": {
+      "granted": "許可済み",
+      "denied": "ブロック中",
+      "default": "未設定",
+      "unsupported": "非対応"
+    },
+    "serverActive": "プッシュ有効",
+    "disable": "通知をオフにする",
+    "prayers": "礼拝時間",
+    "iqamah": "イカーマのリマインダー",
+    "iqamahHint": "モスクのイカーマの10分前。",
+    "jumuah": "金曜礼拝のリマインダー",
+    "jumuahHint": "金曜礼拝の30分前。",
+    "noVapid": "サーバーからの通知はまだ有効ではありません。アプリを開いている間はリマインダーが表示されます。",
+    "localHint": "時刻は松戸のモスクの時間割(日本時間)に基づきます。",
+    "enabledToast": "通知をオンにしました。",
+    "disabledToast": "通知をオフにしました。",
+    "errorToast": "通知をオンにできませんでした。もう一度お試しください。",
+    "testTitle": "アル・ムッタキーン",
+    "testBody": "テスト通知: この端末でアザーン通知が使えます。",
+    "testSent": "テスト通知を送りました。",
+    "testFailed": "テスト通知を表示できませんでした。"
+  },
+  "qibla": {
+    "title": "キブラの基準位置",
+    "description": "キブラコンパスで使います。",
+    "device": "端末の位置情報を使う",
+    "deviceHint": "モスクから離れた場所で最も正確です。",
+    "mosque": "モスクの位置を使う",
+    "mosqueHint": "松戸のアル・ムッタキーン。位置情報の許可は不要です。",
+    "error": "位置情報を取得できませんでした。モスクの位置を使います。"
+  },
+  "arabic": {
+    "title": "アラビア語の文字サイズ",
+    "description": "クルアーン、ドゥアー、ズィクルに適用されます。",
+    "sm": "小",
+    "md": "中",
+    "lg": "大"
+  },
+  "install": {
+    "title": "アプリをインストール",
+    "description": "ホーム画面に追加すると、すぐに開けてオフラインでも使えます。"
+  },
+  "data": {
+    "title": "保存データ",
+    "description": "この端末に保存された設定、最後に読んだ箇所、タスビーフの回数、オフラインキャッシュ。",
+    "clear": "保存データを削除",
+    "confirmTitle": "保存データを削除しますか?",
+    "confirmBody": "この端末の設定、読書履歴、タスビーフの回数、オフライン用の内容が削除されます。元に戻せません。",
+    "confirm": "削除する",
+    "cleared": "保存データを削除しました。"
+  },
+  "about": {
+    "title": "アプリについて",
+    "version": "バージョン",
+    "language": "言語",
+    "privacy": "プライバシーポリシー",
+    "website": "ウェブサイトを開く"
+  },
+  "notify": {
+    "adhanTitle": "{prayer}のアザーン",
+    "adhanBody": "{time}(日本時間)、{prayer}の時間になりました。",
+    "iqamahTitle": "{prayer}のイカーマまであと{minutes}分",
+    "iqamahBody": "アル・ムッタキーンのイカーマは{time}です。",
+    "jumuahTitle": "金曜礼拝 {time}",
+    "jumuahBody": "アル・ムッタキーンの金曜礼拝まであと{minutes}分です。"
+  }
+}

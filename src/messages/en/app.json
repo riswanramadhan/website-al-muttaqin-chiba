@@ -1,0 +1,41 @@
+{
+  "title": "Jamaah App",
+  "description": "Prayer times, iqamah, Jumuah info, qibla, Quran, duas, and infaq for the Al Muttaqin congregation. Works offline.",
+  "navLabel": "App navigation",
+  "backToWeb": "Back to the website",
+  "back": "Back",
+  "greeting": "Assalamu'alaikum",
+  "greetingSub": "Welcome to Al Muttaqin, Matsudo",
+  "tabs": {
+    "home": "Home",
+    "prayer": "Prayer",
+    "quran": "Quran",
+    "donate": "Infaq",
+    "more": "More",
+    "settings": "Settings"
+  },
+  "screens": {
+    "prayer": "Prayer times",
+    "qibla": "Qibla",
+    "quran": "Al-Quran",
+    "dua": "Duas and dhikr",
+    "tasbih": "Digital tasbih",
+    "hijri": "Hijri calendar",
+    "live": "Live lecture",
+    "agenda": "Agenda",
+    "info": "Announcements",
+    "donate": "Infaq",
+    "dictionary": "Dawah dictionary",
+    "radar": "Halal radar",
+    "help": "Help center",
+    "settings": "Settings"
+  },
+  "menu": {
+    "title": "All features",
+    "description": "Everything in the Jamaah app, in one place."
+  },
+  "placeholder": {
+    "title": "Coming soon",
+    "body": "This screen is being prepared."
+  }
+}

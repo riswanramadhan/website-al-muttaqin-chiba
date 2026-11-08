@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "title": "Baru di Chiba: panduan untuk muslim",
+    "description": "Langkah pertama di Matsudo, aturan sampah, transportasi, makanan halal, darurat, dan kehidupan muslim di tempat kerja dan sekolah. Panduan praktis dari Al Muttaqin Cultural Center."
+  },
+  "tag": "Baru di Chiba",
+  "title": "Panduan praktis untuk muslim yang baru tiba di Matsudo dan Chiba.",
+  "highlight": "Matsudo dan Chiba.",
+  "description": "Semua yang ingin kami ketahui di bulan pertama: balai kota, sampah, kereta, makanan halal, nomor darurat, dan cara meminta waktu salat di tempat kerja. Ditulis oleh jamaah, untuk jamaah.",
+  "hero": {
+    "print": "Cetak ringkasan",
+    "whatsapp": "Tanya pengurus lewat WhatsApp",
+    "halal": "Panduan halal",
+    "dictionary": "Kamus dakwah",
+    "note": "Pengurus memperbarui halaman ini saat aturan berubah. Jika ada yang sudah tidak berlaku, beri tahu kami."
+  },
+  "toc": {
+    "title": "Isi halaman",
+    "firstSteps": "Langkah pertama",
+    "garbage": "Aturan sampah",
+    "transport": "Transportasi",
+    "halal": "Halal sehari-hari",
+    "emergency": "Darurat",
+    "work": "Kerja dan sekolah",
+    "contact": "Hubungi pengurus"
+  },
+  "firstSteps": {
+    "tag": "Bagian 1",
+    "title": "Langkah pertama di dua minggu pertama",
+    "description": "Kerjakan berurutan. Sebagian besar dilakukan di Balai Kota Matsudo (松戸市役所), tidak jauh dari Stasiun Matsudo. Bawa paspor dan kartu izin tinggal setiap kali datang."
+  },
+  "checklist": {
+    "title": "Ceklis Anda",
+    "description": "Centang setiap langkah yang sudah selesai. Progres tersimpan hanya di perangkat ini.",
+    "progress": "{done} dari {total} selesai",
+    "complete": "Semua selesai. Selamat datang di rumah baru, Matsudo.",
+    "reset": "Atur ulang ceklis",
+    "detailsLabel": "Rincian",
+    "items": {
+      "0": "Lapor alamat di Balai Kota Matsudo (転入届) dalam 14 hari",
+      "1": "Ajukan kartu My Number (マイナンバーカード)",
+      "2": "Daftar Asuransi Kesehatan Nasional (国民健康保険) atau pastikan asuransi dari kantor",
+      "3": "Buka rekening bank (Japan Post Bank / ゆうちょ paling mudah)",
+      "4": "Beli kartu IC Suica atau PASMO, dan konversi SIM jika Anda menyetir",
+      "5": "Gabung grup WhatsApp jamaah dan perkenalkan diri"
+    },
+    "details": {
+      "0": "Datangi Bagian Kependudukan (市民課) di Balai Kota Matsudo dengan paspor, kartu izin tinggal (在留カード), dan alamat rumah baru. Jika pindah dari kota lain di Jepang, bawa surat keterangan pindah keluar (転出証明書). Alamat baru langsung dicetak di belakang kartu izin tinggal.",
+      "1": "Balai kota memberi surat pemberitahuan nomor pribadi. Ajukan kartu plastiknya secara daring atau di loket; prosesnya sekitar sebulan dan memudahkan urusan bank, asuransi, dan pajak. Bawa pasfoto.",
+      "2": "Jika kantor tidak mendaftarkan Anda ke Asuransi Sosial (社会保険), Anda wajib ikut Asuransi Kesehatan Nasional di loket yang sama. Premi dihitung dari pendapatan tahun lalu sehingga murah di tahun pertama. Dengan kartu ini Anda membayar 30 persen biaya berobat.",
+      "3": "Japan Post Bank (ゆうちょ銀行) menerima pendatang baru tanpa syarat lama tinggal. Bawa kartu izin tinggal, nomor telepon Jepang, dan hanko atau tanda tangan. Bank daring seperti Sony Bank dan SMBC juga menerima orang asing; tanyakan pengalaman terbaru di grup.",
+      "4": "Beli Suica atau PASMO di mesin tiket JR atau Shin-Keisei (deposit 500 yen) atau tambahkan ke ponsel. Berlaku untuk kereta, bus, minimarket, dan mesin minuman. Jika ingin menyetir, SIM Indonesia bisa dikonversi di Pusat SIM Chiba di Makuhari dengan terjemahan dari JAF.",
+      "5": "Grup jamaah membagikan jadwal salat, perubahan Jumat, temuan halal, dan bantuan urusan dokumen. Minta pengurus lewat WhatsApp untuk ditambahkan, dan sebutkan tempat tinggal agar tetangga bisa menyapa."
+    }
+  },
+  "garbage": {
+    "tag": "Bagian 2",
+    "title": "Aturan sampah di Matsudo",
+    "description": "Matsudo memilah sampah dengan ketat, dan hari pengumpulan berbeda tiap wilayah. Keluarkan kantong sebelum pukul 8 pagi pada hari yang tepat di titik pengumpulan gedung Anda, jangan malam sebelumnya.",
+    "types": {
+      "0": { "name": "Sampah bakar (燃やせるごみ)", "detail": "Sisa dapur, kertas kotor, popok, plastik kecil bekas makanan. Pakai kantong resmi kota. Diambil dua kali seminggu." },
+      "1": { "name": "Sampah tidak bakar (燃やせないごみ)", "detail": "Logam, keramik, kaca, alat elektronik kecil, baterai dalam kantong bening terpisah. Biasanya satu atau dua kali sebulan." },
+      "2": { "name": "Botol PET (ペットボトル)", "detail": "Lepas tutup dan label, bilas, remas sedikit. Tutup dan label masuk plastik kemasan atau sampah bakar." },
+      "3": { "name": "Kaleng dan botol kaca (缶・びん)", "detail": "Bilas. Kaleng semprot harus kosong. Pisahkan per bahan jika titik pengumpulan punya keranjang terpisah." },
+      "4": { "name": "Kertas dan kardus (紙類・段ボール)", "detail": "Ikat koran, majalah, dan kardus yang sudah dilipat dengan tali. Karton susu dibilas, dibuka, dan dikeringkan." },
+      "5": { "name": "Sampah besar (粗大ごみ)", "detail": "Perabot, sepeda, futon. Pesan daring atau telepon, beli stiker di minimarket, lalu keluarkan pada hari yang disepakati." }
+    },
+    "scheduleTitle": "Cari hari pengumpulan Anda",
+    "schedule": "Hari pengumpulan bergantung pada distrik. Lihat kalender sampah Matsudo, pakai aplikasi sampah kota, atau minta selebaran dari pemilik rumah. Banyak apartemen juga menempel jadwal di dekat titik pengumpulan.",
+    "link": "Halaman sampah Kota Matsudo",
+    "linkUrl": "https://www.city.matsudo.chiba.jp/kurashi/gomi_recycle/index.html",
+    "tipsTitle": "Tips bahasa",
+    "tips": {
+      "0": "燃やせる (moyaseru) berarti bisa dibakar, 燃やせない (moyasenai) berarti tidak bisa dibakar.",
+      "1": "Jika melihat tulisan 分別 (bunbetsu), itu pengingat untuk memilah.",
+      "2": "Stiker 違反 (ihan) pada kantong berarti ditolak. Periksa jenis dan harinya lalu keluarkan lagi dengan benar."
+    }
+  },
+  "transport": {
+    "tag": "Bagian 3",
+    "title": "Bepergian dari Matsudo",
+    "description": "Matsudo berada di jalur JR Joban dan Shin-Keisei, 20 menit dari Ueno dan 30 menit dari Stasiun Tokyo. Masjid berjarak 12 menit jalan kaki dari Stasiun Matsudo.",
+    "items": {
+      "0": { "name": "Jalur JR Joban (常磐線)", "detail": "Kereta cepat (rapid) berhenti di Matsudo dan menuju Kashiwa, Ueno, Tokyo, dan Shinagawa. Kereta lokal lanjut ke Kita-Senju dan tersambung ke jalur subway Chiyoda." },
+      "1": { "name": "Jalur Shin-Keisei (新京成線)", "detail": "Dari Matsudo ke Yabashira, Kamagaya, dan Tsudanuma. Praktis untuk ke Funabashi dan LaLaport TOKYO-BAY." },
+      "2": { "name": "Kartu IC (Suica, PASMO)", "detail": "Tempelkan saat masuk dan keluar gerbang. Isi ulang tunai di mesin mana pun. Kartu anak lebih murah. Mobile Suica bisa dipakai di kebanyakan ponsel." },
+      "3": { "name": "Menuju masjid", "detail": "Dari Tokyo atau Ueno naik Joban Rapid ke Matsudo (pintu timur). Dari Kashiwa hanya satu stasiun dengan kereta cepat. Dari stasiun ikuti peta di halaman Kontak; sekitar 12 menit jalan kaki." },
+      "4": { "name": "Parkir sepeda", "detail": "Daftarkan sepeda (防犯登録) di toko saat membeli. Gunakan parkir sepeda berbayar dekat stasiun; sepeda yang diparkir di jalan akan diderek. Masjid menyediakan parkir sepeda untuk jamaah." }
+    }
+  },
+  "halal": {
+    "tag": "Bagian 4",
+    "title": "Halal sehari-hari di Chiba",
+    "description": "Babi dan alkohol bersembunyi di banyak makanan Jepang. Pelajari kanjinya, kenali tokonya, dan jika ragu, tanyakan.",
+    "link": "Buka panduan halal dan radar",
+    "supermarketsTitle": "Supermarket dengan pojok halal",
+    "supermarkets": {
+      "0": "Gyomu Super (業務スーパー): ayam dan makanan beku bersertifikat halal di sebagian cabang.",
+      "1": "Toko bahan halal dekat Stasiun Matsudo, Kashiwa, dan Otsuka untuk daging, beras, dan rempah.",
+      "2": "Toko daring mengirim daging halal ke Chiba dalam sehari; tanyakan di grup toko yang biasa dipakai keluarga."
+    },
+    "labelsTitle": "Label yang harus dicek setiap kali",
+    "labels": {
+      "0": "原材料名 (komposisi): cari 豚, ポーク, ラード, ゼラチン.",
+      "1": "酒, 料理酒, みりん, 酒精: semua bentuk alkohol.",
+      "2": "乳化剤, ショートニング, 動物油脂: tanyakan ke produsen apakah sumbernya hewani.",
+      "3": "ハラール認証 atau logo halal berarti produk sudah tersertifikasi."
+    }
+  },
+  "emergency": {
+    "tag": "Bagian 5",
+    "title": "Darurat",
+    "description": "Simpan nomor ini sekarang. Panggilan ke 110 dan 119 gratis dari telepon mana pun, termasuk ponsel terkunci, dan tersedia penerjemah.",
+    "numbers": {
+      "police": { "label": "Polisi", "number": "110", "detail": "Kecelakaan, pencurian, barang hilang. Katakan 事故 (jiko, kecelakaan) atau 泥棒 (dorobō, pencuri) dan lokasi Anda." },
+      "fire": { "label": "Ambulans dan pemadam", "number": "119", "detail": "Katakan 救急 (kyūkyū) untuk ambulans atau 火事 (kaji) untuk kebakaran, lalu sebutkan alamat perlahan." },
+      "disaster": { "label": "Layanan pesan bencana", "number": "171", "detail": "Setelah gempa besar, rekam dan dengarkan pesan suara untuk keluarga saat jaringan telepon sibuk." }
+    },
+    "call": "Telepon {number}",
+    "earthquakeTitle": "Dasar menghadapi gempa",
+    "earthquake": {
+      "0": "Berlindung di bawah meja yang kokoh sampai guncangan berhenti. Jangan lari ke luar saat masih berguncang.",
+      "1": "Kenali tempat evakuasi terdekat (避難所), biasanya SD setempat. Cek peta bahaya (hazard map) Matsudo.",
+      "2": "Siapkan tas siaga: air untuk tiga hari, makanan, senter, salinan paspor dan kartu izin tinggal, obat, power bank.",
+      "3": "Matikan gas setelah gempa kuat dan kabari keselamatan Anda lewat layanan 171 atau grup WhatsApp."
+    },
+    "consulateTitle": "KBRI Tokyo",
+    "consulate": "Paspor, bantuan konsuler, dan keadaan darurat untuk WNI. 5-2-9 Higashi-Gotanda, Shinagawa-ku, Tokyo. Telepon +81-3-3441-4201. Untuk warga negara lain, cari kedutaan masing-masing di Tokyo.",
+    "consulatePhone": "+81-3-3441-4201",
+    "hospitalsTitle": "Rumah sakit dengan layanan bahasa asing",
+    "hospitals": {
+      "0": "RS Umum Kota Matsudo (松戸市立総合医療センター): gawat darurat, tablet penerjemah.",
+      "1": "RS Universitas Chiba (千葉大学医学部附属病院): perawatan spesialis dengan dukungan bahasa Inggris.",
+      "2": "Layanan informasi medis Prefektur Chiba untuk orang asing: panduan multibahasa ke mana harus pergi."
+    }
+  },
+  "work": {
+    "tag": "Bagian 6",
+    "title": "Kehidupan muslim di tempat kerja dan sekolah",
+    "description": "Kebanyakan perusahaan dan sekolah Jepang belum pernah punya muslim sebelumnya dan tidak tahu apa yang bisa disediakan. Mintalah dengan jelas, sejak awal, dan sopan, sambil membawa kalimat dari kamus.",
+    "items": {
+      "0": { "name": "Meminta tempat salat", "detail": "Minta ruang kosong atau sudut yang tenang sekitar sepuluh menit, dua kali selama jam kerja. Tunjukkan kalimat dari kamus; kebanyakan perusahaan setuju setelah tahu bahwa salat singkat dan tidak berisik." },
+      "1": { "name": "Salat Jumat", "detail": "Minta memakai jam istirahat pada hari Jumat dan ganti waktunya. Jika masjid jauh, halaman Jumat memuat masjid dan musala terdekat." },
+      "2": { "name": "Puasa Ramadan", "detail": "Beri tahu atasan sebelum Ramadan mulai. Jelaskan bahwa Anda bekerja seperti biasa tetapi tidak makan siang dan mungkin perlu jeda singkat saat matahari terbenam. Banyak rekan yang penasaran dan mendukung." },
+      "3": { "name": "Makan siang sekolah (給食)", "detail": "Makan siang sekolah Jepang sering mengandung babi. Minta menu bulanan (献立表) ke sekolah dan sepakati kapan anak membawa bekal (お弁当). Serahkan templat surat di bawah ini kepada guru." }
+    },
+    "letterTitle": "Templat surat untuk sekolah",
+    "letter": "Saya orang tua dari (nama anak). Keluarga kami muslim, dan karena alasan agama kami tidak makan daging babi, bahan turunan babi, maupun makanan yang mengandung alkohol. Kami mohon dibagikan menu makan siang bulanan agar kami dapat membawakan bekal pada hari-hari ketika menu mengandung bahan tersebut. Terima kasih atas pengertian dan kerja samanya.",
+    "letterJa": "私は（お子様の名前）の保護者です。私たちの家族はムスリム（イスラム教徒）で、宗教上の理由により豚肉、豚由来の原材料、アルコールを含む食品を口にしません。該当する献立の日には弁当を持参させたいと考えておりますので、毎月の献立表をご共有いただけますと幸いです。ご理解とご協力のほど、よろしくお願いいたします。",
+    "copyLetter": "Salin surat bahasa Jepang",
+    "dictionaryLink": "Buka kamus dakwah untuk frasa lainnya"
+  },
+  "contact": {
+    "tag": "Bagian 7",
+    "title": "Hubungi pengurus",
+    "description": "Kami menjawab pertanyaan tentang dokumen, makanan halal, sekolah, dan apa pun seputar menetap di sini. WhatsApp paling cepat.",
+    "whatsapp": "Chat lewat WhatsApp",
+    "whatsappMessage": "Assalamu'alaikum, saya baru tiba di Chiba dan ingin bertanya tentang hal-hal untuk menetap di sini.",
+    "email": "Email pengurus",
+    "phone": "Telepon masjid",
+    "print": "Cetak panduan ini",
+    "printHint": "Versi cetak hanya beberapa halaman dan nomor darurat tetap ada di halaman pertama."
+  }
+}

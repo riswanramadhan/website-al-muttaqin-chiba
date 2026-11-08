@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "title": "クルアーン",
+    "description": "全114章をウスマーン書体と訳文で読めます。続きから読む機能と朗誦の再生にも対応しています。"
+  },
+  "title": "クルアーン",
+  "description": "全114章・訳文つき",
+  "search": {
+    "placeholder": "章の名前や番号で検索",
+    "empty": "該当する章はありません。",
+    "label": "章を検索"
+  },
+  "filter": {
+    "label": "啓示の場所で絞り込む",
+    "all": "すべて",
+    "meccan": "マッカ啓示",
+    "medinan": "マディーナ啓示"
+  },
+  "ayahs": "{count}節",
+  "surahNumber": "第{n}章",
+  "continue": {
+    "title": "続きから読む",
+    "body": "{surah} 第{ayah}節",
+    "action": "開く"
+  },
+  "reader": {
+    "loading": "章を読み込んでいます",
+    "error": "章を読み込めませんでした。通信状態を確認して、もう一度お試しください。",
+    "retry": "もう一度試す",
+    "offlineCopy": "この端末に保存された内容を表示しています。",
+    "arabicOnly": "アラビア語のみ",
+    "withTranslation": "訳文つき",
+    "arabicSize": "アラビア語の文字サイズ",
+    "sizeSm": "小",
+    "sizeMd": "中",
+    "sizeLg": "大",
+    "jumpLabel": "節に移動",
+    "jumpPlaceholder": "節番号",
+    "jumpGo": "移動",
+    "audioLabel": "ミシャーリー・ラーシド・アル＝アファーシーによる朗誦",
+    "audioHint": "音声は cdn.islamic.network から配信され、オフライン保存はされません。",
+    "audioUnsupported": "お使いのブラウザは音声再生に対応していません。",
+    "prev": "前の章",
+    "next": "次の章",
+    "lastRead": "最後に読んだ節：第{ayah}節",
+    "goLastRead": "最後に読んだ節へ",
+    "translationSource": "訳文：{edition}",
+    "ayah": "第{n}節",
+    "basmalah": "慈悲あまねく慈愛深きアッラーの御名において",
+    "editions": {
+      "en.sahih": "Saheeh International",
+      "id.indonesian": "インドネシア宗教省",
+      "ja.ryoichi": "三田了一 訳"
+    }
+  },
+  "revelation": {
+    "Meccan": "マッカ啓示",
+    "Medinan": "マディーナ啓示"
+  }
+}

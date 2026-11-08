@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "title": "Duas and dhikr",
+    "description": "Morning and evening dhikr, daily duas, prayer, travel, Ramadan and Friday supplications with Arabic text, transliteration and translation."
+  },
+  "title": "Duas and dhikr",
+  "description": "Arabic text, transliteration, translation and sources",
+  "categories": {
+    "morning": "Morning",
+    "evening": "Evening",
+    "daily": "Daily",
+    "prayer": "Prayer",
+    "travel": "Travel",
+    "ramadan": "Ramadan",
+    "jumuah": "Friday"
+  },
+  "categoriesLabel": "Dua categories",
+  "autoHint": "Morning dhikr is shown before Dhuhr and evening dhikr after it (Tokyo time).",
+  "search": {
+    "placeholder": "Search in this category",
+    "empty": "No dua matches your search.",
+    "count": "{count, plural, one {# dua} other {# duas}}"
+  },
+  "arabicSize": {
+    "label": "Arabic size",
+    "sm": "Small",
+    "md": "Medium",
+    "lg": "Large"
+  },
+  "transliteration": {
+    "show": "Show transliteration",
+    "hide": "Hide transliteration"
+  },
+  "counter": {
+    "label": "Tap counter",
+    "tap": "Tap to count",
+    "progress": "{count} of {total}",
+    "done": "Complete",
+    "reset": "Reset counter"
+  },
+  "repeat": "{count, plural, one {Once} other {# times}}",
+  "source": "Source",
+  "actions": {
+    "copy": "Copy",
+    "share": "Share",
+    "copied": "Dua copied"
+  }
+}

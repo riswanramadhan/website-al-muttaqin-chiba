@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "title": "Al-Quran",
+    "description": "Read all 114 surahs with Uthmani script and translation, continue where you left off, and listen to the recitation."
+  },
+  "title": "Al-Quran",
+  "description": "114 surahs with translation",
+  "search": {
+    "placeholder": "Search surah name or number",
+    "empty": "No surah matches your search.",
+    "label": "Search surahs"
+  },
+  "filter": {
+    "label": "Filter by revelation",
+    "all": "All",
+    "meccan": "Meccan",
+    "medinan": "Medinan"
+  },
+  "ayahs": "{count, plural, one {# ayah} other {# ayahs}}",
+  "surahNumber": "Surah {n}",
+  "continue": {
+    "title": "Continue reading",
+    "body": "{surah}, ayah {ayah}",
+    "action": "Open"
+  },
+  "reader": {
+    "loading": "Loading the surah",
+    "error": "The surah could not be loaded. Check your connection and try again.",
+    "retry": "Try again",
+    "offlineCopy": "Showing a copy saved on this device.",
+    "arabicOnly": "Arabic only",
+    "withTranslation": "With translation",
+    "arabicSize": "Arabic size",
+    "sizeSm": "Small",
+    "sizeMd": "Medium",
+    "sizeLg": "Large",
+    "jumpLabel": "Jump to ayah",
+    "jumpPlaceholder": "Ayah",
+    "jumpGo": "Go",
+    "audioLabel": "Recitation by Mishary Rashid Alafasy",
+    "audioHint": "Audio streams from cdn.islamic.network and is not stored offline.",
+    "audioUnsupported": "Your browser does not support audio playback.",
+    "prev": "Previous",
+    "next": "Next",
+    "lastRead": "Last read: ayah {ayah}",
+    "goLastRead": "Go to last read",
+    "translationSource": "Translation: {edition}",
+    "ayah": "Ayah {n}",
+    "basmalah": "In the name of Allah, the Most Gracious, the Most Merciful",
+    "editions": {
+      "en.sahih": "Saheeh International",
+      "id.indonesian": "Kementerian Agama RI",
+      "ja.ryoichi": "Ryoichi Mita"
+    }
+  },
+  "revelation": {
+    "Meccan": "Meccan",
+    "Medinan": "Medinan"
+  }
+}

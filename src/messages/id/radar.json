@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Radar halal",
+    "description": "Masjid, musala, restoran halal, dan toko di sekitar Matsudo, diurutkan berdasarkan jarak dari Anda."
+  },
+  "title": "Radar halal",
+  "description": "Masjid, musala, restoran, dan toko terdekat.",
+  "mapLabel": "Peta tempat halal",
+  "listTitle": "Tempat terdekat",
+  "filters": {
+    "all": "Semua",
+    "mosque": "Masjid",
+    "prayer-room": "Musala",
+    "restaurant": "Restoran",
+    "mart": "Toko",
+    "service": "Layanan"
+  },
+  "types": {
+    "mosque": "Masjid",
+    "prayer-room": "Musala",
+    "restaurant": "Restoran",
+    "mart": "Toko",
+    "service": "Layanan"
+  },
+  "verified": "Terverifikasi",
+  "unverified": "Belum diverifikasi",
+  "distance": "{distance} dari sini",
+  "fromMosque": "Jarak dari masjid",
+  "fromYou": "Jarak dari lokasi Anda",
+  "myLocation": "Pakai lokasi saya",
+  "locating": "Mencari lokasi Anda",
+  "locationDenied": "Lokasi tidak bisa dibaca. Jarak tetap dihitung dari masjid.",
+  "locationUnsupported": "Lokasi tidak tersedia di perangkat ini.",
+  "youAreHere": "Anda di sini",
+  "openMaps": "Google Maps",
+  "count": "{count} tempat",
+  "empty": "Belum ada tempat jenis ini. Usulkan satu dan pengurus akan menambahkannya.",
+  "suggest": "Usulkan tempat",
+  "suggestTitle": "Usulan untuk radar halal",
+  "suggestName": "Nama tempat",
+  "suggestType": "Jenis (masjid, musala, restoran, toko)",
+  "suggestAddress": "Alamat atau tautan Google Maps",
+  "suggestNote": "Catatan (sertifikat halal, apa yang dijual)",
+  "suggestFill": "(mohon diisi)",
+  "note": "Catatan",
+  "placeholderHint": "Entri dengan alamat PLACEHOLDER menunggu konfirmasi pengurus."
+}

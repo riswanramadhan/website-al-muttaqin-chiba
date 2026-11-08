@@ -1,0 +1,47 @@
+{
+  "title": "Pencarian",
+  "placeholder": "Cari jadwal salat, agenda, halal, kamus...",
+  "hint": "Tekan {shortcut} untuk mencari",
+  "noResults": "Tidak ada hasil untuk \"{query}\"",
+  "results": "{count} hasil",
+  "recent": "Terbaru",
+  "clear": "Bersihkan",
+  "types": {
+    "page": "Halaman",
+    "announcement": "Pengumuman",
+    "event": "Agenda",
+    "lecture": "Kajian",
+    "news": "Berita",
+    "faq": "FAQ",
+    "program": "Program",
+    "dictionary": "Kamus",
+    "dua": "Doa",
+    "halal": "Halal"
+  },
+  "dialogDescription": "Cari halaman, pengumuman, agenda, kajian, FAQ, kamus, dan tempat halal.",
+  "searching": "Mencari...",
+  "error": "Pencarian sedang tidak tersedia. Periksa koneksi Anda.",
+  "empty": "Ketik untuk mencari di seluruh situs.",
+  "popular": "Populer",
+  "seeAll": "Lihat semua hasil",
+  "removeRecent": "Hapus \"{query}\" dari riwayat pencarian",
+  "submit": "Cari",
+  "keys": {
+    "navigate": "untuk berpindah",
+    "open": "untuk membuka"
+  },
+  "meta": {
+    "title": "Pencarian",
+    "titleWithQuery": "Pencarian: {query}",
+    "description": "Cari di situs Al Muttaqin Cultural Center: jadwal salat, agenda, kajian, FAQ, panduan halal, dan lainnya."
+  },
+  "page": {
+    "tag": "Pencarian",
+    "title": "Cari di situs",
+    "highlight": "situs",
+    "description": "Temukan halaman, pengumuman, agenda, kajian, jawaban, entri kamus, dan tempat halal.",
+    "emptyTitle": "Apa yang Anda cari?",
+    "emptyBody": "Coba \"Jumat\", \"halal\", \"zakat\", atau topik kajian.",
+    "noResultsHint": "Coba kata yang lebih pendek atau bahasa lain."
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "title": "Infaq dan donasi",
+    "description": "Rekening resmi Al Muttaqin Cultural Center: Japan Post Bank untuk yen, QRIS untuk rupiah. Konfirmasi transfer, jadi donatur tetap, dan hitung zakat."
+  },
+  "hero": {
+    "tag": "Infaq",
+    "title": "Masjid sudah berdiri. Kini mari kita makmurkan bersama.",
+    "highlight": "makmurkan bersama.",
+    "description": "Berkat wakaf ratusan donatur, tanah dan bangunan telah lunas. Infaq Anda kini menghidupi masjid setiap hari: listrik dan air, kebersihan, honor imam, serta pendidikan anak dan muallaf.",
+    "primaryCta": "Lihat rekening resmi",
+    "secondaryCta": "Laporan keuangan",
+    "points": {
+      "1": "Transparan: setiap bulan kami umumkan pemasukan dan pengeluaran.",
+      "2": "Mudah: transfer yen atau QRIS, lalu konfirmasi dalam satu menit.",
+      "3": "Aman: situs ini tidak menyimpan data kartu apa pun."
+    }
+  },
+  "programs": {
+    "tag": "Program",
+    "title": "Ke mana infaq Anda disalurkan",
+    "highlight": "disalurkan",
+    "description": "Pilih program atau cukup berinfaq untuk operasional. Progres diperbarui bendahara setiap bulan.",
+    "target": "Target",
+    "raised": "Terkumpul",
+    "ofTarget": "{raised} dari {target}",
+    "percent": "{percent}% tercapai",
+    "noTarget": "Berjalan terus, tanpa target tetap",
+    "status": {
+      "open": "Dibuka",
+      "closed": "Ditutup",
+      "completed": "Lunas"
+    }
+  },
+  "accounts": {
+    "tag": "Rekening resmi",
+    "title": "Transfer ke rekening masjid",
+    "highlight": "rekening masjid",
+    "description": "Hanya ini rekening resmi kami. Pengurus tidak pernah meminta transfer ke rekening pribadi.",
+    "tabs": {
+      "JPY": "Yen (Jepang)",
+      "IDR": "Rupiah (Indonesia)"
+    },
+    "labels": {
+      "bank": "Bank",
+      "branch": "Cabang",
+      "branchCode": "Kode cabang",
+      "accountType": "Jenis rekening",
+      "accountNumber": "Nomor rekening",
+      "accountName": "Atas nama",
+      "note": "Catatan"
+    },
+    "copyNumber": "Salin nomor",
+    "copyName": "Salin nama",
+    "copyBranch": "Salin kode",
+    "primary": "Disarankan",
+    "qrisAlt": "Kode QRIS resmi Al Muttaqin Cultural Center",
+    "downloadQris": "Unduh QRIS",
+    "scanHint": "Pindai dengan e-wallet atau m-banking Indonesia mana pun, masukkan nominal unik, lalu konfirmasi di bawah.",
+    "empty": "Belum ada rekening untuk mata uang ini."
+  },
+  "unique": {
+    "tag": "Nominal unik",
+    "title": "Pilih nominal, kami tambahkan kode unik",
+    "highlight": "kode unik",
+    "description": "Tiga digit terakhir adalah kode acak agar bendahara dapat mencocokkan transfer Anda secara otomatis. Mohon transfer tepat sesuai nominal yang tampil.",
+    "currency": "Mata uang",
+    "presets": "Nominal cepat",
+    "custom": "Nominal lain",
+    "customPlaceholder": "Masukkan nominal",
+    "customHint": "Dibulatkan ke ribuan terdekat sebelum kode ditambahkan.",
+    "result": "Transfer tepat sebesar",
+    "code": "Kode unik {code}",
+    "base": "Nominal dasar {amount}",
+    "regenerate": "Kode baru",
+    "copy": "Salin nominal",
+    "empty": "Pilih nominal untuk mendapatkan kode unik Anda.",
+    "filled": "Nominal ini sudah terisi di formulir konfirmasi di bawah."
+  },
+  "form": {
+    "tag": "Konfirmasi",
+    "title": "Beri tahu kami transfer Anda",
+    "highlight": "transfer Anda",
+    "description": "Setelah transfer, isi formulir singkat ini agar bendahara dapat mencatat infaq Anda di laporan bulanan. Semua kolom selain nominal dan tanggal bersifat opsional.",
+    "fields": {
+      "program": "Program",
+      "account": "Rekening atau metode",
+      "currency": "Mata uang",
+      "amount": "Nominal transfer",
+      "amountHint": "Gunakan nominal unik di atas bila ada.",
+      "date": "Tanggal transfer",
+      "name": "Nama Anda",
+      "nameHint": "Kosongkan untuk tetap anonim.",
+      "contact": "Kontak",
+      "contactHint": "WhatsApp, telepon, atau email untuk ucapan terima kasih dan tanda terima.",
+      "onBehalf": "Atas nama",
+      "onBehalfHint": "Misalnya orang tua, almarhum/almarhumah, atau kelompok.",
+      "message": "Pesan atau permohonan doa",
+      "selectPlaceholder": "Pilih"
+    },
+    "submit": "Kirim konfirmasi",
+    "submitting": "Mengirim",
+    "success": {
+      "title": "Terima kasih, jazakumullahu khairan",
+      "saved": "Konfirmasi Anda telah tercatat. Bendahara akan mencocokkannya dengan mutasi rekening dalam beberapa hari.",
+      "fallback": "Basis data daring belum aktif. Tekan tombol di bawah untuk mengirim konfirmasi yang sama ke pengurus lewat WhatsApp.",
+      "whatsapp": "Kirim via WhatsApp",
+      "another": "Kirim konfirmasi lain"
+    },
+    "errors": {
+      "generic": "Konfirmasi gagal dikirim. Coba lagi atau hubungi kami lewat WhatsApp.",
+      "rateLimit": "Terlalu banyak kiriman. Tunggu semenit lalu coba lagi."
+    }
+  },
+  "recurring": {
+    "tag": "Donatur tetap",
+    "title": "Jadilah pilar tetap bagi masjid",
+    "highlight": "pilar tetap",
+    "description": "Nominal tetap setiap bulan, sekecil apa pun, membuat pengurus dapat merencanakan tagihan dan honor dengan tenang. Daftar sekali, lalu pasang pengingat di kalender Anda.",
+    "benefits": {
+      "1": "Pemasukan yang terencana untuk biaya operasional bulanan",
+      "2": "Bisa jeda atau berhenti kapan saja cukup dengan mengirim pesan",
+      "3": "Opsional: nama Anda dicantumkan di laporan bulanan"
+    },
+    "fields": {
+      "name": "Nama lengkap",
+      "contact": "Kontak",
+      "contactHint": "WhatsApp atau email",
+      "amount": "Nominal bulanan",
+      "currency": "Mata uang",
+      "day": "Tanggal pembayaran tiap bulan",
+      "dayHint": "Antara tanggal 1 dan 28.",
+      "method": "Metode",
+      "methods": {
+        "bank": "Transfer bank",
+        "qris": "QRIS",
+        "ewallet": "E-wallet"
+      },
+      "publishName": "Nama saya boleh dicantumkan sebagai donatur tetap di laporan."
+    },
+    "submit": "Daftar sebagai donatur tetap",
+    "calendar": "Pasang pengingat kalender",
+    "calendarTitle": "Infaq bulanan Al Muttaqin Cultural Center",
+    "calendarDetails": "Infaq bulanan sebesar {amount}. Transfer ke rekening resmi di {url} lalu kirim formulir konfirmasi.",
+    "success": {
+      "title": "Selamat bergabung dalam keluarga donatur tetap",
+      "saved": "Pendaftaran Anda tercatat. Pengurus akan menghubungi Anda sebelum tanggal pembayaran pertama.",
+      "fallback": "Basis data daring belum aktif. Kirim pendaftaran Anda ke pengurus lewat WhatsApp dengan tombol di bawah.",
+      "whatsapp": "Kirim via WhatsApp"
+    }
+  },
+  "zakatTeaser": {
+    "tag": "Zakat",
+    "title": "Perlu menghitung zakat?",
+    "highlight": "zakat?",
+    "description": "Zakat maal, zakat penghasilan, dan zakat fitrah dalam yen atau rupiah, dengan harga emas dan beras yang bisa diubah. Tidak ada data yang disimpan.",
+    "cta": "Buka kalkulator zakat"
+  },
+  "faq": {
+    "tag": "FAQ",
+    "title": "Pertanyaan seputar infaq",
+    "highlight": "infaq"
+  },
+  "gateway": {
+    "tag": "Pembayaran otomatis",
+    "title": "Bayar dengan kartu atau e-wallet",
+    "description": "Pembayaran otomatis melalui gateway berizin sedang disiapkan. Sementara itu, silakan gunakan rekening di atas.",
+    "soon": "Segera"
+  },
+  "whatsapp": {
+    "confirmTitle": "Konfirmasi infaq - Al Muttaqin Cultural Center",
+    "recurringTitle": "Pendaftaran donatur tetap - Al Muttaqin Cultural Center",
+    "labels": {
+      "program": "Program",
+      "account": "Rekening",
+      "currency": "Mata uang",
+      "amount": "Nominal",
+      "uniqueCode": "Kode unik",
+      "date": "Tanggal transfer",
+      "name": "Nama",
+      "contact": "Kontak",
+      "onBehalf": "Atas nama",
+      "message": "Pesan",
+      "monthlyAmount": "Nominal bulanan",
+      "paymentDay": "Tanggal bayar",
+      "method": "Metode",
+      "publishName": "Cantumkan nama",
+      "yes": "Ya",
+      "no": "Tidak",
+      "anonymous": "Hamba Allah"
+    }
+  },
+  "cta": {
+    "title": "Dukung masjid dengan infaq Anda",
+    "description": "Yen lewat Japan Post Bank, rupiah lewat QRIS. Konfirmasi dalam satu menit dan lihat laporan bulanannya.",
+    "primary": "Berinfaq",
+    "secondary": "Lihat laporan"
+  },
+  "app": {
+    "title": "Infaq",
+    "description": "Rekening resmi, nominal unik, dan konfirmasi.",
+    "confirmTitle": "Konfirmasi transfer Anda",
+    "zakatLink": "Kalkulator zakat",
+    "transparencyLink": "Laporan keuangan bulanan",
+    "moreOnWeb": "Program dan donatur tetap ada di situs web"
+  }
+}

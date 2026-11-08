@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "Mengenal Islam",
+    "description": "Pengantar ramah tentang Islam untuk pengunjung di Jepang: apa yang diyakini muslim, apa yang terjadi di masjid, cara berkunjung, dan salah paham umum."
+  },
+  "tag": "Mengenal Islam",
+  "title": "Pengantar ramah",
+  "highlight": "untuk tetangga kami",
+  "description": "Penasaran tentang Islam, atau tentang masjid di dekat rumah? Halaman ini menjawab hal-hal dasar dengan bahasa sederhana. Tanpa pengetahuan awal, tanpa kewajiban apa pun.",
+  "hero": { "visit": "Datang saat Open Mosque", "ask": "Ajukan pertanyaan" },
+  "intro": {
+    "tag": "Apa itu Islam",
+    "title": "Satu Tuhan,",
+    "highlight": "satu cara hidup",
+    "p1": "Islam adalah keyakinan pada satu Tuhan, Tuhan yang sama yang disampaikan Ibrahim, Musa, dan Isa, serta pada Muhammad sebagai nabi terakhir. Ajarannya tertulis dalam Al-Qur'an. Orang yang mengikutinya disebut muslim.",
+    "p2": "Bagi muslim, iman dijalani lewat kebiasaan sehari-hari: salat lima kali sehari, jujur dalam bekerja, peduli pada keluarga dan tetangga, serta berbagi dengan yang membutuhkan. Ada sekitar dua miliar muslim di dunia, dari setiap budaya dan bahasa.",
+    "arabic": "لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ",
+    "arabicMeaning": "Tiada tuhan selain Allah; Muhammad utusan Allah. Kalimat ini adalah inti Islam."
+  },
+  "pillars": {
+    "tag": "Keyakinan dan amalan",
+    "title": "Enam keyakinan,",
+    "highlight": "lima amalan",
+    "description": "Muslim merangkum imannya dalam enam rukun iman dan lima rukun Islam.",
+    "faithTitle": "Enam rukun iman",
+    "islamTitle": "Lima rukun Islam",
+    "faith": {
+      "1": { "title": "Allah", "text": "Satu Pencipta, tanpa sekutu dan tanpa rupa." },
+      "2": { "title": "Malaikat", "text": "Makhluk dari cahaya yang menjalankan perintah Allah." },
+      "3": { "title": "Kitab suci", "text": "Taurat, Zabur, Injil, dan terakhir Al-Qur'an." },
+      "4": { "title": "Para nabi", "text": "Dari Adam hingga Muhammad, termasuk Nuh, Ibrahim, Musa, dan Isa." },
+      "5": { "title": "Hari akhir", "text": "Kehidupan setelah mati dan pertanggungjawaban atas perbuatan kita." },
+      "6": { "title": "Takdir", "text": "Allah mengetahui dan mengizinkan segala yang terjadi; manusia tetap bertanggung jawab atas pilihannya." }
+    },
+    "islam": {
+      "1": { "title": "Syahadat: persaksian", "text": "Mengucapkan dengan tulus bahwa tiada tuhan selain Allah dan Muhammad utusan-Nya." },
+      "2": { "title": "Salat: sembahyang", "text": "Lima salat singkat sehari, menghadap Makkah." },
+      "3": { "title": "Zakat: berbagi", "text": "Memberikan 2,5 persen harta simpanan setiap tahun kepada yang membutuhkan." },
+      "4": { "title": "Saum: puasa", "text": "Tidak makan dan minum dari fajar hingga matahari terbenam di bulan Ramadan." },
+      "5": { "title": "Haji: ziarah", "text": "Perjalanan ke Makkah sekali seumur hidup, bagi yang mampu." }
+    }
+  },
+  "japan": {
+    "tag": "Muslim di Jepang",
+    "title": "Tetangga Anda,",
+    "highlight": "dalam angka",
+    "description": "Muslim telah tinggal di Jepang lebih dari seabad. Kini mereka adalah mahasiswa, insinyur, perawat, pekerja pabrik, pemilik toko, dan semakin banyak warga Jepang.",
+    "stats": {
+      "1": { "value": "230000", "suffix": "+", "label": "Muslim yang tinggal di Jepang" },
+      "2": { "value": "47000", "suffix": "+", "label": "Muslim berkebangsaan Jepang" },
+      "3": { "value": "110", "suffix": "+", "label": "Masjid di seluruh negeri" }
+    },
+    "note": "Perkiraan dari penelitian Universitas Waseda (Tanada, 2020). Angkanya terus bertambah."
+  },
+  "mosque": {
+    "tag": "Di masjid",
+    "title": "Apa yang terjadi",
+    "highlight": "di dalamnya",
+    "description": "Masjid adalah ruang salat, ruang kelas, dan pusat komunitas sekaligus.",
+    "items": {
+      "1": { "title": "Lima salat harian", "text": "Salat berjamaah singkat yang dipimpin imam. Salat Jumat siang disertai khutbah." },
+      "2": { "title": "Kelas", "text": "Mengaji untuk anak-anak, Islam dalam bahasa Jepang untuk muallaf, dan bahasa Jepang untuk pendatang baru." },
+      "3": { "title": "Makan bersama", "text": "Buka puasa bersama di bulan Ramadan, perayaan Idulfitri dan Iduladha, serta makan bersama komunitas." },
+      "4": { "title": "Bantuan dan nasihat", "text": "Dukungan untuk pendatang baru, keluarga, dan siapa pun yang sedang melewati masa sulit." }
+    }
+  },
+  "etiquette": {
+    "tag": "Berkunjung",
+    "title": "Cara berkunjung",
+    "highlight": "dengan nyaman",
+    "description": "Semua dipersilakan. Sedikit sopan santun membuat kunjungan nyaman bagi semua.",
+    "items": {
+      "1": { "title": "Pakaian", "text": "Kenakan apa yang Anda suka; pakaian sopan yang menutup bahu dan lutut sangat dihargai. Perempuan bisa meminjam kerudung di pintu masuk." },
+      "2": { "title": "Sepatu", "text": "Lepas sepatu sebelum menginjak karpet, seperti di rumah Jepang." },
+      "3": { "title": "Foto", "text": "Memotret gedung boleh. Minta izin sebelum memotret orang, terutama saat salat." },
+      "4": { "title": "Area perempuan", "text": "Perempuan salat di ruang terpisah. Pengunjung dari gender mana pun boleh menyaksikan dari bagian belakang aula." },
+      "5": { "title": "Saat salat berlangsung", "text": "Harap tenang dan jangan lewat di depan orang yang sedang salat. Setelahnya, silakan bertanya apa saja." }
+    }
+  },
+  "myths": {
+    "tag": "Pertanyaan umum",
+    "title": "Hal yang sering",
+    "highlight": "ditanyakan orang",
+    "description": "Jawaban jujur untuk pertanyaan yang paling sering kami dengar.",
+    "items": {
+      "1": { "q": "Apakah harus muslim untuk masuk masjid?", "a": "Tidak. Siapa pun boleh berkunjung. Saat Open Mosque kami mengadakan tur dan tanya jawab." },
+      "2": { "q": "Apakah Islam hanya untuk orang Arab atau orang asing?", "a": "Tidak. Sebagian besar muslim bukan orang Arab, dan puluhan ribu orang Jepang adalah muslim. Islam tidak punya kebangsaan." },
+      "3": { "q": "Mengapa perempuan muslim memakai kerudung?", "a": "Itu wujud kesederhanaan dan iman yang dipilih sendiri oleh perempuan tersebut. Memakai atau tidak, dan caranya, adalah keputusannya." },
+      "4": { "q": "Apakah makanan halal sulit ditemukan di Jepang?", "a": "Semakin mudah. Makanan laut, sayuran, dan banyak masakan Jepang pada dasarnya halal; Panduan halal kami memuat toko-toko terdekat." },
+      "5": { "q": "Apakah Islam mengajarkan kekerasan?", "a": "Tidak. Al-Qur'an melarang menghilangkan nyawa orang yang tidak bersalah, dan muslim saling menyapa dengan salam perdamaian. Mereka yang melakukan kekerasan atas namanya justru menyalahi ajarannya." }
+    }
+  },
+  "learn": {
+    "tag": "Belajar lebih lanjut",
+    "title": "Langkah berikutnya,",
+    "highlight": "sesuai ritme Anda",
+    "description": "Pilih yang paling cocok. Tidak ada paksaan sama sekali.",
+    "items": {
+      "1": { "title": "Kelas muallaf", "text": "Delapan pertemuan ramah dalam bahasa Jepang, dengan mentor pribadi. Terbuka bagi siapa pun yang penasaran." },
+      "2": { "title": "Open Mosque", "text": "Setiap Sabtu ketiga. Tur, demo salat, dan camilan halal." },
+      "3": { "title": "Buku dan situs berbahasa Jepang", "text": "Minta daftar bacaan singkat kepada kami, termasuk terjemahan Al-Qur'an bahasa Jepang beserta tafsirnya." },
+      "4": { "title": "Pertanyaan yang sering diajukan", "text": "Jawaban praktis tentang salat, berkunjung, dan keseharian." }
+    },
+    "open": "Buka"
+  },
+  "contact": {
+    "tag": "Bicara dengan seseorang",
+    "title": "Pembimbing hanya sejauh satu pesan",
+    "body": "Mentor kami yang berbahasa Jepang senang menjawab pertanyaan, lewat pesan atau sambil minum teh di masjid. Tidak ada pertanyaan yang terlalu kecil.",
+    "mentor": "Mentor: Kyoichiro Sugimoto (Chiba Islamic Culture Center) dan tim Al Muttaqin.",
+    "whatsapp": "Kirim pesan WhatsApp",
+    "email": "Kirim email",
+    "visit": "Rencanakan kunjungan",
+    "whatsappText": "Halo, saya menemukan halaman Mengenal Islam dan ingin bertanya."
+  }
+}

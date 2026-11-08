@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "title": "Agenda kegiatan",
+    "description": "Kajian, kelas, open mosque, dan acara komunitas mendatang di Al Muttaqin Cultural Center, Matsudo."
+  },
+  "tag": "Agenda",
+  "title": "Apa yang berlangsung",
+  "highlight": "di masjid",
+  "description": "Kajian, kelas, hari kunjungan, dan silaturahmi. Waktu dalam zona Jepang (JST). Sebagian acara perlu pendaftaran; kuota tampil di tiap kartu.",
+  "tabs": {
+    "upcoming": "Mendatang",
+    "past": "Sudah lewat"
+  },
+  "filters": {
+    "category": "Kategori",
+    "all": "Semua kategori",
+    "emptyUpcoming": "Belum ada agenda mendatang di kategori ini. Pantau pengumuman kami.",
+    "emptyPast": "Tidak ada agenda yang sudah lewat di kategori ini."
+  },
+  "card": {
+    "registrationOpen": "Pendaftaran dibuka",
+    "waitlist": "Daftar tunggu",
+    "full": "Penuh",
+    "noRegistration": "Tanpa pendaftaran",
+    "deadline": "Daftar sebelum {date}",
+    "finished": "Selesai",
+    "free": "Gratis",
+    "fee": "Biaya {amount}",
+    "details": "Detail"
+  },
+  "detail": {
+    "back": "Semua agenda",
+    "about": "Tentang acara ini",
+    "practical": "Informasi praktis",
+    "date": "Tanggal",
+    "time": "Waktu",
+    "location": "Lokasi",
+    "openMaps": "Buka di Google Maps",
+    "languages": "Bahasa",
+    "speaker": "Pemateri",
+    "fee": "Biaya",
+    "free": "Gratis",
+    "quota": "Kapasitas",
+    "quotaValue": "{registered} dari {quota} terdaftar",
+    "remaining": "{count, plural, =0 {Kuota habis} other {Sisa # kursi}}",
+    "recurring": "Rutin",
+    "registrationRequired": "Perlu pendaftaran",
+    "noRegistration": "Tidak perlu mendaftar. Langsung datang saja.",
+    "addToCalendar": "Tambah ke kalender",
+    "googleCalendar": "Google Calendar",
+    "downloadIcs": "Unduh .ics",
+    "share": "Bagikan",
+    "pastEvent": "Acara ini sudah selesai.",
+    "deadlinePassed": "Batas waktu pendaftaran sudah lewat.",
+    "others": "Agenda mendatang lainnya",
+    "othersDescription": "Mungkin Anda juga tertarik dengan ini."
+  },
+  "form": {
+    "title": "Daftar acara ini",
+    "description": "Isi formulir dan kami akan mengonfirmasi lewat WhatsApp atau email. Satu formulir per keluarga atau kelompok sudah cukup.",
+    "name": "Nama lengkap",
+    "namePlaceholder": "Nama Anda",
+    "contact": "Telepon, WhatsApp, atau email",
+    "contactPlaceholder": "+81 90 1234 5678 atau nama@contoh.com",
+    "participants": "Jumlah peserta",
+    "participantsHint": "Termasuk Anda sendiri, maksimal 10 orang.",
+    "notes": "Catatan",
+    "notesPlaceholder": "Usia anak, kebutuhan makanan, pertanyaan",
+    "submit": "Daftar",
+    "submitWaitlist": "Masuk daftar tunggu",
+    "submitting": "Mengirim",
+    "fullNotice": "Acara ini sudah penuh. Anda tetap bisa masuk daftar tunggu dan kami hubungi bila ada kursi kosong.",
+    "successTitle": "Pendaftaran diterima",
+    "successRegistered": "Terima kasih, {name}. Pendaftaran untuk {participants} orang sudah tercatat. Kami segera mengonfirmasi.",
+    "successWaitlist": "Terima kasih, {name}. Anda masuk daftar tunggu untuk {participants} orang. Kami hubungi bila ada kursi kosong.",
+    "fallbackTitle": "Kirim pendaftaran lewat WhatsApp",
+    "fallbackBody": "Pendaftaran online belum terhubung. Tekan tombol untuk mengirim data yang sama ke pengurus lewat WhatsApp.",
+    "whatsapp": "Kirim lewat WhatsApp",
+    "errorTitle": "Pendaftaran gagal dikirim",
+    "rateLimit": "Terlalu banyak percobaan. Tunggu semenit lalu coba lagi.",
+    "waMessageTitle": "Pendaftaran acara: {title}",
+    "waName": "Nama",
+    "waContact": "Kontak",
+    "waParticipants": "Peserta",
+    "waNotes": "Catatan",
+    "waDate": "Tanggal",
+    "waStatus": "Status"
+  },
+  "routine": {
+    "tag": "Kegiatan rutin",
+    "title": "Setiap pekan,",
+    "highlight": "sepanjang tahun",
+    "description": "Program ini berjalan tiap pekan tanpa pendaftaran per sesi. Lihat halaman program untuk detail dan pendaftaran.",
+    "more": "Detail program"
+  },
+  "calendar": {
+    "description": "{title} di Al Muttaqin Cultural Center, Matsudo. Detail: {url}"
+  },
+  "app": {
+    "title": "Agenda",
+    "description": "Kegiatan mendatang di masjid",
+    "empty": "Belum ada agenda mendatang.",
+    "addToCalendar": "Tambah ke kalender",
+    "seeAll": "Agenda lengkap di situs web"
+  }
+}

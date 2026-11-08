@@ -1,0 +1,47 @@
+{
+  "title": "検索",
+  "placeholder": "礼拝時間、イベント、ハラール、辞典を検索...",
+  "hint": "{shortcut} で検索",
+  "noResults": "「{query}」に一致する結果はありません",
+  "results": "{count}件",
+  "recent": "最近",
+  "clear": "クリア",
+  "types": {
+    "page": "ページ",
+    "announcement": "お知らせ",
+    "event": "イベント",
+    "lecture": "勉強会",
+    "news": "ニュース",
+    "faq": "よくある質問",
+    "program": "プログラム",
+    "dictionary": "辞典",
+    "dua": "ドゥアー",
+    "halal": "ハラール"
+  },
+  "dialogDescription": "ページ、お知らせ、イベント、勉強会、よくある質問、辞典、ハラールの場所を検索します。",
+  "searching": "検索中...",
+  "error": "現在検索できません。接続を確認してください。",
+  "empty": "サイト全体を検索できます。",
+  "popular": "よく見られるページ",
+  "seeAll": "すべての結果を見る",
+  "removeRecent": "「{query}」を履歴から削除",
+  "submit": "検索",
+  "keys": {
+    "navigate": "で移動",
+    "open": "で開く"
+  },
+  "meta": {
+    "title": "検索",
+    "titleWithQuery": "検索: {query}",
+    "description": "アル・ムッタキーン文化センターのサイト内検索。礼拝時間、イベント、勉強会、よくある質問、ハラールガイドなど。"
+  },
+  "page": {
+    "tag": "検索",
+    "title": "サイト内を検索",
+    "highlight": "検索",
+    "description": "ページ、お知らせ、イベント、勉強会、回答、辞典、ハラールの場所を探せます。",
+    "emptyTitle": "何をお探しですか?",
+    "emptyBody": "「金曜礼拝」「ハラール」「ザカート」や勉強会のテーマで試してください。",
+    "noResultsHint": "短い言葉や別の言語で試してください。"
+  }
+}

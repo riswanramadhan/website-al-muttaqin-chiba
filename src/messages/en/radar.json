@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "title": "Halal radar",
+    "description": "Mosques, prayer rooms, halal restaurants, and shops around Matsudo, sorted by distance from you."
+  },
+  "title": "Halal radar",
+  "description": "Nearest mosques, prayer rooms, restaurants, and shops.",
+  "mapLabel": "Map of halal places",
+  "listTitle": "Nearby places",
+  "filters": {
+    "all": "All",
+    "mosque": "Mosques",
+    "prayer-room": "Prayer rooms",
+    "restaurant": "Restaurants",
+    "mart": "Shops",
+    "service": "Services"
+  },
+  "types": {
+    "mosque": "Mosque",
+    "prayer-room": "Prayer room",
+    "restaurant": "Restaurant",
+    "mart": "Shop",
+    "service": "Service"
+  },
+  "verified": "Verified",
+  "unverified": "Not yet verified",
+  "distance": "{distance} away",
+  "fromMosque": "Distances from the mosque",
+  "fromYou": "Distances from your location",
+  "myLocation": "Use my location",
+  "locating": "Finding your location",
+  "locationDenied": "We could not read your location. Distances stay measured from the mosque.",
+  "locationUnsupported": "Location is not available on this device.",
+  "youAreHere": "You are here",
+  "openMaps": "Google Maps",
+  "count": "{count, plural, one {# place} other {# places}}",
+  "empty": "No places of this type yet. Suggest one and the committee will add it.",
+  "suggest": "Suggest a place",
+  "suggestTitle": "Suggestion for the halal radar",
+  "suggestName": "Name of the place",
+  "suggestType": "Type (mosque, prayer room, restaurant, shop)",
+  "suggestAddress": "Address or Google Maps link",
+  "suggestNote": "Notes (halal certification, what they sell)",
+  "suggestFill": "(please fill in)",
+  "note": "Note",
+  "placeholderHint": "Entries with a PLACEHOLDER address are waiting for the committee to confirm."
+}

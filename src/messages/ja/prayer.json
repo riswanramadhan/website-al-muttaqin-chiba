@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "礼拝時間",
+    "description": "千葉県松戸市アルムッタキーン文化センターの毎日のアザーンとイカーマの時刻、月間スケジュール、スンナの時間、ラマダーンのイムサーキーヤ、カレンダーのダウンロード。"
+  },
+  "names": {
+    "fajr": "ファジュル",
+    "sunrise": "日の出",
+    "dhuhr": "ズフル",
+    "asr": "アスル",
+    "maghrib": "マグリブ",
+    "isha": "イシャー"
+  },
+  "arabic": {
+    "fajr": "الفجر",
+    "sunrise": "الشروق",
+    "dhuhr": "الظهر",
+    "asr": "العصر",
+    "maghrib": "المغرب",
+    "isha": "العشاء"
+  },
+  "hero": {
+    "tag": "礼拝時間",
+    "title": "千葉・松戸の礼拝時間",
+    "highlight": "千葉・松戸",
+    "description": "モスクの所在地に合わせて計算し、運営委員会が確認したアルムッタキーンのアザーンとイカーマの時刻です。すべて日本標準時（JST）で表示しています。",
+    "ics": "カレンダーに追加",
+    "openApp": "ジャマーアアプリを開く"
+  },
+  "today": {
+    "title": "今日",
+    "adhan": "アザーン",
+    "iqamah": "イカーマ",
+    "ongoing": "礼拝時間中",
+    "next": "次の礼拝",
+    "tomorrow": "明日",
+    "listLabel": "今日の礼拝時間",
+    "jst": "JST"
+  },
+  "countdown": {
+    "toward": "{prayer}まで",
+    "placeholder": "--:--",
+    "adhanAt": "アザーン {time}",
+    "iqamahAt": "イカーマ {time}",
+    "label": "{prayer}までの残り時間",
+    "progressLabel": "次の礼拝までの進み具合"
+  },
+  "arc": {
+    "label": "日の出から日の入りまでの一日の弧と今日の礼拝時間",
+    "now": "現在"
+  },
+  "table": {
+    "tag": "月間スケジュール",
+    "title": "{month}のスケジュール",
+    "description": "各日のアザーン時刻です。今日の行は強調表示され、金曜日には印が付いています。",
+    "caption": "{month}の礼拝時間（Asia/Tokyo、JST）",
+    "date": "日付",
+    "imsak": "イムサーク",
+    "friday": "金",
+    "today": "今日",
+    "prevMonth": "前の月",
+    "nextMonth": "次の月",
+    "print": "印刷",
+    "ics": "ICSをダウンロード",
+    "iqamahNote": "イカーマ：{rules}。",
+    "offsetRule": "{prayer}はアザーンの{count}分後",
+    "fixedRule": "{prayer}は{time}",
+    "imsakNote": "イムサークはファジュルの10分前で、ラマダーン期間中のみ表示されます。"
+  },
+  "guide": {
+    "tag": "スケジュールの読み方",
+    "title": "礼拝時間の計算方法について",
+    "highlight": "計算方法",
+    "method": "計算方法",
+    "madhab": "アスルの学派",
+    "shafi": "シャーフィイー派（影の長さが物体と同じ）",
+    "hanafi": "ハナフィー派（影の長さが物体の2倍）",
+    "highLatitude": "高緯度ルール",
+    "adjustments": "分単位の補正",
+    "adjustmentsNone": "補正はありません",
+    "iqamah": "イカーマの規則",
+    "jumuah": "金曜礼拝",
+    "jumuahBody": "説教は毎週金曜日{time}に始まります。今週のハティーブは金曜礼拝のページをご覧ください。",
+    "timezone": "タイムゾーン",
+    "timezoneBody": "Asia/Tokyo（JST、UTC+9）。日本では夏時間を採用していません。",
+    "notifications": "アザーン通知",
+    "notificationsBody": "ジャマーアアプリを開くと、スマートフォンでアザーンとイカーマの通知を受け取り、スケジュールをオフラインで保存できます。",
+    "openApp": "ジャマーアアプリを開く",
+    "jumuahLink": "金曜礼拝のページ"
+  },
+  "sunnah": {
+    "tag": "スンナの時間",
+    "title": "夜の礼拝とその他の時間",
+    "highlight": "夜の礼拝",
+    "description": "今日のマグリブと明日のファジュルから計算した、任意の礼拝の目安です。",
+    "midnight": "夜の中間",
+    "midnightHint": "マグリブとファジュルのちょうど中間",
+    "lastThird": "夜の最後の三分の一",
+    "lastThirdHint": "タハッジュドとドゥアーに最も適した時間",
+    "duha": "ドゥハー",
+    "duhaHint": "日の出の約15分後からズフルの少し前まで",
+    "forbidden": "任意の礼拝を避ける時間",
+    "forbiddenAfterFajr": "ファジュルの後から日の出まで（{from}〜{to}）",
+    "forbiddenAfterAsr": "アスルの後からマグリブまで（{from}〜{to}）",
+    "forbiddenNoon": "太陽が最も高い時、ズフルの数分前"
+  },
+  "ramadan": {
+    "tag": "ラマダーン",
+    "title": "今日のイムサーキーヤ",
+    "highlight": "イムサーキーヤ",
+    "description": "イムサークはファジュルの10分前です。イフタールはマグリブに始まります。断食が受け入れられますように。",
+    "imsak": "イムサーク",
+    "iftar": "イフタール",
+    "countdown": "イフタールまで",
+    "done": "断食を解く時間です。断食と礼拝が受け入れられますように。"
+  },
+  "app": {
+    "title": "礼拝時間",
+    "description": "アザーン、イカーマ、これからの数日間のスケジュール。",
+    "today": "今日",
+    "tomorrow": "明日",
+    "week": "7日間",
+    "fullSchedule": "月間スケジュール",
+    "jumuahLink": "金曜礼拝の詳細",
+    "offlineTitle": "30日分のスケジュールをオフライン保存",
+    "offlineBody": "今後30日分をこの端末に保存しているため、通信がなくてもスケジュールを開けます。",
+    "offlineSaved": "{date}に保存",
+    "offlineNow": "現在オフラインです。保存済みのスケジュールを表示しています。",
+    "offlineError": "スケジュールを更新できませんでした。保存済みのものを表示しています。",
+    "offlineNone": "オンラインの状態でこの画面を一度開くと、スケジュールが保存されます。",
+    "offlineSaving": "オフライン用にスケジュールを保存しています"
+  }
+}

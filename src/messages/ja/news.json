@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "お知らせ・ニュース",
+    "description": "松戸のアルムッタキーン文化センターからの公式なお知らせ、ニュース、活動報告です。"
+  },
+  "tag": "ニュース",
+  "title": "お知らせと",
+  "highlight": "活動報告",
+  "description": "運営委員会からの公式なお知らせ、モスクのニュース、そして皆様と一緒に行った活動の報告です。",
+  "tabs": {
+    "all": "すべて",
+    "announcements": "お知らせ",
+    "news": "ニュース",
+    "reports": "報告"
+  },
+  "labels": {
+    "pinned": "固定",
+    "new": "新着",
+    "announcement": "お知らせ",
+    "author": "執筆：{name}",
+    "published": "{date}公開",
+    "expired": "掲載期間終了",
+    "readMore": "続きを読む",
+    "empty": "まだ表示するものがありません。",
+    "back": "ニュース一覧へ",
+    "share": "共有する",
+    "related": "関連記事",
+    "relatedDescription": "同じカテゴリーの記事です。",
+    "announcementsHeading": "お知らせ",
+    "newsHeading": "ニュースと報告"
+  },
+  "app": {
+    "title": "お知らせ",
+    "description": "運営委員会からの公式情報",
+    "empty": "現在、お知らせはありません。",
+    "readOnWeb": "ウェブサイトで読む"
+  }
+}

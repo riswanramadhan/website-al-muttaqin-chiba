@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "title": "Tentang kami",
+    "description": "Sejarah, visi, mitra, pengurus, dan fasilitas Al Muttaqin Cultural Center, masjid sekaligus pusat budaya Islam di Matsudo, Chiba."
+  },
+  "hero": {
+    "tag": "Tentang kami",
+    "title": "Masjid dan rumah belajar di Matsudo, Chiba.",
+    "highlight": "Matsudo, Chiba.",
+    "description": "Al Muttaqin Cultural Center melayani jamaah, muallaf, keluarga, dan warga sekitar dalam bahasa Jepang, Inggris, dan Indonesia. Halaman ini menjelaskan siapa kami, dari mana kami bermula, dan bagaimana kami bekerja.",
+    "primaryCta": "Kontak dan akses",
+    "secondaryCta": "Lihat galeri"
+  },
+  "profile": {
+    "tag": "Profil",
+    "title": "Siapa kami",
+    "highlight": "kami",
+    "body": "Pusat ini dikelola oleh relawan dari komunitas muslim Jepang dan Indonesia di Chiba. Salat lima waktu, khutbah Jumat, kajian pekanan, TPA untuk anak-anak, kelas muallaf, dan kelas bahasa Jepang berlangsung di bawah satu atap, dan pintu terbuka bagi siapa pun yang ingin mengenal Islam."
+  },
+  "vision": {
+    "tag": "Visi dan misi",
+    "title": "Empat pilar kerja kami",
+    "highlight": "kerja kami",
+    "statement": "Visi kami adalah masjid yang tenang untuk beribadah, mudah untuk belajar, dan ramah bagi lingkungan sekitar. Kami mewujudkannya lewat empat pilar.",
+    "pillars": {
+      "0": {
+        "title": "Ibadah",
+        "description": "Salat berjamaah lima waktu, Jumat, tarawih, dan Id dengan waktu yang akurat serta ruang yang bersih dan tenang untuk semua."
+      },
+      "1": {
+        "title": "Pembinaan muallaf",
+        "description": "Kelas kelompok kecil berbahasa Jepang, pendampingan, dan komunitas yang tetap dekat setelah syahadat."
+      },
+      "2": {
+        "title": "Pendidikan generasi muda",
+        "description": "TPA untuk anak-anak, halaqah remaja, dan dukungan pengasuhan agar iman tumbuh wajar di Jepang."
+      },
+      "3": {
+        "title": "Ekonomi halal dan dialog budaya",
+        "description": "Panduan halal, kamus dakwah, Open Mosque Day, serta kerja sama dengan sekolah dan pemerintah daerah."
+      }
+    }
+  },
+  "history": {
+    "tag": "Sejarah",
+    "title": "Dari gagasan menjadi masjid",
+    "highlight": "menjadi masjid",
+    "description": "Perjalanan singkat lahirnya pusat ini. Tanggal akan diperbarui pengurus setiap tonggak tercapai."
+  },
+  "partners": {
+    "tag": "Mitra",
+    "title": "Dibangun bersama para mitra",
+    "highlight": "para mitra",
+    "description": "Pusat ini dikelola Chiba Islamic Culture Center dan didukung Dompet Dhuafa di Indonesia maupun Jepang.",
+    "visit": "Kunjungi situs"
+  },
+  "board": {
+    "tag": "Pengurus",
+    "title": "Orang-orang di balik pusat ini",
+    "highlight": "pusat ini",
+    "description": "Pengurus relawan mengawasi ibadah, pendidikan, keuangan, dan program komunitas. Nama dan foto ditambahkan setelah dikonfirmasi pengurus.",
+    "placeholder": "Akan diumumkan"
+  },
+  "facilities": {
+    "tag": "Fasilitas",
+    "title": "Yang akan Anda temukan di sini",
+    "highlight": "di sini",
+    "description": "Bangunan sederhana yang dirancang untuk salat, kelas, dan pertemuan, dengan ruang terpisah untuk laki-laki dan perempuan."
+  },
+  "stats": {
+    "capacity": "Kapasitas ruang salat",
+    "programs": "Program rutin",
+    "languages": "Bahasa layanan",
+    "founded": "Tahun berdiri"
+  },
+  "governance": {
+    "tag": "Tata kelola dan transparansi",
+    "title": "Setiap yen dipertanggungjawabkan",
+    "highlight": "dipertanggungjawabkan",
+    "body": "Donasi disimpan di rekening khusus, dan pengurus menerbitkan laporan bulanan seluruh pemasukan dan pengeluaran. Pembelian besar dijelaskan, dan zakat dicatat terpisah dari infaq serta wakaf.",
+    "items": {
+      "0": "Laporan pemasukan dan pengeluaran bulanan dipublikasikan di situs ini",
+      "1": "Dua tanda tangan untuk setiap pengeluaran di atas batas yang disetujui",
+      "2": "Ringkasan tahunan ditinjau organisasi pengelola"
+    },
+    "cta": "Lihat laporan keuangan"
+  },
+  "volunteer": {
+    "tag": "Bergabung",
+    "title": "Jadilah relawan",
+    "highlight": "relawan",
+    "body": "Pusat ini berjalan berkat relawan. Satu jam sebulan atau satu hari sepekan, selalu ada peran untuk Anda.",
+    "items": {
+      "0": "Mengajar di TPA atau kelas bahasa Jepang",
+      "1": "Memandu pengunjung Open Mosque Day dan menerjemahkan",
+      "2": "Memasak untuk buka puasa, bersih-bersih, dan membantu acara"
+    },
+    "cta": "Daftar jadi relawan",
+    "secondary": "Lihat program kami"
+  }
+}

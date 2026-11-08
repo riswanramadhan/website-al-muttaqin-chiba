@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "title": "Kontak dan akses",
+    "description": "Alamat, peta, stasiun terdekat, jam layanan sekretariat, dan formulir kontak Al Muttaqin Cultural Center di Matsudo, Chiba."
+  },
+  "hero": {
+    "tag": "Kontak dan akses",
+    "title": "Silakan berkunjung ke Matsudo.",
+    "highlight": "Matsudo.",
+    "description": "Kami hanya beberapa menit jalan kaki dari Stasiun Matsudo. Kirim pesan, telepon, atau WhatsApp, dan kami akan membalas pada jam layanan sekretariat."
+  },
+  "card": {
+    "address": "Alamat",
+    "hours": "Jam buka",
+    "officeHours": "Sekretariat menjawab telepon dan pesan pada hari kerja pukul 10.00-17.00.",
+    "phone": "Telepon dan WhatsApp",
+    "email": "Email",
+    "emailHint": "Biasanya kami membalas dalam dua hari kerja.",
+    "copyAddress": "Salin alamat Jepang"
+  },
+  "map": {
+    "note": "Data peta oleh kontributor OpenStreetMap. Alamat jalan resmi akan diumumkan pengurus; penanda saat ini menunjuk pusat kota Matsudo."
+  },
+  "access": {
+    "tag": "Akses",
+    "title": "Cara menuju ke sini",
+    "highlight": "ke sini",
+    "description": "Transportasi umum adalah cara termudah. Parkir sangat terbatas, terutama pada hari Jumat.",
+    "directions": "Rute perjalanan",
+    "stations": "Stasiun terdekat",
+    "walk": "Sekitar {minutes} menit jalan kaki",
+    "routesTitle": "Rute dari stasiun utama",
+    "routes": {
+      "tokyo": {
+        "from": "Dari Stasiun Tokyo",
+        "text": "JR Ueno-Tokyo Line ke Matsudo, sekitar 30 menit tanpa pindah kereta. Kereta rapid juga berhenti di Matsudo."
+      },
+      "ueno": {
+        "from": "Dari Ueno",
+        "text": "JR Joban Line (lokal atau rapid) ke Matsudo, sekitar 20 menit."
+      },
+      "kashiwa": {
+        "from": "Dari Kashiwa",
+        "text": "JR Joban Line arah Ueno, sekitar 10 menit ke Matsudo."
+      },
+      "narita": {
+        "from": "Dari Bandara Narita",
+        "text": "Keisei Line ke Keisei-Takasago atau Aoto, lalu pindah ke Shin-Keisei atau JR Joban Line menuju Matsudo. Sediakan waktu sekitar 80 menit."
+      }
+    },
+    "parking": {
+      "title": "Parkir",
+      "body": "Hanya tersedia beberapa slot mobil dan tidak ada pada hari Jumat atau saat acara. Parkir berbayar tersedia di sekitar Stasiun Matsudo.",
+      "bike": "Parkir sepeda tersedia di samping pintu masuk."
+    }
+  },
+  "office": {
+    "title": "Jam layanan sekretariat",
+    "description": "Waktu sekretariat dapat menjawab telepon, pesan, dan menerima kunjungan.",
+    "hours": {
+      "weekday": { "label": "Senin-Kamis", "value": "10.00 - 17.00" },
+      "friday": { "label": "Jumat", "value": "10.00 - 12.00, 14.00 - 17.00" },
+      "weekend": { "label": "Sabtu dan Minggu", "value": "Dengan janji" }
+    }
+  },
+  "form": {
+    "tag": "Formulir kontak",
+    "title": "Kirim pesan kepada kami",
+    "highlight": "pesan",
+    "description": "Untuk kunjungan, permintaan media, relawan, atau kerja sama. Pertanyaan mendesak soal waktu salat lebih cepat dijawab lewat WhatsApp.",
+    "tips": {
+      "0": "Pilih subjek agar pesan sampai ke pengurus yang tepat.",
+      "1": "Untuk kunjungan sekolah atau rombongan, sebutkan tanggal, jumlah peserta, dan bahasa yang diinginkan.",
+      "2": "Data Anda hanya dipakai untuk membalas dan tidak pernah dibagikan ke pihak ketiga."
+    },
+    "name": "Nama",
+    "email": "Email",
+    "subject": "Subjek",
+    "subjects": {
+      "general": "Pertanyaan umum",
+      "visit": "Kunjungan",
+      "media": "Media dan pers",
+      "volunteer": "Relawan",
+      "partnership": "Kerja sama"
+    },
+    "message": "Pesan",
+    "messageHint": "Minimal 10 karakter. Sertakan tanggal atau detail yang membantu kami menjawab.",
+    "placeholders": {
+      "name": "Nama lengkap Anda",
+      "email": "nama@contoh.com",
+      "message": "Ada yang bisa kami bantu?"
+    },
+    "note": "Kolom bertanda * wajib diisi.",
+    "submit": "Kirim pesan",
+    "errors": {
+      "turnstile": "Pemeriksaan anti-spam gagal. Muat ulang halaman dan coba lagi."
+    },
+    "success": {
+      "title": "Terima kasih, pesan Anda sudah kami terima.",
+      "body": "Sekretariat akan membalas lewat email, biasanya dalam dua hari kerja.",
+      "fallbackTitle": "Satu langkah lagi untuk mengirim pesan",
+      "fallbackBody": "Pengiriman daring belum aktif. Kirim pesan yang sama lewat WhatsApp atau email dengan satu ketukan; tidak perlu mengetik ulang.",
+      "whatsapp": "Kirim lewat WhatsApp",
+      "email": "Kirim lewat email",
+      "again": "Tulis pesan lain"
+    }
+  },
+  "social": {
+    "title": "Media sosial",
+    "description": "Kabar harian, rekaman kajian, dan foto kegiatan."
+  }
+}

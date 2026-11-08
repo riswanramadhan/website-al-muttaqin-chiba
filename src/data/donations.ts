@@ -1,0 +1,307 @@
+import type { DonationAccount, DonationProgram, TransparencyReport } from "@/lib/types";
+
+/**
+ * Rekening resmi (PRD-05): Yen lewat Japan Post Bank, Rupiah lewat QRIS.
+ * PLACEHOLDER: nomor rekening dan gambar QRIS diganti data resmi dari pengurus.
+ */
+export const donationAccounts: DonationAccount[] = [
+  {
+    id: "jpb",
+    currency: "JPY",
+    method: "bank",
+    bankName: "Japan Post Bank",
+    bankNameLocalized: { ja: "ゆうちょ銀行", en: "Japan Post Bank (Yucho)", id: "Japan Post Bank (Yucho)" },
+    branch: "〇一八 (ゼロイチハチ)",
+    branchCode: "018",
+    accountType: "普通 (Futsu)",
+    accountNumber: "1234567",
+    accountName: "アルムッタキーンブンカセンター",
+    note: {
+      ja: "記号 10180 番号 12345671（ゆうちょ同士の振替用）",
+      en: "Symbol 10180, number 12345671 for transfers between Yucho accounts",
+      id: "Kigou 10180, bangou 12345671 untuk transfer sesama Yucho",
+    },
+    primary: true,
+  },
+  {
+    id: "qris",
+    currency: "IDR",
+    method: "qris",
+    bankName: "QRIS",
+    bankNameLocalized: { ja: "QRIS（インドネシアのQR決済）", en: "QRIS (Indonesian QR payment)", id: "QRIS" },
+    accountNumber: "ID1024XXXXXXXX",
+    accountName: "Al Muttaqin Cultural Center",
+    qrImage: "/images/qris-placeholder.svg",
+    note: {
+      ja: "GoPay、OVO、DANA、ShopeePay、インドネシアのモバイルバンキングで読み取れます。",
+      en: "Scan with GoPay, OVO, DANA, ShopeePay, or any Indonesian mobile banking app.",
+      id: "Pindai dengan GoPay, OVO, DANA, ShopeePay, atau m-banking bank Indonesia.",
+    },
+    primary: true,
+  },
+  {
+    id: "bsi",
+    currency: "IDR",
+    method: "bank",
+    bankName: "Bank Syariah Indonesia",
+    bankNameLocalized: { ja: "インドネシア・シャリーア銀行（BSI）", en: "Bank Syariah Indonesia (BSI)", id: "Bank Syariah Indonesia (BSI)" },
+    branchCode: "451",
+    accountNumber: "7123456789",
+    accountName: "Al Muttaqin Cultural Center",
+    note: {
+      ja: "インドネシア国内からの銀行振込用",
+      en: "For bank transfers from inside Indonesia",
+      id: "Untuk transfer bank dari dalam negeri Indonesia",
+    },
+  },
+];
+
+export const donationPrograms: DonationProgram[] = [
+  {
+    id: "operational",
+    slug: "infaq-operasional",
+    title: { ja: "運営インファーク", en: "Operational infaq", id: "Infaq operasional" },
+    description: {
+      ja: "光熱費、暖房、清掃、イマームの謝礼など、モスクを毎日開けるための費用。",
+      en: "Utilities, heating, cleaning, and imam honorarium: everything that keeps the mosque open daily.",
+      id: "Listrik, pemanas, kebersihan, dan honor imam: semua yang menjaga masjid tetap buka setiap hari.",
+    },
+    target: { amount: 400000, currency: "JPY" },
+    raised: { amount: 186500, currency: "JPY" },
+    status: "open",
+    icon: "building",
+  },
+  {
+    id: "education",
+    slug: "pendidikan-anak-dan-muallaf",
+    title: { ja: "子どもとムアッラフの教育", en: "Children and new Muslim education", id: "Pendidikan anak dan muallaf" },
+    description: {
+      ja: "教材、教師の交通費、日本語のイスラーム入門書の制作。",
+      en: "Teaching materials, teacher transport, and Japanese-language introductory books on Islam.",
+      id: "Materi ajar, transportasi pengajar, dan pembuatan buku pengantar Islam berbahasa Jepang.",
+    },
+    target: { amount: 200000, currency: "JPY" },
+    raised: { amount: 72000, currency: "JPY" },
+    status: "open",
+    icon: "graduation-cap",
+  },
+  {
+    id: "iftar",
+    slug: "iftar-ramadan-1448",
+    title: { ja: "ラマダーン1448 イフタール", en: "Ramadan 1448 iftar", id: "Iftar Ramadan 1448" },
+    description: {
+      ja: "毎日のイフタールを学生、技能実習生、改宗者に。1食500円。",
+      en: "Daily iftar for students, trainees, and new Muslims. JPY 500 per meal.",
+      id: "Buka puasa harian untuk pelajar, pemagang, dan muallaf. ¥500 per porsi.",
+    },
+    target: { amount: 450000, currency: "JPY" },
+    raised: { amount: 0, currency: "JPY" },
+    status: "open",
+    icon: "moon",
+  },
+  {
+    id: "jumat-berkah",
+    slug: "jumat-berkah",
+    title: { ja: "金曜の食事会", en: "Friday community meal", id: "Jumat berkah" },
+    description: {
+      ja: "金曜礼拝のあと、学生や単身の技能実習生に温かい食事を。1食400円。",
+      en: "A warm meal after Jumuah for students and trainees living alone. JPY 400 per portion.",
+      id: "Makan siang hangat setelah salat Jumat untuk pelajar dan pemagang yang tinggal sendiri. ¥400 per porsi.",
+    },
+    target: { amount: 120000, currency: "JPY" },
+    raised: { amount: 54800, currency: "JPY" },
+    status: "open",
+    icon: "utensils",
+  },
+  {
+    id: "construction",
+    slug: "wakaf-pembangunan",
+    title: { ja: "建設ワクフ（終了）", en: "Construction waqf (closed)", id: "Wakaf pembangunan (ditutup)" },
+    description: {
+      ja: "土地と建物のワクフは完了しました。ご協力に心から感謝いたします。",
+      en: "The land and building waqf is complete. Thank you to everyone who contributed.",
+      id: "Wakaf tanah dan bangunan telah lunas. Terima kasih kepada semua donatur.",
+    },
+    status: "completed",
+    icon: "heart",
+  },
+];
+
+/**
+ * Laporan bulanan (PRD-05). Saldo berantai: closingBalance bulan N = openingBalance bulan N+1,
+ * dan closing = opening + total pemasukan - total pengeluaran. PLACEHOLDER sampai bendahara mengisi.
+ */
+const L = (ja: string, en: string, id: string) => ({ ja, en, id });
+const INCOME_LABELS = {
+  jpb: L("運営インファーク（ゆうちょ）", "Operational infaq (Japan Post Bank)", "Infaq operasional (Japan Post Bank)"),
+  qris: L("運営インファーク（QRIS）", "Operational infaq (QRIS)", "Infaq operasional (QRIS)"),
+  box: L("金曜礼拝の献金箱", "Jumuah collection box", "Kotak infaq Jumat"),
+  education: L("教育プログラム寄付", "Education program donations", "Donasi program pendidikan"),
+  meal: L("金曜の食事会寄付", "Friday meal donations", "Donasi Jumat berkah"),
+  eid: L("イード・アル＝アドハー寄付", "Eid al-Adha donations", "Donasi Idul Adha"),
+};
+const EXPENSE_LABELS = {
+  utilities: L("光熱費", "Utilities", "Listrik dan air"),
+  imam: L("イマーム謝礼", "Imam honorarium", "Honor imam"),
+  cleaning: L("清掃用品・備品", "Cleaning and supplies", "Kebersihan dan perlengkapan"),
+  materials: L("教材・印刷", "Teaching materials and printing", "Materi ajar dan cetak"),
+  openMosque: L("オープンモスク軽食", "Open Mosque Day refreshments", "Konsumsi Open Mosque Day"),
+  meal: L("金曜の食事会の食材", "Friday meal groceries", "Bahan makanan Jumat berkah"),
+  maintenance: L("空調メンテナンス", "Air-conditioning maintenance", "Perawatan AC"),
+  eid: L("イード・アル＝アドハー行事", "Eid al-Adha event", "Kegiatan Idul Adha"),
+  summer: L("夏休み子ども教室", "Summer children's program", "Program anak liburan musim panas"),
+  muharram: L("ムハッラム勉強会", "Muharram study night", "Kajian Muharram"),
+};
+const VERIFIED_NOTE = L(
+  "すべての数字は会計担当が確認済みです。詳細は事務局までお問い合わせください。",
+  "All figures verified by the treasurer. Contact the office for details.",
+  "Semua angka telah diverifikasi bendahara. Hubungi sekretariat untuk rincian.",
+);
+
+export const transparencyReports: TransparencyReport[] = [
+  {
+    id: "rep-2026-05",
+    period: "2026-05",
+    title: { ja: "2026年5月 月次報告", en: "May 2026 monthly report", id: "Laporan bulanan Mei 2026" },
+    currency: "JPY",
+    openingBalance: 91000,
+    income: [
+      { label: INCOME_LABELS.jpb, amount: 95400 },
+      { label: INCOME_LABELS.qris, amount: 33900 },
+      { label: INCOME_LABELS.box, amount: 52600 },
+      { label: INCOME_LABELS.education, amount: 15000 },
+    ],
+    expense: [
+      { label: EXPENSE_LABELS.utilities, amount: 36500 },
+      { label: EXPENSE_LABELS.imam, amount: 80000 },
+      { label: EXPENSE_LABELS.cleaning, amount: 9700 },
+      { label: EXPENSE_LABELS.materials, amount: 11200 },
+      { label: EXPENSE_LABELS.openMosque, amount: 22000 },
+    ],
+    closingBalance: 128500,
+    publishedAt: "2026-06-03T03:00:00.000Z",
+    note: VERIFIED_NOTE,
+  },
+  {
+    id: "rep-2026-06",
+    period: "2026-06",
+    title: { ja: "2026年6月 月次報告", en: "June 2026 monthly report", id: "Laporan bulanan Juni 2026" },
+    currency: "JPY",
+    openingBalance: 128500,
+    income: [
+      { label: INCOME_LABELS.jpb, amount: 110200 },
+      { label: INCOME_LABELS.qris, amount: 42800 },
+      { label: INCOME_LABELS.box, amount: 59400 },
+      { label: INCOME_LABELS.eid, amount: 30000 },
+    ],
+    expense: [
+      { label: EXPENSE_LABELS.utilities, amount: 39800 },
+      { label: EXPENSE_LABELS.imam, amount: 80000 },
+      { label: EXPENSE_LABELS.cleaning, amount: 12100 },
+      { label: EXPENSE_LABELS.materials, amount: 7400 },
+      { label: EXPENSE_LABELS.eid, amount: 45000 },
+    ],
+    closingBalance: 186600,
+    publishedAt: "2026-07-04T03:00:00.000Z",
+    note: VERIFIED_NOTE,
+  },
+  {
+    id: "rep-2026-07",
+    period: "2026-07",
+    title: { ja: "2026年7月 月次報告", en: "July 2026 monthly report", id: "Laporan bulanan Juli 2026" },
+    currency: "JPY",
+    openingBalance: 186600,
+    income: [
+      { label: INCOME_LABELS.jpb, amount: 98000 },
+      { label: INCOME_LABELS.qris, amount: 36500 },
+      { label: INCOME_LABELS.box, amount: 54800 },
+      { label: INCOME_LABELS.education, amount: 12000 },
+    ],
+    expense: [
+      { label: EXPENSE_LABELS.utilities, amount: 44200 },
+      { label: EXPENSE_LABELS.imam, amount: 80000 },
+      { label: EXPENSE_LABELS.cleaning, amount: 10400 },
+      { label: EXPENSE_LABELS.materials, amount: 8600 },
+      { label: EXPENSE_LABELS.muharram, amount: 19500 },
+    ],
+    closingBalance: 225200,
+    publishedAt: "2026-08-04T03:00:00.000Z",
+    note: VERIFIED_NOTE,
+  },
+  {
+    id: "rep-2026-08",
+    period: "2026-08",
+    title: { ja: "2026年8月 月次報告", en: "August 2026 monthly report", id: "Laporan bulanan Agustus 2026" },
+    currency: "JPY",
+    openingBalance: 225200,
+    income: [
+      { label: INCOME_LABELS.jpb, amount: 105500 },
+      { label: INCOME_LABELS.qris, amount: 51000 },
+      { label: INCOME_LABELS.box, amount: 57200 },
+      { label: INCOME_LABELS.education, amount: 18000 },
+    ],
+    expense: [
+      { label: EXPENSE_LABELS.utilities, amount: 46900 },
+      { label: EXPENSE_LABELS.imam, amount: 80000 },
+      { label: EXPENSE_LABELS.cleaning, amount: 11300 },
+      { label: EXPENSE_LABELS.materials, amount: 9800 },
+      { label: EXPENSE_LABELS.summer, amount: 24000 },
+    ],
+    closingBalance: 284900,
+    publishedAt: "2026-09-03T03:00:00.000Z",
+    note: VERIFIED_NOTE,
+  },
+  {
+    id: "rep-2026-09",
+    period: "2026-09",
+    title: { ja: "2026年9月 月次報告", en: "September 2026 monthly report", id: "Laporan bulanan September 2026" },
+    currency: "JPY",
+    openingBalance: 284900,
+    income: [
+      { label: INCOME_LABELS.jpb, amount: 118000 },
+      { label: INCOME_LABELS.qris, amount: 39200 },
+      { label: INCOME_LABELS.box, amount: 61500 },
+      { label: INCOME_LABELS.education, amount: 25000 },
+    ],
+    expense: [
+      { label: EXPENSE_LABELS.utilities, amount: 41300 },
+      { label: EXPENSE_LABELS.imam, amount: 80000 },
+      { label: EXPENSE_LABELS.cleaning, amount: 9800 },
+      { label: EXPENSE_LABELS.materials, amount: 14600 },
+      { label: EXPENSE_LABELS.openMosque, amount: 12500 },
+      { label: EXPENSE_LABELS.maintenance, amount: 58000 },
+    ],
+    closingBalance: 312400,
+    publishedAt: "2026-10-04T03:00:00.000Z",
+    note: VERIFIED_NOTE,
+  },
+  {
+    id: "rep-2026-10",
+    period: "2026-10",
+    title: { ja: "2026年10月 月次報告", en: "October 2026 monthly report", id: "Laporan bulanan Oktober 2026" },
+    currency: "JPY",
+    openingBalance: 312400,
+    income: [
+      { label: { ja: "運営インファーク（ゆうちょ）", en: "Operational infaq (Japan Post Bank)", id: "Infaq operasional (Japan Post Bank)" }, amount: 142000 },
+      { label: { ja: "運営インファーク（QRIS）", en: "Operational infaq (QRIS)", id: "Infaq operasional (QRIS)" }, amount: 44500 },
+      { label: { ja: "金曜礼拝の献金箱", en: "Jumuah collection box", id: "Kotak infaq Jumat" }, amount: 68300 },
+      { label: { ja: "教育プログラム寄付", en: "Education program donations", id: "Donasi program pendidikan" }, amount: 72000 },
+      { label: INCOME_LABELS.meal, amount: 54800 },
+    ],
+    expense: [
+      { label: { ja: "光熱費", en: "Utilities", id: "Listrik dan air" }, amount: 38200 },
+      { label: { ja: "イマーム謝礼", en: "Imam honorarium", id: "Honor imam" }, amount: 80000 },
+      { label: { ja: "清掃用品・備品", en: "Cleaning and supplies", id: "Kebersihan dan perlengkapan" }, amount: 12650 },
+      { label: { ja: "教材・印刷", en: "Teaching materials and printing", id: "Materi ajar dan cetak" }, amount: 21400 },
+      { label: { ja: "オープンモスク軽食", en: "Open Mosque Day refreshments", id: "Konsumsi Open Mosque Day" }, amount: 18900 },
+      { label: EXPENSE_LABELS.meal, amount: 38600 },
+    ],
+    closingBalance: 484250,
+    publishedAt: "2026-11-02T03:00:00.000Z",
+    note: {
+      ja: "すべての数字は会計担当が確認済みです。詳細は事務局までお問い合わせください。",
+      en: "All figures verified by the treasurer. Contact the office for details.",
+      id: "Semua angka telah diverifikasi bendahara. Hubungi sekretariat untuk rincian.",
+    },
+  },
+];

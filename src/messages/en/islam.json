@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "title": "Discover Islam",
+    "description": "A friendly introduction to Islam for visitors in Japan: what Muslims believe, what happens in a mosque, how to visit, and common misunderstandings."
+  },
+  "tag": "Discover Islam",
+  "title": "A gentle introduction",
+  "highlight": "for our neighbours",
+  "description": "Curious about Islam, or about the mosque down the street? This page answers the basics in plain words. No prior knowledge needed, and no obligation.",
+  "hero": { "visit": "Visit on Open Mosque day", "ask": "Ask a question" },
+  "intro": {
+    "tag": "What is Islam",
+    "title": "One God,",
+    "highlight": "a way of living",
+    "p1": "Islam is the belief in one God, the same God spoken of by Abraham, Moses, and Jesus, and in Muhammad as the last of the prophets. Its message is in the Quran. A person who follows it is called a Muslim.",
+    "p2": "For Muslims, faith is lived in daily habits: praying five times a day, being honest at work, caring for family and neighbours, and giving to those in need. There are about two billion Muslims in the world, from every culture and language.",
+    "arabic": "لَا إِلَٰهَ إِلَّا اللَّهُ مُحَمَّدٌ رَسُولُ اللَّهِ",
+    "arabicMeaning": "There is no god but God; Muhammad is the messenger of God. This sentence is the heart of Islam."
+  },
+  "pillars": {
+    "tag": "Beliefs and practices",
+    "title": "Six beliefs,",
+    "highlight": "five practices",
+    "description": "Muslims summarise their faith in six articles of belief and five pillars of practice.",
+    "faithTitle": "The six articles of faith",
+    "islamTitle": "The five pillars of Islam",
+    "faith": {
+      "1": { "title": "God", "text": "One Creator, without partner or image." },
+      "2": { "title": "Angels", "text": "Beings of light who carry out God's commands." },
+      "3": { "title": "Scriptures", "text": "The Torah, Psalms, Gospel, and finally the Quran." },
+      "4": { "title": "Prophets", "text": "From Adam to Muhammad, including Noah, Abraham, Moses, and Jesus." },
+      "5": { "title": "The Last Day", "text": "Life after death and accountability for what we did." },
+      "6": { "title": "Divine decree", "text": "God knows and permits all that happens; people remain responsible for their choices." }
+    },
+    "islam": {
+      "1": { "title": "Shahada: the declaration", "text": "Saying sincerely that there is no god but God and Muhammad is His messenger." },
+      "2": { "title": "Salat: prayer", "text": "Five short prayers a day, facing Makkah." },
+      "3": { "title": "Zakat: giving", "text": "Giving 2.5 percent of saved wealth each year to those in need." },
+      "4": { "title": "Sawm: fasting", "text": "No food or drink from dawn to sunset in the month of Ramadan." },
+      "5": { "title": "Hajj: pilgrimage", "text": "A journey to Makkah once in a lifetime, for those who are able." }
+    }
+  },
+  "japan": {
+    "tag": "Muslims in Japan",
+    "title": "Your neighbours,",
+    "highlight": "in numbers",
+    "description": "Muslims have lived in Japan for over a century. Today they are students, engineers, nurses, factory workers, shop owners, and a growing number of Japanese citizens.",
+    "stats": {
+      "1": { "value": "230000", "suffix": "+", "label": "Muslims living in Japan" },
+      "2": { "value": "47000", "suffix": "+", "label": "Japanese Muslims" },
+      "3": { "value": "110", "suffix": "+", "label": "Mosques across the country" }
+    },
+    "note": "Estimates from Waseda University research (Tanada, 2020). Numbers have grown since."
+  },
+  "mosque": {
+    "tag": "At the mosque",
+    "title": "What happens",
+    "highlight": "inside",
+    "description": "A mosque is a prayer hall, a classroom, and a community centre at once.",
+    "items": {
+      "1": { "title": "Five daily prayers", "text": "Short congregational prayers led by an imam. Friday noon prayer includes a sermon." },
+      "2": { "title": "Classes", "text": "Quran reading for children, Islam in Japanese for new Muslims, and Japanese language for newcomers." },
+      "3": { "title": "Shared meals", "text": "Breaking the fast together in Ramadan, Eid celebrations, and community potlucks." },
+      "4": { "title": "Help and advice", "text": "Support for new arrivals, families, and anyone going through a hard time." }
+    }
+  },
+  "etiquette": {
+    "tag": "Visiting",
+    "title": "How to visit",
+    "highlight": "with ease",
+    "description": "Everyone is welcome. A few small courtesies make the visit comfortable for all.",
+    "items": {
+      "1": { "title": "Clothing", "text": "Wear what you like; modest clothing covering shoulders and knees is appreciated. Women may borrow a scarf at the entrance." },
+      "2": { "title": "Shoes", "text": "Please take off your shoes before stepping onto the carpet, as in a Japanese home." },
+      "3": { "title": "Photos", "text": "Photos of the building are fine. Please ask before photographing people, especially during prayer." },
+      "4": { "title": "Women's area", "text": "Women pray in a separate space. Visitors of any gender are welcome to observe from the back of the hall." },
+      "5": { "title": "During prayer", "text": "Keep quiet and avoid walking in front of someone praying. Afterwards, feel free to ask anything." }
+    }
+  },
+  "myths": {
+    "tag": "Common questions",
+    "title": "Things people",
+    "highlight": "often wonder",
+    "description": "Honest answers to questions we hear most often.",
+    "items": {
+      "1": { "q": "Do I have to be Muslim to enter the mosque?", "a": "No. Anyone can visit. On Open Mosque days we give tours and answer questions." },
+      "2": { "q": "Is Islam only for Arabs or foreigners?", "a": "No. Most Muslims are not Arab, and tens of thousands of Japanese people are Muslim. Islam has no nationality." },
+      "3": { "q": "Why do Muslim women wear a scarf?", "a": "It is an act of modesty and faith chosen by the woman herself. Whether to wear it, and how, is her decision." },
+      "4": { "q": "Is halal food hard to find in Japan?", "a": "It is getting easier. Seafood, vegetables, and many Japanese dishes are naturally halal; our Halal guide lists local shops." },
+      "5": { "q": "Does Islam teach violence?", "a": "No. The Quran forbids taking innocent life, and Muslims greet each other with the word peace. Those who commit violence in its name act against its teachings." }
+    }
+  },
+  "learn": {
+    "tag": "Learn more",
+    "title": "Next steps,",
+    "highlight": "at your own pace",
+    "description": "Pick whichever suits you. There is never any pressure.",
+    "items": {
+      "1": { "title": "New Muslim course", "text": "Eight friendly sessions in Japanese, with a personal mentor. Open to anyone curious." },
+      "2": { "title": "Open Mosque day", "text": "Every third Saturday. Tour, prayer demonstration, and halal snacks." },
+      "3": { "title": "Books and websites in Japanese", "text": "Ask us for a short reading list, including a Japanese translation of the Quran with commentary." },
+      "4": { "title": "Frequently asked questions", "text": "Practical answers about prayer, visiting, and daily life." }
+    },
+    "open": "Open"
+  },
+  "contact": {
+    "tag": "Talk to someone",
+    "title": "A guide is one message away",
+    "body": "Our Japanese-speaking mentors are happy to answer questions, by message or over tea at the mosque. No question is too small.",
+    "mentor": "Mentor: Kyoichiro Sugimoto (Chiba Islamic Culture Center) and the Al Muttaqin team.",
+    "whatsapp": "Message on WhatsApp",
+    "email": "Send an email",
+    "visit": "Plan a visit",
+    "whatsappText": "Hello, I found the Discover Islam page and would like to ask a question."
+  }
+}

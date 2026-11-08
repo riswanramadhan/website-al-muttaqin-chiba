@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "title": "Room booking",
+    "description": "Borrow the multipurpose hall or classroom at Al Muttaqin Cultural Center for akad nikah, aqiqah, seminars, and meetings."
+  },
+  "tag": "Room booking",
+  "title": "Use the mosque",
+  "highlight": "for your occasion",
+  "description": "The hall and classroom are available to the congregation free of charge for weddings, aqiqah, seminars, and meetings. Requests are confirmed by the committee within two working days.",
+  "rooms": {
+    "tag": "Rooms",
+    "title": "Spaces you",
+    "highlight": "can borrow",
+    "description": "Choose the room that fits your group. Capacity is the maximum number of people the room can hold safely.",
+    "capacity": "Up to {count} people",
+    "amenities": "Facilities",
+    "availableFor": "Suitable for"
+  },
+  "rules": {
+    "tag": "House rules",
+    "title": "Simple rules,",
+    "highlight": "shared space",
+    "items": {
+      "1": { "title": "Free for the congregation", "text": "There is no rental fee. Voluntary infaq for electricity and cleaning is welcome." },
+      "2": { "title": "Voluntary infaq", "text": "Any amount is appreciated and goes to the mosque's operating fund." },
+      "3": { "title": "No loud music", "text": "Nasheed and speeches are fine; keep volume respectful of prayers and neighbours." },
+      "4": { "title": "Clean up after use", "text": "Return chairs and carpets, take rubbish with you, and leave the kitchen as you found it." },
+      "5": { "title": "Finish by 22:00", "text": "Events end by 22:00 so the building can be locked after Isha." }
+    }
+  },
+  "availability": {
+    "title": "Confirmed within two working days",
+    "body": "We do not show a live calendar yet. Send your request and the committee will check the schedule and reply by WhatsApp or email.",
+    "hours": "Available daily, 08:00 to 22:00, outside prayer times"
+  },
+  "form": {
+    "tag": "Request",
+    "title": "Booking request",
+    "description": "Fill in the details and we will confirm availability.",
+    "room": "Room",
+    "roomHint": "Capacity: up to {count} people.",
+    "purpose": "Purpose",
+    "organizerName": "Your name",
+    "organizerContact": "Phone, WhatsApp, or email",
+    "contactHint": "We will reply here to confirm.",
+    "date": "Date",
+    "time": "Time",
+    "startTime": "Start time",
+    "endTime": "End time",
+    "attendees": "Attendees",
+    "notes": "Notes",
+    "notesPlaceholder": "Set-up needs, catering, or anything else.",
+    "submit": "Send request",
+    "another": "Send another request",
+    "success": { "title": "Request received", "body": "Thank you. The committee will confirm availability within two working days." },
+    "fallback": { "title": "One more step", "body": "Online storage is not active yet. Tap the button to send your request to the committee on WhatsApp; the message is ready." }
+  },
+  "purposes": {
+    "wedding": "Akad nikah (wedding contract)",
+    "aqiqah": "Aqiqah or tasyakuran",
+    "seminar": "Seminar or talk",
+    "meeting": "Meeting",
+    "other": "Other"
+  },
+  "validation": {
+    "time": "Please choose a time.",
+    "attendees": "Please enter the number of attendees.",
+    "endAfterStart": "End time must be after the start time.",
+    "latest": "Events must finish by 22:00.",
+    "past": "Please choose a date from today onwards.",
+    "capacity": "This exceeds the room's capacity. Choose a bigger room or reduce the number."
+  },
+  "whatsapp": {
+    "title": "Room booking request - Al Muttaqin"
+  }
+}

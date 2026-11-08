@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "title": "Peminjaman ruangan",
+    "description": "Pinjam aula serbaguna atau ruang kelas Al Muttaqin Cultural Center untuk akad nikah, akikah, seminar, dan rapat."
+  },
+  "tag": "Peminjaman ruangan",
+  "title": "Gunakan masjid",
+  "highlight": "untuk acara Anda",
+  "description": "Aula dan ruang kelas tersedia gratis bagi jamaah untuk akad nikah, akikah, seminar, dan rapat. Permintaan dikonfirmasi pengurus dalam dua hari kerja.",
+  "rooms": {
+    "tag": "Ruangan",
+    "title": "Ruang yang",
+    "highlight": "bisa dipinjam",
+    "description": "Pilih ruangan yang sesuai jumlah peserta. Kapasitas adalah jumlah orang maksimal yang bisa ditampung dengan aman.",
+    "capacity": "Maks. {count} orang",
+    "amenities": "Fasilitas",
+    "availableFor": "Cocok untuk"
+  },
+  "rules": {
+    "tag": "Aturan pemakaian",
+    "title": "Aturan sederhana,",
+    "highlight": "ruang bersama",
+    "items": {
+      "1": { "title": "Gratis untuk jamaah", "text": "Tidak ada biaya sewa. Infak sukarela untuk listrik dan kebersihan dipersilakan." },
+      "2": { "title": "Infak sukarela", "text": "Berapa pun dihargai dan masuk ke dana operasional masjid." },
+      "3": { "title": "Tanpa musik keras", "text": "Nasyid dan sambutan boleh; jaga volume agar tidak mengganggu salat dan tetangga." },
+      "4": { "title": "Bersihkan setelah pakai", "text": "Kembalikan kursi dan karpet, bawa pulang sampah, dan rapikan dapur seperti semula." },
+      "5": { "title": "Selesai maksimal 22:00", "text": "Acara berakhir pukul 22:00 agar gedung bisa dikunci setelah Isya." }
+    }
+  },
+  "availability": {
+    "title": "Dikonfirmasi pengurus dalam 2 hari kerja",
+    "body": "Kalender ketersediaan belum ditampilkan secara langsung. Kirim permintaan Anda; pengurus akan mengecek jadwal dan membalas lewat WhatsApp atau email.",
+    "hours": "Tersedia setiap hari, 08:00-22:00, di luar waktu salat"
+  },
+  "form": {
+    "tag": "Permintaan",
+    "title": "Formulir peminjaman",
+    "description": "Isi detailnya dan kami akan mengonfirmasi ketersediaan.",
+    "room": "Ruangan",
+    "roomHint": "Kapasitas: maksimal {count} orang.",
+    "purpose": "Keperluan",
+    "organizerName": "Nama Anda",
+    "organizerContact": "Telepon, WhatsApp, atau email",
+    "contactHint": "Kami akan membalas ke sini untuk konfirmasi.",
+    "date": "Tanggal",
+    "time": "Jam",
+    "startTime": "Jam mulai",
+    "endTime": "Jam selesai",
+    "attendees": "Jumlah hadir",
+    "notes": "Catatan",
+    "notesPlaceholder": "Kebutuhan penataan, konsumsi, atau hal lain.",
+    "submit": "Kirim permintaan",
+    "another": "Kirim permintaan lain",
+    "success": { "title": "Permintaan diterima", "body": "Terima kasih. Pengurus akan mengonfirmasi ketersediaan dalam dua hari kerja." },
+    "fallback": { "title": "Satu langkah lagi", "body": "Penyimpanan online belum aktif. Tekan tombol untuk mengirim permintaan ke pengurus lewat WhatsApp; pesannya sudah siap." }
+  },
+  "purposes": {
+    "wedding": "Akad nikah",
+    "aqiqah": "Akikah atau tasyakuran",
+    "seminar": "Seminar atau ceramah",
+    "meeting": "Rapat",
+    "other": "Lainnya"
+  },
+  "validation": {
+    "time": "Pilih jam.",
+    "attendees": "Masukkan jumlah hadir.",
+    "endAfterStart": "Jam selesai harus setelah jam mulai.",
+    "latest": "Acara harus selesai maksimal pukul 22:00.",
+    "past": "Pilih tanggal hari ini atau setelahnya.",
+    "capacity": "Melebihi kapasitas ruangan. Pilih ruangan lebih besar atau kurangi jumlah."
+  },
+  "whatsapp": {
+    "title": "Permintaan peminjaman ruangan - Al Muttaqin"
+  }
+}

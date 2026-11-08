@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "title": "Jadwal salat",
+    "description": "Waktu azan dan iqamah harian di Al Muttaqin Cultural Center, Matsudo, Chiba, beserta jadwal bulanan, waktu sunnah, imsakiyah Ramadan, dan unduhan kalender."
+  },
+  "names": {
+    "fajr": "Subuh",
+    "sunrise": "Syuruk",
+    "dhuhr": "Zuhur",
+    "asr": "Asar",
+    "maghrib": "Magrib",
+    "isha": "Isya"
+  },
+  "arabic": {
+    "fajr": "الفجر",
+    "sunrise": "الشروق",
+    "dhuhr": "الظهر",
+    "asr": "العصر",
+    "maghrib": "المغرب",
+    "isha": "العشاء"
+  },
+  "hero": {
+    "tag": "Jadwal salat",
+    "title": "Jadwal salat di Matsudo, Chiba",
+    "highlight": "Matsudo, Chiba",
+    "description": "Waktu azan dan iqamah di Al Muttaqin, dihitung untuk lokasi masjid dan ditinjau oleh pengurus. Semua waktu dalam Waktu Standar Jepang (JST).",
+    "ics": "Tambahkan ke kalender",
+    "openApp": "Buka App Jamaah"
+  },
+  "today": {
+    "title": "Hari ini",
+    "adhan": "Azan",
+    "iqamah": "Iqamah",
+    "ongoing": "Sedang berlangsung",
+    "next": "Berikutnya",
+    "tomorrow": "Besok",
+    "listLabel": "Waktu salat hari ini",
+    "jst": "JST"
+  },
+  "countdown": {
+    "toward": "Menuju {prayer}",
+    "placeholder": "--:--",
+    "adhanAt": "Azan {time}",
+    "iqamahAt": "Iqamah {time}",
+    "label": "Sisa waktu menuju {prayer}",
+    "progressLabel": "Perjalanan menuju salat berikutnya"
+  },
+  "arc": {
+    "label": "Busur hari dari matahari terbit hingga terbenam dengan waktu salat hari ini",
+    "now": "Sekarang"
+  },
+  "table": {
+    "tag": "Jadwal bulanan",
+    "title": "Jadwal bulan {month}",
+    "description": "Waktu azan setiap hari dalam sebulan. Baris hari ini disorot dan hari Jumat ditandai.",
+    "caption": "Jadwal salat bulan {month}, Asia/Tokyo (JST)",
+    "date": "Tanggal",
+    "imsak": "Imsak",
+    "friday": "Jum",
+    "today": "Hari ini",
+    "prevMonth": "Bulan sebelumnya",
+    "nextMonth": "Bulan berikutnya",
+    "print": "Cetak",
+    "ics": "Unduh ICS",
+    "iqamahNote": "Iqamah: {rules}.",
+    "offsetRule": "{prayer} {count, plural, one {# menit} other {# menit}} setelah azan",
+    "fixedRule": "{prayer} pukul {time}",
+    "imsakNote": "Imsak adalah 10 menit sebelum Subuh dan hanya ditampilkan selama Ramadan."
+  },
+  "guide": {
+    "tag": "Cara membaca jadwal",
+    "title": "Bagaimana waktu salat dihitung",
+    "highlight": "dihitung",
+    "method": "Metode perhitungan",
+    "madhab": "Mazhab untuk Asar",
+    "shafi": "Syafi'i (bayangan sama dengan panjang benda)",
+    "hanafi": "Hanafi (bayangan dua kali panjang benda)",
+    "highLatitude": "Aturan lintang tinggi",
+    "adjustments": "Koreksi menit",
+    "adjustmentsNone": "Tidak ada koreksi",
+    "iqamah": "Aturan iqamah",
+    "jumuah": "Salat Jumat",
+    "jumuahBody": "Khutbah dimulai pukul {time} setiap Jumat. Khatib pekan ini dapat dilihat di halaman Jumat.",
+    "timezone": "Zona waktu",
+    "timezoneBody": "Asia/Tokyo (JST, UTC+9). Jepang tidak memberlakukan waktu musim panas.",
+    "notifications": "Notifikasi azan",
+    "notificationsBody": "Buka App Jamaah untuk menerima notifikasi azan dan iqamah di ponsel serta menyimpan jadwal secara offline.",
+    "openApp": "Buka App Jamaah",
+    "jumuahLink": "Halaman Jumat"
+  },
+  "sunnah": {
+    "tag": "Waktu sunnah",
+    "title": "Salat malam dan waktu lainnya",
+    "highlight": "Salat malam",
+    "description": "Panduan salat sunnah hari ini, dihitung dari Magrib hari ini dan Subuh besok.",
+    "midnight": "Tengah malam",
+    "midnightHint": "Pertengahan antara Magrib dan Subuh",
+    "lastThird": "Sepertiga malam terakhir",
+    "lastThirdHint": "Waktu terbaik untuk tahajud dan doa",
+    "duha": "Duha",
+    "duhaHint": "Sekitar 15 menit setelah syuruk hingga menjelang Zuhur",
+    "forbidden": "Waktu yang dihindari untuk salat sunnah",
+    "forbiddenAfterFajr": "Setelah Subuh hingga syuruk ({from} sampai {to})",
+    "forbiddenAfterAsr": "Setelah Asar hingga Magrib ({from} sampai {to})",
+    "forbiddenNoon": "Saat matahari tepat di atas kepala, beberapa menit sebelum Zuhur"
+  },
+  "ramadan": {
+    "tag": "Ramadan",
+    "title": "Imsakiyah hari ini",
+    "highlight": "Imsakiyah",
+    "description": "Imsak adalah 10 menit sebelum Subuh. Berbuka dimulai saat Magrib. Semoga Allah menerima puasa kita.",
+    "imsak": "Imsak",
+    "iftar": "Berbuka",
+    "countdown": "Menuju berbuka",
+    "done": "Waktu berbuka telah tiba. Semoga Allah menerima puasa dan salat kita."
+  },
+  "app": {
+    "title": "Jadwal salat",
+    "description": "Azan, iqamah, dan jadwal beberapa hari ke depan.",
+    "today": "Hari ini",
+    "tomorrow": "Besok",
+    "week": "7 hari",
+    "fullSchedule": "Jadwal bulanan",
+    "jumuahLink": "Detail Jumat",
+    "offlineTitle": "Jadwal tersimpan offline 30 hari",
+    "offlineBody": "Jadwal 30 hari ke depan disimpan di perangkat ini sehingga tetap bisa dibuka tanpa koneksi.",
+    "offlineSaved": "Disimpan {date}",
+    "offlineNow": "Anda sedang offline. Menampilkan jadwal tersimpan.",
+    "offlineError": "Jadwal tidak dapat diperbarui. Menampilkan salinan tersimpan.",
+    "offlineNone": "Buka layar ini sekali saat online agar jadwal tersimpan.",
+    "offlineSaving": "Menyimpan jadwal untuk penggunaan offline"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "title": "Arah kiblat",
+    "description": "Temukan arah kiblat dari Matsudo atau dari lokasi Anda dengan kompas langsung, derajat dari utara, dan jarak ke Makkah."
+  },
+  "title": "Kiblat",
+  "description": "Arah Ka'bah dari Matsudo, Chiba",
+  "compassLabel": "Kompas kiblat",
+  "cardinal": { "n": "U", "e": "T", "s": "S", "w": "B" },
+  "qiblaLabel": "Arah kiblat",
+  "degrees": "{deg}° dari utara",
+  "headingLabel": "Arah HP",
+  "distanceLabel": "Jarak ke Makkah",
+  "distance": "{km} km",
+  "aligned": "Sudah sejajar dengan kiblat",
+  "rotateHint": "Putar HP sampai penanda Ka'bah berada di atas.",
+  "calibration": "Bila arah terasa meleset, gerakkan HP membentuk angka delapan untuk mengalibrasi kompas.",
+  "status": {
+    "label": "Sensor",
+    "idle": "Memeriksa sensor kompas",
+    "needsPermission": "Ketuk tombol untuk mengizinkan akses kompas",
+    "waiting": "Menunggu data sensor",
+    "active": "Kompas aktif",
+    "unsupported": "Perangkat ini tidak punya sensor kompas",
+    "denied": "Akses kompas ditolak",
+    "relative": "Kompas bersifat relatif: hadap utara dulu, lalu ikuti penanda"
+  },
+  "noSensorHint": "Tanpa kompas, gunakan derajat di atas dengan kompas fisik, atau buka petunjuk arah di Google Maps.",
+  "actions": {
+    "enableCompass": "Aktifkan kompas",
+    "useLocation": "Pakai lokasi saya",
+    "locating": "Mencari lokasi Anda",
+    "useMosque": "Pakai lokasi masjid",
+    "openMaps": "Buka di Google Maps"
+  },
+  "location": {
+    "label": "Dihitung dari",
+    "mosque": "Al Muttaqin, Matsudo",
+    "yours": "Lokasi Anda",
+    "error": "Lokasi tidak tersedia. Menampilkan kiblat dari masjid."
+  }
+}

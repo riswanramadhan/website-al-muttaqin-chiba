@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "title": "ドゥアーとズィクル",
+    "description": "朝夕のズィクル、日常のドゥアー、礼拝、旅、ラマダーン、金曜日の祈りを、アラビア語本文、読み方、訳文とともに掲載しています。"
+  },
+  "title": "ドゥアーとズィクル",
+  "description": "アラビア語本文、読み方、訳文、出典",
+  "categories": {
+    "morning": "朝",
+    "evening": "夕方",
+    "daily": "日常",
+    "prayer": "礼拝",
+    "travel": "旅",
+    "ramadan": "ラマダーン",
+    "jumuah": "金曜日"
+  },
+  "categoriesLabel": "ドゥアーの分類",
+  "autoHint": "東京時間でズフル前は朝のズィクル、ズフル後は夕方のズィクルを表示します。",
+  "search": {
+    "placeholder": "この分類の中を検索",
+    "empty": "該当するドゥアーはありません。",
+    "count": "{count}件"
+  },
+  "arabicSize": {
+    "label": "アラビア語の文字サイズ",
+    "sm": "小",
+    "md": "中",
+    "lg": "大"
+  },
+  "transliteration": {
+    "show": "読み方を表示",
+    "hide": "読み方を隠す"
+  },
+  "counter": {
+    "label": "タップカウンター",
+    "tap": "タップして数える",
+    "progress": "{count} / {total}",
+    "done": "完了",
+    "reset": "カウンターをリセット"
+  },
+  "repeat": "{count, plural, one {1回} other {#回}}",
+  "source": "出典",
+  "actions": {
+    "copy": "コピー",
+    "share": "共有",
+    "copied": "ドゥアーをコピーしました"
+  }
+}

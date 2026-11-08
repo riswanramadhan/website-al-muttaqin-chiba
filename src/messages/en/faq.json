@@ -1,0 +1,36 @@
+{
+  "meta": {
+    "title": "Frequently asked questions",
+    "description": "Answers about prayer times, Jumuah, donations, visiting the mosque, programs, and settling in Chiba as a Muslim."
+  },
+  "hero": {
+    "tag": "FAQ",
+    "title": "Questions we hear most often.",
+    "highlight": "most often.",
+    "description": "Search or filter by topic. If your question is not here, write to us and we will add it."
+  },
+  "search": {
+    "label": "Search questions",
+    "placeholder": "Search, for example: parking, zakat, women",
+    "clear": "Clear search",
+    "results": "{count, plural, =0 {No questions found} one {# question} other {# questions}}",
+    "emptyTitle": "Nothing matches your search",
+    "emptyBody": "Try a different word or clear the filters.",
+    "reset": "Clear filters"
+  },
+  "categories": {
+    "label": "Categories",
+    "all": "All",
+    "general": "General",
+    "prayer": "Prayer",
+    "donation": "Donation",
+    "newcomer": "New in Chiba",
+    "program": "Programs",
+    "visit": "Visiting"
+  },
+  "cta": {
+    "title": "Still have a question?",
+    "body": "The office is happy to help in Japanese, English, or Indonesian. Newcomers may also find the settling-in guide useful.",
+    "newcomers": "Newcomer guide"
+  }
+}

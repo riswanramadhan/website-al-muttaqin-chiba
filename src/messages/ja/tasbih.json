@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "title": "デジタルタスビーフ",
+    "description": "目標回数、周回数、振動やクリック音の設定ができるズィクルカウンターです。1日の記録は端末に保存されます。"
+  },
+  "title": "デジタルタスビーフ",
+  "description": "タップして数え、毎日の記録を残す",
+  "countLabel": "現在の回数",
+  "tapHint": "円をタップするか、スペースキーを押してください",
+  "tapButton": "ズィクルを数える",
+  "targetLabel": "目標",
+  "targetReached": "目標に達しました",
+  "custom": "自由設定",
+  "customPlaceholder": "目標回数",
+  "customLabel": "目標回数を入力",
+  "rounds": "{count}周",
+  "roundsLabel": "周回数",
+  "presets": {
+    "label": "ズィクル",
+    "subhanallah": "アッラーに栄光あれ",
+    "alhamdulillah": "アッラーに称賛あれ",
+    "allahuakbar": "アッラーは偉大なり",
+    "astaghfirullah": "アッラーに赦しを求めます",
+    "salawat": "預言者への祝福",
+    "tahlil": "アッラーのほかに神はなし"
+  },
+  "settings": {
+    "vibrate": "タップ時に振動",
+    "sound": "クリック音"
+  },
+  "reset": {
+    "button": "リセット",
+    "title": "カウンターをリセットしますか",
+    "description": "現在の回数と周回数が0に戻ります。1日の記録は残ります。",
+    "confirm": "リセットする",
+    "cancel": "キャンセル"
+  },
+  "stats": {
+    "today": "今日",
+    "week": "直近7日間",
+    "weekTotal": "合計 {count}回",
+    "empty": "まだ記録がありません。回数はこの端末に保存されます。",
+    "dayTotal": "{count}回"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "banner": {
+    "liveNow": "ライブ配信中",
+    "liveTitle": "勉強会を配信しています",
+    "liveDescription": "下の画面でご覧いただくか、YouTubeで開いてください。",
+    "streamTitle": "アルムッタキーン ライブ配信",
+    "offlineTitle": "現在は配信していません",
+    "offlineDescription": "録画は各回の終了後に公開します。次回の予定は下記をご覧ください。",
+    "checking": "配信状況を確認しています",
+    "nextLecture": "次回の勉強会",
+    "noSchedule": "次回の予定は近日中にお知らせします。",
+    "openChannel": "YouTubeチャンネル",
+    "watchOnYouTube": "YouTubeで見る",
+    "viewEvent": "イベントの詳細",
+    "streamHint": "配信が始まると、ここに自動で表示されます。"
+  },
+  "app": {
+    "title": "ライブ講話",
+    "description": "ライブ配信と最新の録画",
+    "latest": "最新の録画",
+    "latestDescription": "タップするとここで再生できます。",
+    "openInWeb": "ウェブサイトで開く",
+    "allLectures": "すべての講話",
+    "empty": "録画はまだありません。"
+  }
+}

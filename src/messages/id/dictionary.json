@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "title": "Kamus dakwah: frasa Jepang untuk kehidupan muslim",
+    "description": "Kata dan kalimat Jepang siap pakai untuk salat, makanan halal, urusan harian, dan darurat. Tunjukkan teks Jepang besar ke lawan bicara, salin, atau dengarkan pengucapannya."
+  },
+  "tag": "Kamus dakwah",
+  "title": "Sampaikan kebutuhan Anda dalam bahasa Jepang tanpa ragu.",
+  "highlight": "tanpa ragu.",
+  "description": "Setiap entri berisi kata, bacaan, dan kalimat sopan yang bisa ditunjukkan di layar. Ketuk Tunjukkan untuk versi layar penuh yang terbaca dari jarak satu meter.",
+  "search": {
+    "placeholder": "Cari bahasa Jepang, bacaan, atau arti",
+    "label": "Cari di kamus",
+    "count": "{count} entri",
+    "empty": "Tidak ada yang cocok. Coba kata lain atau ganti kategori.",
+    "seeAll": "Lihat semua entri",
+    "showingLimited": "Menampilkan {count} hasil pertama"
+  },
+  "categories": {
+    "all": "Semua",
+    "worship": "Ibadah",
+    "food": "Makanan",
+    "daily": "Harian",
+    "emergency": "Darurat",
+    "phrases": "Frasa"
+  },
+  "entry": {
+    "example": "Kalimat untuk ditunjukkan",
+    "show": "Tunjukkan",
+    "copy": "Salin",
+    "speak": "Dengarkan",
+    "speaking": "Memutar",
+    "reading": "Bacaan"
+  },
+  "show": {
+    "title": "Tunjukkan layar ini",
+    "hint": "Hadapkan ponsel Anda ke lawan bicara.",
+    "close": "Tutup",
+    "next": "Frasa berikutnya",
+    "previous": "Frasa sebelumnya"
+  },
+  "tips": {
+    "tag": "Cara pakai",
+    "title": "Tiga cara memakai satu entri",
+    "items": {
+      "0": { "name": "Tunjukkan", "detail": "Membuka kalimat Jepang dalam teks sangat besar dengan terjemahan di bawahnya, jadi Anda cukup mengangkat ponsel." },
+      "1": { "name": "Salin", "detail": "Menyalin kalimat Jepang untuk ditempel ke pesan, formulir, atau aplikasi penerjemah." },
+      "2": { "name": "Dengarkan", "detail": "Memutar kalimat dengan suara Jepang di perangkat Anda bila tersedia, untuk berlatih pengucapan." }
+    }
+  }
+}

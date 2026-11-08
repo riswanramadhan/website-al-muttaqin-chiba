@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "title": "Contact and access",
+    "description": "Address, map, nearest stations, office hours, and contact form of Al Muttaqin Cultural Center in Matsudo, Chiba."
+  },
+  "hero": {
+    "tag": "Contact and access",
+    "title": "Come and visit us in Matsudo.",
+    "highlight": "Matsudo.",
+    "description": "We are a short walk from Matsudo Station. Write to us, call, or send a WhatsApp message, and we will reply as soon as the office is open."
+  },
+  "card": {
+    "address": "Address",
+    "hours": "Opening hours",
+    "officeHours": "The office answers calls and messages on weekdays from 10:00 to 17:00.",
+    "phone": "Phone and WhatsApp",
+    "email": "Email",
+    "emailHint": "We usually reply within two working days.",
+    "copyAddress": "Copy Japanese address"
+  },
+  "map": {
+    "note": "Map data by OpenStreetMap contributors. The exact street address will be published by the committee; the marker currently shows central Matsudo."
+  },
+  "access": {
+    "tag": "Access",
+    "title": "How to get here",
+    "highlight": "get here",
+    "description": "Public transport is the easiest way to reach us. Parking is very limited, especially on Fridays.",
+    "directions": "Directions",
+    "stations": "Nearest stations",
+    "walk": "About {minutes} minutes on foot",
+    "routesTitle": "Routes from major stations",
+    "routes": {
+      "tokyo": {
+        "from": "From Tokyo Station",
+        "text": "JR Ueno-Tokyo Line to Matsudo, about 30 minutes without a change. Rapid trains also stop at Matsudo."
+      },
+      "ueno": {
+        "from": "From Ueno",
+        "text": "JR Joban Line local or rapid to Matsudo, about 20 minutes."
+      },
+      "kashiwa": {
+        "from": "From Kashiwa",
+        "text": "JR Joban Line toward Ueno, about 10 minutes to Matsudo."
+      },
+      "narita": {
+        "from": "From Narita Airport",
+        "text": "Keisei Line to Keisei-Takasago or Aoto, then change for Matsudo via Shin-Keisei or JR Joban Line. Allow about 80 minutes."
+      }
+    },
+    "parking": {
+      "title": "Parking",
+      "body": "Only a few car spaces are available and none on Fridays or during events. Nearby paid car parks can be found around Matsudo Station.",
+      "bike": "Bicycle parking is available next to the entrance."
+    }
+  },
+  "office": {
+    "title": "Office hours",
+    "description": "When the secretariat can answer calls, messages, and visits.",
+    "hours": {
+      "weekday": { "label": "Monday to Thursday", "value": "10:00 - 17:00" },
+      "friday": { "label": "Friday", "value": "10:00 - 12:00, 14:00 - 17:00" },
+      "weekend": { "label": "Saturday and Sunday", "value": "By appointment" }
+    }
+  },
+  "form": {
+    "tag": "Contact form",
+    "title": "Send us a message",
+    "highlight": "a message",
+    "description": "For visits, media requests, volunteering, or partnerships. Urgent prayer-time questions are answered faster on WhatsApp.",
+    "tips": {
+      "0": "Choose a subject so the right person on the board receives your message.",
+      "1": "For school or group visits, tell us the date, group size, and preferred language.",
+      "2": "Your data is used only to reply to you and is never shared with third parties."
+    },
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "subjects": {
+      "general": "General question",
+      "visit": "Visit or tour",
+      "media": "Media and press",
+      "volunteer": "Volunteering",
+      "partnership": "Partnership and cooperation"
+    },
+    "message": "Message",
+    "messageHint": "At least 10 characters. Please include dates or details that help us answer.",
+    "placeholders": {
+      "name": "Your full name",
+      "email": "name@example.com",
+      "message": "How can we help?"
+    },
+    "note": "Fields marked with * are required.",
+    "submit": "Send message",
+    "errors": {
+      "turnstile": "Spam check failed. Please reload the page and try again."
+    },
+    "success": {
+      "title": "Thank you, your message has been received.",
+      "body": "The office will reply by email, usually within two working days.",
+      "fallbackTitle": "One more step to send your message",
+      "fallbackBody": "Online delivery is not active yet. Send the same message to us through WhatsApp or email with one tap; nothing needs to be retyped.",
+      "whatsapp": "Send via WhatsApp",
+      "email": "Send via email",
+      "again": "Write another message"
+    }
+  },
+  "social": {
+    "title": "Social media",
+    "description": "Daily updates, recorded lectures, and event photos."
+  }
+}
