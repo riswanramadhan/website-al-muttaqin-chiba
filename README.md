@@ -41,8 +41,23 @@ Salin `.env.example` ke `.env.local`. Semua variabel opsional:
 - Tambahkan `<NEXT_PUBLIC_SITE_URL>/admin/auth/callback` ke daftar Redirect URLs di Supabase Auth
   agar magic link dan undangan bisa masuk.
 - Bahasa UI admin: Indonesia atau Jepang (tombol ID/JA di header).
-- Web Push memerlukan kunci VAPID (`npx web-push generate-vapid-keys`) dan cron ke `/api/push/send`.
+- Web Push memerlukan kunci VAPID (`npx web-push generate-vapid-keys`) dan pemicu tiap 5 menit ke
+  `/api/push/send` (lihat bagian berikut).
 - Anti-spam: Cloudflare Turnstile (`NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`).
+
+## Pengingat adzan (pemicu tiap 5 menit)
+
+Paket Vercel Hobby hanya mengizinkan cron harian, jadi `vercel.json` sengaja tanpa `crons`.
+Pengingat adzan, iqamah, dan Jumat dipicu dari penjadwal luar yang gratis, misalnya
+[cron-job.org](https://cron-job.org):
+
+1. Isi `PUSH_CRON_SECRET` di Environment Variables Vercel dengan string acak panjang, lalu redeploy.
+2. Di cron-job.org buat job baru: URL `https://<domain>/api/push/send`, metode `GET`, jadwal tiap 5 menit.
+3. Di tab Advanced tambahkan header `Authorization` bernilai `Bearer <PUSH_CRON_SECRET>`.
+4. Klik "Test run". Respons yang benar berbentuk `{"ok":true,"sent":0,...}`; `401` berarti header salah.
+
+Bila nanti memakai Vercel Pro, cron bawaan bisa dipakai lagi dengan menambahkan ke `vercel.json`:
+`"crons": [{ "path": "/api/push/send", "schedule": "*/5 * * * *" }]` dan mengisi `CRON_SECRET`.
 
 ## Struktur
 
