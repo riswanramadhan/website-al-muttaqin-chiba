@@ -6,6 +6,8 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // Default 60 detik terlalu ketat untuk mesin build yang lambat; 607 halaman statis dirender saat build.
+  staticPageGenerationTimeout: 180,
   turbopack: {
     rules: {
       "*.css": {

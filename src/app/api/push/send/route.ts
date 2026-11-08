@@ -11,7 +11,7 @@ import { buildReminderMessage, getCronEvents, normalizePreferences, reminderTag,
  * Pengirim Web Push (PRD-07b).
  * Otorisasi: `Authorization: Bearer <PUSH_CRON_SECRET | CRON_SECRET>`.
  *
- * Mode cron (GET dari Vercel Cron tiap 5 menit, atau POST tanpa body / { mode: "cron" }):
+ * Mode cron (GET tiap 5 menit dari penjadwal luar seperti cron-job.org, atau POST tanpa body / { mode: "cron" }):
  *   adzan, iqamah, dan Jumatan yang jatuh 5-10 menit ke depan, dikirim sesuai preferensi & bahasa.
  * Mode broadcast (POST dari admin):
  *   { mode: "broadcast", title: { ja, en, id }, body: { ja, en, id }, url } ke semua langganan.
