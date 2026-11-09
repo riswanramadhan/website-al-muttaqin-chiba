@@ -38,7 +38,7 @@
     "jumpPlaceholder": "Ayat",
     "jumpGo": "Lompat",
     "audioLabel": "Murottal Mishary Rashid Alafasy",
-    "audioHint": "Audio diputar dari cdn.islamic.network dan tidak disimpan offline.",
+    "audioHint": "Audio diputar langsung dari server murottal (cdn.islamic.network, cadangan mp3quran.net) dan tidak disimpan offline.",
     "audioUnsupported": "Browser Anda tidak mendukung pemutaran audio.",
     "prev": "Sebelumnya",
     "next": "Berikutnya",
@@ -50,8 +50,12 @@
     "editions": {
       "en_sahih": "Saheeh International",
       "id_indonesian": "Kementerian Agama RI",
-      "ja_ryoichi": "Ryoichi Mita"
-    }
+      "ja_japanese": "Terjemahan Jepang (Tanzil)"
+    },
+    "audioPlay": "Putar murottal",
+    "audioPause": "Jeda murottal",
+    "audioSeek": "Posisi murottal",
+    "audioError": "Murottal tidak dapat diputar. Periksa koneksi lalu coba lagi."
   },
   "revelation": {
     "Meccan": "Makkiyah",

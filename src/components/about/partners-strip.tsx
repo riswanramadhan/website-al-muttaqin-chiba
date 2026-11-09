@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { ExternalLink, Handshake } from "lucide-react";
 import type { Locale } from "@/lib/types";
@@ -25,16 +26,22 @@ export async function PartnersStrip({ locale, className }: { locale: Locale; cla
           .toUpperCase();
         return (
           <li key={p.name} className="card-surface flex flex-col gap-4 p-6">
-            <div className="flex items-center gap-4">
-              <IconCircle tone="soft" shape="square" size="lg">
-                <span className="text-sm font-bold tracking-wide" aria-hidden>
-                  {initials}
-                </span>
-              </IconCircle>
-              <div className="min-w-0">
-                <p className="font-bold leading-snug">{p.name}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{pick(p.role, locale)}</p>
+            {p.logo ? (
+              <div className="flex h-20 items-center justify-center rounded-2xl border border-border bg-white px-6 py-3">
+                <Image src={p.logo.src} alt={p.name} width={p.logo.width} height={p.logo.height} className="h-full w-auto max-w-full object-contain" />
               </div>
+            ) : (
+              <div className="flex h-20 items-center justify-center rounded-2xl border border-border bg-surface">
+                <IconCircle tone="soft" shape="square" size="lg">
+                  <span className="text-sm font-bold tracking-wide" aria-hidden>
+                    {initials}
+                  </span>
+                </IconCircle>
+              </div>
+            )}
+            <div className="min-w-0">
+              <p className="font-bold leading-snug">{p.name}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{pick(p.role, locale)}</p>
             </div>
             {p.url && (
               <a

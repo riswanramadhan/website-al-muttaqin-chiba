@@ -87,6 +87,18 @@ const serwist = new Serwist({
   },
 });
 
+// Streaming media lintas domain (murottal cdn.islamic.network / mp3quran.net, video) tidak
+// boleh lewat service worker: aturan "cross-origin" bawaan (NetworkFirst) mencoba menyimpan
+// berkas puluhan MB dan permintaan Range, sehingga pemutaran di PWA iOS gagal. Didaftarkan
+// sebelum pendengar Serwist; tanpa respondWith, browser mengambilnya langsung dari jaringan.
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+  if (request.method !== "GET") return;
+  const crossOrigin = new URL(request.url).origin !== self.location.origin;
+  const media = request.destination === "audio" || request.destination === "video" || request.headers.has("range");
+  if (crossOrigin && media) event.stopImmediatePropagation();
+});
+
 serwist.addEventListeners();
 
 // ---------------------------------------------------------------

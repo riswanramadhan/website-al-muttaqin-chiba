@@ -53,7 +53,7 @@ adzan tepat pada menit adzan, iqamah 10 menit sebelum iqamah, Jumat 30 menit seb
 **Saat App terbuka** (layar mana pun di `/app`, juga di tab latar belakang): `AdhanReminderHost` di
 `src/app/[locale]/app/layout.tsx` mencocokkan jadwal dengan jam setiap 20 detik (plus timer presisi
 menjelang waktunya, dan saat tab aktif kembali), lalu menampilkan notifikasi sistem lewat service
-worker, memutar suara pilihan di Pengaturan (adzan penuh dari `public/audio/adhan.mp3`, chime
+worker, memutar suara pilihan di Pengaturan (adzan penuh dari `public/audio/adhan-madinah.mp3`, chime
 Web Audio, getar saja, atau senyap), dan menampilkan banner dengan tombol Hentikan. Tiap kejadian
 diklaim lewat tag di localStorage (`acc-reminder-fired`) sehingga hanya berbunyi sekali walau ada
 beberapa tab atau push server ikut tiba. Browser memblokir suara sebelum ada interaksi; App membuka

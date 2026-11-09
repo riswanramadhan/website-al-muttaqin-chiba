@@ -38,7 +38,7 @@
     "jumpPlaceholder": "Ayah",
     "jumpGo": "Go",
     "audioLabel": "Recitation by Mishary Rashid Alafasy",
-    "audioHint": "Audio streams from cdn.islamic.network and is not stored offline.",
+    "audioHint": "Audio streams from cdn.islamic.network (backup: mp3quran.net) and is not stored offline.",
     "audioUnsupported": "Your browser does not support audio playback.",
     "prev": "Previous",
     "next": "Next",
@@ -50,8 +50,12 @@
     "editions": {
       "en_sahih": "Saheeh International",
       "id_indonesian": "Kementerian Agama RI",
-      "ja_ryoichi": "Ryoichi Mita"
-    }
+      "ja_japanese": "Japanese translation (Tanzil)"
+    },
+    "audioPlay": "Play recitation",
+    "audioPause": "Pause recitation",
+    "audioSeek": "Recitation position",
+    "audioError": "The recitation could not be played. Check your connection and try again."
   },
   "revelation": {
     "Meccan": "Meccan",

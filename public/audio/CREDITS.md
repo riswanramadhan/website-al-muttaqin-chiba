@@ -1,15 +1,21 @@
 # Audio credits
 
-## adhan.mp3, adhan.ogg
+## adhan-madinah.mp3, adhan-madinah.ogg
 
-- Title: "The Adhan - Muslim Call to Prayer - Aaqib Azeez"
-- Source: https://commons.wikimedia.org/wiki/File:The_Adhan_-_Muslim_Call_to_Prayer_-_Aaqib_Azeez.mp3
-- Author: Wikimedia Commons user Atcovi (marked "own work"); the title names the muezzin, Aaqib Azeez
-- License: Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0),
-  https://creativecommons.org/licenses/by-sa/4.0/
-- Files: `adhan.mp3` is the original upload (MP3, 128 kbps, 86 s, 1.4 MB) and is used by every
-  browser including iOS Safari. `adhan.ogg` is the Ogg Vorbis transcode that Wikimedia Commons
-  publishes for the same file, kept as a fallback. Neither file was modified.
+- Title: "Call to Prayer from the Prophet's Mosque" (recorded at Masjid an-Nabawi, Madinah;
+  the muezzin is not named)
+- Source: https://commons.wikimedia.org/wiki/File:33937_ejaz215_call-to-prayer-from-the-prophet-s-mo.ogg
+- Author: Freesound user ejaz215 (Freesound sound #33937, 2007), imported to Wikimedia Commons
+- License: Creative Commons Attribution 3.0 Unported (CC BY 3.0),
+  https://creativecommons.org/licenses/by/3.0/
+- Required attribution: "Call to Prayer from the Prophet's Mosque" by ejaz215 (Freesound),
+  via Wikimedia Commons, CC BY 3.0.
+- Files: `adhan-madinah.ogg` is the Wikimedia Commons original (Ogg Vorbis, 128 kbps, 3:07),
+  unmodified. `adhan-madinah.mp3` is a 128 kbps MP3 encoded from that file for iOS Safari;
+  the recording itself was not edited.
+- The author asked that the sample not be used in musical productions; it is used here only
+  as the prayer-time call to prayer.
 
-Attribution is required wherever the recording is redistributed. The chime and tasbih click
-sounds are generated in the browser with the Web Audio API and are not recordings.
+The file names include "madinah" so service workers that cached the previous recording
+fetch the new one. The chime and tasbih click sounds are generated in the browser with the
+Web Audio API and are not recordings.

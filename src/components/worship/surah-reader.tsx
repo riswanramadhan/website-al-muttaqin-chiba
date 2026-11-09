@@ -15,8 +15,9 @@ import { ArabicSizeControl, useArabicSizeClass } from "./arabic-size-control";
 import { readJson, useStoredJson, writeJson } from "./storage";
 import { LAST_READ_KEY, surahLocalName, type LastRead } from "./surah-list";
 import { BASMALAH, stripBasmalah } from "./utils";
+import { MurottalPlayer } from "./murottal-player";
 
-const EDITIONS: Record<Locale, string> = { id: "id.indonesian", en: "en.sahih", ja: "ja.ryoichi" };
+const EDITIONS: Record<Locale, string> = { id: "id.indonesian", en: "en.sahih", ja: "ja.japanese" };
 const ARABIC_EDITION = "quran-uthmani";
 
 type ApiAyah = { numberInSurah: number; text: string };
@@ -28,7 +29,7 @@ type Loaded = { ayahs: Ayah[]; fromCache: boolean };
 type State = { status: "loading" } | { status: "ready"; data: Loaded } | { status: "error" };
 
 function cacheKey(surah: number, edition: string): string {
-  return `acc-quran-${surah}-${edition}`;
+  return `acc-quran-v2-${surah}-${edition}`;
 }
 
 function parseResponse(json: ApiResponse, surah: number): Ayah[] {
@@ -150,11 +151,7 @@ export function SurahReader({ meta, prev, next, locale }: { meta: QuranSurahMeta
           <Badge variant="outline">{t("ayahs", { count: meta.numberOfAyahs })}</Badge>
         </div>
         <div className="mt-2 w-full">
-          <p className="mb-1 text-xs text-muted-foreground">{t("reader.audioLabel")}</p>
-          <audio controls preload="none" className="w-full" src={`https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${surah}.mp3`}>
-            {t("reader.audioUnsupported")}
-          </audio>
-          <p className="mt-1 text-[11px] text-muted-foreground">{t("reader.audioHint")}</p>
+          <MurottalPlayer surah={surah} title={`${meta.transliteration} · ${meta.name}`} subtitle={surahLocalName(meta, locale)} />
         </div>
       </section>
 

@@ -25,8 +25,8 @@ export const DEFAULT_SOUND: SoundSettings = { mode: "adhan", volume: 0.8 };
 
 /** Rekaman adzan (lihat public/audio/CREDITS.md). MP3 untuk semua browser termasuk iOS, OGG cadangan. */
 const ADHAN_SOURCES = [
-  { src: "/audio/adhan.mp3", type: "audio/mpeg" },
-  { src: "/audio/adhan.ogg", type: "audio/ogg" },
+  { src: "/audio/adhan-madinah.mp3", type: "audio/mpeg" },
+  { src: "/audio/adhan-madinah.ogg", type: "audio/ogg" },
 ] as const;
 
 export const ADHAN_VIBRATE = [600, 250, 600, 250, 900];
@@ -131,17 +131,28 @@ function getCtx(): AudioContext | null {
   return audioCtx;
 }
 
+/** Ada pemutar media lain di halaman yang sedang berbunyi (murottal, video)? */
+function otherMediaPlaying(): boolean {
+  if (typeof document === "undefined") return false;
+  return Array.from(document.querySelectorAll<HTMLMediaElement>("audio, video")).some((m) => m !== audioEl && !m.paused);
+}
+
 /**
  * Dipanggil pada interaksi pertama (ketuk/tombol): memutar audio tanpa suara sesaat agar
  * pemutaran berikutnya (saat waktu adzan) diizinkan browser, termasuk Safari iOS.
+ * Dilewati bila ketukan mengenai pemutar media lain atau ada media lain yang sedang berbunyi,
+ * karena di iOS memutar elemen audio kedua menghentikan murottal. Mengembalikan true bila
+ * audio sudah terbuka (pendengar boleh dilepas).
  */
-export function unlockAudio(): void {
-  if (unlocked) return;
+export function unlockAudio(target?: EventTarget | null): boolean {
+  if (unlocked) return true;
+  if (typeof Element !== "undefined" && target instanceof Element && target.closest("[data-media-player], audio, video, iframe")) return false;
+  if (otherMediaPlaying()) return false;
   unlocked = true;
   const ctx = getCtx();
   if (ctx && ctx.state === "suspended") void ctx.resume().catch(() => undefined);
   const el = getAudio();
-  if (!el || state.status === "playing") return;
+  if (!el || state.status === "playing") return true;
   el.muted = true;
   el.play()
     .then(() => {
@@ -155,6 +166,7 @@ export function unlockAudio(): void {
       el.muted = false;
       unlocked = false;
     });
+  return true;
 }
 
 function stopChime() {

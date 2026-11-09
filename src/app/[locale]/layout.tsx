@@ -11,6 +11,7 @@ import { ToastProvider } from "@/components/ui/toast";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PwaProvider } from "@/components/shared/pwa-provider";
 import { PwaRuntime } from "@/components/pwa/pwa-runtime";
+import { DonationPosterPopup } from "@/components/promo/donation-poster-popup";
 import { siteUrl } from "@/lib/site";
 import "../globals.css";
 
@@ -86,6 +87,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
                 <PwaProvider>
                   {children}
                   <PwaRuntime />
+                  <DonationPosterPopup />
                 </PwaProvider>
               </ToastProvider>
             </TooltipProvider>

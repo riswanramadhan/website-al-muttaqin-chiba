@@ -301,6 +301,12 @@ export function SettingsPanel({ version }: { version: string }) {
             </Button>
             <Notice>{t("sound.foregroundNote")}</Notice>
             <Notice tone="warning">{t("sound.backgroundNote")}</Notice>
+            <p className="text-[11px] leading-relaxed text-muted-foreground">
+              {t("sound.credit")}{" "}
+              <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noreferrer" className="underline underline-offset-2">
+                CC BY 3.0
+              </a>
+            </p>
           </div>
 
           <div className={cn("divide-y divide-border", !push.enabled && "opacity-60")}>

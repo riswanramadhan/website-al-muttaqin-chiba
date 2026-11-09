@@ -22,7 +22,13 @@ export function DialogOverlay({ className, ...props }: React.ComponentProps<type
   );
 }
 
-export function DialogContent({ className, children, closeLabel = "Close", ...props }: React.ComponentProps<typeof DialogPrimitive.Content> & { closeLabel?: string }) {
+export function DialogContent({
+  className,
+  children,
+  closeLabel = "Close",
+  showClose = true,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Content> & { closeLabel?: string; showClose?: boolean }) {
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -34,10 +40,12 @@ export function DialogContent({ className, children, closeLabel = "Close", ...pr
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="absolute top-4 right-4 rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-surface hover:text-foreground">
-          <X className="size-4" />
-          <span className="sr-only">{closeLabel}</span>
-        </DialogPrimitive.Close>
+        {showClose && (
+          <DialogPrimitive.Close className="absolute top-4 right-4 rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-surface hover:text-foreground">
+            <X className="size-4" />
+            <span className="sr-only">{closeLabel}</span>
+          </DialogPrimitive.Close>
+        )}
       </DialogPrimitive.Content>
     </DialogPortal>
   );

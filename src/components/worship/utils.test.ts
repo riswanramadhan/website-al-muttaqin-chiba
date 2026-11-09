@@ -73,6 +73,17 @@ describe("util lain", () => {
     expect(stripBasmalah("الٓمٓ")).toBe("الٓمٓ");
   });
 
+  it("membuang basmalah walau urutan harakat dan bentuk hurufnya berbeda (teks API)", () => {
+    // quran-uthmani: syadah (U+0651) sebelum fathah (U+064E), seperti respons api.alquran.cloud.
+    const uthmani = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ يسٓ";
+    expect(stripBasmalah(uthmani)).toBe("يسٓ");
+    // Varian quran academy: sukun kecil (U+06E1), tatweel, dan ya Persia.
+    const academy = "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَـٰنِ ٱلرَّحِیمِ الۤمۤ";
+    expect(stripBasmalah(academy)).toBe("الۤمۤ");
+    // Ayat yang tidak diawali basmalah tidak berubah.
+    expect(stripBasmalah("قُلْ هُوَ ٱللَّهُ أَحَدٌ")).toBe("قُلْ هُوَ ٱللَّهُ أَحَدٌ");
+  });
+
   it("normalisasi pencarian mengabaikan harakat dan apostrof", () => {
     expect(normalizeSearch("Al-Fātiḥah")).toBe("alfatihah");
     expect(normalizeSearch("ٱلرَّحِيمِ")).toBe("ٱلرحيم");

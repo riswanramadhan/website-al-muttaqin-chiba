@@ -120,17 +120,19 @@ export function useLocalAdhanReminder({ config, coordinates }: { config: PrayerC
   }, []);
 
   // Buka kunci audio pada interaksi pertama (kebijakan autoplay browser).
+  // Ketukan pada pemutar media lain (murottal, video) dilewati agar tidak menghentikannya di iOS;
+  // pendengar dilepas setelah audio benar-benar terbuka.
   React.useEffect(() => {
-    const unlock = () => unlockAudio();
-    const opts = { once: true, capture: true, passive: true } as const;
-    window.addEventListener("pointerdown", unlock, opts);
-    window.addEventListener("keydown", unlock, opts);
-    window.addEventListener("touchend", unlock, opts);
-    return () => {
-      window.removeEventListener("pointerdown", unlock, opts);
-      window.removeEventListener("keydown", unlock, opts);
-      window.removeEventListener("touchend", unlock, opts);
+    const opts = { capture: true, passive: true } as const;
+    const events = ["pointerdown", "keydown", "touchend"] as const;
+    const cleanup = () => {
+      for (const ev of events) window.removeEventListener(ev, unlock, opts);
     };
+    function unlock(e: Event) {
+      if (unlockAudio(e.target)) cleanup();
+    }
+    for (const ev of events) window.addEventListener(ev, unlock, opts);
+    return cleanup;
   }, []);
 
   // Simpan rekaman adzan di cache agar tetap berbunyi saat offline.

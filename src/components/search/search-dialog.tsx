@@ -4,7 +4,7 @@ import * as React from "react";
 import { ArrowRight, Clock, CornerDownLeft, LoaderCircle, Search, SearchX, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils/cn";
 import { MAX_QUERY_LENGTH, groupResults, type SearchApiResponse, type SearchResult } from "./search";
 import { addSearchHistory, useSearchHistory } from "./search-history";
@@ -153,7 +153,7 @@ export function SearchDialog({ open, onOpenChange, shortcutLabel }: { open: bool
           className={cn("flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-colors", selected ? "bg-surface text-foreground" : "text-foreground/90")}
         >
           {content}
-          {selected && <CornerDownLeft className="ml-auto size-4 shrink-0 text-muted-foreground" aria-hidden />}
+          {selected && <CornerDownLeft className="ml-auto hidden size-4 shrink-0 text-muted-foreground sm:block" aria-hidden />}
         </div>
         {extra}
       </div>
@@ -163,13 +163,16 @@ export function SearchDialog({ open, onOpenChange, shortcutLabel }: { open: bool
   return (
     <Dialog open={open} onOpenChange={onOpenChangeInternal}>
       <DialogContent
-        closeLabel={tc("actions.close")}
-        className="top-[8dvh] max-h-[84dvh] max-w-xl translate-y-0 gap-0 overflow-hidden p-0"
+        showClose={false}
+        className="top-[max(1rem,7dvh)] flex max-h-[86dvh] w-[calc(100%-2rem)] max-w-xl translate-y-0 flex-col gap-0 overflow-hidden rounded-3xl p-0"
       >
         <DialogTitle className="sr-only">{t("title")}</DialogTitle>
         <DialogDescription className="sr-only">{t("dialogDescription")}</DialogDescription>
-        <div className="flex items-center gap-3 border-b border-border px-4 pr-12">
-          {loading ? <LoaderCircle className="size-5 shrink-0 animate-spin text-muted-foreground" aria-hidden /> : <Search className="size-5 shrink-0 text-muted-foreground" aria-hidden />}
+        {/* Baris pencarian simetris: ikon kiri dan tombol tutup kanan sama-sama 40 px. */}
+        <div className="flex h-16 shrink-0 items-center gap-1 border-b border-border px-3 transition-colors focus-within:border-primary/40">
+          <span className="flex size-10 shrink-0 items-center justify-center text-muted-foreground" aria-hidden>
+            {loading ? <LoaderCircle className="size-5 animate-spin" /> : <Search className="size-5" />}
+          </span>
           <input
             type="search"
             role="combobox"
@@ -189,11 +192,15 @@ export function SearchDialog({ open, onOpenChange, shortcutLabel }: { open: bool
             autoComplete="off"
             spellCheck={false}
             enterKeyHint="search"
-            className="h-14 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted-foreground [&::-webkit-search-cancel-button]:hidden"
+            className="h-full min-w-0 flex-1 truncate bg-transparent px-1 text-base outline-none placeholder:text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0 [&::-webkit-search-cancel-button]:hidden"
           />
+          <DialogClose className="flex size-10 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-surface hover:text-foreground">
+            <X className="size-5" aria-hidden />
+            <span className="sr-only">{tc("actions.close")}</span>
+          </DialogClose>
         </div>
 
-        <div ref={listRef} id={listId} role="listbox" aria-label={t("title")} className="max-h-[60dvh] overflow-y-auto p-2" aria-busy={loading}>
+        <div ref={listRef} id={listId} role="listbox" aria-label={t("title")} className="min-h-0 flex-1 overflow-y-auto p-3" aria-busy={loading}>
           {trimmed ? (
             <>
               {current?.status === "error" && <p className="px-3 py-8 text-center text-sm text-muted-foreground">{t("error")}</p>}
@@ -270,7 +277,7 @@ export function SearchDialog({ open, onOpenChange, shortcutLabel }: { open: bool
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-3 border-t border-border bg-surface/60 px-4 py-2.5 text-xs text-muted-foreground">
+        <div className="flex shrink-0 items-center justify-center gap-3 border-t border-border bg-surface/60 px-5 py-3 text-center text-xs text-muted-foreground sm:justify-between sm:text-left">
           <span className="hidden items-center gap-3 sm:flex">
             <span>
               <kbd className="rounded border border-border bg-background px-1.5 py-0.5 font-sans">↑</kbd> <kbd className="rounded border border-border bg-background px-1.5 py-0.5 font-sans">↓</kbd> {t("keys.navigate")}
@@ -287,13 +294,13 @@ export function SearchDialog({ open, onOpenChange, shortcutLabel }: { open: bool
                 addSearchHistory(trimmed);
                 close();
               }}
-              className="ml-auto inline-flex items-center gap-1 font-semibold text-brand hover:underline"
+              className="inline-flex items-center gap-1 font-semibold text-brand hover:underline sm:ml-auto"
             >
               {t("seeAll")}
               <ArrowRight className="size-3.5" aria-hidden />
             </Link>
           ) : (
-            <span className="ml-auto">{t("empty")}</span>
+            <span className="sm:ml-auto">{t("empty")}</span>
           )}
         </div>
       </DialogContent>

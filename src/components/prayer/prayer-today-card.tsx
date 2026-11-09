@@ -74,7 +74,8 @@ export async function PrayerTodayCard({ locale, variant = "site" }: PrayerTodayC
           <div className="mt-5">
             <NextPrayerCountdown config={config} coordinates={profile.coordinates} variant="hero" />
           </div>
-          <PrayerArc config={config} coordinates={profile.coordinates} tone="inverse" className="mx-auto mt-5 max-w-md" />
+          {/* Busur langit interaktif yang sama dengan beranda (panel langitnya sendiri tetap terbaca di hero gelap). */}
+          <PrayerArc config={config} coordinates={profile.coordinates} interactive idleReadout="clock" className="mx-auto mt-5 w-full max-w-xl" />
           <div className="mt-4">{list}</div>
         </>
       )}
