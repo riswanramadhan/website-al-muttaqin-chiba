@@ -64,7 +64,7 @@ export default async function ProgramDetailPage({ params }: { params: Promise<Pa
     <>
       <section className="hero-surface pattern-shippo">
         <div className="container-site py-14 lg:py-20">
-          <Link href="/programs" className="inline-flex items-center gap-2 text-sm font-semibold text-hero-muted hover:text-hero-foreground">
+          <Link href="/programs" className="tap-link inline-flex items-center gap-2 text-sm font-semibold text-hero-muted hover:text-hero-foreground">
             <ArrowLeft className="size-4" aria-hidden />
             {t("detail.backToList")}
           </Link>

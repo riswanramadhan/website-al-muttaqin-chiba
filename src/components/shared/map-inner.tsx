@@ -18,12 +18,13 @@ const COLORS: Record<NonNullable<MapMarker["kind"]>, string> = {
 
 function pinIcon(kind: MapMarker["kind"] = "default") {
   const color = COLORS[kind];
+  // Titik 18 px di tengah area ketuk 36 px agar mudah disentuh dengan presisi di ponsel.
   return L.divIcon({
     className: "",
-    html: `<span style="display:block;width:18px;height:18px;border-radius:9999px;background:${color};box-shadow:0 0 0 4px color-mix(in oklab, ${color} 30%, transparent), 0 2px 6px rgb(0 0 0 / .3)"></span>`,
-    iconSize: [18, 18],
-    iconAnchor: [9, 9],
-    popupAnchor: [0, -10],
+    html: `<span style="display:flex;width:36px;height:36px;align-items:center;justify-content:center"><span style="display:block;width:18px;height:18px;border-radius:9999px;background:${color};border:2px solid #fff;box-shadow:0 0 0 4px color-mix(in oklab, ${color} 30%, transparent), 0 2px 6px rgb(0 0 0 / .3)"></span></span>`,
+    iconSize: [36, 36],
+    iconAnchor: [18, 18],
+    popupAnchor: [0, -14],
   });
 }
 
@@ -70,7 +71,13 @@ export default function MapInner({ center, zoom = 15, markers, height = 320, cla
     >
       <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {markers.map((m) => (
-        <Marker key={m.id} position={[m.position.lat, m.position.lng]} icon={pinIcon(m.kind)}>
+        <Marker
+          key={m.id}
+          position={[m.position.lat, m.position.lng]}
+          icon={pinIcon(m.kind)}
+          title={m.title}
+          eventHandlers={{ add: (e) => (e.target as L.Marker).getElement()?.setAttribute("aria-label", m.title) }}
+        >
           <Popup>
             <div className="min-w-40 text-sm">
               <p className="font-semibold">{m.title}</p>

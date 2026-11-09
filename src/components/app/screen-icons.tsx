@@ -15,7 +15,7 @@ import {
   Radio,
   Settings,
 } from "lucide-react";
-import type { Icon3DTone } from "@/components/ui/icon-3d";
+import type { IconTone } from "@/components/ui/icon-tile";
 
 /** Ikon untuk setiap layar App Jamaah (kunci sama dengan APP_SCREENS di nav-config). */
 export const SCREEN_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -36,11 +36,11 @@ export const SCREEN_ICONS: Record<string, React.ComponentType<{ className?: stri
 };
 
 /**
- * Warna ubin 3D per layar (gaya aplikasi super). Disusun agar tetangga di grid 4 kolom
- * (beranda) dan 4 kolom menu tidak berwarna sama.
+ * Warna aksen lembut per layar (ubin flat). Disusun agar tetangga di grid 4 kolom
+ * (beranda) dan 4 kolom menu tidak berwarna sama, sehingga mudah dipindai.
  */
-export const SCREEN_TONES: Record<string, Icon3DTone> = {
-  prayer: "maroon",
+export const SCREEN_TONES: Record<string, IconTone> = {
+  prayer: "brand",
   qibla: "teal",
   quran: "emerald",
   dua: "rose",
@@ -49,18 +49,9 @@ export const SCREEN_TONES: Record<string, Icon3DTone> = {
   live: "coral",
   agenda: "sky",
   info: "amber",
-  donate: "maroon",
+  donate: "brand",
   dictionary: "indigo",
   radar: "emerald",
   help: "sky",
   settings: "slate",
-};
-
-/** Ikon & warna tab navigasi bawah. */
-export const TAB_TONES: Record<string, Icon3DTone> = {
-  home: "maroon",
-  prayer: "amber",
-  quran: "emerald",
-  donate: "rose",
-  more: "indigo",
 };

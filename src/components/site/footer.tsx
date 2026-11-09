@@ -104,13 +104,13 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
               </li>
               <li className="flex gap-3">
                 <Mail className="mt-0.5 size-4 shrink-0 text-hero-muted" />
-                <a href={`mailto:${profile.email}`} className="break-all hover:underline">
+                <a href={`mailto:${profile.email}`} className="tap-link break-all hover:underline">
                   {profile.email}
                 </a>
               </li>
               <li className="flex gap-3">
                 <Phone className="mt-0.5 size-4 shrink-0 text-hero-muted" />
-                <a href={`tel:${profile.phone}`} className="hover:underline">
+                <a href={`tel:${profile.phone}`} className="tap-link hover:underline">
                   {profile.phone}
                 </a>
               </li>
@@ -145,15 +145,15 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           <p>{t("copyright", { year })}</p>
           <p className="max-w-xl">{t("prayerNote", { method: METHOD_LABELS[config.method] })}</p>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <Link href="/privacy" className="hover:text-hero-foreground">
+            <Link href="/privacy" className="tap-link hover:text-hero-foreground">
               {tn("privacy")}
             </Link>
-            <Link href="/faq" className="hover:text-hero-foreground">
+            <Link href="/faq" className="tap-link hover:text-hero-foreground">
               {tn("faq")}
             </Link>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-hero-foreground/15 bg-hero-foreground/5 px-3 py-1">
               <span>{t("poweredBy")}</span>
-              <a href={DEKATLOKAL_URL} target="_blank" rel="noreferrer" className="font-bold text-hero-foreground hover:text-gold">
+              <a href={DEKATLOKAL_URL} target="_blank" rel="noreferrer" className="tap-link font-bold text-hero-foreground hover:text-gold">
                 DekatLokal
               </a>
             </span>

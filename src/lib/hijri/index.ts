@@ -82,7 +82,8 @@ export function toHijri(date: Date, adjustment = 0): HijriDate {
 }
 
 export function hijriMonthName(month: number, locale: Locale | "ar"): string {
-  return HIJRI_MONTHS[locale][month - 1] ?? "";
+  // Halaman 404 di luar rute bahasa (mis. /sw.js) bisa memanggil ini dengan "locale" tak dikenal.
+  return (HIJRI_MONTHS[locale] ?? HIJRI_MONTHS.en)[month - 1] ?? "";
 }
 
 export function formatHijri(date: Date, locale: Locale, adjustment = 0, withArabic = false): string {

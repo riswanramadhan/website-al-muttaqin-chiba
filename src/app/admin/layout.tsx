@@ -39,10 +39,8 @@ export default async function AdminRootLayout({ children }: { children: React.Re
   const { lang } = await getAdminT();
   return (
     <html lang={lang} suppressHydrationWarning className={`${jakarta.variable} ${notoJp.variable}`}>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body className="min-h-dvh">
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <AdminI18nProvider lang={lang}>
           <TooltipProvider delayDuration={200}>
             <ToastProvider>{children}</ToastProvider>

@@ -25,7 +25,7 @@ export async function ProgramCard({ program, locale }: { program: Program; local
 
       <div className="flex-1">
         <h3 className="text-lg font-bold leading-snug">
-          <Link href={href} className="hover:text-brand">
+          <Link href={href} className="tap-link hover:text-brand">
             {pick(program.title, locale)}
           </Link>
         </h3>
@@ -53,7 +53,7 @@ export async function ProgramCard({ program, locale }: { program: Program; local
             </li>
           ))}
         </ul>
-        <Link href={href} className="inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline">
+        <Link href={href} className="tap-link inline-flex items-center gap-1 text-sm font-semibold text-brand hover:underline">
           {t("card.details")}
           <ArrowRight className="size-4" aria-hidden />
         </Link>

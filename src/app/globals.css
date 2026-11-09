@@ -51,17 +51,17 @@
   --pattern-shippo: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23fff5e6' stroke-opacity='0.07' stroke-width='1'%3E%3Ccircle cx='24' cy='24' r='24'/%3E%3Ccircle cx='0' cy='0' r='24'/%3E%3Ccircle cx='48' cy='0' r='24'/%3E%3Ccircle cx='0' cy='48' r='24'/%3E%3Ccircle cx='48' cy='48' r='24'/%3E%3C/g%3E%3C/svg%3E");
   --pattern-star-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cg fill='none' stroke='%23800000' stroke-opacity='0.07' stroke-width='1'%3E%3Crect x='24' y='24' width='48' height='48'/%3E%3Crect x='24' y='24' width='48' height='48' transform='rotate(45 48 48)'/%3E%3Cpath d='M0 48h24M72 48h24M48 0v24M48 72v24'/%3E%3Ccircle cx='48' cy='48' r='6'/%3E%3C/g%3E%3C/svg%3E");
 
-  /* Ikon 3D (gradien terang, tengah, gelap) */
-  --i3d-maroon-1: #e8736b; --i3d-maroon-2: #a81c1c; --i3d-maroon-3: #6a0808;
-  --i3d-rose-1: #ff9db0; --i3d-rose-2: #e8476d; --i3d-rose-3: #9c1640;
-  --i3d-coral-1: #ffab84; --i3d-coral-2: #f0643c; --i3d-coral-3: #ad3816;
-  --i3d-amber-1: #ffd977; --i3d-amber-2: #f2a52a; --i3d-amber-3: #a96404;
-  --i3d-emerald-1: #7beab1; --i3d-emerald-2: #1fae6b; --i3d-emerald-3: #0a6a40;
-  --i3d-teal-1: #7ae3df; --i3d-teal-2: #15a8a2; --i3d-teal-3: #0a625e;
-  --i3d-sky-1: #96d6ff; --i3d-sky-2: #2f95e8; --i3d-sky-3: #12529f;
-  --i3d-indigo-1: #aeb7ff; --i3d-indigo-2: #5c63e6; --i3d-indigo-3: #2c2d9c;
-  --i3d-violet-1: #d8aeff; --i3d-violet-2: #9b51e0; --i3d-violet-3: #5a1d9c;
-  --i3d-slate-1: #b5aca7; --i3d-slate-2: #6f6560; --i3d-slate-3: #3b3330;
+  /* Palet warna aksen (terang, tengah, gelap) untuk ikon & ilustrasi */
+  --tone-maroon-1: #e8736b; --tone-maroon-2: #a81c1c; --tone-maroon-3: #6a0808;
+  --tone-rose-1: #ff9db0; --tone-rose-2: #e8476d; --tone-rose-3: #9c1640;
+  --tone-coral-1: #ffab84; --tone-coral-2: #f0643c; --tone-coral-3: #ad3816;
+  --tone-amber-1: #ffd977; --tone-amber-2: #f2a52a; --tone-amber-3: #a96404;
+  --tone-emerald-1: #7beab1; --tone-emerald-2: #1fae6b; --tone-emerald-3: #0a6a40;
+  --tone-teal-1: #7ae3df; --tone-teal-2: #15a8a2; --tone-teal-3: #0a625e;
+  --tone-sky-1: #96d6ff; --tone-sky-2: #2f95e8; --tone-sky-3: #12529f;
+  --tone-indigo-1: #aeb7ff; --tone-indigo-2: #5c63e6; --tone-indigo-3: #2c2d9c;
+  --tone-violet-1: #d8aeff; --tone-violet-2: #9b51e0; --tone-violet-3: #5a1d9c;
+  --tone-slate-1: #b5aca7; --tone-slate-2: #6f6560; --tone-slate-3: #3b3330;
 }
 
 .dark {
@@ -301,7 +301,18 @@
 }
 
 @utility lift {
-  @apply transition-transform duration-300 ease-out hover:-translate-y-0.5;
+  @apply transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-24px_rgb(0_0_0/0.35)] active:translate-y-0 active:scale-[0.99];
+}
+
+/* Perluas area sentuh tautan teks kecil (~36 px tinggi) tanpa menggeser tata letak. */
+@utility tap-link {
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -0.5rem -0.375rem;
+  }
 }
 
 @utility headline {
@@ -344,64 +355,75 @@
 }
 
 /* ------------------------------------------------------------------
-   Ikon 3D gaya aplikasi super (dipakai <Icon3D> dan <IconCircle>)
+   Ikon sederhana modern (dipakai <IconTile> dan <IconCircle>)
 ------------------------------------------------------------------- */
 @layer components {
-  .icon-3d {
-    --i3d-1: var(--i3d-maroon-1);
-    --i3d-2: var(--i3d-maroon-2);
-    --i3d-3: var(--i3d-maroon-3);
+  /* Ikon sederhana modern (flat): ubin squircle dengan latar tipis sewarna, garis ikon 1,75
+     dan isian lembut (duotone) sebagai sentuhan khas. Warna dari token --tone-* (tanpa hex di
+     komponen). Varian: soft (bawaan), solid (latar penuh, ikon putih), inverse (di permukaan gelap). */
+  .icon-tile {
+    --it-l: var(--primary);
+    --it-d: var(--brand);
+    --it-s: var(--primary);
+    --it: var(--it-l);
     position: relative;
-    isolation: isolate;
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
-    /* Cahaya dari tengah atas (simetris) + kilap elips di atas; semuanya lapisan background
-       sehingga ikut terpotong border-radius dan tidak bocor ke sudut ubin bulat. */
-    background:
-      radial-gradient(62% 40% at 50% 10%, rgb(255 255 255 / 0.5) 0%, rgb(255 255 255 / 0.14) 62%, rgb(255 255 255 / 0) 100%),
-      radial-gradient(120% 120% at 50% 0%, var(--i3d-1) 0%, var(--i3d-2) 55%, var(--i3d-3) 100%);
-    box-shadow:
-      inset 0 1.5px 0.5px rgb(255 255 255 / 0.55),
-      inset 0 -3px 6px rgb(0 0 0 / 0.22),
-      0 8px 16px -6px color-mix(in oklab, var(--i3d-3) 70%, transparent),
-      0 1px 2px rgb(0 0 0 / 0.14);
+    color: var(--it);
+    background-color: color-mix(in oklab, var(--it) 9%, var(--card));
+    box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--it) 15%, transparent);
     transition:
-      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.25s ease;
+      transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.2s ease,
+      color 0.2s ease;
   }
-  .icon-3d > svg {
-    position: relative;
+  .dark .icon-tile {
+    --it: var(--it-d);
+    background-color: color-mix(in oklab, var(--it) 13%, var(--card));
+  }
+  .icon-tile > svg {
     display: block;
     flex-shrink: 0;
-    margin: auto;
-    filter: drop-shadow(0 1px 0 var(--i3d-3)) drop-shadow(0 1px 1.5px rgb(0 0 0 / 0.22));
+    stroke-width: 1.75;
   }
-  .icon-3d > svg:not(.lucide) {
-    stroke-width: 2;
+  .icon-tile > svg.lucide {
+    fill: color-mix(in oklab, currentColor 14%, transparent);
   }
-  .icon-3d > svg.lucide {
-    stroke-width: 2.1;
-    fill: rgb(255 255 255 / 0.16);
+  .icon-tile[data-variant="solid"] {
+    color: #ffffff;
+    background-color: var(--it-s);
+    box-shadow: 0 8px 18px -10px color-mix(in oklab, var(--it-s) 80%, transparent);
   }
-  .icon-3d[data-tone="rose"] { --i3d-1: var(--i3d-rose-1); --i3d-2: var(--i3d-rose-2); --i3d-3: var(--i3d-rose-3); }
-  .icon-3d[data-tone="coral"] { --i3d-1: var(--i3d-coral-1); --i3d-2: var(--i3d-coral-2); --i3d-3: var(--i3d-coral-3); }
-  .icon-3d[data-tone="amber"] { --i3d-1: var(--i3d-amber-1); --i3d-2: var(--i3d-amber-2); --i3d-3: var(--i3d-amber-3); }
-  .icon-3d[data-tone="emerald"] { --i3d-1: var(--i3d-emerald-1); --i3d-2: var(--i3d-emerald-2); --i3d-3: var(--i3d-emerald-3); }
-  .icon-3d[data-tone="teal"] { --i3d-1: var(--i3d-teal-1); --i3d-2: var(--i3d-teal-2); --i3d-3: var(--i3d-teal-3); }
-  .icon-3d[data-tone="sky"] { --i3d-1: var(--i3d-sky-1); --i3d-2: var(--i3d-sky-2); --i3d-3: var(--i3d-sky-3); }
-  .icon-3d[data-tone="indigo"] { --i3d-1: var(--i3d-indigo-1); --i3d-2: var(--i3d-indigo-2); --i3d-3: var(--i3d-indigo-3); }
-  .icon-3d[data-tone="violet"] { --i3d-1: var(--i3d-violet-1); --i3d-2: var(--i3d-violet-2); --i3d-3: var(--i3d-violet-3); }
-  .icon-3d[data-tone="slate"] { --i3d-1: var(--i3d-slate-1); --i3d-2: var(--i3d-slate-2); --i3d-3: var(--i3d-slate-3); }
-  /* Hanya perangkat dengan hover sungguhan (bukan sentuh, agar tidak "nyangkut" miring di HP). */
+  .icon-tile[data-variant="solid"] > svg.lucide {
+    fill: rgb(255 255 255 / 0.18);
+  }
+  .icon-tile[data-variant="inverse"],
+  :is(.hero-surface, .bg-hero, .bg-primary) .icon-tile[data-variant="soft"] {
+    --it: var(--it-d);
+    background-color: rgb(255 255 255 / 0.08);
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.14);
+  }
+  :is(.icon-tile[data-variant="inverse"], :is(.hero-surface, .bg-hero, .bg-primary) .icon-tile[data-variant="soft"])[data-tone="brand"] {
+    --it-d: var(--gold-soft);
+  }
+  .icon-tile[data-tone="rose"] { --it-l: var(--tone-rose-3); --it-d: var(--tone-rose-1); --it-s: var(--tone-rose-2); }
+  .icon-tile[data-tone="coral"] { --it-l: var(--tone-coral-3); --it-d: var(--tone-coral-1); --it-s: var(--tone-coral-2); }
+  .icon-tile[data-tone="amber"] { --it-l: var(--tone-amber-3); --it-d: var(--tone-amber-1); --it-s: var(--tone-amber-2); }
+  .icon-tile[data-tone="emerald"] { --it-l: var(--tone-emerald-3); --it-d: var(--tone-emerald-1); --it-s: var(--tone-emerald-2); }
+  .icon-tile[data-tone="teal"] { --it-l: var(--tone-teal-3); --it-d: var(--tone-teal-1); --it-s: var(--tone-teal-2); }
+  .icon-tile[data-tone="sky"] { --it-l: var(--tone-sky-3); --it-d: var(--tone-sky-1); --it-s: var(--tone-sky-2); }
+  .icon-tile[data-tone="indigo"] { --it-l: var(--tone-indigo-3); --it-d: var(--tone-indigo-1); --it-s: var(--tone-indigo-2); }
+  .icon-tile[data-tone="violet"] { --it-l: var(--tone-violet-3); --it-d: var(--tone-violet-1); --it-s: var(--tone-violet-2); }
+  .icon-tile[data-tone="slate"] { --it-l: var(--tone-slate-3); --it-d: var(--tone-slate-1); --it-s: var(--tone-slate-2); }
+  /* Hover hanya untuk perangkat dengan pointer sungguhan, agar tidak "nyangkut" di HP. */
   @media (hover: hover) and (pointer: fine) {
-    .group:hover .icon-3d {
+    .group:hover .icon-tile {
       transform: translateY(-2px);
     }
   }
-  .group:active .icon-3d {
+  .group:active .icon-tile {
     transform: scale(0.94);
   }
 }

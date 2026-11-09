@@ -94,7 +94,7 @@ export default async function AppHomePage({ params }: { params: Promise<{ locale
             <h2 id="app-home-announcements" className="text-base font-bold">
               {tp("home.announcements")}
             </h2>
-            <Link href="/app/info" className="inline-flex items-center gap-1 text-sm font-semibold text-brand">
+            <Link href="/app/info" className="tap-link inline-flex items-center gap-1 text-sm font-semibold text-brand">
               {tp("home.seeAll")}
               <ArrowRight className="size-4" aria-hidden />
             </Link>

@@ -240,17 +240,17 @@ export function SettingsPanel({ version }: { version: string }) {
           {push.permission !== "unsupported" && (
             <div className="flex flex-col gap-2 sm:flex-row">
               {push.enabled ? (
-                <Button variant="outline" onClick={disableNotifications} disabled={push.busy} className="flex-1">
+                <Button variant="outline" onClick={disableNotifications} disabled={push.busy} className="sm:flex-1">
                   <BellOff aria-hidden />
                   {t("notifications.disable")}
                 </Button>
               ) : (
-                <Button onClick={enableNotifications} disabled={push.busy || push.permission === "denied"} className="flex-1">
+                <Button onClick={enableNotifications} disabled={push.busy || push.permission === "denied"} className="sm:flex-1">
                   <BellRing aria-hidden />
                   {tpwa("notifications.enable")}
                 </Button>
               )}
-              <Button variant="soft" onClick={sendTest} disabled={push.permission !== "granted"} className="flex-1">
+              <Button variant="soft" onClick={sendTest} disabled={push.permission !== "granted"} className="sm:flex-1">
                 <Send aria-hidden />
                 {tpwa("notifications.test")}
               </Button>
@@ -400,10 +400,10 @@ export function SettingsPanel({ version }: { version: string }) {
           <dd className="font-semibold">{localeNames[locale]}</dd>
         </dl>
         <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
-          <Link href="/privacy" className="text-brand hover:underline">
+          <Link href="/privacy" className="tap-link text-brand hover:underline">
             {t("about.privacy")}
           </Link>
-          <Link href="/" className="text-brand hover:underline">
+          <Link href="/" className="tap-link text-brand hover:underline">
             {t("about.website")}
           </Link>
         </div>

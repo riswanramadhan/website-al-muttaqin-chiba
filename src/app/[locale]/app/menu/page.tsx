@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return { title: t("menu.title"), description: t("menu.description") };
 }
 
-/** Semua fitur App Jamaah dalam grid ikon 3D (gaya aplikasi super). */
+/** Semua fitur App Jamaah dalam grid ikon sederhana modern (ubin flat beraksen lembut). */
 export default async function AppMenuPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);

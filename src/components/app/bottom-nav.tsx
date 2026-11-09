@@ -4,7 +4,6 @@ import { BookOpen, Clock, Heart, House, LayoutGrid, type LucideIcon } from "luci
 import { motion, useReducedMotion } from "motion/react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/cn";
-import { TAB_TONES } from "@/components/app/screen-icons";
 
 export type BottomTab = { key: string; href: string; label: string };
 
@@ -22,7 +21,7 @@ const SPRING = { type: "spring", stiffness: 520, damping: 36, mass: 0.8 } as con
  * Navigasi bawah App Jamaah (PRD §8: mobile-first, bottom nav), gaya aplikasi modern:
  * - bilah mengambang membulat di atas home indicator iPhone (`safe-area-inset-bottom`),
  * - lima kolom sama lebar; setiap ikon di kotak 44 px yang sama sehingga sejajar presisi,
- * - "pill" 3D tab aktif meluncur antartab (Motion `layoutId`), ikon aktif memantul kecil,
+ * - "pill" maroon (flat) tab aktif meluncur antartab (Motion `layoutId`), ikon aktif memantul kecil,
  *   dan semua tombol mengecil sesaat saat diketuk,
  * - menghormati `prefers-reduced-motion` (tanpa luncuran/pantulan).
  */
@@ -56,8 +55,7 @@ export function BottomNav({ tabs, label }: { tabs: BottomTab[]; label: string })
                     <motion.span
                       layoutId={reduce ? undefined : "app-tab-pill"}
                       transition={SPRING}
-                      data-tone={TAB_TONES[tab.key] ?? "maroon"}
-                      className="icon-3d absolute inset-x-0.5 inset-y-1 rounded-[0.95rem]"
+                      className="absolute inset-x-0.5 inset-y-1 rounded-[0.95rem] bg-primary shadow-[0_8px_18px_-10px_var(--primary)]"
                       aria-hidden
                     />
                   )}
@@ -71,7 +69,7 @@ export function BottomNav({ tabs, label }: { tabs: BottomTab[]; label: string })
                     <Icon
                       className={cn(
                         "size-[1.3rem] transition-colors duration-200",
-                        active ? "stroke-[2.1] text-white drop-shadow-[0_1px_1px_rgb(0_0_0/0.3)]" : "stroke-[1.75] text-muted-foreground group-hover:text-foreground",
+                        active ? "fill-primary-foreground/15 stroke-[1.9] text-primary-foreground" : "stroke-[1.75] text-muted-foreground group-hover:text-foreground",
                       )}
                       aria-hidden
                     />
