@@ -48,7 +48,7 @@ export async function PartnersStrip({ locale, className }: { locale: Locale; cla
                 href={p.url}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-brand underline-offset-4 hover:underline"
+                className="tap-link mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-brand underline-offset-4 hover:underline"
               >
                 <Handshake className="size-4" aria-hidden />
                 {t("partners.visit")}

@@ -32,7 +32,7 @@ export async function HomeLiveStrip({ locale }: { locale: Locale }) {
         {pinned.length > 0 && (
           <div className="flex flex-col gap-3">
             <AnnouncementList announcements={pinned} locale={locale} compact />
-            <Link href="/news" className="inline-flex items-center gap-1.5 self-end text-sm font-semibold text-brand underline-offset-4 hover:underline">
+            <Link href="/news" className="tap-link inline-flex items-center gap-1.5 self-end text-sm font-semibold text-brand underline-offset-4 hover:underline">
               {t("pinned.seeAll")}
               <ArrowRight className="size-4" aria-hidden />
             </Link>

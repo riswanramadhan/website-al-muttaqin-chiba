@@ -76,10 +76,10 @@ export default async function LocaleLayout({ children, params }: { children: Rea
 
   return (
     <html lang={locale} suppressHydrationWarning className={`${jakarta.variable} ${notoJp.variable} ${amiri.variable}`}>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-      </head>
       <body className="min-h-dvh flex flex-col">
+        {/* Skrip tema di awal <body> (bukan <head> manual) agar hidrasi <head> React tidak bentrok
+            dengan metadata Next; tetap berjalan sebelum konten dilukis sehingga tidak berkedip. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <NextIntlClientProvider messages={messages} locale={locale as Locale} timeZone="Asia/Tokyo">
           <ThemeProvider prayerConfig={config} coordinates={profile.coordinates}>
             <TooltipProvider delayDuration={200}>

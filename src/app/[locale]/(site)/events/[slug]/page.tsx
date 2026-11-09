@@ -132,7 +132,7 @@ export default async function EventDetailPage({ params }: { params: Promise<{ lo
                   <dd className="font-semibold">{pick(event.location, locale)}</dd>
                   <dd className="text-muted-foreground">{pick(profile.name, locale)}</dd>
                   <dd>
-                    <a href={profile.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="mt-1 inline-flex items-center gap-1 text-xs font-semibold text-brand">
+                    <a href={profile.googleMapsUrl} target="_blank" rel="noopener noreferrer" className="tap-link mt-1 inline-flex items-center gap-1 text-xs font-semibold text-brand">
                       <ExternalLink className="size-3.5" aria-hidden />
                       {t("detail.openMaps")}
                     </a>

@@ -5,7 +5,7 @@ import { BellRing, Play, Square, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils/cn";
 import { Button } from "@/components/ui/button";
-import { Icon3D } from "@/components/ui/icon-3d";
+import { IconTile } from "@/components/ui/icon-tile";
 import { dismissAlert, retryAlertSound, stopAlertSound, useAdhanAlert } from "./adhan-sound";
 
 /** Batang ekualiser kecil sebagai tanda suara sedang berbunyi (diam saat reduced motion). */
@@ -45,7 +45,7 @@ export function AdhanAlertBanner() {
       <div className="mx-auto max-w-md px-3 pt-2">
         <section role="alertdialog" aria-labelledby="adhan-alert-title" aria-describedby="adhan-alert-body" className="hero-surface pointer-events-auto animate-fade-up rounded-3xl p-4 shadow-soft ring-1 ring-hero-foreground/10">
           <div className="flex items-start gap-3">
-            <Icon3D icon={BellRing} tone="amber" size="md" className={cn(playing && "motion-safe:animate-pulse-soft")} />
+            <IconTile icon={BellRing} tone="amber" variant="solid" size="md" className={cn(playing && "motion-safe:animate-pulse-soft")} />
             <div className="min-w-0 flex-1">
               <p className="flex items-center gap-2 text-xs font-semibold tracking-wide text-hero-foreground/70 uppercase">
                 {t("alert.label")}

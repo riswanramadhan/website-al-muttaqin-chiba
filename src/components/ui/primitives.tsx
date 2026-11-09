@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils/cn";
-import { Icon3D, toneForIcon, type Icon3DTone } from "@/components/ui/icon-3d";
+import { IconTile, toneForIcon, type IconTone } from "@/components/ui/icon-tile";
 
 export function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return <div className={cn("animate-pulse-soft rounded-lg bg-muted", className)} {...props} />;
@@ -37,8 +37,9 @@ export function Progress({ value, max = 100, className, tone = "brand", label }:
 }
 
 /**
- * Ikon Lucide dalam ubin 3D (gaya aplikasi super). Warna dipilih otomatis dari nama ikon,
- * atau tetapkan `color`. `variant="flat"` mengembalikan lingkaran datar lama bila diperlukan.
+ * Ikon Lucide dalam ubin sederhana modern (flat, duotone lembut). Warna bawaan merek (maroon);
+ * ikon bermakna warna (WhatsApp, peringatan) otomatis, atau tetapkan `color`.
+ * `tone`: soft/default = latar tipis, brand = latar maroon penuh, inverse = untuk permukaan gelap.
  */
 export function IconCircle({
   children,
@@ -46,43 +47,21 @@ export function IconCircle({
   shape = "circle",
   tone = "default",
   color,
-  variant = "3d",
   className,
 }: {
   children: React.ReactNode;
   size?: "sm" | "md" | "lg";
   shape?: "circle" | "square";
   tone?: "default" | "brand" | "soft" | "inverse" | "dark";
-  color?: Icon3DTone;
-  variant?: "3d" | "flat";
+  color?: IconTone;
   className?: string;
 }) {
-  if (variant === "3d") {
-    const resolved = color ?? (tone === "brand" ? "maroon" : tone === "dark" ? "slate" : toneForIcon(children));
-    return (
-      <Icon3D tone={resolved} size={size} shape={shape === "circle" ? "circle" : "squircle"} className={className}>
-        {children}
-      </Icon3D>
-    );
-  }
+  const resolved = color ?? (tone === "dark" ? "slate" : toneForIcon(children));
+  const variant = tone === "brand" ? "solid" : tone === "inverse" ? "inverse" : "soft";
   return (
-    <span
-      className={cn(
-        "inline-flex shrink-0 items-center justify-center [&_svg]:stroke-[1.5]",
-        size === "sm" && "size-9 [&_svg]:size-4",
-        size === "md" && "size-12 [&_svg]:size-5",
-        size === "lg" && "size-14 [&_svg]:size-6",
-        shape === "circle" ? "rounded-full" : "rounded-xl",
-        tone === "default" && "bg-surface text-foreground",
-        tone === "brand" && "bg-primary text-primary-foreground",
-        tone === "soft" && "bg-accent text-accent-foreground",
-        tone === "inverse" && "bg-hero-foreground/10 text-hero-foreground",
-        tone === "dark" && "bg-secondary text-secondary-foreground",
-        className,
-      )}
-    >
+    <IconTile tone={resolved} variant={variant} size={size} shape={shape === "circle" ? "circle" : "squircle"} className={className}>
       {children}
-    </span>
+    </IconTile>
   );
 }
 

@@ -377,8 +377,7 @@ export function TasbihCounter({ locale }: { locale: Locale }) {
             transition={{ type: "spring", stiffness: 500, damping: 26 }}
             aria-label={t("tapButton")}
             aria-describedby="tasbih-progress"
-            data-tone="maroon"
-            className="icon-3d absolute inset-[19%] touch-manipulation flex-col rounded-full outline-offset-4 [-webkit-tap-highlight-color:transparent]"
+            className="absolute inset-[19%] flex touch-manipulation flex-col items-center justify-center rounded-full bg-primary text-primary-foreground shadow-[0_18px_40px_-18px_var(--primary)] ring-8 ring-primary/10 outline-offset-4 [-webkit-tap-highlight-color:transparent]"
           >
             {!reduced && session.taps > 0 && (
               <motion.span

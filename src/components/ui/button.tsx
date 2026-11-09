@@ -3,11 +3,11 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils/cn";
 
 export const buttonVariants = cva(
-  "inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold transition-all duration-200 ease-out disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 active:scale-[0.98]",
+  "inline-flex shrink-0 select-none items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold transition-[transform,background-color,color,border-color,box-shadow,opacity] duration-200 ease-out [-webkit-tap-highlight-color:transparent] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-200 [&_svg:not([class*='size-'])]:size-4 active:scale-[0.96] hover:[&_svg.lucide-arrow-right]:translate-x-0.5",
   {
     variants: {
       variant: {
-        primary: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-soft",
+        primary: "bg-primary text-primary-foreground hover:bg-primary-hover shadow-soft hover:shadow-[0_10px_24px_-12px_var(--primary)]",
         secondary: "bg-secondary text-secondary-foreground hover:opacity-90",
         outline: "border border-border bg-transparent hover:bg-surface",
         ghost: "hover:bg-surface",

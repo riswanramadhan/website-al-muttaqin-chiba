@@ -35,13 +35,13 @@ export type PrayerArcInteractiveProps = {
 /** Gradien langit dari token (tanpa hex); bobotnya berubah halus sepanjang hari. */
 const SKY: Record<SkyKey, string> = {
   night:
-    "radial-gradient(70% 55% at 50% 0%, color-mix(in oklab, var(--i3d-indigo-3) 45%, transparent), transparent 70%), linear-gradient(180deg, var(--hero) 0%, var(--hero-2) 100%)",
+    "radial-gradient(70% 55% at 50% 0%, color-mix(in oklab, var(--tone-indigo-3) 45%, transparent), transparent 70%), linear-gradient(180deg, var(--hero) 0%, var(--hero-2) 100%)",
   dawn:
-    "radial-gradient(55% 40% at 14% 66%, color-mix(in oklab, var(--gold) 70%, transparent), transparent 75%), linear-gradient(180deg, var(--i3d-indigo-3) 0%, var(--hero-2) 55%, var(--i3d-coral-3) 100%)",
+    "radial-gradient(55% 40% at 14% 66%, color-mix(in oklab, var(--gold) 70%, transparent), transparent 75%), linear-gradient(180deg, var(--tone-indigo-3) 0%, var(--hero-2) 55%, var(--tone-coral-3) 100%)",
   day:
-    "radial-gradient(60% 50% at 50% 0%, color-mix(in oklab, var(--gold) 16%, transparent), transparent 70%), linear-gradient(180deg, color-mix(in oklab, var(--i3d-sky-2) 22%, var(--card)) 0%, var(--card) 100%)",
+    "radial-gradient(60% 50% at 50% 0%, color-mix(in oklab, var(--gold) 16%, transparent), transparent 70%), linear-gradient(180deg, color-mix(in oklab, var(--tone-sky-2) 22%, var(--card)) 0%, var(--card) 100%)",
   dusk:
-    "radial-gradient(55% 40% at 86% 66%, color-mix(in oklab, var(--gold) 65%, transparent), transparent 75%), linear-gradient(180deg, var(--i3d-violet-3) 0%, var(--hero-2) 50%, color-mix(in oklab, var(--i3d-coral-2) 60%, var(--hero-2)) 100%)",
+    "radial-gradient(55% 40% at 86% 66%, color-mix(in oklab, var(--gold) 65%, transparent), transparent 75%), linear-gradient(180deg, var(--tone-violet-3) 0%, var(--hero-2) 50%, color-mix(in oklab, var(--tone-coral-2) 60%, var(--hero-2)) 100%)",
 };
 const SKY_KEYS: SkyKey[] = ["day", "dawn", "dusk", "night"];
 
