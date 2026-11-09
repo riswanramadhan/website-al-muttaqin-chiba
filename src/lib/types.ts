@@ -57,7 +57,15 @@ export type MosqueProfile = {
   capacity: number;
   openingHours: LocalizedText;
   nearestStations: { name: LocalizedText; walkMinutes: number; lines: string }[];
-  partners: { name: string; role: LocalizedText; url?: string }[];
+  partners: Partner[];
+};
+
+/** Mitra pengelola/pendukung. `logo` berupa berkas di `public/` (rasio asli lewat width/height). */
+export type Partner = {
+  name: string;
+  role: LocalizedText;
+  url?: string;
+  logo?: { src: string; width: number; height: number };
 };
 
 export type PrayerName = "fajr" | "sunrise" | "dhuhr" | "asr" | "maghrib" | "isha";

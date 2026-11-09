@@ -210,5 +210,13 @@
     "zakatLink": "Zakat calculator",
     "transparencyLink": "Monthly financial reports",
     "moreOnWeb": "Programs and monthly donor on the website"
+  },
+  "promo": {
+    "title": "Masjid Al-Muttaqin Chiba is now open for use",
+    "description": "Poster with the current fund status and how to donate toward the bridging loan and renovation. Closes automatically in 5 seconds.",
+    "alt": "Donation poster for Masjid Al-Muttaqin Chiba: current fund status, renovation needs, and donation accounts.",
+    "cta": "Donate now",
+    "later": "Maybe later",
+    "close": "Close poster"
   }
 }

@@ -32,9 +32,9 @@ export const faqs: FaqItem[] = [
     category: "general",
     question: { ja: "誰が運営していますか？", en: "Who runs the center?", id: "Siapa yang mengelola pusat ini?" },
     answer: {
-      ja: "千葉イスラム文化センターが運営し、ドンペット・ドゥアファとドンペット・ドゥアファ・ジャパンが建設と教育プログラムを支援しています。運営委員会と会計は毎月公開されます。",
-      en: "The Chiba Islamic Culture Center runs the center, with Dompet Dhuafa and Dompet Dhuafa Japan supporting construction and education programs. The board and monthly accounts are published openly.",
-      id: "Chiba Islamic Culture Center mengelola pusat ini, didukung Dompet Dhuafa dan Dompet Dhuafa Japan untuk pembangunan dan program pendidikan. Susunan pengurus dan laporan keuangan bulanan dipublikasikan secara terbuka.",
+      ja: "千葉イスラム文化センターが運営し、ドンペット・ドゥアファ・ジャパンが建設と教育プログラムを支援しています。運営委員会と会計は毎月公開されます。",
+      en: "The Chiba Islamic Culture Center runs the center, with Dompet Dhuafa Japan supporting construction and education programs. The board and monthly accounts are published openly.",
+      id: "Chiba Islamic Culture Center mengelola pusat ini, didukung Dompet Dhuafa Japan untuk pembangunan dan program pendidikan. Susunan pengurus dan laporan keuangan bulanan dipublikasikan secara terbuka.",
     },
   },
   {

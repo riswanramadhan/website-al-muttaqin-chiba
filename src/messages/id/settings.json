@@ -93,7 +93,7 @@
       "silent": "Senyap"
     },
     "hints": {
-      "adhan": "Rekaman adzan saat waktu salat; chime untuk iqamah",
+      "adhan": "Adzan gaya Madinah saat waktu salat; chime untuk iqamah",
       "chime": "Bunyi lonceng lembut tiga nada",
       "vibrate": "Tanpa suara, ponsel bergetar",
       "silent": "Hanya notifikasi"
@@ -105,7 +105,8 @@
     "previewTitle": "Pratinjau suara",
     "stop": "Hentikan",
     "foregroundNote": "Selama App terbuka (meski di tab lain), pengingat berbunyi tepat pada waktu adzan dengan suara di atas dan tombol Hentikan. Browser hanya mengizinkan suara setelah App diketuk sekali, jadi ketuk di mana saja setelah membukanya.",
-    "backgroundNote": "Saat App tertutup, ponsel menampilkan notifikasi dengan suara notifikasi standarnya. Browser tidak mengizinkan suara khusus seperti adzan untuk notifikasi latar belakang. Di iPhone, notifikasi memerlukan App ditambahkan ke Layar Utama (iOS 16.4 ke atas)."
+    "backgroundNote": "Saat App tertutup, ponsel menampilkan notifikasi dengan suara notifikasi standarnya. Browser tidak mengizinkan suara khusus seperti adzan untuk notifikasi latar belakang. Di iPhone, notifikasi memerlukan App ditambahkan ke Layar Utama (iOS 16.4 ke atas).",
+    "credit": "Rekaman adzan: \"Call to Prayer from the Prophet's Mosque\" (Masjid Nabawi, Madinah) oleh ejaz215 via Wikimedia Commons, lisensi"
   },
   "alert": {
     "label": "Pengingat salat",

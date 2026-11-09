@@ -93,7 +93,7 @@
       "silent": "Silent"
     },
     "hints": {
-      "adhan": "Adhan recording at prayer time; chime for iqamah",
+      "adhan": "Madinah-style adhan at prayer time; chime for iqamah",
       "chime": "A soft three-note bell",
       "vibrate": "No sound, phone vibrates",
       "silent": "Notification only"
@@ -105,7 +105,8 @@
     "previewTitle": "Sound preview",
     "stop": "Stop",
     "foregroundNote": "While the app is open (even in another tab), the reminder fires right at the adhan time with the sound above and a Stop button. Browsers only allow sound after you have tapped the app once, so tap anywhere after opening it.",
-    "backgroundNote": "When the app is closed, your phone shows the notification with its standard notification sound. Browsers do not allow a custom sound such as the adhan for background notifications. On iPhone, notifications need the app added to the Home Screen (iOS 16.4 or later)."
+    "backgroundNote": "When the app is closed, your phone shows the notification with its standard notification sound. Browsers do not allow a custom sound such as the adhan for background notifications. On iPhone, notifications need the app added to the Home Screen (iOS 16.4 or later).",
+    "credit": "Adhan recording: \"Call to Prayer from the Prophet's Mosque\" (Masjid an-Nabawi, Madinah) by ejaz215 via Wikimedia Commons, license"
   },
   "alert": {
     "label": "Prayer reminder",

@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { FacebookIcon, InstagramIcon, WhatsAppIcon, YouTubeIcon } from "@/components/site/social-icons";
@@ -115,23 +116,27 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
               </li>
             </ul>
             <p className="mt-6 mb-3 text-xs font-semibold tracking-wide text-hero-muted uppercase">{t("partners")}</p>
-            <ul className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-hero-foreground/85">
-              {profile.partners.map((p) => (
-                <li key={p.name}>
-                  {p.url ? (
-                    <a href={p.url} target="_blank" rel="noreferrer" className="hover:underline">
-                      {p.name}
-                    </a>
-                  ) : (
-                    p.name
-                  )}
-                </li>
-              ))}
-              <li>
-                <a href={DEKATLOKAL_URL} target="_blank" rel="noreferrer" className="hover:underline" title={t("techPartner")}>
-                  dekatlokal
-                </a>
-              </li>
+            <ul className="flex flex-wrap items-center gap-2.5 text-sm text-hero-foreground/85">
+              {profile.partners.map((p) => {
+                const content = p.logo ? (
+                  <span className="flex h-11 items-center rounded-xl bg-white px-3 py-1.5 shadow-sm ring-1 ring-black/5 transition-transform duration-200 group-hover:-translate-y-0.5">
+                    <Image src={p.logo.src} alt={p.name} width={p.logo.width} height={p.logo.height} className="h-full w-auto object-contain" />
+                  </span>
+                ) : (
+                  <span className="flex h-11 items-center rounded-xl border border-hero-foreground/15 bg-hero-foreground/5 px-3 font-semibold">{p.name}</span>
+                );
+                return (
+                  <li key={p.name}>
+                    {p.url ? (
+                      <a href={p.url} target="_blank" rel="noreferrer" className="group block" title={p.url === DEKATLOKAL_URL ? t("techPartner") : p.name}>
+                        {content}
+                      </a>
+                    ) : (
+                      content
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -149,7 +154,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
             <span className="inline-flex items-center gap-1.5 rounded-full border border-hero-foreground/15 bg-hero-foreground/5 px-3 py-1">
               <span>{t("poweredBy")}</span>
               <a href={DEKATLOKAL_URL} target="_blank" rel="noreferrer" className="font-bold text-hero-foreground hover:text-gold">
-                dekatlokal
+                DekatLokal
               </a>
             </span>
           </div>

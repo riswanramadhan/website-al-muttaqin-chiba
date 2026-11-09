@@ -46,9 +46,9 @@ export const news: NewsPost[] = [
       id: "Masjid Al-Muttaqin resmi dibuka di Matsudo",
     },
     excerpt: {
-      ja: "千葉イスラム文化センターとドンペット・ドゥアファの協力で建てられたモスクが、礼拝と学びの場として開所しました。",
-      en: "Built through the partnership of Chiba Islamic Culture Center and Dompet Dhuafa, the mosque opens as a place of worship and learning.",
-      id: "Dibangun lewat kolaborasi Chiba Islamic Culture Center dan Dompet Dhuafa, masjid dibuka sebagai tempat ibadah dan belajar.",
+      ja: "千葉イスラム文化センターとドンペット・ドゥアファ・ジャパンの協力で建てられたモスクが、礼拝と学びの場として開所しました。",
+      en: "Built through the partnership of Chiba Islamic Culture Center and Dompet Dhuafa Japan, the mosque opens as a place of worship and learning.",
+      id: "Dibangun lewat kolaborasi Chiba Islamic Culture Center dan Dompet Dhuafa Japan, masjid dibuka sebagai tempat ibadah dan belajar.",
     },
     body: {
       ja: [

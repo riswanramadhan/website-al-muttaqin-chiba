@@ -22,9 +22,9 @@ export const profile: MosqueProfile = {
     id: "Masjid dan pusat budaya Islam di Matsudo, Chiba",
   },
   description: {
-    ja: "アルムッタキーン文化センターは、千葉県松戸市にあるモスク兼イスラム文化センターです。礼拝の場であると同時に、改宗者（ムアッラフ）の学びの場、子どもたちのイスラム教育、そして日本の地域社会との対話の拠点として、千葉イスラム文化センターとドンペット・ドゥアファの協力により運営されています。",
-    en: "Al Muttaqin Cultural Center is a mosque and Islamic cultural center in Matsudo, Chiba. It is a place of worship, a learning home for new Muslims, a school for children, and a bridge to the local Japanese community, run in partnership between the Chiba Islamic Culture Center and Dompet Dhuafa.",
-    id: "Al Muttaqin Cultural Center adalah masjid sekaligus pusat budaya Islam di Matsudo, Chiba. Selain tempat ibadah, ia menjadi rumah belajar muallaf, sekolah bagi anak-anak, dan jembatan dialog dengan masyarakat Jepang, dikelola bersama oleh Chiba Islamic Culture Center dan Dompet Dhuafa.",
+    ja: "アルムッタキーン文化センターは、千葉県松戸市にあるモスク兼イスラム文化センターです。礼拝の場であると同時に、改宗者（ムアッラフ）の学びの場、子どもたちのイスラム教育、そして日本の地域社会との対話の拠点として、千葉イスラム文化センターとドンペット・ドゥアファ・ジャパンの協力により運営されています。",
+    en: "Al Muttaqin Cultural Center is a mosque and Islamic cultural center in Matsudo, Chiba. It is a place of worship, a learning home for new Muslims, a school for children, and a bridge to the local Japanese community, run in partnership between the Chiba Islamic Culture Center and Dompet Dhuafa Japan.",
+    id: "Al Muttaqin Cultural Center adalah masjid sekaligus pusat budaya Islam di Matsudo, Chiba. Selain tempat ibadah, ia menjadi rumah belajar muallaf, sekolah bagi anak-anak, dan jembatan dialog dengan masyarakat Jepang, dikelola bersama oleh Chiba Islamic Culture Center dan Dompet Dhuafa Japan.",
   },
   // PLACEHOLDER: alamat jalan lengkap diisi pengurus.
   address: {
@@ -79,22 +79,24 @@ export const profile: MosqueProfile = {
       url: "https://cicc-japan.com",
     },
     {
-      name: "Dompet Dhuafa",
-      role: {
-        ja: "建設・教育プログラムの支援パートナー",
-        en: "Construction and education program partner",
-        id: "Mitra pembangunan dan program pendidikan",
-      },
-      url: "https://www.dompetdhuafa.org",
-    },
-    {
       name: "Dompet Dhuafa Japan",
       role: {
-        ja: "在日インドネシア人コミュニティとの連携",
-        en: "Liaison with the Indonesian community in Japan",
-        id: "Penghubung komunitas Indonesia di Jepang",
+        ja: "建設・教育プログラムの支援と在日インドネシア人コミュニティとの連携",
+        en: "Construction and education program partner, liaison with the Indonesian community in Japan",
+        id: "Mitra pembangunan dan program pendidikan, penghubung komunitas Indonesia di Jepang",
       },
       url: "https://ddjepang.org",
+      logo: { src: "/images/partners/dd-japan.png", width: 360, height: 147 },
+    },
+    {
+      name: "DekatLokal",
+      role: {
+        ja: "技術パートナー・ウェブサイトとアプリの制作",
+        en: "Technology partner, builds the website and app",
+        id: "Mitra teknologi, pembuat situs web dan aplikasi",
+      },
+      url: "https://dekatlokal.com",
+      logo: { src: "/images/partners/dekatlokal.png", width: 609, height: 240 },
     },
   ],
 };
@@ -164,14 +166,14 @@ export const timeline: TimelineItem[] = [
   {
     year: "2026",
     title: {
-      ja: "ドンペット・ドゥアファとの協力協定",
-      en: "Partnership with Dompet Dhuafa",
-      id: "Kolaborasi dengan Dompet Dhuafa",
+      ja: "ドンペット・ドゥアファ・ジャパンとの協力協定",
+      en: "Partnership with Dompet Dhuafa Japan",
+      id: "Kolaborasi dengan Dompet Dhuafa Japan",
     },
     description: {
-      ja: "ジャカルタで協力協定を締結し、土地取得と建設のためのワクフ募金を開始。",
-      en: "A partnership agreement is signed in Jakarta and a waqf campaign for land and construction begins.",
-      id: "Kesepakatan kolaborasi ditandatangani di Jakarta dan penggalangan wakaf tanah serta bangunan dimulai.",
+      ja: "協力協定を締結し、土地取得と建設のためのワクフ募金を開始。",
+      en: "A partnership agreement is signed and a waqf campaign for land and construction begins.",
+      id: "Kesepakatan kolaborasi ditandatangani dan penggalangan wakaf tanah serta bangunan dimulai.",
     },
   },
   {

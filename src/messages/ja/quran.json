@@ -38,7 +38,7 @@
     "jumpPlaceholder": "節番号",
     "jumpGo": "移動",
     "audioLabel": "ミシャーリー・ラーシド・アル＝アファーシーによる朗誦",
-    "audioHint": "音声は cdn.islamic.network から配信され、オフライン保存はされません。",
+    "audioHint": "音声は cdn.islamic.network（予備: mp3quran.net）から配信され、オフライン保存はされません。",
     "audioUnsupported": "お使いのブラウザは音声再生に対応していません。",
     "prev": "前の章",
     "next": "次の章",
@@ -50,8 +50,12 @@
     "editions": {
       "en_sahih": "Saheeh International",
       "id_indonesian": "インドネシア宗教省",
-      "ja_ryoichi": "三田了一 訳"
-    }
+      "ja_japanese": "日本語訳（Tanzil）"
+    },
+    "audioPlay": "朗誦を再生",
+    "audioPause": "朗誦を一時停止",
+    "audioSeek": "再生位置",
+    "audioError": "朗誦を再生できませんでした。通信状態を確認して、もう一度お試しください。"
   },
   "revelation": {
     "Meccan": "マッカ啓示",

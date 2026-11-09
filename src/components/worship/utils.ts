@@ -84,18 +84,52 @@ export function weekdayShortNames(locale: Locale): string[] {
   return Array.from({ length: 7 }, (_, i) => fmt.format(new Date(Date.UTC(2023, 0, 1 + i))));
 }
 
-/** Basmalah yang disisipkan API di ayat pertama (varian Uthmani & standar). */
-const BASMALAH_VARIANTS = ["بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ", "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ", "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"];
+/** Basmalah yang ditampilkan sekali di atas surah (selain Al-Fatihah & At-Taubah). */
+export const BASMALAH = "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ";
 
-export const BASMALAH = BASMALAH_VARIANTS[0];
+/** Kerangka huruf basmalah (tanpa harakat & spasi) untuk pencocokan yang tahan variasi penulisan. */
+const BASMALAH_SKELETON = "بسماللهالرحمنالرحيم";
 
-/** Hapus basmalah pembuka dari teks ayat pertama (selain Al-Fatihah & At-Taubah). */
+/** Harakat, tanda waqaf/tilawah Uthmani, alif khanjariyah, dan tatweel. */
+function isArabicMark(ch: string): boolean {
+  const c = ch.charCodeAt(0);
+  return (
+    (c >= 0x0610 && c <= 0x061a) ||
+    (c >= 0x064b && c <= 0x065f) ||
+    c === 0x0670 ||
+    c === 0x0640 ||
+    (c >= 0x06d6 && c <= 0x06dc) ||
+    (c >= 0x06df && c <= 0x06e8) ||
+    (c >= 0x06ea && c <= 0x06ed)
+  );
+}
+
+/** Samakan bentuk huruf: alif wasla/hamzah → alif, ya Persia → ya Arab. */
+function baseLetter(ch: string): string {
+  if (ch === "ٱ" || ch === "أ" || ch === "إ" || ch === "آ") return "ا";
+  if (ch === "ی" || ch === "ى") return "ي";
+  return ch;
+}
+
+/**
+ * Hapus basmalah pembuka dari teks ayat pertama (selain Al-Fatihah & At-Taubah). Teks API
+ * memakai urutan harakat yang berbeda-beda (mis. syadah sebelum/ sesudah fathah), jadi yang
+ * dicocokkan hanya kerangka hurufnya; harakat penutup basmalah ikut terbuang.
+ */
 export function stripBasmalah(text: string): string {
   const trimmed = text.trim();
-  for (const b of BASMALAH_VARIANTS) {
-    if (trimmed.startsWith(b)) return trimmed.slice(b.length).trim();
+  const chars = Array.from(trimmed);
+  let k = 0;
+  let i = 0;
+  for (; i < chars.length && k < BASMALAH_SKELETON.length; i++) {
+    const ch = chars[i];
+    if (ch === " " || ch === " " || isArabicMark(ch)) continue;
+    if (baseLetter(ch) !== BASMALAH_SKELETON[k]) return trimmed;
+    k++;
   }
-  return trimmed;
+  if (k < BASMALAH_SKELETON.length) return trimmed;
+  while (i < chars.length && isArabicMark(chars[i])) i++;
+  return chars.slice(i).join("").trim();
 }
 
 /** Normalisasi teks pencarian: huruf kecil, tanpa diakritik Latin & harakat Arab. */

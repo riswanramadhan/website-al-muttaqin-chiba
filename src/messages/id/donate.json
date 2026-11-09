@@ -210,5 +210,13 @@
     "zakatLink": "Kalkulator zakat",
     "transparencyLink": "Laporan keuangan bulanan",
     "moreOnWeb": "Program dan donatur tetap ada di situs web"
+  },
+  "promo": {
+    "title": "Masjid Al-Muttaqin Chiba sudah dapat digunakan",
+    "description": "Poster kondisi dana dan cara berdonasi untuk pelunasan dana talangan dan renovasi masjid. Menutup otomatis dalam 5 detik.",
+    "alt": "Poster donasi Masjid Al-Muttaqin Chiba: kondisi dana saat ini, kebutuhan renovasi, dan rekening donasi.",
+    "cta": "Donasi sekarang",
+    "later": "Nanti saja",
+    "close": "Tutup poster"
   }
 }

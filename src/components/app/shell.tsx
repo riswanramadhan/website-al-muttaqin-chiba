@@ -77,7 +77,7 @@ export function PoweredBy({ className }: { className?: string }) {
     <p className={cn("mt-8 text-center text-xs text-muted-foreground", className)}>
       Powered by{" "}
       <a href="https://dekatlokal.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand hover:underline">
-        dekatlokal
+        DekatLokal
       </a>
     </p>
   );
