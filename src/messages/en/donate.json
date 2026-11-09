@@ -57,7 +57,14 @@
     "qrisAlt": "Official QRIS code of Al Muttaqin Cultural Center",
     "downloadQris": "Download QRIS",
     "scanHint": "Scan with any Indonesian e-wallet or mobile banking app, enter the unique amount, then confirm below.",
-    "empty": "No account available for this currency yet."
+    "empty": "No account available for this currency yet.",
+    "logos": {
+      "title": "Scan with any QRIS-enabled app",
+      "ewallet": "E-wallets",
+      "banks": "Mobile banking",
+      "more": "and every other bank or e-wallet that shows the QRIS mark.",
+      "alt": "{name} logo"
+    }
   },
   "unique": {
     "tag": "Unique amount",

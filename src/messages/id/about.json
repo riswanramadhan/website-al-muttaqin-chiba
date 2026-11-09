@@ -97,5 +97,16 @@
     },
     "cta": "Daftar jadi relawan",
     "secondary": "Lihat program kami"
+  },
+  "documentary": {
+    "tag": "Video dokumenter",
+    "title": "Mengenal Al Muttaqin lewat film dokumenter",
+    "highlight": "film dokumenter",
+    "description": "Film dokumenter singkat tentang Masjid Al-Muttaqin Chiba: kisah para muallaf dan peran masjid ini sebagai Islamic Cultural Center di tengah masyarakat Jepang.",
+    "watchOnYoutube": "Tonton di YouTube",
+    "play": "Putar video",
+    "duration": "Durasi",
+    "published": "Tayang",
+    "channel": "Kanal"
   }
 }

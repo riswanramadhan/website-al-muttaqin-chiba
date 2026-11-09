@@ -94,24 +94,57 @@ export function getNextLocalReminder(config: PrayerConfig, coords: GeoPoint, pre
   return events[0] ?? null;
 }
 
-/** Jendela cron server: kirim kejadian yang jatuh 5-10 menit ke depan (cron tiap 5 menit, tiap kejadian sekali). */
-export const CRON_LOOKAHEAD_MIN = 10;
-export const CRON_INTERVAL_MIN = 5;
+/**
+ * Interval pemicu cron server dalam menit. Bawaan 1: cron-job.org memanggil /api/push/send
+ * tiap menit sehingga notifikasi adzan tiba tepat pada menit adzan (waktu salat dibulatkan
+ * ke menit oleh pustaka adhan). Nilai lebih besar (mis. 5) tetap aman: kejadian dikirim
+ * paling awal `interval` menit sebelum waktunya, tidak pernah terlambat atau terlewat.
+ */
+export const CRON_INTERVAL_MIN = 1;
+
+/** Awal menit (ms) dari sebuah waktu. */
+export function minuteFloor(d: Date): number {
+  return Math.floor(d.getTime() / 60_000) * 60_000;
+}
 
 /**
- * Kejadian untuk dikirim cron pada `now`: waktu kejadian (dikurangi jeda Jumat) di dalam
- * [now + lookahead - interval, now + lookahead). Adzan & iqamah diberitahukan sekitar 10 menit sebelumnya.
+ * Kejadian untuk dikirim cron pada `now`: waktu tampil idealnya (`reminderNotifyAt`: adzan tepat
+ * waktu, iqamah 10 menit sebelumnya, Jumat 30 menit sebelumnya) berada di jendela
+ * [awal menit `now`, + interval). Jendela berurutan tidak saling tumpang tindih sehingga tiap
+ * kejadian dikirim tepat sekali bila cron berjalan tiap `intervalMin` menit.
  */
-export function getCronEvents(config: PrayerConfig, coords: GeoPoint, now: Date = new Date(), lookaheadMin = CRON_LOOKAHEAD_MIN, intervalMin = CRON_INTERVAL_MIN): ReminderEvent[] {
-  const start = now.getTime() + (lookaheadMin - intervalMin) * 60_000;
-  const end = now.getTime() + lookaheadMin * 60_000;
+export function getCronEvents(config: PrayerConfig, coords: GeoPoint, now: Date = new Date(), intervalMin = CRON_INTERVAL_MIN): ReminderEvent[] {
+  const start = minuteFloor(now);
+  const end = start + Math.max(1, intervalMin) * 60_000;
   // Semua jenis kejadian; filter preferensi dilakukan per langganan.
   const all = getReminderEvents(config, coords, { ...DEFAULT_PUSH_PREFS }, addDays(now, -1), 3);
   return all.filter((e) => {
-    const lead = e.kind === "jumuah" ? (JUMUAH_LEAD_MIN - CRON_LOOKAHEAD_MIN) * 60_000 : 0;
-    const t = e.time.getTime() - lead;
+    const t = reminderNotifyAt(e).getTime();
     return t >= start && t < end;
   });
+}
+
+/** Batas keterlambatan pengingat lokal (tab tertidur / perangkat sleep); lebih dari ini dilewati. */
+export const LOCAL_MAX_LATE_MS = 3 * 60_000;
+
+/** Pengingat yang jatuh tempo pada `now`: waktu tampil di (now - maxLate, now]. Dipakai pengecekan berkala di App. */
+export function getDueReminders(config: PrayerConfig, coords: GeoPoint, prefs: PushPreferences, now: Date = new Date(), maxLateMs = LOCAL_MAX_LATE_MS): ReminderEvent[] {
+  const n = now.getTime();
+  return getReminderEvents(config, coords, prefs, addDays(now, -1), 3).filter((e) => {
+    const t = reminderNotifyAt(e).getTime();
+    return t <= n && n - t < maxLateMs;
+  });
+}
+
+/** Catatan tag pengingat yang sudah dibunyikan (tag -> epoch ms); entri lebih dari 2 hari dibuang. */
+export type FiredLog = Record<string, number>;
+
+export function pruneFiredLog(log: FiredLog, now: number, keepMs = 2 * 24 * 60 * 60_000): FiredLog {
+  const out: FiredLog = {};
+  for (const [tag, at] of Object.entries(log)) {
+    if (typeof at === "number" && now - at < keepMs) out[tag] = at;
+  }
+  return out;
 }
 
 /** Apakah langganan dengan preferensi ini ingin menerima kejadian tersebut. */
@@ -130,3 +163,5 @@ export function buildReminderMessage(e: ReminderEvent, locale: Locale, t: Remind
   if (e.kind === "jumuah") return { title: t("jumuahTitle", values), body: t("jumuahBody", values) };
   return { title: t("adhanTitle", values), body: t("adhanBody", values) };
 }
+
+export { SW_REMINDER_MESSAGE, type ReminderPushPayload, type SwReminderMessage } from "./reminder-message";

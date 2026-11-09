@@ -44,7 +44,7 @@ export const profile: MosqueProfile = {
   email: "info@almuttaqinculturalcenter.org",
   website: "https://almuttaqinculturalcenter.org",
   social: {
-    youtube: "https://www.youtube.com/@almuttaqinchiba",
+    youtube: "https://www.youtube.com/@almuttaqin_chiba",
     instagram: "https://www.instagram.com/almuttaqinchiba",
     facebook: "https://www.facebook.com/almuttaqinchiba",
     whatsapp: "https://wa.me/818000000000",
@@ -102,7 +102,7 @@ export const profile: MosqueProfile = {
 export const board: BoardMember[] = [
   {
     id: "sugimoto",
-    name: "Kyoichiro Sugimoto",
+    name: "Dr. H. Ach Firman Wahyudi, S.E., M.Sc",
     role: { ja: "代表・ダーイー", en: "Chairman and Dai", id: "Ketua dan Dai" },
     organization: "Chiba Islamic Culture Center",
   },

@@ -9,5 +9,7 @@
   "copyright": "{year} アルムッタキーン文化センター All rights reserved.",
   "prayerNote": "礼拝時間はモスクの位置に基づき{method}法で計算しています。イカーマの時間は運営委員が設定します。",
   "installCta": "ジャマーアアプリをインストールすると、アザーン通知・キブラ・オフラインの礼拝表が使えます。",
-  "legal": "法的情報"
+  "legal": "法的情報",
+  "poweredBy": "Powered by",
+  "techPartner": "技術パートナー・サイト制作"
 }

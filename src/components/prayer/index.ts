@@ -3,7 +3,7 @@
  */
 export { PrayerTodayCard } from "./prayer-today-card"; // Server: { locale: Locale; variant?: "site" | "hero" | "app" }
 export { NextPrayerCountdown } from "./next-prayer-countdown"; // Client: { config: PrayerConfig; coordinates: GeoPoint; variant?: "site" | "hero" | "app" }
-export { PrayerArc } from "./prayer-arc"; // Client SVG: { config: PrayerConfig; coordinates: GeoPoint; className?: string; tone?: "default" | "inverse" }
+export { PrayerArc } from "./prayer-arc"; // Client SVG: { config: PrayerConfig; coordinates: GeoPoint; className?: string; tone?: "default" | "inverse"; interactive?: boolean; idleReadout?: "next" | "clock" }
 export { JumuahCard } from "./jumuah-card"; // Server: { locale: Locale; compact?: boolean; tone?: "default" | "inverse" }
 export { PrayerTimesTable } from "./prayer-times-table"; // Server: { locale: Locale; year: number; month: number; highlightToday?: boolean }
 export { HijriDateBadge } from "./hijri-date-badge"; // Server: { locale: Locale; withArabic?: boolean; tone?: "default" | "inverse" }

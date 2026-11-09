@@ -1,6 +1,7 @@
 "use client";
 
-import { CircleCheck, MessageCircle } from "lucide-react";
+import { CircleCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/social-icons";
 import { useTranslations } from "next-intl";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { IconCircle } from "@/components/ui/primitives";
@@ -30,7 +31,7 @@ export function FormOutcome({
   return (
     <div className="card-muted flex flex-col items-center gap-4 px-6 py-10 text-center" role="status" aria-live="polite">
       <IconCircle size="lg" tone={isFallback ? "soft" : "brand"}>
-        {isFallback ? <MessageCircle /> : <CircleCheck />}
+        {isFallback ? <WhatsAppIcon /> : <CircleCheck />}
       </IconCircle>
       <div>
         <p className="text-lg font-bold">{isFallback ? fallbackTitle : successTitle}</p>
@@ -38,7 +39,7 @@ export function FormOutcome({
       </div>
       {isFallback && (
         <a href={outcome.url} target="_blank" rel="noopener noreferrer" className={buttonVariants({ size: "lg" })}>
-          <MessageCircle />
+          <WhatsAppIcon />
           {tc("actions.whatsapp")}
         </a>
       )}

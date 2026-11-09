@@ -47,7 +47,20 @@
   },
   "arc": {
     "label": "Arc of the day from sunrise to sunset with today's prayer times",
-    "now": "Now"
+    "now": "Now",
+    "interactiveLabel": "Arc of the day with today's prayer times. Select a prayer to see its adhan, iqamah and countdown.",
+    "select": "{prayer}, adhan {time}. Show details",
+    "hint": "Tap a prayer time on the arc for details",
+    "reset": "Back to now",
+    "untilIqamah": "Until {prayer} iqamah",
+    "passed": "{prayer} has passed",
+    "agoMinutes": "{count, plural, =0 {Just now} one {# min ago} other {# min ago}}",
+    "agoHours": "{hours} h {minutes} min ago",
+    "nowJst": "Now (JST)",
+    "nextAt": "Next: {prayer} {time}",
+    "iqamahIn": "{prayer} iqamah in {time}",
+    "announce": "{prayer}: adhan {adhan}, iqamah {iqamah}",
+    "announceSunrise": "{prayer}: {time}"
   },
   "table": {
     "tag": "Monthly schedule",

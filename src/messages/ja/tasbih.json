@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "デジタルタスビーフ",
-    "description": "目標回数、周回数、振動やクリック音の設定ができるズィクルカウンターです。1日の記録は端末に保存されます。"
+    "description": "タップごとに玉の輪が回るモダンなタスビーフ。33・99・100回の目標、振動、やさしいクリック音、ズィクルの選択、端末に保存される毎日の記録。"
   },
   "title": "デジタルタスビーフ",
   "description": "タップして数え、毎日の記録を残す",
   "countLabel": "現在の回数",
-  "tapHint": "円をタップするか、スペースキーを押してください",
+  "tapHint": "円をタップするか、スペースキーまたはEnterキーを押してください",
   "tapButton": "ズィクルを数える",
   "targetLabel": "目標",
   "targetReached": "目標に達しました",
@@ -26,7 +26,10 @@
   },
   "settings": {
     "vibrate": "タップ時に振動",
-    "sound": "クリック音"
+    "sound": "クリック音",
+    "autoAdvance": "次のズィクルへ自動で進む",
+    "autoAdvanceHint": "目標に達したら、スブハーナッラー、アルハムドゥリッラー、アッラーフ・アクバルの順に進みます。",
+    "soundHint": "端末内で作るやさしい玉の音です。"
   },
   "reset": {
     "button": "リセット",
@@ -40,6 +43,12 @@
     "week": "直近7日間",
     "weekTotal": "合計 {count}回",
     "empty": "まだ記録がありません。回数はこの端末に保存されます。",
-    "dayTotal": "{count}回"
-  }
+    "dayTotal": "{count}回",
+    "recent": "最近の周回",
+    "roundItem": "{count}回"
+  },
+  "progressLabel": "{target}回中{count}回",
+  "next": "次：{name}",
+  "prevDhikr": "前のズィクル",
+  "nextDhikr": "次のズィクル"
 }

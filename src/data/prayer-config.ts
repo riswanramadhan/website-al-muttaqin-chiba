@@ -44,7 +44,7 @@ export const jumuahSchedules: JumuahSchedule[] = [
   {
     id: "j-2026-11-06",
     date: "2026-11-06",
-    khatib: "Sensei Kyoichiro Sugimoto",
+    khatib: "Dr. H. Ach Firman Wahyudi, S.E., M.Sc",
     imam: "Ust. Ahmad Fauzi",
     time: "12:30",
     language: "ja",
@@ -71,7 +71,7 @@ export const jumuahSchedules: JumuahSchedule[] = [
   {
     id: "j-2026-11-27",
     date: "2026-11-27",
-    khatib: "Sensei Kyoichiro Sugimoto",
+    khatib: "Dr. H. Ach Firman Wahyudi, S.E., M.Sc",
     imam: "Ust. Abdullah Rahman",
     time: "12:30",
     language: "ja",

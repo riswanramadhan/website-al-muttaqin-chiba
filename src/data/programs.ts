@@ -62,7 +62,7 @@ export const programs: Program[] = [
     languages: ["ja"],
     icon: "heart-handshake",
     registrationOpen: true,
-    contactPerson: "Sensei Kyoichiro Sugimoto",
+    contactPerson: "Dr. H. Ach Firman Wahyudi, S.E., M.Sc",
   },
   {
     id: "japanese-class",
@@ -125,7 +125,7 @@ export const programs: Program[] = [
     languages: ["ja", "en"],
     icon: "school",
     registrationOpen: true,
-    contactPerson: "Sensei Kyoichiro Sugimoto",
+    contactPerson: "Dr. H. Ach Firman Wahyudi, S.E., M.Sc",
   },
   {
     id: "weekly-kajian",

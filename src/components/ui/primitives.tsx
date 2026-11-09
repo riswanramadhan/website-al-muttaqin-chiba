@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils/cn";
+import { Icon3D, toneForIcon, type Icon3DTone } from "@/components/ui/icon-3d";
 
 export function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return <div className={cn("animate-pulse-soft rounded-lg bg-muted", className)} {...props} />;
@@ -35,20 +36,35 @@ export function Progress({ value, max = 100, className, tone = "brand", label }:
   );
 }
 
-/** Ikon Lucide di dalam lingkaran atau kotak membulat (PRD §8). */
+/**
+ * Ikon Lucide dalam ubin 3D (gaya aplikasi super). Warna dipilih otomatis dari nama ikon,
+ * atau tetapkan `color`. `variant="flat"` mengembalikan lingkaran datar lama bila diperlukan.
+ */
 export function IconCircle({
   children,
   size = "md",
   shape = "circle",
   tone = "default",
+  color,
+  variant = "3d",
   className,
 }: {
   children: React.ReactNode;
   size?: "sm" | "md" | "lg";
   shape?: "circle" | "square";
   tone?: "default" | "brand" | "soft" | "inverse" | "dark";
+  color?: Icon3DTone;
+  variant?: "3d" | "flat";
   className?: string;
 }) {
+  if (variant === "3d") {
+    const resolved = color ?? (tone === "brand" ? "maroon" : tone === "dark" ? "slate" : toneForIcon(children));
+    return (
+      <Icon3D tone={resolved} size={size} shape={shape === "circle" ? "circle" : "squircle"} className={className}>
+        {children}
+      </Icon3D>
+    );
+  }
   return (
     <span
       className={cn(

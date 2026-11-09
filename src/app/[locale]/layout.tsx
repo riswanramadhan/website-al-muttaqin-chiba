@@ -43,6 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       url: `${siteUrl}/${locale}`,
       title: t("siteTitle"),
       description: t("siteDescription"),
+      images: [{ url: "/images/masjid/og.jpg", width: 1200, height: 630, alt: "Al Muttaqin Cultural Center" }],
     },
     twitter: { card: "summary_large_image" },
     icons: {
@@ -57,8 +58,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#7f1d1d" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#800000" },
+    { media: "(prefers-color-scheme: dark)", color: "#120504" },
   ],
   width: "device-width",
   initialScale: 1,

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/social-icons";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
 import { getFaqs } from "@/lib/data";
@@ -51,8 +52,8 @@ export default async function FaqPage({ params }: { params: Promise<{ locale: st
         </div>
         <aside className="lg:col-span-4">
           <div className="card-muted sticky top-24 p-6">
-            <IconCircle tone="brand">
-              <MessageCircle />
+            <IconCircle color="emerald">
+              <WhatsAppIcon />
             </IconCircle>
             <h2 className="mt-5 text-xl font-bold">{t("cta.title")}</h2>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t("cta.body")}</p>

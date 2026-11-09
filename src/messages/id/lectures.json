@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Kajian dan ceramah",
-    "description": "Rekaman dan siaran langsung kajian Al Muttaqin Cultural Center dalam bahasa Indonesia, Jepang, Inggris, dan Arab."
+    "description": "Pilihan video kajian dan diskusi keislaman berbahasa Indonesia, serta siaran langsung dari Al Muttaqin Cultural Center."
   },
   "tag": "Kajian",
   "title": "Belajar bersama di",
   "highlight": "kajian",
-  "description": "Rekaman kajian pekanan, kelas muallaf, dan ceramah khusus. Saring berdasarkan bahasa atau seri, atau cari tema dan pemateri.",
+  "description": "Pilihan video yang membahas Islam dari kanal Raymond Chin, termasuk seri Ramadan ESCAPE bersama Ustadz Felix Siauw: akidah, takdir, hari akhir, muamalah, dan lainnya. Saring berdasarkan seri atau cari tema.",
   "filters": {
     "search": "Cari",
     "searchPlaceholder": "Judul, pemateri, atau tag",
@@ -45,15 +45,15 @@
   },
   "channels": {
     "tag": "Kanal rujukan",
-    "title": "Kajian dari",
-    "highlight": "para asatidz",
-    "description": "Kanal para asatidz yang rutin mengisi kajian di Al Muttaqin dan komunitas Chiba. Isi kanal dikelola oleh pemiliknya masing-masing.",
+    "title": "Kanal untuk",
+    "highlight": "belajar Islam",
+    "description": "Kanal YouTube rujukan untuk belajar dan mengenal Islam. Isi kanal dikelola oleh pemiliknya masing-masing.",
     "visit": "Buka kanal",
     "items": {
       "1": {
         "name": "Al Muttaqin Chiba",
         "description": "Kanal resmi: kajian pekanan, khutbah Jumat, dan siaran langsung dari masjid.",
-        "url": "https://www.youtube.com/@almuttaqinchiba"
+        "url": "https://www.youtube.com/@almuttaqin_chiba"
       },
       "2": {
         "name": "Chiba Islamic Culture Center",
@@ -61,9 +61,9 @@
         "url": "https://www.youtube.com/@ciccjapan"
       },
       "3": {
-        "name": "Ust. Ahmad Fauzi",
-        "description": "Seri tafsir dan sirah berbahasa Indonesia untuk komunitas di Jepang.",
-        "url": "https://www.youtube.com/@ustahmadfauzi"
+        "name": "Raymond Chin",
+        "description": "Podcast dan seri Ramadan ESCAPE yang membahas Islam dan kehidupan sehari-hari dalam bahasa Indonesia.",
+        "url": "https://www.youtube.com/@RaymondChins"
       }
     }
   },

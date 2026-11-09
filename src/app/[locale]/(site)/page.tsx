@@ -4,6 +4,7 @@ import type { Locale } from "@/lib/types";
 import { siteUrl } from "@/lib/site";
 import {
   HomeContact,
+  HomeDocumentary,
   HomeDonate,
   HomeFaq,
   HomeGallery,
@@ -57,6 +58,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <HomeJumuah locale={locale} />
       {/* 4. Layanan kami 01-06 */}
       <HomeServices locale={locale} />
+      {/* 4b. Video dokumenter Al Muttaqin */}
+      <HomeDocumentary locale={locale} />
       {/* 5. Program */}
       <HomePrograms locale={locale} />
       {/* 6. Kajian terbaru */}

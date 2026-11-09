@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "勉強会・講話",
-    "description": "アルムッタキーン文化センターの勉強会の録画とライブ配信。インドネシア語、日本語、英語、アラビア語でご覧いただけます。"
+    "description": "イスラームについて語るインドネシア語の動画セレクションと、アルムッタキーン文化センターからのライブ配信。"
   },
   "tag": "勉強会",
   "title": "勉強会で",
   "highlight": "学ぶ",
-  "description": "毎週の勉強会、ムアッラフ講座、特別講話の録画です。言語やシリーズで絞り込んだり、テーマや講師名で検索したりできます。",
+  "description": "レイモンド・チン氏のチャンネルから、イスラームを扱った動画を選びました。フェリックス・シアウ師が出演するラマダン特別番組「ESCAPE」など、信仰、定命、終末、イスラーム経済などを取り上げています（インドネシア語）。シリーズで絞り込んだり、テーマで検索したりできます。",
   "filters": {
     "search": "検索",
     "searchPlaceholder": "タイトル、講師、タグ",
@@ -45,15 +45,15 @@
   },
   "channels": {
     "tag": "参考チャンネル",
-    "title": "先生方の",
+    "title": "イスラームを学ぶ",
     "highlight": "チャンネル",
-    "description": "アルムッタキーンや千葉の地域で定期的に教えてくださる先生方のチャンネルです。各チャンネルの内容は、それぞれの運営者が管理しています。",
+    "description": "イスラームを学び、知るためにおすすめのYouTubeチャンネルです。各チャンネルの内容は、それぞれの運営者が管理しています。",
     "visit": "チャンネルを開く",
     "items": {
       "1": {
         "name": "Al Muttaqin Chiba",
         "description": "公式チャンネル：毎週の勉強会、金曜礼拝の説教、モスクからのライブ配信。",
-        "url": "https://www.youtube.com/@almuttaqinchiba"
+        "url": "https://www.youtube.com/@almuttaqin_chiba"
       },
       "2": {
         "name": "千葉イスラム文化センター",
@@ -61,9 +61,9 @@
         "url": "https://www.youtube.com/@ciccjapan"
       },
       "3": {
-        "name": "Ust. Ahmad Fauzi",
-        "description": "在日インドネシア人コミュニティ向けの、インドネシア語によるタフスィールとシーラのシリーズ。",
-        "url": "https://www.youtube.com/@ustahmadfauzi"
+        "name": "Raymond Chin",
+        "description": "イスラームと日々の暮らしを語るポッドキャストと、ラマダン特別番組「ESCAPE」（インドネシア語）。",
+        "url": "https://www.youtube.com/@RaymondChins"
       }
     }
   },

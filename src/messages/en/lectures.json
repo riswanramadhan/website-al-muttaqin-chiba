@@ -1,12 +1,12 @@
 {
   "meta": {
     "title": "Lectures and study circles",
-    "description": "Recorded and live study circles from Al Muttaqin Cultural Center in Indonesian, Japanese, English, and Arabic."
+    "description": "A selection of Indonesian-language videos on Islam, plus live broadcasts from Al Muttaqin Cultural Center."
   },
   "tag": "Lectures",
   "title": "Learn with the",
   "highlight": "study circles",
-  "description": "Recordings of our weekly circles, the New Muslim course, and special talks. Filter by language or series, or search for a topic or speaker.",
+  "description": "A selection of videos about Islam from Raymond Chin's channel, including the ESCAPE Ramadan series with Ustadz Felix Siauw: belief, destiny, the Last Day, Islamic finance, and more. Filter by series or search for a topic.",
   "filters": {
     "search": "Search",
     "searchPlaceholder": "Title, speaker, or tag",
@@ -45,15 +45,15 @@
   },
   "channels": {
     "tag": "Reference channels",
-    "title": "Lectures from",
-    "highlight": "our teachers",
-    "description": "Channels of the asatidz who regularly teach at Al Muttaqin and in the Chiba community. Content on these channels is managed by the owners.",
+    "title": "Channels to",
+    "highlight": "learn about Islam",
+    "description": "YouTube channels we recommend for learning about Islam. Content on these channels is managed by their owners.",
     "visit": "Open channel",
     "items": {
       "1": {
         "name": "Al Muttaqin Chiba",
         "description": "Official channel: weekly circles, Jumuah khutbah, and live broadcasts from the mosque.",
-        "url": "https://www.youtube.com/@almuttaqinchiba"
+        "url": "https://www.youtube.com/@almuttaqin_chiba"
       },
       "2": {
         "name": "Chiba Islamic Culture Center",
@@ -61,9 +61,9 @@
         "url": "https://www.youtube.com/@ciccjapan"
       },
       "3": {
-        "name": "Ust. Ahmad Fauzi",
-        "description": "Tafsir and sirah series in Indonesian for the community in Japan.",
-        "url": "https://www.youtube.com/@ustahmadfauzi"
+        "name": "Raymond Chin",
+        "description": "Podcasts and the ESCAPE Ramadan series discussing Islam and everyday life, in Indonesian.",
+        "url": "https://www.youtube.com/@RaymondChins"
       }
     }
   },

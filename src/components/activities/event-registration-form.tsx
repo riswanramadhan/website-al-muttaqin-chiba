@@ -3,7 +3,8 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CircleCheck, LoaderCircle, MessageCircle, TriangleAlert } from "lucide-react";
+import { CircleCheck, LoaderCircle, TriangleAlert } from "lucide-react";
+import { WhatsAppIcon } from "@/components/site/social-icons";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/lib/types";
@@ -68,7 +69,7 @@ export function EventRegistrationForm({ eventSlug, eventTitle, locale, full, clo
       <div className="card-surface p-6" role="status" aria-live="polite">
         <div className="flex items-start gap-4">
           <IconCircle tone="soft">
-            {result.fallback === "whatsapp" ? <MessageCircle /> : <CircleCheck />}
+            {result.fallback === "whatsapp" ? <WhatsAppIcon /> : <CircleCheck />}
           </IconCircle>
           <div className="min-w-0 flex-1">
             <h3 className="text-lg font-bold">{result.fallback === "whatsapp" ? t("form.fallbackTitle") : t("form.successTitle")}</h3>
@@ -79,7 +80,7 @@ export function EventRegistrationForm({ eventSlug, eventTitle, locale, full, clo
             </p>
             {result.fallback === "whatsapp" && (
               <a href={result.url} target="_blank" rel="noopener noreferrer" className={buttonVariants({ size: "md", className: "mt-4" })}>
-                <MessageCircle />
+                <WhatsAppIcon />
                 {t("form.whatsapp")}
               </a>
             )}

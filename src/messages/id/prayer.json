@@ -47,7 +47,20 @@
   },
   "arc": {
     "label": "Busur hari dari matahari terbit hingga terbenam dengan waktu salat hari ini",
-    "now": "Sekarang"
+    "now": "Sekarang",
+    "interactiveLabel": "Busur hari dengan waktu salat hari ini. Pilih salah satu waktu untuk melihat azan, iqamah, dan hitung mundurnya.",
+    "select": "{prayer}, azan {time}. Lihat detail",
+    "hint": "Ketuk waktu salat pada busur untuk detail",
+    "reset": "Kembali ke sekarang",
+    "untilIqamah": "Menuju iqamah {prayer}",
+    "passed": "{prayer} sudah lewat",
+    "agoMinutes": "{count, plural, =0 {Baru saja} other {# menit lalu}}",
+    "agoHours": "{hours} j {minutes} mnt lalu",
+    "nowJst": "Sekarang (JST)",
+    "nextAt": "Berikutnya: {prayer} {time}",
+    "iqamahIn": "Iqamah {prayer} {time} lagi",
+    "announce": "{prayer}: azan {adhan}, iqamah {iqamah}",
+    "announceSunrise": "{prayer}: {time}"
   },
   "table": {
     "tag": "Jadwal bulanan",

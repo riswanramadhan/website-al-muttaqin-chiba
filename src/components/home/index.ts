@@ -5,6 +5,7 @@ export { HomeLiveStrip } from "./home-live-strip";
 export { HomePortal } from "./home-portal";
 export { HomeJumuah } from "./home-jumuah";
 export { HomeServices } from "./home-services";
+export { HomeDocumentary, DocumentaryFeature } from "./home-documentary";
 export { HomePrograms } from "./home-programs";
 export { HomeLectures } from "./home-lectures";
 export { HomeDonate } from "./home-donate";

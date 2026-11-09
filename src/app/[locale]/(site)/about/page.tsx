@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowRight, BookOpen, HeartHandshake, Languages, Scale, Shield, Users } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -11,6 +12,7 @@ import { TwoToneTitle } from "@/components/ui/two-tone-title";
 import { buttonVariants } from "@/components/ui/button";
 import { IconCircle, NumberedItem } from "@/components/ui/primitives";
 import { BoardGrid, FacilitiesGrid, PartnersStrip, StatsRow, Timeline } from "@/components/about";
+import { DocumentaryFeature } from "@/components/home/home-documentary";
 import { cn } from "@/lib/utils/cn";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -59,6 +61,16 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
             <SectionHeading tag={t("profile.tag")} title={t("profile.title")} highlight={t("profile.highlight")} />
+            <div className="relative mt-8 aspect-[4/3] overflow-hidden rounded-t-[999px] rounded-b-3xl border border-border shadow-soft">
+              <Image
+                src="/images/masjid/masjid-al-muttaqin.jpg"
+                alt={pick(profile.name, locale)}
+                fill
+                sizes="(min-width: 1024px) 34vw, 92vw"
+                className="object-cover object-[50%_72%]"
+              />
+              <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-hero/70 to-transparent" />
+            </div>
           </div>
           <div className="space-y-5 text-base leading-relaxed text-foreground/90 lg:col-span-7">
             <p className="text-lg">{pick(profile.description, locale)}</p>
@@ -71,6 +83,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       {/* Statistik */}
       <section className="container-site pb-12 lg:pb-16">
         <StatsRow locale={locale} />
+      </section>
+
+      {/* Video dokumenter */}
+      <section id="documentary" className="container-site scroll-mt-20 pb-12 lg:pb-16" aria-label={t("documentary.tag")}>
+        <DocumentaryFeature locale={locale} />
       </section>
 
       {/* Visi & misi */}
