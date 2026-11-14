@@ -1,5 +1,6 @@
 "use server";
 
+import { randomUUID } from "node:crypto";
 import { getTranslations } from "next-intl/server";
 import { createAction } from "@/lib/actions";
 import { getDonationAccounts, getDonationPrograms, getProfile } from "@/lib/data";
@@ -25,9 +26,11 @@ export const confirmDonation = createAction<ConfirmDonationValues, DonationActio
   handler: async (data, ctx) => {
     const { code } = splitUniqueAmount(data.amount);
     if (ctx.supabase) {
-      const { data: row, error } = await ctx.supabase
+      const id = randomUUID();
+      const { error } = await ctx.supabase
         .from("donation_confirmations")
         .insert({
+          id,
           program_slug: data.programSlug,
           account_id: data.accountId,
           currency: data.currency,
@@ -39,11 +42,9 @@ export const confirmDonation = createAction<ConfirmDonationValues, DonationActio
           on_behalf_of: data.onBehalfOf || null,
           message: data.message || null,
           locale: ctx.locale,
-        })
-        .select("id")
-        .single<{ id: string }>();
+        });
       if (error) throw error;
-      return { fallback: null, id: row.id };
+      return { fallback: null, id };
     }
 
     const [profile, programs, accounts, t] = await Promise.all([
@@ -77,9 +78,11 @@ export const registerRecurringDonor = createAction<RecurringDonorValues, Donatio
   rateLimit: { max: 3, windowMs: 60_000 },
   handler: async (data, ctx) => {
     if (ctx.supabase) {
-      const { data: row, error } = await ctx.supabase
+      const id = randomUUID();
+      const { error } = await ctx.supabase
         .from("recurring_donors")
         .insert({
+          id,
           full_name: data.fullName,
           contact: data.contact,
           monthly_amount: data.monthlyAmount,
@@ -89,11 +92,9 @@ export const registerRecurringDonor = createAction<RecurringDonorValues, Donatio
           publish_name: data.publishName,
           consent: data.consent,
           locale: ctx.locale,
-        })
-        .select("id")
-        .single<{ id: string }>();
+        });
       if (error) throw error;
-      return { fallback: null, id: row.id };
+      return { fallback: null, id };
     }
 
     const [profile, t] = await Promise.all([getProfile(), getTranslations({ locale: ctx.locale, namespace: "donate" })]);

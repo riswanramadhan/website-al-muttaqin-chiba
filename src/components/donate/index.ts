@@ -11,8 +11,9 @@ export { DonationProgress } from "./donation-progress";
 export { ZakatCalculator } from "./zakat-calculator";
 
 // Ekspor tambahan untuk halaman modul ini.
-export { DonationFlow } from "./donation-flow";
-export { RecurringDonorForm } from "./recurring-donor-form";
+// Formulir diekspor lewat pembungkus malas (lazy-forms.tsx) agar zod + react-hook-form hanya terunduh
+// di halaman yang benar-benar menampilkannya, bukan di setiap halaman yang mengimpor berkas indeks ini.
+export { DonationFlow, RecurringDonorForm } from "./lazy-forms";
 export { DonationFaq } from "./donation-faq";
 export { GatewayCard } from "./gateway-card";
 export { TransparencyChart } from "./transparency-chart";

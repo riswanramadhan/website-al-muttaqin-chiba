@@ -1,0 +1,943 @@
+-- Al Muttaqin Cultural Center: penyiapan database Supabase dalam SATU berkas.
+-- DIBUAT OTOMATIS oleh scripts/build-sql.mjs. Jangan diubah manual.
+--
+-- Cara pakai: Supabase Dashboard > SQL Editor > New query > tempel seluruh isi berkas ini > Run.
+-- PROYEK BARU: sebelum Run, cari GANTI_KATA_SANDI_AWAL di bagian 5/5 dan ganti dengan kata sandi awal
+-- admin pilihan Anda (minimal 8 karakter). Bila akun admin sudah ada, bagian itu tidak perlu diubah.
+-- Aman dijalankan ulang kapan saja; data yang sudah diubah admin tidak ditimpa.
+-- Isi: (1) skema + RLS, (2) kolom panel admin, (3) CMS + storage, (4) data awal, (5) akun admin.
+
+-- ==========================================================================
+-- 1/5  Skema awal dan RLS (migrations/0001_init.sql)
+-- ==========================================================================
+
+-- Al Muttaqin Cultural Center: skema awal (PRD-02)
+-- Konten tiga bahasa disimpan sebagai jsonb { "ja": "...", "en": "...", "id": "..." }.
+-- Semua tabel memakai RLS: publik hanya membaca baris yang diterbitkan,
+-- formulir publik hanya boleh INSERT, dan penulisan lain hanya oleh admin terdaftar.
+
+create extension if not exists "pgcrypto";
+
+-- ---------------------------------------------------------------
+-- Admin & peran
+-- ---------------------------------------------------------------
+do $$ begin
+  create type admin_role as enum ('super_admin', 'content_admin', 'donation_admin', 'viewer');
+exception when duplicate_object then null;
+end $$;
+
+create table if not exists admins (
+  id uuid primary key references auth.users (id) on delete cascade,
+  email text not null unique,
+  full_name text not null,
+  role admin_role not null default 'content_admin',
+  ui_locale text not null default 'id' check (ui_locale in ('id', 'ja', 'en')),
+  active boolean not null default true,
+  created_at timestamptz not null default now()
+);
+
+create or replace function is_admin()
+returns boolean language sql stable security definer set search_path = public as $$
+  select exists (select 1 from admins where id = auth.uid() and active);
+$$;
+
+create or replace function has_role(required admin_role[])
+returns boolean language sql stable security definer set search_path = public as $$
+  select exists (
+    select 1 from admins where id = auth.uid() and active and (role = 'super_admin' or role = any (required))
+  );
+$$;
+
+create or replace function set_updated_at()
+returns trigger language plpgsql as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+-- ---------------------------------------------------------------
+-- Pengaturan & konfigurasi salat
+-- ---------------------------------------------------------------
+create table if not exists prayer_config (
+  id int primary key default 1 check (id = 1),
+  config jsonb not null,
+  updated_by uuid references admins (id),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists site_settings (
+  key text primary key,
+  value jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------
+-- Konten publik
+-- ---------------------------------------------------------------
+do $$ begin
+  create type content_status as enum ('draft', 'published', 'archived');
+exception when duplicate_object then null;
+end $$;
+
+create table if not exists announcements (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  title jsonb not null,
+  excerpt jsonb not null default '{}'::jsonb,
+  body jsonb not null default '{}'::jsonb,
+  category text not null default 'general',
+  pinned boolean not null default false,
+  status content_status not null default 'draft',
+  published_at timestamptz,
+  expires_at timestamptz,
+  created_by uuid references admins (id),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists events (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  title jsonb not null,
+  excerpt jsonb not null default '{}'::jsonb,
+  description jsonb not null default '{}'::jsonb,
+  category text not null default 'community',
+  starts_at timestamptz not null,
+  ends_at timestamptz not null,
+  location jsonb not null default '{}'::jsonb,
+  speaker text,
+  languages text[] not null default array['id'],
+  cover_image text,
+  registration jsonb not null default '{"required": false}'::jsonb,
+  recurring jsonb,
+  featured boolean not null default false,
+  status content_status not null default 'draft',
+  created_by uuid references admins (id),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists jumuah_schedules (
+  id uuid primary key default gen_random_uuid(),
+  date date not null unique,
+  khatib text not null,
+  imam text not null,
+  time text not null default '12:30',
+  language text not null default 'mixed',
+  topic jsonb,
+  note jsonb,
+  published boolean not null default true,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists lectures (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  title jsonb not null,
+  speaker text not null,
+  youtube_id text not null,
+  published_at timestamptz,
+  duration_minutes int not null default 0,
+  series jsonb,
+  description jsonb not null default '{}'::jsonb,
+  language text not null default 'id',
+  tags text[] not null default '{}',
+  status content_status not null default 'draft',
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+create table if not exists news (
+  id uuid primary key default gen_random_uuid(),
+  slug text not null unique,
+  title jsonb not null,
+  excerpt jsonb not null default '{}'::jsonb,
+  body jsonb not null default '{}'::jsonb,
+  category text not null default 'news',
+  author text,
+  cover_image text,
+  tags text[] not null default '{}',
+  status content_status not null default 'draft',
+  published_at timestamptz,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------
+-- Formulir publik (INSERT oleh siapa pun, dibaca admin)
+-- ---------------------------------------------------------------
+create table if not exists donation_confirmations (
+  id uuid primary key default gen_random_uuid(),
+  program_slug text not null,
+  account_id text not null,
+  currency text not null check (currency in ('JPY', 'IDR')),
+  amount numeric(14, 2) not null check (amount > 0),
+  /** nominal unik (amount + 3 digit) untuk pencocokan mutasi */
+  unique_code int,
+  transferred_at date not null,
+  donor_name text,
+  donor_contact text,
+  on_behalf_of text,
+  message text,
+  status text not null default 'pending' check (status in ('pending', 'matched', 'rejected')),
+  matched_by uuid references admins (id),
+  matched_at timestamptz,
+  locale text not null default 'id',
+  created_at timestamptz not null default now()
+);
+
+create table if not exists recurring_donors (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  contact text not null,
+  monthly_amount int not null check (monthly_amount > 0),
+  currency text not null default 'JPY',
+  payment_day int not null check (payment_day between 1 and 28),
+  method text not null,
+  publish_name boolean not null default false,
+  consent boolean not null default false,
+  active boolean not null default true,
+  locale text not null default 'id',
+  created_at timestamptz not null default now()
+);
+
+create table if not exists event_registrations (
+  id uuid primary key default gen_random_uuid(),
+  event_id uuid not null references events (id) on delete cascade,
+  full_name text not null,
+  contact text not null,
+  participants int not null default 1 check (participants between 1 and 10),
+  notes text,
+  status text not null default 'registered' check (status in ('registered', 'waitlist', 'cancelled', 'attended')),
+  locale text not null default 'id',
+  created_at timestamptz not null default now()
+);
+
+create table if not exists program_registrations (
+  id uuid primary key default gen_random_uuid(),
+  program_id text not null,
+  full_name text not null,
+  contact text not null,
+  participant_name text,
+  participant_age int,
+  notes text,
+  status text not null default 'new' check (status in ('new', 'accepted', 'waitlist', 'rejected')),
+  locale text not null default 'id',
+  created_at timestamptz not null default now()
+);
+
+create table if not exists suggestions (
+  id uuid primary key default gen_random_uuid(),
+  kind text not null check (kind in ('suggestion', 'facility', 'question', 'ustadz', 'website', 'other')),
+  message text not null,
+  sender_name text,
+  sender_contact text,
+  status text not null default 'new' check (status in ('new', 'in_progress', 'done', 'spam')),
+  handled_by uuid references admins (id),
+  locale text not null default 'id',
+  created_at timestamptz not null default now()
+);
+
+create table if not exists room_bookings (
+  id uuid primary key default gen_random_uuid(),
+  room_id text not null,
+  purpose text not null,
+  organizer_name text not null,
+  organizer_contact text not null,
+  starts_at timestamptz not null,
+  ends_at timestamptz not null,
+  attendees int not null default 1,
+  notes text,
+  status text not null default 'requested' check (status in ('requested', 'approved', 'rejected', 'cancelled')),
+  locale text not null default 'id',
+  created_at timestamptz not null default now()
+);
+
+create table if not exists contact_messages (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  email text not null,
+  subject text not null,
+  message text not null,
+  locale text not null default 'id',
+  status text not null default 'new',
+  created_at timestamptz not null default now()
+);
+
+create table if not exists push_subscriptions (
+  id uuid primary key default gen_random_uuid(),
+  endpoint text not null unique,
+  keys jsonb not null,
+  locale text not null default 'id',
+  /** preferensi per salat: {"fajr": true, "dhuhr": true, ...} dan pengingat iqamah */
+  preferences jsonb not null default '{"fajr": true, "dhuhr": true, "asr": true, "maghrib": true, "isha": true, "iqamahReminder": true, "jumuah": true}'::jsonb,
+  user_agent text,
+  created_at timestamptz not null default now(),
+  last_seen_at timestamptz not null default now()
+);
+
+create table if not exists activity_log (
+  id bigint generated always as identity primary key,
+  admin_id uuid references admins (id),
+  action text not null,
+  entity text not null,
+  entity_id text,
+  detail jsonb,
+  created_at timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------
+-- Trigger updated_at
+-- ---------------------------------------------------------------
+do $$
+declare t text;
+begin
+  for t in select unnest(array['announcements', 'events', 'jumuah_schedules', 'lectures', 'news']) loop
+    execute format('drop trigger if exists set_updated_at on %I', t);
+    execute format('create trigger set_updated_at before update on %I for each row execute function set_updated_at()', t);
+  end loop;
+end $$;
+
+-- ---------------------------------------------------------------
+-- RLS
+-- ---------------------------------------------------------------
+alter table admins enable row level security;
+alter table prayer_config enable row level security;
+alter table site_settings enable row level security;
+alter table announcements enable row level security;
+alter table events enable row level security;
+alter table jumuah_schedules enable row level security;
+alter table lectures enable row level security;
+alter table news enable row level security;
+alter table donation_confirmations enable row level security;
+alter table recurring_donors enable row level security;
+alter table event_registrations enable row level security;
+alter table program_registrations enable row level security;
+alter table suggestions enable row level security;
+alter table room_bookings enable row level security;
+alter table contact_messages enable row level security;
+alter table push_subscriptions enable row level security;
+alter table activity_log enable row level security;
+
+-- Admin: baca diri sendiri; super admin kelola semua.
+drop policy if exists "admins read self" on admins;
+create policy "admins read self" on admins for select using (id = auth.uid() or has_role(array['super_admin']::admin_role[]));
+drop policy if exists "super admin manage admins" on admins;
+create policy "super admin manage admins" on admins for all using (has_role(array['super_admin']::admin_role[])) with check (has_role(array['super_admin']::admin_role[]));
+
+-- Konfigurasi: publik baca, admin konten tulis.
+drop policy if exists "public read prayer config" on prayer_config;
+create policy "public read prayer config" on prayer_config for select using (true);
+drop policy if exists "admin write prayer config" on prayer_config;
+create policy "admin write prayer config" on prayer_config for all using (has_role(array['content_admin']::admin_role[])) with check (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public read settings" on site_settings;
+create policy "public read settings" on site_settings for select using (true);
+drop policy if exists "admin write settings" on site_settings;
+create policy "admin write settings" on site_settings for all using (has_role(array['content_admin']::admin_role[])) with check (has_role(array['content_admin']::admin_role[]));
+
+-- Konten: publik baca yang diterbitkan, admin konten kelola semua.
+drop policy if exists "public read published announcements" on announcements;
+create policy "public read published announcements" on announcements for select using (status = 'published' or is_admin());
+drop policy if exists "admin manage announcements" on announcements;
+create policy "admin manage announcements" on announcements for all using (has_role(array['content_admin']::admin_role[])) with check (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public read published events" on events;
+create policy "public read published events" on events for select using (status = 'published' or is_admin());
+drop policy if exists "admin manage events" on events;
+create policy "admin manage events" on events for all using (has_role(array['content_admin']::admin_role[])) with check (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public read jumuah" on jumuah_schedules;
+create policy "public read jumuah" on jumuah_schedules for select using (published or is_admin());
+drop policy if exists "admin manage jumuah" on jumuah_schedules;
+create policy "admin manage jumuah" on jumuah_schedules for all using (has_role(array['content_admin']::admin_role[])) with check (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public read published lectures" on lectures;
+create policy "public read published lectures" on lectures for select using (status = 'published' or is_admin());
+drop policy if exists "admin manage lectures" on lectures;
+create policy "admin manage lectures" on lectures for all using (has_role(array['content_admin']::admin_role[])) with check (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public read published news" on news;
+create policy "public read published news" on news for select using (status = 'published' or is_admin());
+drop policy if exists "admin manage news" on news;
+create policy "admin manage news" on news for all using (has_role(array['content_admin']::admin_role[])) with check (has_role(array['content_admin']::admin_role[]));
+
+-- Formulir publik: siapa pun boleh INSERT, hanya admin yang membaca/mengubah.
+drop policy if exists "public insert donation confirmations" on donation_confirmations;
+create policy "public insert donation confirmations" on donation_confirmations for insert with check (true);
+drop policy if exists "donation admin read confirmations" on donation_confirmations;
+create policy "donation admin read confirmations" on donation_confirmations for select using (has_role(array['donation_admin']::admin_role[]));
+drop policy if exists "donation admin update confirmations" on donation_confirmations;
+create policy "donation admin update confirmations" on donation_confirmations for update using (has_role(array['donation_admin']::admin_role[]));
+drop policy if exists "public insert recurring donors" on recurring_donors;
+create policy "public insert recurring donors" on recurring_donors for insert with check (true);
+drop policy if exists "donation admin manage recurring" on recurring_donors;
+create policy "donation admin manage recurring" on recurring_donors for all using (has_role(array['donation_admin']::admin_role[]));
+drop policy if exists "public insert event registrations" on event_registrations;
+create policy "public insert event registrations" on event_registrations for insert with check (true);
+drop policy if exists "content admin manage registrations" on event_registrations;
+create policy "content admin manage registrations" on event_registrations for all using (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public insert program registrations" on program_registrations;
+create policy "public insert program registrations" on program_registrations for insert with check (true);
+drop policy if exists "content admin manage program registrations" on program_registrations;
+create policy "content admin manage program registrations" on program_registrations for all using (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public insert suggestions" on suggestions;
+create policy "public insert suggestions" on suggestions for insert with check (true);
+drop policy if exists "content admin manage suggestions" on suggestions;
+create policy "content admin manage suggestions" on suggestions for all using (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public insert room bookings" on room_bookings;
+create policy "public insert room bookings" on room_bookings for insert with check (true);
+drop policy if exists "content admin manage bookings" on room_bookings;
+create policy "content admin manage bookings" on room_bookings for all using (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public insert contact messages" on contact_messages;
+create policy "public insert contact messages" on contact_messages for insert with check (true);
+drop policy if exists "content admin manage contact" on contact_messages;
+create policy "content admin manage contact" on contact_messages for all using (has_role(array['content_admin']::admin_role[]));
+drop policy if exists "public upsert own push subscription" on push_subscriptions;
+create policy "public upsert own push subscription" on push_subscriptions for insert with check (true);
+drop policy if exists "public update own push subscription" on push_subscriptions;
+create policy "public update own push subscription" on push_subscriptions for update using (true) with check (true);
+drop policy if exists "public delete own push subscription" on push_subscriptions;
+create policy "public delete own push subscription" on push_subscriptions for delete using (true);
+drop policy if exists "admin read push subscriptions" on push_subscriptions;
+create policy "admin read push subscriptions" on push_subscriptions for select using (is_admin());
+drop policy if exists "admin read activity log" on activity_log;
+create policy "admin read activity log" on activity_log for select using (is_admin());
+drop policy if exists "admin insert activity log" on activity_log;
+create policy "admin insert activity log" on activity_log for insert with check (is_admin());
+
+-- ---------------------------------------------------------------
+-- Storage bucket untuk gambar (galeri, sampul, QRIS)
+-- ---------------------------------------------------------------
+insert into storage.buckets (id, name, public) values ('media', 'media', true) on conflict (id) do nothing;
+drop policy if exists "public read media" on storage.objects;
+create policy "public read media" on storage.objects for select using (bucket_id = 'media');
+drop policy if exists "admin write media" on storage.objects;
+create policy "admin write media" on storage.objects for insert with check (bucket_id = 'media' and is_admin());
+drop policy if exists "admin update media" on storage.objects;
+create policy "admin update media" on storage.objects for update using (bucket_id = 'media' and is_admin());
+drop policy if exists "admin delete media" on storage.objects;
+create policy "admin delete media" on storage.objects for delete using (bucket_id = 'media' and is_admin());
+
+-- ---------------------------------------------------------------
+-- Indeks
+-- ---------------------------------------------------------------
+create index if not exists announcements_published_idx on announcements (status, published_at desc);
+create index if not exists events_starts_idx on events (status, starts_at);
+create index if not exists lectures_published_idx on lectures (status, published_at desc);
+create index if not exists news_published_idx on news (status, published_at desc);
+create index if not exists donation_confirmations_status_idx on donation_confirmations (status, created_at desc);
+create index if not exists event_registrations_event_idx on event_registrations (event_id);
+
+
+-- ==========================================================================
+-- 2/5  Panel admin (migrations/0002_admin.sql)
+-- ==========================================================================
+
+-- Panel admin (PRD-09): kolom & indeks tambahan. Tidak mengubah 0001.
+
+-- Catatan pencocokan manual donasi oleh admin donasi.
+alter table donation_confirmations add column if not exists admin_note text;
+
+-- Log aktivitas dibaca terbaru dulu.
+create index if not exists activity_log_created_idx on activity_log (created_at desc);
+
+-- Admin boleh memperbarui baris dirinya sendiri (mis. bahasa UI), tanpa mengubah peran/aktif.
+create or replace function admins_guard_self_update()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if not has_role(array['super_admin']::admin_role[]) then
+    new.role := old.role;
+    new.active := old.active;
+    new.email := old.email;
+  end if;
+  return new;
+end;
+$$;
+
+drop trigger if exists admins_guard_self_update on admins;
+create trigger admins_guard_self_update before update on admins
+  for each row execute function admins_guard_self_update();
+
+drop policy if exists "admins update self" on admins;
+drop policy if exists "admins update self" on admins;
+create policy "admins update self" on admins for update using (id = auth.uid()) with check (id = auth.uid());
+
+
+-- ==========================================================================
+-- 3/5  CMS, hitungan pendaftar, storage (migrations/0003_cms.sql)
+-- ==========================================================================
+
+-- CMS panel admin: koleksi konten generik, pengaturan situs, hitungan pendaftar, dan batas unggahan.
+-- Aman dijalankan ulang (idempoten). Jalankan setelah 0001_init.sql dan 0002_admin.sql.
+
+-- ---------------------------------------------------------------
+-- Koleksi konten (FAQ, galeri, rekening donasi, program, ruangan, tempat halal, pengurus, dst.)
+-- Satu baris = satu item; `data` menyimpan bentuk yang sama dengan tipe di src/lib/types.ts.
+-- ---------------------------------------------------------------
+create table if not exists content_items (
+  id uuid primary key default gen_random_uuid(),
+  collection text not null,
+  item_key text not null,
+  data jsonb not null default '{}'::jsonb,
+  sort_order int not null default 0,
+  published boolean not null default true,
+  updated_by uuid references admins (id) on delete set null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  constraint content_items_key_format check (item_key ~ '^[a-z0-9][a-z0-9-]{0,79}$'),
+  constraint content_items_unique_key unique (collection, item_key)
+);
+
+create index if not exists content_items_collection_idx on content_items (collection, sort_order, created_at);
+
+drop trigger if exists set_updated_at on content_items;
+create trigger set_updated_at before update on content_items
+  for each row execute function set_updated_at();
+
+-- Rekening dan laporan donasi hanya boleh diubah admin donasi (dan super admin);
+-- koleksi lain oleh admin konten.
+create or replace function can_manage_collection(target text)
+returns boolean language sql stable security definer set search_path = public as $$
+  select case
+    when target in ('donation_accounts', 'donation_programs', 'transparency_reports')
+      then has_role(array['donation_admin']::admin_role[])
+    else has_role(array['content_admin']::admin_role[])
+  end;
+$$;
+
+alter table content_items enable row level security;
+
+drop policy if exists "public read published content items" on content_items;
+create policy "public read published content items" on content_items
+  for select using (published or is_admin());
+
+drop policy if exists "admin manage content items" on content_items;
+create policy "admin manage content items" on content_items
+  for all using (can_manage_collection(collection)) with check (can_manage_collection(collection));
+
+-- ---------------------------------------------------------------
+-- Pengaturan situs (profil & kontak, video unggulan, pop-up promo): kolom audit.
+-- ---------------------------------------------------------------
+alter table site_settings add column if not exists updated_by uuid references admins (id) on delete set null;
+
+drop trigger if exists set_updated_at on site_settings;
+create trigger set_updated_at before update on site_settings
+  for each row execute function set_updated_at();
+
+-- ---------------------------------------------------------------
+-- Hitungan pendaftar agenda: `events.registration.registered` selalu dihitung ulang dari
+-- tabel event_registrations, sehingga kuota di situs publik akurat tanpa campur tangan admin.
+-- ---------------------------------------------------------------
+create or replace function events_keep_registered()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  new.registration := jsonb_set(
+    coalesce(new.registration, '{"required": false}'::jsonb),
+    '{registered}',
+    to_jsonb((
+      select coalesce(sum(participants), 0)
+      from event_registrations
+      where event_id = new.id and status in ('registered', 'attended')
+    ))
+  );
+  return new;
+end;
+$$;
+
+drop trigger if exists events_keep_registered on events;
+create trigger events_keep_registered before insert or update on events
+  for each row execute function events_keep_registered();
+
+create or replace function sync_event_registered()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if tg_op in ('UPDATE', 'DELETE') then
+    update events set registration = registration where id = old.event_id;
+  end if;
+  if tg_op in ('INSERT', 'UPDATE') then
+    update events set registration = registration where id = new.event_id;
+  end if;
+  return null;
+end;
+$$;
+
+drop trigger if exists sync_event_registered on event_registrations;
+create trigger sync_event_registered after insert or update or delete on event_registrations
+  for each row execute function sync_event_registered();
+
+-- ---------------------------------------------------------------
+-- Storage: bucket `media` publik untuk dibaca, dibatasi 5 MB per berkas dan hanya gambar/PDF.
+-- Gambar dikompres di browser admin sebelum diunggah (lihat src/components/admin/cms/image-upload.tsx).
+-- ---------------------------------------------------------------
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('media', 'media', true, 5242880, array['image/webp', 'image/jpeg', 'image/png', 'image/avif', 'application/pdf'])
+on conflict (id) do update
+  set public = true,
+      file_size_limit = excluded.file_size_limit,
+      allowed_mime_types = excluded.allowed_mime_types;
+
+-- Hak tulis bucket media mengikuti folder: `donations/` (QRIS) dan `reports/` (laporan keuangan)
+-- hanya admin donasi; folder lain hanya admin konten. Super admin selalu boleh, peran viewer tidak.
+-- Tanpa ini admin konten bisa menimpa gambar QRIS lewat Storage API dengan token sesinya sendiri.
+create or replace function can_manage_media(object_name text)
+returns boolean language sql stable security definer set search_path = public as $$
+  select case
+    when split_part(object_name, '/', 1) in ('donations', 'reports')
+      then has_role(array['donation_admin']::admin_role[])
+    else has_role(array['content_admin']::admin_role[])
+  end;
+$$;
+
+drop policy if exists "admin write media" on storage.objects;
+create policy "admin write media" on storage.objects for insert
+  with check (bucket_id = 'media' and can_manage_media(name));
+drop policy if exists "admin update media" on storage.objects;
+create policy "admin update media" on storage.objects for update
+  using (bucket_id = 'media' and can_manage_media(name))
+  with check (bucket_id = 'media' and can_manage_media(name));
+drop policy if exists "admin delete media" on storage.objects;
+create policy "admin delete media" on storage.objects for delete
+  using (bucket_id = 'media' and can_manage_media(name));
+
+-- Jalur berkas (relatif terhadap bucket media) yang masih dirujuk di mana pun. Dipakai panel admin
+-- sebelum menghapus berkas lama, supaya gambar yang dipakai dua item tidak ikut terhapus.
+create or replace function media_paths_in_use(paths text[])
+returns text[] language sql stable security definer set search_path = public as $$
+  select coalesce(array_agg(p), '{}'::text[])
+  from unnest(paths) as p
+  where exists (select 1 from content_items where position(p in data::text) > 0)
+     or exists (select 1 from site_settings where position(p in value::text) > 0)
+     or exists (select 1 from events where position(p in coalesce(cover_image, '')) > 0)
+     or exists (select 1 from news where position(p in coalesce(cover_image, '')) > 0);
+$$;
+
+-- ---------------------------------------------------------------
+-- Admin: penanda wajib ganti kata sandi awal, dan perbaikan trigger pelindung.
+-- ---------------------------------------------------------------
+alter table admins add column if not exists must_change_password boolean not null default false;
+
+-- Tanpa sesi pengguna (SQL Editor atau service role, auth.uid() null) pemanggil sudah tepercaya,
+-- jadi peran/aktif boleh diubah. Sebelumnya undangan ulang admin dan admin-user.sql diam-diam
+-- gagal mengubah peran. Pengunjung anonim tetap tidak bisa mengubah apa pun karena RLS.
+create or replace function admins_guard_self_update()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if auth.uid() is not null and not has_role(array['super_admin']::admin_role[]) then
+    new.role := old.role;
+    new.active := old.active;
+    new.email := old.email;
+  end if;
+  return new;
+end;
+$$;
+
+-- ---------------------------------------------------------------
+-- Hak akses eksplisit. Proyek Supabase lama memberi hak ini secara otomatis; proyek baru bisa tidak.
+-- Aman dijalankan ulang. RLS di atas tetap menjadi penjaga utama: GRANT hanya membuka pintu tabel.
+-- ---------------------------------------------------------------
+grant usage on schema public to anon, authenticated, service_role;
+
+-- Pengunjung: baca konten terbit, kirim formulir.
+grant select on prayer_config, site_settings, announcements, events, jumuah_schedules, lectures, news, content_items to anon;
+grant insert on donation_confirmations, recurring_donors, event_registrations, program_registrations,
+  suggestions, room_bookings, contact_messages to anon;
+
+-- Admin yang masuk (dibatasi RLS per peran).
+grant select, insert, update, delete on admins, prayer_config, site_settings, announcements, events,
+  jumuah_schedules, lectures, news, donation_confirmations, recurring_donors, event_registrations,
+  program_registrations, suggestions, room_bookings, contact_messages, push_subscriptions, activity_log,
+  content_items to authenticated;
+
+-- Server tepercaya (push, undangan admin).
+grant all on admins, prayer_config, site_settings, announcements, events, jumuah_schedules, lectures, news,
+  donation_confirmations, recurring_donors, event_registrations, program_registrations, suggestions,
+  room_bookings, contact_messages, push_subscriptions, activity_log, content_items to service_role;
+
+grant usage, select on all sequences in schema public to authenticated, service_role;
+
+grant execute on function is_admin(), has_role(admin_role[]), can_manage_collection(text), can_manage_media(text)
+  to anon, authenticated, service_role;
+revoke execute on function media_paths_in_use(text[]) from public, anon;
+grant execute on function media_paths_in_use(text[]) to authenticated, service_role;
+
+
+-- ==========================================================================
+-- 4/5  Data awal (seed.sql)
+-- ==========================================================================
+
+-- Data awal Al Muttaqin Cultural Center. DIBUAT OTOMATIS oleh scripts/build-sql.mjs dari src/data/*.
+-- Jangan diubah manual; ubah data seed lalu jalankan `pnpm db:sql`.
+-- Aman dijalankan ulang: baris yang sudah ada tidak ditimpa (on conflict do nothing), jadi
+-- perubahan yang sudah dibuat admin lewat panel tidak hilang.
+
+-- Konfigurasi salat
+insert into prayer_config (id, config) values
+  (1, '{"method":"MuslimWorldLeague","madhab":"shafi","highLatitudeRule":"MiddleOfTheNight","adjustments":{"fajr":0,"sunrise":0,"dhuhr":2,"asr":0,"maghrib":2,"isha":0},"iqamah":{"fajr":{"type":"offset","minutes":20},"dhuhr":{"type":"offset","minutes":10},"asr":{"type":"offset","minutes":10},"maghrib":{"type":"offset","minutes":5},"isha":{"type":"offset","minutes":10}},"hijriAdjustment":0,"timezone":"Asia/Tokyo","jumuah":{"time":"12:30","note":{"ja":"金曜礼拝は12:30開始（説教は12:30、礼拝は12:50頃）。早めにお越しください。","en":"Jumuah starts at 12:30 (khutbah 12:30, prayer around 12:50). Please arrive early.","id":"Salat Jumat dimulai 12:30 (khutbah 12:30, salat sekitar 12:50). Mohon datang lebih awal."}},"ramadan":{"start":"2027-02-08","end":"2027-03-09"}}'::jsonb)
+on conflict (id) do nothing;
+
+-- Pengaturan situs: profil & kontak, video unggulan, pop-up promo
+insert into site_settings (key, value) values
+  ('profile', '{"name":{"ja":"アルムッタキーン文化センター","en":"Al Muttaqin Cultural Center","id":"Al Muttaqin Cultural Center"},"shortName":"Al Muttaqin","legalName":{"ja":"アルムッタキーン文化センター（マスジド・アルムッタキーン）","en":"Al Muttaqin Cultural Center (Masjid Al-Muttaqin)","id":"Al Muttaqin Cultural Center (Masjid Al-Muttaqin)"},"tagline":{"ja":"千葉・松戸のモスクとイスラム文化センター","en":"A mosque and Islamic cultural center in Matsudo, Chiba","id":"Masjid dan pusat budaya Islam di Matsudo, Chiba"},"description":{"ja":"アルムッタキーン文化センターは、千葉県松戸市にあるモスク兼イスラム文化センターです。礼拝の場であると同時に、改宗者（ムアッラフ）の学びの場、子どもたちのイスラム教育、そして日本の地域社会との対話の拠点として、千葉イスラム文化センターとドンペット・ドゥアファ・ジャパンの協力により運営されています。","en":"Al Muttaqin Cultural Center is a mosque and Islamic cultural center in Matsudo, Chiba. It is a place of worship, a learning home for new Muslims, a school for children, and a bridge to the local Japanese community, run in partnership between the Chiba Islamic Culture Center and Dompet Dhuafa Japan.","id":"Al Muttaqin Cultural Center adalah masjid sekaligus pusat budaya Islam di Matsudo, Chiba. Selain tempat ibadah, ia menjadi rumah belajar muallaf, sekolah bagi anak-anak, dan jembatan dialog dengan masyarakat Jepang, dikelola bersama oleh Chiba Islamic Culture Center dan Dompet Dhuafa Japan."},"address":{"ja":"千葉県松戸市（詳細住所は近日公開）","en":"Matsudo City, Chiba Prefecture (full street address to be announced)","id":"Kota Matsudo, Prefektur Chiba (alamat lengkap akan diumumkan)"},"postalCode":"271-0092","city":{"ja":"松戸市","en":"Matsudo","id":"Matsudo"},"prefecture":{"ja":"千葉県","en":"Chiba","id":"Chiba"},"country":{"ja":"日本","en":"Japan","id":"Jepang"},"coordinates":{"lat":35.7876,"lng":139.9031},"googleMapsUrl":"https://www.google.com/maps/search/?api=1&query=35.7876,139.9031","phone":"+81-47-000-0000","whatsapp":"+818000000000","email":"info@almuttaqinculturalcenter.org","website":"https://almuttaqinculturalcenter.org","social":{"youtube":"https://www.youtube.com/@almuttaqin_chiba","instagram":"https://www.instagram.com/almuttaqinchiba","facebook":"https://www.facebook.com/almuttaqinchiba","whatsapp":"https://wa.me/818000000000"},"foundedYear":2026,"capacity":150,"openingHours":{"ja":"毎日 ファジュル礼拝の30分前からイシャー礼拝の30分後まで","en":"Daily, from 30 minutes before Fajr until 30 minutes after Isha","id":"Setiap hari, 30 menit sebelum Subuh hingga 30 menit setelah Isya"},"nearestStations":[{"name":{"ja":"JR松戸駅","en":"JR Matsudo Station","id":"Stasiun JR Matsudo"},"walkMinutes":12,"lines":"JR Joban Line, Shin-Keisei Line"},{"name":{"ja":"松戸駅（新京成線）","en":"Matsudo Station (Shin-Keisei)","id":"Stasiun Matsudo (Shin-Keisei)"},"walkMinutes":12,"lines":"Shin-Keisei Line"}],"partners":[{"name":"Chiba Islamic Culture Center","role":{"ja":"運営団体・地域のダアワ拠点","en":"Operating organization and local dawah hub","id":"Organisasi pengelola dan pusat dakwah setempat"},"url":"https://cicc-japan.com"},{"name":"Dompet Dhuafa Japan","role":{"ja":"建設・教育プログラムの支援と在日インドネシア人コミュニティとの連携","en":"Construction and education program partner, liaison with the Indonesian community in Japan","id":"Mitra pembangunan dan program pendidikan, penghubung komunitas Indonesia di Jepang"},"url":"https://ddjepang.org","logo":{"src":"/images/partners/dd-japan.png","width":360,"height":147}},{"name":"DekatLokal","role":{"ja":"技術パートナー・ウェブサイトとアプリの制作","en":"Technology partner, builds the website and app","id":"Mitra teknologi, pembuat situs web dan aplikasi"},"url":"https://dekatlokal.com","logo":{"src":"/images/partners/dekatlokal.png","width":495,"height":149}}]}'::jsonb),
+  ('featured_video', '{"youtubeId":"NoQclilJUqo","title":"Video Dokumenter Masjid Al-Muttaqin Chiba — Mualaf & Islamic Cultural Center","channelName":"almuttaqin. project","channelUrl":"https://www.youtube.com/@almuttaqin_chiba","publishedAt":"2026-06-29T10:21:12.000Z","durationSeconds":454}'::jsonb),
+  ('promo_popup', '{"enabled":true,"image":{"src":"/images/promo/poster-donasi.jpg","width":1080,"height":1350},"alt":{"ja":"アルムッタキーン文化センターへのご寄付のお願い","en":"Donation appeal poster for Al Muttaqin Cultural Center","id":"Poster ajakan donasi Al Muttaqin Cultural Center"},"href":"/donate","version":"v1"}'::jsonb)
+on conflict (key) do nothing;
+
+-- Pengumuman
+insert into announcements (slug, title, excerpt, body, category, pinned, status, published_at, expires_at) values
+  ('jadwal-kajian-pekanan-november-2026', '{"ja":"11月の毎週の勉強会スケジュール","en":"Weekly study circle schedule for November","id":"Jadwal kajian pekanan bulan November"}'::jsonb, '{"ja":"毎週土曜日のマグリブ後、インドネシア語・日本語・英語の勉強会を交互に開催します。","en":"Every Saturday after Maghrib, study circles rotate between Indonesian, Japanese, and English.","id":"Setiap Sabtu ba''da Maghrib, kajian bergantian dalam bahasa Indonesia, Jepang, dan Inggris."}'::jsonb, '{"ja":[{"type":"p","text":"11月の毎週の勉強会は、毎週土曜日のマグリブ礼拝後に開催します。"},{"type":"ul","items":["第1・3土曜日：インドネシア語","第2土曜日：日本語（改宗者・入門者向け）","第4土曜日：英語"]},{"type":"callout","tone":"info","text":"お子様連れも歓迎です。託児スペースをご利用ください。"}],"en":[{"type":"p","text":"Weekly study circles in November are held every Saturday after Maghrib prayer."},{"type":"ul","items":["1st and 3rd Saturday: Indonesian","2nd Saturday: Japanese (for new Muslims and beginners)","4th Saturday: English"]},{"type":"callout","tone":"info","text":"Families with children are welcome; a kids corner is available."}],"id":[{"type":"p","text":"Kajian pekanan bulan November diadakan setiap Sabtu setelah salat Maghrib."},{"type":"ul","items":["Sabtu ke-1 dan ke-3: bahasa Indonesia","Sabtu ke-2: bahasa Jepang (untuk muallaf dan pemula)","Sabtu ke-4: bahasa Inggris"]},{"type":"callout","tone":"info","text":"Keluarga dengan anak dipersilakan; tersedia area anak."}]}'::jsonb, 'event', true, 'published', '2026-10-28T03:00:00.000Z', null),
+  ('infaq-operasional-musim-dingin', '{"ja":"冬の運営インファーク（暖房費）へのご協力のお願い","en":"Winter operational infaq: heating costs","id":"Infaq operasional musim dingin: biaya pemanas"}'::jsonb, '{"ja":"12月から3月の暖房費と光熱費のため、毎月のインファークにご協力ください。","en":"Please support monthly infaq for heating and utilities from December to March.","id":"Mohon dukungan infaq bulanan untuk pemanas dan listrik dari Desember sampai Maret."}'::jsonb, '{"ja":[{"type":"p","text":"冬季の暖房費と光熱費は月およそ8万円かかります。インファークはゆうちょ銀行口座またはQRISで受け付けています。"},{"type":"p","text":"送金後は寄付ページの確認フォームからお知らせください。"}],"en":[{"type":"p","text":"Heating and utilities cost around JPY 80,000 per month in winter. Infaq is accepted via Japan Post Bank or QRIS."},{"type":"p","text":"After transferring, please let us know through the confirmation form on the donation page."}],"id":[{"type":"p","text":"Biaya pemanas dan listrik di musim dingin sekitar ¥80.000 per bulan. Infaq diterima lewat Japan Post Bank atau QRIS."},{"type":"p","text":"Setelah transfer, mohon konfirmasi melalui formulir di halaman infaq."}]}'::jsonb, 'donation', false, 'published', '2026-10-25T03:00:00.000Z', null),
+  ('pendaftaran-tpa-semester-baru', '{"ja":"子どもクルアーン教室（TPA）新学期の募集","en":"Children''s Quran class (TPA) enrollment for the new term","id":"Pendaftaran TPA semester baru"}'::jsonb, '{"ja":"4歳から12歳のお子様を対象に、毎週日曜日の午前中に開講します。","en":"For children aged 4 to 12, every Sunday morning.","id":"Untuk anak usia 4-12 tahun, setiap Minggu pagi."}'::jsonb, '{"ja":[{"type":"p","text":"新学期は12月第1日曜日から始まります。定員は30名、先着順です。"},{"type":"p","text":"お申し込みはプログラムページの登録フォームからお願いします。"}],"en":[{"type":"p","text":"The new term starts on the first Sunday of December. Capacity is 30 children, first come first served."},{"type":"p","text":"Register through the form on the programs page."}],"id":[{"type":"p","text":"Semester baru dimulai Minggu pertama Desember. Kuota 30 anak, siapa cepat dia dapat."},{"type":"p","text":"Daftar lewat formulir di halaman program."}]}'::jsonb, 'general', false, 'published', '2026-10-20T03:00:00.000Z', null),
+  ('jadwal-iqamah-musim-dingin', '{"ja":"冬のイカーマ時刻の変更（11月8日から）","en":"Winter iqamah times from 8 November","id":"Perubahan jadwal iqamah musim dingin mulai 8 November"}'::jsonb, '{"ja":"日没が早まるため、マグリブとイシャーの集団礼拝の時刻を冬時間に切り替えます。","en":"As sunset comes earlier, Maghrib and Isha congregation times switch to the winter schedule.","id":"Karena matahari terbenam lebih cepat, jamaah Maghrib dan Isya beralih ke jadwal musim dingin."}'::jsonb, '{"ja":[{"type":"p","text":"11月8日（日）から、マグリブはアザーンの5分後、イシャーは19:30固定で集団礼拝を行います。"},{"type":"ul","items":["ファジュル：アザーンの20分後","ズフル：12:30固定（金曜は12:30と13:15の2回）","アスル：アザーンの10分後","マグリブ：アザーンの5分後","イシャー：19:30固定"]},{"type":"callout","tone":"info","text":"最新の時刻はアプリの礼拝時間画面でいつでも確認できます。"}],"en":[{"type":"p","text":"From Sunday 8 November, Maghrib is held 5 minutes after the adhan and Isha at a fixed 19:30."},{"type":"ul","items":["Fajr: 20 minutes after the adhan","Dhuhr: fixed 12:30 (Fridays at 12:30 and 13:15)","Asr: 10 minutes after the adhan","Maghrib: 5 minutes after the adhan","Isha: fixed 19:30"]},{"type":"callout","tone":"info","text":"The latest times are always on the prayer screen of the app."}],"id":[{"type":"p","text":"Mulai Minggu 8 November, Maghrib berjamaah 5 menit setelah azan dan Isya tetap pukul 19:30."},{"type":"ul","items":["Subuh: 20 menit setelah azan","Zuhur: tetap 12:30 (Jumat pukul 12:30 dan 13:15)","Asar: 10 menit setelah azan","Maghrib: 5 menit setelah azan","Isya: tetap 19:30"]},{"type":"callout","tone":"info","text":"Jadwal terbaru selalu tersedia di layar waktu salat aplikasi."}]}'::jsonb, 'prayer', true, 'published', '2026-11-01T03:00:00.000Z', null),
+  ('parkir-terbatas-saat-salat-jumat', '{"ja":"金曜礼拝時の駐車場のご案内","en":"Parking during Jumuah prayer","id":"Parkir saat salat Jumat"}'::jsonb, '{"ja":"敷地内の駐車場は8台分のみです。公共交通機関と近隣のコインパーキングのご利用をお願いします。","en":"The on-site car park has only eight spaces. Please use public transport or nearby paid parking.","id":"Parkir di lahan masjid hanya 8 mobil. Mohon gunakan transportasi umum atau parkir berbayar terdekat."}'::jsonb, '{"ja":[{"type":"p","text":"近隣の皆様とのよい関係を保つため、路上駐車は絶対にしないでください。敷地内の駐車場は高齢者と体の不自由な方を優先します。"},{"type":"p","text":"徒歩5分以内に3か所のコインパーキングがあります。アクセスページの地図をご確認ください。"}],"en":[{"type":"p","text":"To keep good relations with our neighbours, please never park on the street. On-site spaces are reserved for the elderly and those with limited mobility."},{"type":"p","text":"There are three paid car parks within a five-minute walk; see the map on the access page."}],"id":[{"type":"p","text":"Demi hubungan baik dengan tetangga, jangan pernah parkir di jalan. Lahan parkir masjid diprioritaskan untuk lansia dan yang berkebutuhan khusus."},{"type":"p","text":"Ada tiga parkir berbayar dalam jarak jalan kaki lima menit; lihat peta di halaman akses."}]}'::jsonb, 'general', false, 'published', '2026-11-05T03:00:00.000Z', null),
+  ('sekretariat-tutup-akhir-tahun', '{"ja":"年末年始の事務局休業のお知らせ","en":"Office closure over the New Year holidays","id":"Sekretariat tutup selama libur tahun baru"}'::jsonb, '{"ja":"12月29日から1月3日まで事務局はお休みです。礼拝は通常どおり行います。","en":"The office is closed from 29 December to 3 January. Prayers continue as usual.","id":"Sekretariat libur 29 Desember sampai 3 Januari. Salat berjamaah tetap berjalan seperti biasa."}'::jsonb, '{"ja":[{"type":"p","text":"期間中のお問い合わせはWhatsAppで受け付けますが、返信に時間がかかる場合があります。部屋の予約と証明書の発行は1月4日以降の対応となります。"}],"en":[{"type":"p","text":"During this period we still answer WhatsApp messages, but replies may be slower. Room bookings and certificates will be handled from 4 January."}],"id":[{"type":"p","text":"Selama periode ini pesan WhatsApp tetap dibalas, tetapi mungkin lebih lambat. Peminjaman ruangan dan surat keterangan dilayani mulai 4 Januari."}]}'::jsonb, 'general', false, 'published', '2026-11-06T03:00:00.000Z', '2027-01-05T00:00:00.000Z'),
+  ('peringatan-topan-oktober-2026', '{"ja":"台風接近に伴う10月10日の活動中止","en":"Activities cancelled on 10 October due to the typhoon","id":"Kegiatan 10 Oktober dibatalkan karena topan"}'::jsonb, '{"ja":"台風の接近に伴い、10月10日の勉強会とTPAは中止します。安全を最優先してください。","en":"Due to the approaching typhoon, the study circle and TPA on 10 October are cancelled. Please stay safe.","id":"Karena topan mendekat, kajian dan TPA pada 10 Oktober dibatalkan. Utamakan keselamatan."}'::jsonb, '{"ja":[{"type":"p","text":"集団礼拝は行いますが、無理に来館しないでください。最新情報はWhatsAppグループでお知らせします。"}],"en":[{"type":"p","text":"Congregational prayers continue, but please do not travel if it is unsafe. Updates will be posted in the WhatsApp group."}],"id":[{"type":"p","text":"Salat berjamaah tetap ada, tetapi jangan memaksakan datang bila tidak aman. Informasi terbaru lewat grup WhatsApp."}]}'::jsonb, 'urgent', false, 'published', '2026-10-09T06:00:00.000Z', '2026-10-12T00:00:00.000Z')
+on conflict (slug) do nothing;
+
+-- Agenda (jumlah pendaftar dihitung otomatis oleh trigger, jadi tidak ikut di-seed)
+insert into events (slug, title, excerpt, description, category, starts_at, ends_at, location, speaker, languages, cover_image, registration, recurring, featured, status) values
+  ('kajian-sabtu-adab-bertetangga', '{"ja":"土曜勉強会：隣人への礼儀","en":"Saturday study circle: etiquette with neighbours","id":"Kajian Sabtu: adab bertetangga"}'::jsonb, '{"ja":"日本の地域社会でムスリムとして良き隣人になるために。","en":"Being a good neighbour as a Muslim in a Japanese community.","id":"Menjadi tetangga yang baik sebagai muslim di lingkungan Jepang."}'::jsonb, '{"ja":[{"type":"p","text":"マグリブ礼拝の後、インドネシア語で行います。日本語の要約もあります。"},{"type":"p","text":"ごみ出しのルール、騒音への配慮、ご近所へのあいさつなど、日本で暮らすムスリムが日々直面する場面を、預言者の教えから学びます。"}],"en":[{"type":"p","text":"Held after Maghrib in Indonesian with a Japanese summary."},{"type":"p","text":"Rubbish rules, noise, greeting neighbours: everyday situations Muslims in Japan face, seen through the teachings of the Prophet."}],"id":[{"type":"p","text":"Diadakan setelah Maghrib dalam bahasa Indonesia dengan ringkasan bahasa Jepang."},{"type":"p","text":"Aturan buang sampah, menjaga ketenangan, menyapa tetangga: situasi sehari-hari muslim di Jepang dilihat dari tuntunan Nabi."}]}'::jsonb, 'kajian', '2026-11-07T08:30:00.000Z', '2026-11-07T10:00:00.000Z', '{"ja":"礼拝ホール","en":"Prayer hall","id":"Ruang salat utama"}'::jsonb, 'Ust. Ahmad Fauzi', array['id', 'ja']::text[], null, '{"required":false}'::jsonb, '{"ja":"毎週土曜日","en":"Every Saturday","id":"Setiap Sabtu"}'::jsonb, true, 'published'),
+  ('kelas-muallaf-dasar-islam', '{"ja":"ムアッラフ講座：イスラームの基礎（日本語）","en":"New Muslim course: basics of Islam (Japanese)","id":"Kelas muallaf: dasar-dasar Islam (bahasa Jepang)"}'::jsonb, '{"ja":"信仰の柱、礼拝の仕方、清めなど、日本語でゼロから学びます。","en":"Pillars of faith, how to pray, and purification, taught from zero in Japanese.","id":"Rukun iman, tata cara salat, dan bersuci, diajarkan dari nol dalam bahasa Jepang."}'::jsonb, '{"ja":[{"type":"p","text":"全8回のコース。毎週日曜日14:00から。教材は無料です。"},{"type":"p","text":"改宗を考えている方、改宗したばかりの方、ご家族の方も歓迎です。"}],"en":[{"type":"p","text":"An eight-session course, every Sunday from 14:00. Materials are free."},{"type":"p","text":"Open to those considering Islam, new Muslims, and their families."}],"id":[{"type":"p","text":"Kursus 8 pertemuan, setiap Minggu pukul 14:00. Materi gratis."},{"type":"p","text":"Terbuka untuk yang sedang mempelajari Islam, muallaf baru, dan keluarganya."}]}'::jsonb, 'muallaf', '2026-11-08T05:00:00.000Z', '2026-11-08T06:30:00.000Z', '{"ja":"教室A","en":"Classroom A","id":"Ruang kelas A"}'::jsonb, 'Dr. H. Ach Firman Wahyudi, S.E., M.Sc', array['ja']::text[], null, '{"required":true,"quota":20,"deadline":"2026-11-06T15:00:00.000Z"}'::jsonb, '{"ja":"毎週日曜日（全8回）","en":"Every Sunday (8 sessions)","id":"Setiap Minggu (8 pertemuan)"}'::jsonb, true, 'published'),
+  ('open-mosque-day-november', '{"ja":"オープンモスクデー：どなたでもご見学ください","en":"Open Mosque Day: everyone is welcome","id":"Open Mosque Day: terbuka untuk umum"}'::jsonb, '{"ja":"近隣にお住まいの方、学校、団体向けのモスク見学会。礼拝の見学とハラール軽食付き。","en":"A mosque tour for neighbours, schools, and groups, with a prayer demonstration and halal snacks.","id":"Kunjungan masjid untuk tetangga, sekolah, dan kelompok, dengan demo salat dan camilan halal."}'::jsonb, '{"ja":[{"type":"p","text":"13:00から16:00まで自由見学。14:00と15:00にガイドツアー（日本語）があります。"},{"type":"ul","items":["礼拝ホールと女性礼拝スペースの見学","アスル礼拝の見学（15:00ごろ）","ハラール軽食とお茶","質問コーナー"]},{"type":"callout","tone":"info","text":"服装の決まりはありません。女性の方はスカーフの貸し出しもあります。"}],"en":[{"type":"p","text":"Free visit from 13:00 to 16:00, with guided tours in Japanese at 14:00 and 15:00."},{"type":"ul","items":["Tour of the prayer hall and the women''s prayer area","Watch the Asr prayer (around 15:00)","Halal snacks and tea","Question corner"]},{"type":"callout","tone":"info","text":"There is no dress code. Scarves can be borrowed by women who wish to."}],"id":[{"type":"p","text":"Kunjungan bebas pukul 13:00-16:00, dengan tur berpemandu (bahasa Jepang) pukul 14:00 dan 15:00."},{"type":"ul","items":["Tur ruang salat utama dan ruang salat perempuan","Menyaksikan salat Asar (sekitar 15:00)","Camilan halal dan teh","Pojok tanya jawab"]},{"type":"callout","tone":"info","text":"Tidak ada aturan pakaian khusus. Tersedia kerudung pinjaman bagi tamu perempuan yang berminat."}]}'::jsonb, 'open-mosque', '2026-11-15T04:00:00.000Z', '2026-11-15T07:00:00.000Z', '{"ja":"モスク全館","en":"Whole building","id":"Seluruh gedung"}'::jsonb, null, array['ja', 'en']::text[], null, '{"required":true,"quota":60}'::jsonb, null, true, 'published'),
+  ('tpa-semester-musim-dingin', '{"ja":"子どもクルアーン教室 冬学期開始","en":"Children''s Quran class: winter term begins","id":"TPA: semester musim dingin dimulai"}'::jsonb, '{"ja":"4歳から12歳。毎週日曜日10:00から11:30。","en":"Ages 4 to 12. Every Sunday 10:00 to 11:30.","id":"Usia 4-12 tahun. Setiap Minggu 10:00-11:30."}'::jsonb, '{"ja":[{"type":"p","text":"イクロ・クルアーン読誦、ドゥアーの暗記、イスラームの基礎を年齢別に学びます。"}],"en":[{"type":"p","text":"Iqra and Quran reading, memorising duas, and basics of Islam by age group."}],"id":[{"type":"p","text":"Iqra dan tahsin Al-Qur''an, hafalan doa, dan dasar Islam sesuai kelompok usia."}]}'::jsonb, 'tpa', '2026-12-06T01:00:00.000Z', '2026-12-06T02:30:00.000Z', '{"ja":"教室A・B","en":"Classrooms A and B","id":"Ruang kelas A dan B"}'::jsonb, null, array['id', 'ja', 'en']::text[], null, '{"required":true,"quota":30,"deadline":"2026-12-04T15:00:00.000Z"}'::jsonb, '{"ja":"毎週日曜日","en":"Every Sunday","id":"Setiap Minggu"}'::jsonb, false, 'published'),
+  ('kajian-sabtu-tafsir-surah-al-fatihah', '{"ja":"土曜勉強会：開端章（アル・ファーティハ）のタフスィール","en":"Saturday study circle: tafsir of Surah Al-Fatihah","id":"Kajian Sabtu: tafsir Surah Al-Fatihah"}'::jsonb, '{"ja":"毎日の礼拝で唱える章の意味を、一節ずつ丁寧に学びます。","en":"The meaning of the surah we recite in every prayer, verse by verse.","id":"Makna surah yang kita baca di setiap salat, ayat demi ayat."}'::jsonb, '{"ja":[{"type":"p","text":"マグリブ礼拝後、インドネシア語で行いました。録画は勉強会ページで公開しています。"}],"en":[{"type":"p","text":"Held after Maghrib in Indonesian. The recording is available on the lectures page."}],"id":[{"type":"p","text":"Diadakan setelah Maghrib dalam bahasa Indonesia. Rekaman tersedia di halaman kajian."}]}'::jsonb, 'kajian', '2026-09-19T09:00:00.000Z', '2026-09-19T10:30:00.000Z', '{"ja":"礼拝ホール","en":"Prayer hall","id":"Ruang salat utama"}'::jsonb, 'Ust. Ahmad Fauzi', array['id']::text[], null, '{"required":false}'::jsonb, '{"ja":"毎週土曜日","en":"Every Saturday","id":"Setiap Sabtu"}'::jsonb, false, 'published'),
+  ('seminar-parenting-anak-muslim-di-jepang', '{"ja":"セミナー：日本でムスリムの子どもを育てる","en":"Seminar: raising Muslim children in Japan","id":"Seminar parenting: mendidik anak muslim di Jepang"}'::jsonb, '{"ja":"学校生活、給食、友人関係。親が直面する課題を一緒に考える半日セミナー。","en":"School life, lunches, friendships: a half-day seminar on the questions parents meet.","id":"Kehidupan sekolah, makan siang, pertemanan: seminar setengah hari untuk orang tua."}'::jsonb, '{"ja":[{"type":"p","text":"英語で行い、インドネシア語の通訳がつきました。定員40名は満席となりました。ご参加ありがとうございました。"},{"type":"p","text":"当日の資料は勉強会ページの教材リンクからダウンロードできます。"}],"en":[{"type":"p","text":"Delivered in English with Indonesian interpretation. All 40 seats were filled; thank you for joining."},{"type":"p","text":"The handouts can be downloaded from the materials link on the lectures page."}],"id":[{"type":"p","text":"Disampaikan dalam bahasa Inggris dengan penerjemah bahasa Indonesia. Kuota 40 kursi terisi penuh; terima kasih atas kehadirannya."},{"type":"p","text":"Materi seminar dapat diunduh lewat tautan materi di halaman kajian."}]}'::jsonb, 'community', '2026-10-03T04:00:00.000Z', '2026-10-03T07:00:00.000Z', '{"ja":"多目的ホール","en":"Multipurpose hall","id":"Aula serbaguna"}'::jsonb, 'Ust. Abdullah Rahman', array['en', 'id']::text[], null, '{"required":true,"quota":40,"deadline":"2026-10-01T15:00:00.000Z"}'::jsonb, null, false, 'published'),
+  ('open-mosque-day-oktober', '{"ja":"10月オープンモスクデー","en":"October Open Mosque Day","id":"Open Mosque Day Oktober"}'::jsonb, '{"ja":"松戸市内の学校と自治会からの見学会。48名が来館しました。","en":"A visit day for local schools and the neighbourhood association. 48 guests came.","id":"Hari kunjungan untuk sekolah dan asosiasi warga Matsudo. 48 tamu hadir."}'::jsonb, '{"ja":[{"type":"p","text":"礼拝の見学、建物の案内、ハラール軽食、質疑応答を行いました。報告記事はお知らせページをご覧ください。"}],"en":[{"type":"p","text":"Prayer demonstration, building tour, halal snacks, and Q&A. Read the report on the news page."}],"id":[{"type":"p","text":"Demo salat, tur gedung, camilan halal, dan tanya jawab. Laporannya ada di halaman berita."}]}'::jsonb, 'open-mosque', '2026-10-18T04:00:00.000Z', '2026-10-18T07:00:00.000Z', '{"ja":"モスク全館","en":"Whole building","id":"Seluruh gedung"}'::jsonb, null, array['ja', 'en']::text[], null, '{"required":true,"quota":50}'::jsonb, null, false, 'published'),
+  ('kelas-bahasa-jepang-term-musim-dingin', '{"ja":"日本語クラス 冬学期スタート","en":"Japanese language class: winter term starts","id":"Kelas bahasa Jepang: term musim dingin dimulai"}'::jsonb, '{"ja":"市役所、病院、職場で使う生活日本語。初級と中級の2クラス。","en":"Everyday Japanese for city hall, hospitals, and work. Beginner and intermediate levels.","id":"Bahasa Jepang sehari-hari untuk balai kota, rumah sakit, dan tempat kerja. Tingkat pemula dan menengah."}'::jsonb, '{"ja":[{"type":"p","text":"毎週水曜日19:30から21:00、ボランティア講師が担当します。全10回、教材費は無料です。"},{"type":"p","text":"初回にレベルチェックを行い、初級または中級クラスに分かれます。"}],"en":[{"type":"p","text":"Every Wednesday from 19:30 to 21:00 with volunteer teachers. Ten sessions, materials free."},{"type":"p","text":"A short level check on the first evening places you in the beginner or intermediate class."}],"id":[{"type":"p","text":"Setiap Rabu pukul 19:30-21:00 bersama relawan pengajar. Sepuluh pertemuan, materi gratis."},{"type":"p","text":"Tes level singkat di pertemuan pertama menentukan kelas pemula atau menengah."}]}'::jsonb, 'class', '2026-11-11T10:30:00.000Z', '2026-11-11T12:00:00.000Z', '{"ja":"教室B","en":"Classroom B","id":"Ruang kelas B"}'::jsonb, null, array['ja', 'en', 'id']::text[], null, '{"required":true,"quota":16,"deadline":"2026-11-10T15:00:00.000Z"}'::jsonb, '{"ja":"毎週水曜日（全10回）","en":"Every Wednesday (10 sessions)","id":"Setiap Rabu (10 pertemuan)"}'::jsonb, false, 'published'),
+  ('kajian-sabtu-bahasa-jepang-tauhid', '{"ja":"土曜勉強会（日本語）：タウヒードとは何か","en":"Saturday study circle (Japanese): what is tawhid","id":"Kajian Sabtu (bahasa Jepang): apa itu tauhid"}'::jsonb, '{"ja":"改宗者と入門者のための日本語の勉強会。神の唯一性をやさしく学びます。","en":"A Japanese-language circle for new Muslims and beginners on the oneness of God.","id":"Kajian berbahasa Jepang untuk muallaf dan pemula tentang keesaan Allah."}'::jsonb, '{"ja":[{"type":"p","text":"第2土曜日は日本語の勉強会です。質問の時間を多めに取ります。ご家族やご友人（非ムスリム）もどうぞ。"}],"en":[{"type":"p","text":"The second Saturday is in Japanese, with plenty of time for questions. Family and non-Muslim friends are welcome."}],"id":[{"type":"p","text":"Sabtu kedua berbahasa Jepang, dengan waktu tanya jawab yang lapang. Keluarga dan teman non-muslim dipersilakan."}]}'::jsonb, 'kajian', '2026-11-14T08:30:00.000Z', '2026-11-14T10:00:00.000Z', '{"ja":"礼拝ホール","en":"Prayer hall","id":"Ruang salat utama"}'::jsonb, 'Dr. H. Ach Firman Wahyudi, S.E., M.Sc', array['ja']::text[], null, '{"required":false}'::jsonb, '{"ja":"毎月第2土曜日","en":"Second Saturday of the month","id":"Sabtu kedua setiap bulan"}'::jsonb, false, 'published'),
+  ('english-study-circle-sirah-nabawiyah', '{"ja":"英語勉強会：預言者の生涯（シーラ）","en":"English study circle: the life of the Prophet (sirah)","id":"Kajian bahasa Inggris: sirah nabawiyah"}'::jsonb, '{"ja":"第4土曜日は英語の勉強会。メッカ時代の出来事から学びます。","en":"The fourth Saturday is in English. This month: lessons from the Makkan period.","id":"Sabtu keempat berbahasa Inggris. Bulan ini: pelajaran dari periode Makkah."}'::jsonb, '{"ja":[{"type":"p","text":"留学生や多国籍のご家庭向けに英語で行います。マグリブ礼拝後、約1時間です。"}],"en":[{"type":"p","text":"Held in English for students and international families. After Maghrib, about one hour."}],"id":[{"type":"p","text":"Diadakan dalam bahasa Inggris untuk mahasiswa dan keluarga internasional. Setelah Maghrib, sekitar satu jam."}]}'::jsonb, 'kajian', '2026-11-28T08:30:00.000Z', '2026-11-28T09:45:00.000Z', '{"ja":"礼拝ホール","en":"Prayer hall","id":"Ruang salat utama"}'::jsonb, 'Ust. Abdullah Rahman', array['en']::text[], null, '{"required":false}'::jsonb, '{"ja":"毎月第4土曜日","en":"Fourth Saturday of the month","id":"Sabtu keempat setiap bulan"}'::jsonb, false, 'published'),
+  ('family-gathering-musim-dingin', '{"ja":"冬のファミリーギャザリング","en":"Winter family gathering","id":"Family gathering musim dingin"}'::jsonb, '{"ja":"持ち寄りランチ、子どもの発表、クイズ大会。ジャマーアの親睦の日。","en":"Potluck lunch, children''s performances, and a quiz: a day for the congregation to get together.","id":"Makan siang potluck, penampilan anak-anak, dan kuis: hari silaturahmi jamaah."}'::jsonb, '{"ja":[{"type":"p","text":"11:00集合、ズフル礼拝を挟んで15:00まで。一家族につき一品の持ち寄りをお願いします（ハラールであること）。"},{"type":"p","text":"会場費と飲み物代として大人一人500円をお願いしています。子どもは無料です。"}],"en":[{"type":"p","text":"Gather at 11:00; we break for Dhuhr and finish by 15:00. Each family brings one halal dish to share."},{"type":"p","text":"A contribution of JPY 500 per adult covers the hall and drinks. Children are free."}],"id":[{"type":"p","text":"Berkumpul pukul 11:00, jeda salat Zuhur, selesai pukul 15:00. Setiap keluarga membawa satu hidangan halal untuk dibagi."},{"type":"p","text":"Kontribusi ¥500 per dewasa untuk aula dan minuman. Anak-anak gratis."}]}'::jsonb, 'community', '2026-12-20T02:00:00.000Z', '2026-12-20T06:00:00.000Z', '{"ja":"多目的ホール","en":"Multipurpose hall","id":"Aula serbaguna"}'::jsonb, null, array['id', 'ja', 'en']::text[], null, '{"required":true,"quota":80,"deadline":"2026-12-17T15:00:00.000Z","fee":{"amount":500,"currency":"JPY","note":{"ja":"大人一人、子どもは無料","en":"Per adult; children free","id":"Per dewasa; anak gratis"}}}'::jsonb, null, false, 'published'),
+  ('kajian-akhir-tahun-muhasabah', '{"ja":"年末特別勉強会：ムハーサバ（自己省察）","en":"Year-end special: muhasabah, taking account of ourselves","id":"Kajian khusus akhir tahun: muhasabah diri"}'::jsonb, '{"ja":"一年を振り返り、来年の目標をイスラームの視点から立てる特別回。","en":"A special session to look back on the year and set intentions from an Islamic perspective.","id":"Sesi khusus menengok setahun yang lewat dan menata niat untuk tahun depan."}'::jsonb, '{"ja":[{"type":"p","text":"インドネシア語で行い、日本語と英語の要約を配布します。終了後に軽食があります。"}],"en":[{"type":"p","text":"In Indonesian with printed Japanese and English summaries. Light refreshments afterwards."}],"id":[{"type":"p","text":"Dalam bahasa Indonesia dengan ringkasan cetak bahasa Jepang dan Inggris. Ada hidangan ringan setelahnya."}]}'::jsonb, 'kajian', '2026-12-26T08:30:00.000Z', '2026-12-26T10:30:00.000Z', '{"ja":"礼拝ホール","en":"Prayer hall","id":"Ruang salat utama"}'::jsonb, 'Ust. Ahmad Fauzi', array['id', 'ja', 'en']::text[], null, '{"required":false}'::jsonb, null, true, 'published'),
+  ('peringatan-isra-miraj-1448', '{"ja":"イスラー・ミウラージュ記念の集い 1448","en":"Isra and Mi''raj gathering 1448","id":"Peringatan Isra Mi''raj 1448 H"}'::jsonb, '{"ja":"礼拝が定められた夜の旅を振り返る講話とナシード。","en":"A talk and nasheed recalling the night journey in which the prayer was prescribed.","id":"Ceramah dan nasyid mengenang perjalanan malam saat salat diwajibkan."}'::jsonb, '{"ja":[{"type":"p","text":"イシャー礼拝の後、講話（インドネシア語、日本語要約あり）、子どもたちのナシード、軽食の順で行います。"}],"en":[{"type":"p","text":"After Isha: a talk in Indonesian with a Japanese summary, nasheed by the children, then refreshments."}],"id":[{"type":"p","text":"Setelah Isya: ceramah bahasa Indonesia dengan ringkasan Jepang, nasyid anak-anak, lalu hidangan."}]}'::jsonb, 'culture', '2027-01-09T10:00:00.000Z', '2027-01-09T12:30:00.000Z', '{"ja":"礼拝ホール","en":"Prayer hall","id":"Ruang salat utama"}'::jsonb, 'Ust. Ahmad Fauzi', array['id', 'ja']::text[], null, '{"required":false}'::jsonb, null, false, 'published'),
+  ('kajian-persiapan-ramadan-1448', '{"ja":"ラマダーン準備講座 1448","en":"Preparing for Ramadan 1448","id":"Kajian persiapan Ramadan 1448 H"}'::jsonb, '{"ja":"日本の職場や学校で断食する工夫、タラーウィーの予定、イフタール当番の案内。","en":"Fasting at work and school in Japan, the tarawih schedule, and iftar duty sign-up.","id":"Tips puasa di tempat kerja dan sekolah Jepang, jadwal tarawih, dan pendaftaran piket iftar."}'::jsonb, '{"ja":[{"type":"p","text":"三言語で順に行います。ラマダーン中の礼拝時間表とイフタールの当番表も配布します。"},{"type":"callout","tone":"info","text":"イフタールの食事提供（家族・団体）を希望される方は、当日受付でお申し出ください。"}],"en":[{"type":"p","text":"Delivered in three languages in turn. The Ramadan prayer timetable and the iftar rota will be handed out."},{"type":"callout","tone":"info","text":"Families or groups who wish to sponsor an iftar can sign up at the desk on the day."}],"id":[{"type":"p","text":"Disampaikan bergantian dalam tiga bahasa. Jadwal salat Ramadan dan daftar piket iftar akan dibagikan."},{"type":"callout","tone":"info","text":"Keluarga atau kelompok yang ingin menyediakan iftar dapat mendaftar di meja penerimaan hari itu."}]}'::jsonb, 'ramadan', '2027-02-06T08:30:00.000Z', '2027-02-06T10:00:00.000Z', '{"ja":"礼拝ホール","en":"Prayer hall","id":"Ruang salat utama"}'::jsonb, null, array['id', 'ja', 'en']::text[], null, '{"required":false}'::jsonb, null, true, 'published')
+on conflict (slug) do nothing;
+
+-- Jadwal Jumat
+insert into jumuah_schedules (date, khatib, imam, time, language, topic, note, published) values
+  ('2026-10-30', 'Ust. Ahmad Fauzi', 'Ust. Ahmad Fauzi', '12:30', 'id', '{"ja":"感謝の心","en":"The heart of gratitude","id":"Hati yang bersyukur"}'::jsonb, null, true),
+  ('2026-11-06', 'Dr. H. Ach Firman Wahyudi, S.E., M.Sc', 'Ust. Ahmad Fauzi', '12:30', 'ja', '{"ja":"隣人への善行","en":"Kindness to neighbours","id":"Berbuat baik kepada tetangga"}'::jsonb, null, true),
+  ('2026-11-13', 'Ust. Abdullah Rahman', 'Ust. Abdullah Rahman', '12:30', 'en', '{"ja":"礼拝を大切にする","en":"Guarding the prayer","id":"Menjaga salat"}'::jsonb, null, true),
+  ('2026-11-20', 'Ust. Ahmad Fauzi', 'Ust. Ahmad Fauzi', '12:30', 'id', '{"ja":"子どもの教育","en":"Raising our children","id":"Mendidik anak"}'::jsonb, null, true),
+  ('2026-11-27', 'Dr. H. Ach Firman Wahyudi, S.E., M.Sc', 'Ust. Abdullah Rahman', '12:30', 'ja', '{"ja":"日本社会で生きるムスリム","en":"Living as a Muslim in Japan","id":"Menjadi muslim di Jepang"}'::jsonb, null, true),
+  ('2026-12-04', 'Ust. Abdullah Rahman', 'Ust. Ahmad Fauzi', '12:30', 'en', '{"ja":"誠実さ（イフサーン）","en":"Ihsan: excellence in faith","id":"Ihsan: kesempurnaan iman"}'::jsonb, null, true)
+on conflict (date) do nothing;
+
+-- Kajian video
+insert into lectures (slug, title, speaker, youtube_id, published_at, duration_minutes, series, description, language, tags, status) values
+  ('konsep-tuhan-yang-99-persen-orang-salah', '{"ja":"99%の人が誤解している「神」の概念（ESCAPE 第12話）","en":"The concept of God that 99% of people get wrong (ESCAPE ep. 12)","id":"KONSEP TUHAN YANG 99% ORANG SALAH - Escape Eps 12 (Ft Felix Siauw, Koiyo Cabe, Verren, Fuadh)"}'::jsonb, 'Raymond Chin', 'dFW3YIWWvcI', '2026-03-02T09:00:06.000Z', 81, '{"ja":"ESCAPE ラマダン特別番組 2026","en":"ESCAPE Ramadan series 2026","id":"ESCAPE Ramadan 2026"}'::jsonb, '{"ja":"お金、恋愛、権力など、人が何かに執着して「しもべ」になってしまう理由と、その執着を手放す方法を考えます。ゲストにフェリックス・シアウ師。","en":"Why people so easily become \"servants\" of money, love, or power, and how to let go of that attachment. With guest Ustadz Felix Siauw.","id":"Mengapa manusia mudah menjadi \"hamba\" dari uang, cinta, atau kekuasaan, dan bagaimana melepaskan keterikatan itu. Bersama Ustadz Felix Siauw."}'::jsonb, 'id', array['akidah', 'tauhid', 'ramadan']::text[], 'published'),
+  ('riba-paylater-dan-investasi', '{"ja":"リバー（利息）、後払い、投資は許されるのか（ESCAPE 第11話）","en":"Riba, paylater, and investing: when are they allowed? (ESCAPE ep. 11)","id":"RIBA, PAYLATER DAN INVESTASI ITU BOLEH, KALAU...... - Escape Eps 11 (ft Felix Siauw, Koiyo, Verren)"}'::jsonb, 'Raymond Chin', 'II5BHIN8tJ0', '2026-03-01T09:00:07.000Z', 86, '{"ja":"ESCAPE ラマダン特別番組 2026","en":"ESCAPE Ramadan series 2026","id":"ESCAPE Ramadan 2026"}'::jsonb, '{"ja":"暗号資産、金、債券、株式はイスラームの視点で投資か賭けか。リバーの境界と、イスラームにかなった投資の考え方を学びます。","en":"Crypto, gold, bonds, and shares: investment or gambling from an Islamic point of view? Where riba begins, and a sensible approach to investing in Islam.","id":"Kripto, emas, obligasi, dan saham: investasi atau judi menurut Islam? Di mana batas riba dan bagaimana berinvestasi secara masuk akal dalam Islam."}'::jsonb, 'id', array['muamalah', 'riba', 'ekonomi-syariah']::text[], 'published'),
+  ('islam-itu-ribet-banyak-aturan', '{"ja":"イスラームは面倒で規則だらけ？（ESCAPE 第5話）","en":"Is Islam complicated, with too many rules? (ESCAPE ep. 5)","id":"ISLAM ITU RIBET, BANYAK ATURAN!?!? - Escape Eps 5 (ft Felix Siauw, Koiyo Cabe, Verren)"}'::jsonb, 'Raymond Chin', 'p-2feskqE3w', '2026-02-23T09:00:07.000Z', 98, '{"ja":"ESCAPE ラマダン特別番組 2026","en":"ESCAPE Ramadan series 2026","id":"ESCAPE Ramadan 2026"}'::jsonb, '{"ja":"イスラーム法は思われているほど硬直的ではなく、多くの規定には文脈と理由がある。その仕組みを対話形式で掘り下げます。","en":"Islamic law is less rigid than many imagine: most rulings have a context and a reason. A conversation on how the rules work.","id":"Hukum Islam tidak sekaku yang sering dibayangkan: banyak aturan punya konteks dan alasan. Diskusi tentang cara kerja aturan-aturan itu."}'::jsonb, 'id', array['fikih', 'syariah', 'ramadan']::text[], 'published'),
+  ('kiamat-sudah-dekat-ini-tandanya', '{"ja":"終末は近い？その兆候とは（ESCAPE 第1話）","en":"Is the Last Day near? These are the signs (ESCAPE ep. 1)","id":"KIAMAT SUDAH DEKAT, INI TANDANYA!? - Escape Eps 1 (ft. Felix Siauw, Koiyocabe, Veren)"}'::jsonb, 'Raymond Chin', 'jEQHYSdzEdg', '2026-02-19T09:00:06.000Z', 121, '{"ja":"ESCAPE ラマダン特別番組 2026","en":"ESCAPE Ramadan series 2026","id":"ESCAPE Ramadan 2026"}'::jsonb, '{"ja":"終末（キヤーマ）の基本概念から、なぜ終末が必要なのかという問いまで。シリーズ最長回でダッジャールについても語ります。","en":"From the basic concept of the Day of Judgement to why it must come at all. The longest episode of the series, also touching on the Dajjal.","id":"Dari konsep dasar hari kiamat sampai pertanyaan mengapa kiamat harus ada. Episode terpanjang di seri ini, termasuk pembahasan tentang Dajjal."}'::jsonb, 'id', array['akidah', 'hari-akhir', 'ramadan']::text[], 'published'),
+  ('sejarah-jin-dan-manusia-sampai-lailatul-qodar', '{"ja":"ジンと人類の歴史からライラトゥル・カドルまで（ESCAPE 第24話）","en":"From the story of jinn and humankind to Laylatul Qadr (ESCAPE ep. 24)","id":"SEJARAH JIN DAN MANUSIA SAMPAI LAILATUL QODAR - Escape Eps 24 (ft Felix Siauw, Veren)"}'::jsonb, 'Raymond Chin', 'ik82ZtQG5Ls', '2025-03-24T09:00:06.000Z', 54, '{"ja":"ESCAPE ラマダン特別番組 2025","en":"ESCAPE Ramadan series 2025","id":"ESCAPE Ramadan 2025"}'::jsonb, '{"ja":"天使、ジン、そしてライラトゥル・カドル（定めの夜）の神秘について、率直な質問に答えるラマダン特別回。","en":"A Ramadan episode answering candid questions about angels, jinn, and the mystery of Laylatul Qadr.","id":"Episode Ramadan yang menjawab pertanyaan jujur tentang malaikat, jin, dan misteri Lailatul Qadar."}'::jsonb, 'id', array['akidah', 'lailatul-qadar', 'ramadan']::text[], 'published'),
+  ('hamba-cuan-vs-hamba-allah', '{"ja":"お金のしもべか、アッラーのしもべか（ESCAPE 第18話）","en":"Servant of money or servant of Allah? (ESCAPE ep. 18)","id":"HAMBA CUAN VS HAMBA ALLAH - Escape Eps 18 (ft Felix Siauw, Veren Ornela)"}'::jsonb, 'Raymond Chin', '3VrFq5z_SU0', '2025-03-18T09:00:07.000Z', 64, '{"ja":"ESCAPE ラマダン特別番組 2025","en":"ESCAPE Ramadan series 2025","id":"ESCAPE Ramadan 2025"}'::jsonb, '{"ja":"お金は人生の目的ではなく道具であるべき。物質主義に目をくらまされないための心構えを語ります。","en":"Money should be a tool in life, not its goal. On not being blinded by wealth and materialism.","id":"Uang seharusnya menjadi alat dalam hidup, bukan tujuan. Tentang menjaga diri agar tidak dibutakan oleh harta dan hedonisme."}'::jsonb, 'id', array['tazkiyah', 'harta', 'ramadan']::text[], 'published'),
+  ('bongkar-mitos-takdir-di-islam', '{"ja":"イスラームにおける「定め（タクディール）」の誤解を解く（ESCAPE 第14話）","en":"Unpacking myths about destiny (taqdir) in Islam (ESCAPE ep. 14)","id":"BONGKAR MITOS \"TAKDIR\" DI ISLAM! - Escape Eps 14  (Ft Felix Siauw)"}'::jsonb, 'Raymond Chin', 'gXNrXJjdEs4', '2025-03-14T09:00:07.000Z', 54, '{"ja":"ESCAPE ラマダン特別番組 2025","en":"ESCAPE Ramadan series 2025","id":"ESCAPE Ramadan 2025"}'::jsonb, '{"ja":"怠けを「定め」のせいにしないために。イスラームにおけるタクディール（定命）の概念を理解します。","en":"Understanding the concept of taqdir in Islam, so that destiny is not used as an excuse for giving up.","id":"Memahami konsep takdir dalam Islam agar tidak dijadikan alasan untuk pasrah dan bermalas-malasan."}'::jsonb, 'id', array['akidah', 'takdir', 'ramadan']::text[], 'published'),
+  ('ajaran-islam-dan-para-nabi-untuk-naik-level', '{"ja":"成長のためのイスラームの教えと預言者たち（ESCAPE 第1話）","en":"Islamic teachings and the prophets for leveling up (ESCAPE ep. 1)","id":"KABUR!! AJARAN ISLAM DAN PARA NABI UNTUK NAIK LEVEL - Escape Ep 1 (ft Felix Siauw)"}'::jsonb, 'Raymond Chin', 'KYszstjudqU', '2025-03-01T09:00:06.000Z', 39, '{"ja":"ESCAPE ラマダン特別番組 2025","en":"ESCAPE Ramadan series 2025","id":"ESCAPE Ramadan 2025"}'::jsonb, '{"ja":"ラマダン特別番組 ESCAPE の第1話。イフタールのひとときに、イスラームの教えと預言者たちの姿から学びます。","en":"The first episode of the ESCAPE Ramadan programme: learning from Islamic teachings and the prophets, to keep you company at iftar.","id":"Episode pertama program Ramadan ESCAPE: belajar dari ajaran Islam dan para nabi, menemani waktu berbuka puasa."}'::jsonb, 'id', array['sirah', 'para-nabi', 'ramadan']::text[], 'published'),
+  ('agama-itu-penting', '{"ja":"宗教は大切である","en":"Religion matters","id":"AGAMA ITU PENTING."}'::jsonb, 'Raymond Chin', 'U5b9fO_V0No', '2024-12-12T11:01:40.000Z', 9, null, '{"ja":"かつて宗教を信じていなかった語り手が、個人と文明の両面から、なぜ宗教が大切なのかを語る短い動画。","en":"A short talk from someone who once did not believe in religion, on why religion matters for the individual and for civilization.","id":"Video singkat dari seseorang yang dulu tidak percaya agama, tentang mengapa agama penting bagi individu maupun peradaban."}'::jsonb, 'id', array['iman', 'agama']::text[], 'published'),
+  ('belajar-islam-pake-logika', '{"ja":"論理で学ぶイスラーム（ゲスト：フェリックス・シアウ師）","en":"Learning Islam through logic (ft. Felix Siauw)","id":"Belajar Islam Pake Logika ft Felix Siauw"}'::jsonb, 'Raymond Chin', 'J97G-nzTJRw', '2024-11-25T10:59:10.000Z', 88, '{"ja":"レイモンド・チン ポッドキャスト","en":"Raymond Chin podcast","id":"Podcast Raymond Chin"}'::jsonb, '{"ja":"宗教を学ぶこと、論理と感情、宗教をめぐる対立はなぜ起きるのかなどを、フェリックス・シアウ師と語り合うポッドキャスト。","en":"A podcast with Ustadz Felix Siauw on learning religion, logic versus feelings, and why conflicts over religion arise.","id":"Podcast bersama Ustadz Felix Siauw tentang belajar agama Islam, logika versus perasaan, dan mengapa konflik agama bisa terjadi."}'::jsonb, 'id', array['pengantar', 'iman', 'logika']::text[], 'published')
+on conflict (slug) do nothing;
+
+-- Berita
+insert into news (slug, title, excerpt, body, category, author, cover_image, tags, status, published_at) values
+  ('laporan-open-mosque-oktober-2026', '{"ja":"10月オープンモスクデーの報告：近隣から48名が来館","en":"October Open Mosque Day report: 48 neighbours visited","id":"Laporan Open Mosque Day Oktober: 48 tetangga berkunjung"}'::jsonb, '{"ja":"松戸市内の学校と自治会からの参加者が礼拝を見学し、ハラール料理を体験しました。","en":"Visitors from local schools and the neighbourhood association watched the prayer and tried halal food.","id":"Peserta dari sekolah dan asosiasi warga Matsudo menyaksikan salat dan mencicipi makanan halal."}'::jsonb, '{"ja":[{"type":"p","text":"10月18日に開催したオープンモスクデーには48名が来館しました。参加者の多くはイスラームについて初めて学ぶ方々でした。"},{"type":"p","text":"14:00のアスル礼拝を見学した後、インドネシア料理のハラール軽食を囲んで質疑応答を行いました。"},{"type":"quote","text":"モスクがこんなに開かれた場所だとは知りませんでした。","cite":"参加者（松戸市在住）"}],"en":[{"type":"p","text":"Forty-eight people visited the Open Mosque Day on 18 October, most of them learning about Islam for the first time."},{"type":"p","text":"After watching the Asr prayer at 14:00, guests shared halal Indonesian snacks and asked questions."},{"type":"quote","text":"I did not know a mosque could be such an open place.","cite":"A visitor from Matsudo"}],"id":[{"type":"p","text":"Open Mosque Day pada 18 Oktober dihadiri 48 orang, sebagian besar baru pertama kali mengenal Islam."},{"type":"p","text":"Setelah menyaksikan salat Asar pukul 14:00, para tamu menikmati camilan halal Indonesia sambil bertanya jawab."},{"type":"quote","text":"Saya tidak tahu masjid bisa seterbuka ini.","cite":"Seorang pengunjung dari Matsudo"}]}'::jsonb, 'report', 'Tim Media Al Muttaqin', null, array['open-mosque', 'komunitas']::text[], 'published', '2026-10-21T03:00:00.000Z'),
+  ('masjid-al-muttaqin-resmi-dibuka', '{"ja":"マスジド・アルムッタキーン、松戸に開所","en":"Masjid Al-Muttaqin opens in Matsudo","id":"Masjid Al-Muttaqin resmi dibuka di Matsudo"}'::jsonb, '{"ja":"千葉イスラム文化センターとドンペット・ドゥアファ・ジャパンの協力で建てられたモスクが、礼拝と学びの場として開所しました。","en":"Built through the partnership of Chiba Islamic Culture Center and Dompet Dhuafa Japan, the mosque opens as a place of worship and learning.","id":"Dibangun lewat kolaborasi Chiba Islamic Culture Center dan Dompet Dhuafa Japan, masjid dibuka sebagai tempat ibadah dan belajar."}'::jsonb, '{"ja":[{"type":"p","text":"建設募金にご協力くださった皆様、ありがとうございました。これからは運営インファークと学びのプログラムに力を注ぎます。"},{"type":"h2","text":"これからの活動"},{"type":"ul","items":["毎日の集団礼拝と金曜礼拝","毎週の勉強会（3言語）","ムアッラフ講座と子どもクルアーン教室","地域向けオープンモスクと日本語クラス"]}],"en":[{"type":"p","text":"Thank you to everyone who supported the construction campaign. From now on, our focus is operational infaq and learning programs."},{"type":"h2","text":"What comes next"},{"type":"ul","items":["Daily congregational prayers and Jumuah","Weekly study circles in three languages","New Muslim course and children''s Quran class","Open mosque days and Japanese classes for the community"]}],"id":[{"type":"p","text":"Terima kasih kepada semua yang mendukung wakaf pembangunan. Mulai sekarang fokus kami adalah infaq operasional dan program pembinaan."},{"type":"h2","text":"Langkah berikutnya"},{"type":"ul","items":["Salat berjamaah harian dan Jumat","Kajian pekanan tiga bahasa","Kelas muallaf dan TPA","Open mosque dan kelas bahasa Jepang untuk warga"]}]}'::jsonb, 'news', 'Pengurus Al Muttaqin Cultural Center', null, array['pembukaan', 'sejarah']::text[], 'published', '2026-10-01T03:00:00.000Z'),
+  ('liputan-koho-matsudo-masjid-baru', '{"ja":"市の広報誌にモスクが紹介されました","en":"The mosque featured in the city newsletter","id":"Masjid diliput buletin resmi Kota Matsudo"}'::jsonb, '{"ja":"松戸市の広報誌10月号「多文化共生のまち」特集で、当センターの活動が取り上げられました。","en":"The October issue of the Matsudo city newsletter featured the center in its multicultural living special.","id":"Edisi Oktober buletin Kota Matsudo mengangkat kegiatan pusat kami dalam rubrik hidup multikultural."}'::jsonb, '{"ja":[{"type":"p","text":"特集では、ムアッラフ講座、日本語クラス、オープンモスクデーの取り組みが紹介され、「地域に開かれた宗教施設」として評価をいただきました。"},{"type":"p","text":"取材にご協力くださったジャマーアの皆様、ありがとうございました。広報誌は市役所と各支所で配布されています。"}],"en":[{"type":"p","text":"The feature introduced the New Muslim course, the Japanese class, and Open Mosque Day, describing the center as a religious facility open to its neighbourhood."},{"type":"p","text":"Thank you to the congregation members who took part in the interview. The newsletter is available at city hall and branch offices."}],"id":[{"type":"p","text":"Liputan itu memperkenalkan kelas muallaf, kelas bahasa Jepang, dan Open Mosque Day, serta menyebut pusat kami sebagai fasilitas keagamaan yang terbuka bagi lingkungannya."},{"type":"p","text":"Terima kasih kepada jamaah yang bersedia diwawancarai. Buletin tersedia di balai kota dan kantor cabang."}]}'::jsonb, 'press', 'Tim Media Al Muttaqin', null, array['media', 'komunitas']::text[], 'published', '2026-10-12T03:00:00.000Z'),
+  ('kerja-sama-kunjungan-mahasiswa-universitas', '{"ja":"大学の国際学部と見学プログラムで連携","en":"Partnership with a university faculty for student visits","id":"Kerja sama kunjungan mahasiswa dengan fakultas internasional universitas"}'::jsonb, '{"ja":"県内の大学の国際学部と、学生向けのモスク見学と対話プログラムを年2回行うことで合意しました。","en":"We agreed with a university faculty in the prefecture to host mosque visits and dialogue sessions for students twice a year.","id":"Disepakati dengan fakultas internasional sebuah universitas di Chiba untuk kunjungan dan dialog mahasiswa dua kali setahun."}'::jsonb, '{"ja":[{"type":"p","text":"第1回は11月下旬を予定しています。学生は礼拝の見学、ムスリム学生との対話、ハラール食の体験を通じて、イスラームと多文化共生について学びます。"},{"type":"callout","tone":"info","text":"対話セッションに参加してくださるジャマーア（日本語または英語）を募集しています。お問い合わせページからご連絡ください。"}],"en":[{"type":"p","text":"The first visit is planned for late November. Students will watch the prayer, talk with Muslim students, and try halal food as part of their intercultural studies."},{"type":"callout","tone":"info","text":"We are looking for congregation members (Japanese or English) to join the dialogue sessions. Please reach us through the contact page."}],"id":[{"type":"p","text":"Kunjungan pertama direncanakan akhir November. Mahasiswa akan menyaksikan salat, berdialog dengan mahasiswa muslim, dan mencoba makanan halal sebagai bagian studi lintas budaya."},{"type":"callout","tone":"info","text":"Kami mencari jamaah (berbahasa Jepang atau Inggris) untuk ikut sesi dialog. Silakan hubungi lewat halaman kontak."}]}'::jsonb, 'news', 'Pengurus Al Muttaqin Cultural Center', null, array['kunjungan', 'pendidikan']::text[], 'published', '2026-10-27T03:00:00.000Z'),
+  ('laporan-kajian-pekanan-oktober-2026', '{"ja":"10月の勉強会報告：4回開催、延べ210名が参加","en":"October study circle report: four sessions, 210 attendances","id":"Laporan kajian pekanan Oktober: 4 sesi, 210 kehadiran"}'::jsonb, '{"ja":"三言語で行った10月の土曜勉強会のまとめと、録画の公開状況です。","en":"A summary of October''s Saturday circles in three languages and which recordings are online.","id":"Ringkasan kajian Sabtu bulan Oktober dalam tiga bahasa dan rekaman yang sudah tayang."}'::jsonb, '{"ja":[{"type":"p","text":"10月は4回の土曜勉強会を行い、延べ210名が参加しました。アラビア語の特別回（アルバイーン解説）には通訳付きで68名が集まりました。"},{"type":"ol","items":["10月3日：ウドゥーの基本（日本語）","10月10日：日本でムスリムの子どもを育てる（英語）","10月17日：はじめての礼拝（日本語）","10月24日：美名を通してアッラーを知る（インドネシア語）","10月31日：アルバイーン第1ハディース（アラビア語・通訳付き）"]},{"type":"p","text":"すべての録画は勉強会ページで視聴できます。"}],"en":[{"type":"p","text":"Four Saturday circles were held in October with 210 attendances in total. The special Arabic session on the Arba''in drew 68 people with interpretation."},{"type":"ol","items":["3 October: basics of wudu (Japanese)","10 October: raising Muslim children in Japan (English)","17 October: prayer for beginners (Japanese)","24 October: knowing Allah through His names (Indonesian)","31 October: Arba''in hadith 1 (Arabic with interpretation)"]},{"type":"p","text":"All recordings are available on the lectures page."}],"id":[{"type":"p","text":"Sepanjang Oktober diadakan empat kajian Sabtu dengan total 210 kehadiran. Sesi khusus bahasa Arab (syarah Arbain) dihadiri 68 orang dengan penerjemah."},{"type":"ol","items":["3 Oktober: dasar wudu (Jepang)","10 Oktober: mendidik anak muslim di Jepang (Inggris)","17 Oktober: salat untuk pemula (Jepang)","24 Oktober: mengenal Allah lewat Asmaul Husna (Indonesia)","31 Oktober: Arbain hadis pertama (Arab, diterjemahkan)"]},{"type":"p","text":"Semua rekaman dapat ditonton di halaman kajian."}]}'::jsonb, 'report', 'Tim Media Al Muttaqin', null, array['kajian', 'laporan']::text[], 'published', '2026-11-02T03:00:00.000Z'),
+  ('menghadapi-musim-dingin-pertama-di-jepang', '{"ja":"日本で初めての冬を迎えるムスリムへ：礼拝と暮らしのヒント","en":"Facing your first winter in Japan: tips for prayer and daily life","id":"Menghadapi musim dingin pertama di Jepang: tips ibadah dan keseharian"}'::jsonb, '{"ja":"早いマグリブ、冷たい水でのウドゥー、暖房費。冬を安心して過ごすための実用記事。","en":"Early Maghrib, wudu with cold water, heating bills: a practical article for a comfortable winter.","id":"Maghrib yang cepat, wudu dengan air dingin, biaya pemanas: artikel praktis agar nyaman melewati musim dingin."}'::jsonb, '{"ja":[{"type":"h2","text":"礼拝時間が大きく変わります"},{"type":"p","text":"12月のマグリブは16:30ごろ、ファジュルは5:00ごろです。アプリの通知を有効にして、勤務先での礼拝時間をあらかじめ相談しておきましょう。"},{"type":"h2","text":"冷たい水でのウドゥー"},{"type":"p","text":"お湯を使ってもウドゥーは有効です。モスクの清め場には温水が出ます。靴下の上を拭く（マスフ）の条件も勉強会で解説しています。"},{"type":"h2","text":"暖房と光熱費"},{"type":"p","text":"こたつや電気毛布は電気代が比較的安く、エアコンの設定温度は20度前後が目安です。市の補助制度は市役所の外国人相談窓口で案内しています。"}],"en":[{"type":"h2","text":"Prayer times shift a lot"},{"type":"p","text":"In December, Maghrib falls around 16:30 and Fajr around 5:00. Turn on app notifications and talk to your workplace about prayer breaks in advance."},{"type":"h2","text":"Wudu with cold water"},{"type":"p","text":"Warm water is fine for wudu, and the mosque''s washing area has hot water. The conditions for wiping over socks (masah) are explained in the study circles."},{"type":"h2","text":"Heating and bills"},{"type":"p","text":"A kotatsu or electric blanket is relatively cheap to run; set the air conditioner around 20 degrees. The city''s foreign residents desk can explain subsidy schemes."}],"id":[{"type":"h2","text":"Waktu salat berubah drastis"},{"type":"p","text":"Pada Desember, Maghrib sekitar 16:30 dan Subuh sekitar 05:00. Aktifkan notifikasi aplikasi dan bicarakan jeda salat dengan tempat kerja sejak awal."},{"type":"h2","text":"Wudu dengan air dingin"},{"type":"p","text":"Air hangat sah untuk wudu, dan tempat wudu masjid tersedia air panas. Syarat mengusap kaus kaki (masah) dibahas di kajian."},{"type":"h2","text":"Pemanas dan tagihan"},{"type":"p","text":"Kotatsu atau selimut listrik relatif hemat; atur AC sekitar 20 derajat. Loket warga asing balai kota dapat menjelaskan skema subsidi."}]}'::jsonb, 'article', 'Tim Media Al Muttaqin', null, array['musim-dingin', 'pendatang-baru']::text[], 'published', '2026-11-05T03:00:00.000Z')
+on conflict (slug) do nothing;
+
+-- Koleksi: faqs (23 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('faqs', 'faq-location', '{"category":"general","question":{"ja":"モスクはどこにありますか？","en":"Where is the mosque?","id":"Di mana lokasi masjid?"},"answer":{"ja":"千葉県松戸市にあります。JR松戸駅から徒歩約12分です。詳しい道順はアクセスページをご覧ください。","en":"In Matsudo City, Chiba, about 12 minutes on foot from JR Matsudo Station. See the contact page for directions.","id":"Di Kota Matsudo, Chiba, sekitar 12 menit jalan kaki dari Stasiun JR Matsudo. Lihat halaman kontak untuk rute."}}'::jsonb, 0, true),
+  ('faqs', 'faq-languages', '{"category":"general","question":{"ja":"どの言語で対応していますか？","en":"Which languages do you use?","id":"Bahasa apa saja yang dipakai?"},"answer":{"ja":"日本語、英語、インドネシア語で対応しています。金曜の説教はアラビア語と日本語、または英語で行われ、勉強会は内容によって言語が異なります。","en":"We work in Japanese, English, and Indonesian. The Friday khutbah is delivered in Arabic with Japanese or English, and study circles vary by topic.","id":"Kami melayani dalam bahasa Jepang, Inggris, dan Indonesia. Khutbah Jumat disampaikan dalam bahasa Arab dengan Jepang atau Inggris, sedangkan kajian menyesuaikan tema."}}'::jsonb, 1, true),
+  ('faqs', 'faq-who-runs', '{"category":"general","question":{"ja":"誰が運営していますか？","en":"Who runs the center?","id":"Siapa yang mengelola pusat ini?"},"answer":{"ja":"千葉イスラム文化センターが運営し、ドンペット・ドゥアファ・ジャパンが建設と教育プログラムを支援しています。運営委員会と会計は毎月公開されます。","en":"The Chiba Islamic Culture Center runs the center, with Dompet Dhuafa Japan supporting construction and education programs. The board and monthly accounts are published openly.","id":"Chiba Islamic Culture Center mengelola pusat ini, didukung Dompet Dhuafa Japan untuk pembangunan dan program pendidikan. Susunan pengurus dan laporan keuangan bulanan dipublikasikan secara terbuka."}}'::jsonb, 2, true),
+  ('faqs', 'faq-opening-hours', '{"category":"general","question":{"ja":"モスクは何時に開いていますか？","en":"When is the mosque open?","id":"Jam berapa masjid buka?"},"answer":{"ja":"毎日、ファジュル礼拝の30分前からイシャー礼拝の30分後まで開いています。事務局は平日の日中に対応しています。","en":"Every day from 30 minutes before Fajr until 30 minutes after Isha. The office is staffed on weekday daytimes.","id":"Setiap hari, 30 menit sebelum Subuh hingga 30 menit setelah Isya. Sekretariat melayani pada hari kerja di siang hari."}}'::jsonb, 3, true),
+  ('faqs', 'faq-iqamah', '{"category":"prayer","question":{"ja":"礼拝とイカーマの時間は？","en":"What are the prayer and iqamah times?","id":"Kapan jadwal salat dan iqamah?"},"answer":{"ja":"礼拝時間はモスクの座標から自動計算され、イカーマはアザーンの5〜20分後です。礼拝時間ページとアプリで毎日確認できます。","en":"Prayer times are calculated from the mosque''s coordinates; iqamah follows the adhan by 5 to 20 minutes. Check the prayer times page or the app daily.","id":"Waktu salat dihitung dari koordinat masjid; iqamah 5-20 menit setelah azan. Cek halaman jadwal salat atau App setiap hari."}}'::jsonb, 4, true),
+  ('faqs', 'faq-jumuah', '{"category":"prayer","question":{"ja":"金曜礼拝は何時ですか？","en":"What time is Jumuah?","id":"Jam berapa salat Jumat?"},"answer":{"ja":"説教は12:30に始まります。駐車場が限られているため、公共交通機関でお越しください。","en":"The khutbah starts at 12:30. Parking is limited, so please come by public transport.","id":"Khutbah dimulai pukul 12:30. Parkir terbatas, mohon datang dengan transportasi umum."}}'::jsonb, 5, true),
+  ('faqs', 'faq-women', '{"category":"prayer","question":{"ja":"女性用の礼拝スペースはありますか？","en":"Is there a prayer space for women?","id":"Apakah ada ruang salat untuk perempuan?"},"answer":{"ja":"はい。女性専用の礼拝スペース、ウドゥー場、トイレがあります。金曜礼拝やイベントの際もご利用いただけます。","en":"Yes. There is a dedicated women''s prayer space with its own wudu area and restroom, available at Jumuah and during events.","id":"Ya. Tersedia ruang salat khusus perempuan dengan tempat wudu dan toilet sendiri, termasuk saat salat Jumat dan acara."}}'::jsonb, 6, true),
+  ('faqs', 'faq-eid', '{"category":"prayer","question":{"ja":"イードの礼拝はどこで行われますか？","en":"Where is the Eid prayer held?","id":"Di mana salat Id dilaksanakan?"},"answer":{"ja":"参加者が多いため、イード礼拝は複数回に分けて行うか、近隣の会場を借りて行います。日時はお知らせとアプリの通知で事前に発表します。","en":"Because attendance is high, the Eid prayer is held in several sessions or at a nearby rented venue. The date and time are announced in advance on the news page and through app notifications.","id":"Karena jamaah sangat banyak, salat Id dilaksanakan dalam beberapa gelombang atau di aula sewaan terdekat. Tanggal dan waktunya diumumkan lebih dulu lewat halaman berita dan notifikasi App."}}'::jsonb, 7, true),
+  ('faqs', 'faq-donate', '{"category":"donation","question":{"ja":"寄付はどうすればいいですか？","en":"How can I donate?","id":"Bagaimana cara berinfaq?"},"answer":{"ja":"日本円はゆうちょ銀行、ルピアはQRISで受け付けています。送金後に確認フォームを送っていただくと、毎月の報告に反映されます。","en":"Yen via Japan Post Bank, Rupiah via QRIS. Submit the confirmation form after transferring so it appears in the monthly report.","id":"Yen lewat Japan Post Bank, Rupiah lewat QRIS. Isi formulir konfirmasi setelah transfer agar tercatat di laporan bulanan."}}'::jsonb, 8, true),
+  ('faqs', 'faq-donation-report', '{"category":"donation","question":{"ja":"寄付の使い道はどこで確認できますか？","en":"How do I know how donations are used?","id":"Bagaimana saya tahu donasi digunakan untuk apa?"},"answer":{"ja":"毎月、収入と支出をまとめた会計報告を透明性ページで公開しています。大きな支出は理由とともに記載します。","en":"A monthly financial report with all income and expenses is published on the financial reports page. Major expenses are listed with an explanation.","id":"Setiap bulan laporan keuangan berisi seluruh pemasukan dan pengeluaran dipublikasikan di halaman transparansi. Pengeluaran besar dicantumkan beserta alasannya."}}'::jsonb, 9, true),
+  ('faqs', 'faq-zakat', '{"category":"donation","question":{"ja":"ザカートやサダカも受け付けていますか？","en":"Do you accept zakat and sadaqah?","id":"Apakah menerima zakat dan sedekah?"},"answer":{"ja":"はい。ザカート、サダカ、ワクフ、インファークをそれぞれ別に管理しています。送金時に種類を記載してください。ザカートは対象者にのみ配分されます。","en":"Yes. Zakat, sadaqah, waqf, and infaq are tracked separately. Please note the type when you transfer; zakat is distributed only to eligible recipients.","id":"Ya. Zakat, sedekah, wakaf, dan infaq dicatat terpisah. Mohon tulis jenisnya saat transfer; zakat hanya disalurkan kepada mustahik."}}'::jsonb, 10, true),
+  ('faqs', 'faq-donation-receipt', '{"category":"donation","question":{"ja":"領収書は発行できますか？","en":"Can I get a receipt?","id":"Apakah bisa mendapat bukti donasi?"},"answer":{"ja":"はい。確認フォームで領収書を希望すると、事務局からメールでお送りします。現在、税控除の対象ではありません。","en":"Yes. Tick the receipt option on the confirmation form and the office will email one. Donations are not yet tax-deductible in Japan.","id":"Ya. Centang pilihan bukti donasi pada formulir konfirmasi dan sekretariat akan mengirimkannya lewat email. Donasi saat ini belum dapat dikurangkan dari pajak di Jepang."}}'::jsonb, 11, true),
+  ('faqs', 'faq-newcomer', '{"category":"newcomer","question":{"ja":"千葉に引っ越してきたばかりです。何から始めればいいですか？","en":"I just moved to Chiba. Where do I start?","id":"Saya baru pindah ke Chiba. Mulai dari mana?"},"answer":{"ja":"新しく来た方のための案内ページで、市役所の手続き、ゴミの出し方、ハラール食品、交通について説明しています。WhatsAppグループにもぜひご参加ください。","en":"Start with the newcomer guide: city hall registration, garbage rules, halal food, and transport. Join our WhatsApp group as well.","id":"Mulai dari panduan muslim baru: lapor diri di balai kota, aturan sampah, makanan halal, dan transportasi. Bergabunglah juga ke grup WhatsApp jamaah."}}'::jsonb, 12, true),
+  ('faqs', 'faq-halal-food', '{"category":"newcomer","question":{"ja":"近くでハラール食品はどこで買えますか？","en":"Where can I buy halal food nearby?","id":"Di mana bisa membeli makanan halal di sekitar sini?"},"answer":{"ja":"ハラールガイドのページに、松戸周辺のハラール食材店とレストランの地図を掲載しています。成分表示で避けるべき漢字の一覧もあります。","en":"The halal guide page has a map of halal grocers and restaurants around Matsudo, plus a list of kanji to avoid on ingredient labels.","id":"Halaman panduan halal memuat peta toko bahan makanan dan restoran halal di sekitar Matsudo, serta daftar kanji yang perlu dihindari pada label bahan."}}'::jsonb, 13, true),
+  ('faqs', 'faq-whatsapp-group', '{"category":"newcomer","question":{"ja":"ジャマーアのWhatsAppグループに入るには？","en":"How do I join the community WhatsApp group?","id":"Bagaimana cara bergabung ke grup WhatsApp jamaah?"},"answer":{"ja":"お問い合わせページのWhatsAppボタンから事務局にメッセージを送ってください。お名前と居住エリアを確認したうえで招待します。","en":"Message the office through the WhatsApp button on the contact page. We confirm your name and area before sending an invitation.","id":"Kirim pesan ke sekretariat lewat tombol WhatsApp di halaman kontak. Kami akan mengonfirmasi nama dan area tempat tinggal sebelum mengirim undangan."}}'::jsonb, 14, true),
+  ('faqs', 'faq-tpa', '{"category":"program","question":{"ja":"子どものクルアーン教室はいつありますか？","en":"When are the children''s Quran classes?","id":"Kapan jadwal TPA untuk anak-anak?"},"answer":{"ja":"毎週土曜の午後に開催しています。4歳から12歳が対象で、クルアーンの読み方、暗唱、礼拝の基本を学びます。登録はプログラムページから行えます。","en":"Every Saturday afternoon, for ages 4 to 12: Quran reading, memorization, and the basics of prayer. Register on the programs page.","id":"Setiap Sabtu siang untuk usia 4-12 tahun: membaca Al-Quran, hafalan, dan dasar-dasar salat. Pendaftaran lewat halaman program."}}'::jsonb, 15, true),
+  ('faqs', 'faq-muallaf-class', '{"category":"program","question":{"ja":"イスラムに改宗したばかりです。学べる場はありますか？","en":"I recently became Muslim. Is there a class for me?","id":"Saya baru masuk Islam. Apakah ada kelas untuk saya?"},"answer":{"ja":"はい。ムアッラフ講座では、礼拝の仕方、ウドゥー、基本的な信仰について日本語で少人数で学べます。シャハーダの立ち会いもお手伝いします。","en":"Yes. The new Muslim course covers prayer, wudu, and the basics of faith in small groups, in Japanese. We can also help with taking the shahada.","id":"Ya. Kelas muallaf membahas tata cara salat, wudu, dan dasar akidah dalam kelompok kecil berbahasa Jepang. Kami juga membantu prosesi syahadat."}}'::jsonb, 16, true),
+  ('faqs', 'faq-japanese-class', '{"category":"program","question":{"ja":"日本語クラスは誰でも参加できますか？","en":"Can anyone join the Japanese class?","id":"Apakah semua orang boleh ikut kelas bahasa Jepang?"},"answer":{"ja":"はい。日本に来たばかりのムスリムを主な対象とした無料クラスで、生活に必要な会話と市役所・病院で使う表現を学びます。ボランティア講師も募集しています。","en":"Yes. The free class is aimed at Muslims new to Japan and covers everyday conversation and phrases for city hall and hospital visits. Volunteer teachers are welcome.","id":"Ya. Kelas gratis ini terutama untuk muslim yang baru tiba di Jepang: percakapan sehari-hari dan ungkapan untuk urusan balai kota dan rumah sakit. Kami juga membuka kesempatan relawan pengajar."}}'::jsonb, 17, true),
+  ('faqs', 'faq-room-booking', '{"category":"program","question":{"ja":"部屋を借りてイベントを開催できますか？","en":"Can I book a room for an event?","id":"Bisakah meminjam ruangan untuk acara?"},"answer":{"ja":"はい。教室や集会スペースは、アキーカや勉強会などイスラムの趣旨に沿った集まりに貸し出しています。予約ページから申し込んでください。","en":"Yes. Classrooms and the gathering space can be booked for gatherings in keeping with Islamic values, such as aqiqah or study sessions. Apply through the booking page.","id":"Ya. Ruang kelas dan ruang kumpul dapat dipinjam untuk kegiatan yang sesuai nilai Islam, seperti akikah atau kajian. Ajukan lewat halaman peminjaman ruang."}}'::jsonb, 18, true),
+  ('faqs', 'faq-visit', '{"category":"visit","question":{"ja":"ムスリムでなくても見学できますか？","en":"Can non-Muslims visit?","id":"Bolehkah non-muslim berkunjung?"},"answer":{"ja":"もちろんです。毎月のオープンモスクデーのほか、事前にご連絡いただければいつでもご案内します。肩と膝が隠れる服装でお越しください。","en":"Of course. Join a monthly Open Mosque Day or contact us for a visit any time. Please wear clothing that covers shoulders and knees.","id":"Tentu. Ikuti Open Mosque Day bulanan atau hubungi kami untuk kunjungan kapan saja. Mohon berpakaian menutup bahu dan lutut."}}'::jsonb, 19, true),
+  ('faqs', 'faq-etiquette', '{"category":"visit","question":{"ja":"見学のときに気をつけることはありますか？","en":"What should I know before visiting?","id":"Apa yang perlu diperhatikan saat berkunjung?"},"answer":{"ja":"入口で靴を脱ぎ、礼拝中の方の前を横切らないようにしてください。写真撮影はスタッフにご確認ください。女性の方はスカーフをお持ちいただくか、貸出用をご利用ください。","en":"Remove your shoes at the entrance and avoid walking in front of people who are praying. Ask staff before taking photos. Women may bring a scarf or borrow one from us.","id":"Lepas sepatu di pintu masuk dan hindari lewat di depan orang yang sedang salat. Tanyakan kepada petugas sebelum memotret. Pengunjung perempuan dapat membawa kerudung atau meminjam dari kami."}}'::jsonb, 20, true),
+  ('faqs', 'faq-school-visit', '{"category":"visit","question":{"ja":"学校や団体での見学はできますか？","en":"Do you host school or group visits?","id":"Apakah menerima kunjungan sekolah atau rombongan?"},"answer":{"ja":"はい。学校、自治会、企業向けに、イスラムの基礎と礼拝の見学を含む1〜2時間のプログラムを用意しています。お問い合わせフォームから「見学」を選んでご連絡ください。","en":"Yes. We offer a one to two hour program for schools, neighborhood associations, and companies, including an introduction to Islam and watching a prayer. Choose \"Visit\" on the contact form.","id":"Ya. Kami menyediakan program 1-2 jam untuk sekolah, RT/RW setempat, dan perusahaan, termasuk pengenalan Islam dan menyaksikan salat. Pilih subjek \"Kunjungan\" pada formulir kontak."}}'::jsonb, 21, true),
+  ('faqs', 'faq-parking', '{"category":"visit","question":{"ja":"駐車場はありますか？","en":"Is there parking?","id":"Apakah ada tempat parkir?"},"answer":{"ja":"駐車スペースは数台分のみで、金曜日とイベント時は利用できません。駐輪場はあります。公共交通機関か近隣のコインパーキングをご利用ください。","en":"Only a few car spaces, and none on Fridays or during events. Bicycle parking is available. Please use public transport or a nearby paid car park.","id":"Hanya tersedia beberapa slot mobil, dan tidak tersedia pada hari Jumat atau saat acara. Parkir sepeda tersedia. Mohon gunakan transportasi umum atau parkir berbayar di sekitar."}}'::jsonb, 22, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: gallery (12 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('gallery', 'g-01', '{"src":"/images/gallery/01.svg","alt":{"ja":"礼拝ホールの内観","en":"Inside the prayer hall","id":"Interior ruang salat"},"category":"building","takenAt":"2026-03-14","width":1200,"height":800}'::jsonb, 0, true),
+  ('gallery', 'g-02', '{"src":"/images/gallery/02.svg","alt":{"ja":"土曜勉強会の様子","en":"Saturday study circle","id":"Suasana kajian Sabtu"},"category":"activity","takenAt":"2026-04-11","width":1200,"height":900}'::jsonb, 1, true),
+  ('gallery', 'g-03', '{"src":"/images/gallery/03.svg","alt":{"ja":"オープンモスクデーの来館者","en":"Visitors on Open Mosque Day","id":"Pengunjung Open Mosque Day"},"category":"community","takenAt":"2026-05-02","width":1200,"height":800}'::jsonb, 2, true),
+  ('gallery', 'g-04', '{"src":"/images/gallery/04.svg","alt":{"ja":"子どもクルアーン教室","en":"Children''s Quran class","id":"Kelas TPA"},"category":"activity","takenAt":"2026-05-16","width":1200,"height":1200}'::jsonb, 3, true),
+  ('gallery', 'g-05', '{"src":"/images/gallery/05.svg","alt":{"ja":"モスクの外観","en":"Mosque exterior","id":"Tampak luar masjid"},"category":"building","takenAt":"2026-03-01","width":1200,"height":800}'::jsonb, 4, true),
+  ('gallery', 'g-06', '{"src":"/images/gallery/06.svg","alt":{"ja":"イフタールの準備","en":"Preparing iftar","id":"Persiapan buka puasa"},"category":"ramadan","takenAt":"2026-02-20","width":1200,"height":900}'::jsonb, 5, true),
+  ('gallery', 'g-07', '{"src":"/images/gallery/03.svg","alt":{"ja":"イード・アル＝フィトルの朝の集まり","en":"Eid al-Fitr morning gathering","id":"Suasana pagi Idulfitri"},"category":"eid","takenAt":"2026-03-20","width":1200,"height":800}'::jsonb, 6, true),
+  ('gallery', 'g-08', '{"src":"/images/gallery/02.svg","alt":{"ja":"ムアッラフ講座の少人数クラス","en":"Small-group session of the new Muslim course","id":"Sesi kelompok kecil kelas muallaf"},"category":"activity","takenAt":"2026-06-06","width":1200,"height":900}'::jsonb, 7, true),
+  ('gallery', 'g-09', '{"src":"/images/gallery/06.svg","alt":{"ja":"ラマダンの夜、タラウィーフ礼拝の後","en":"A Ramadan night after tarawih","id":"Malam Ramadan setelah tarawih"},"category":"ramadan","takenAt":"2026-03-05","width":1200,"height":900}'::jsonb, 8, true),
+  ('gallery', 'g-10', '{"src":"/images/gallery/01.svg","alt":{"ja":"女性用礼拝スペース","en":"Women''s prayer space","id":"Ruang salat perempuan"},"category":"building","takenAt":"2026-03-14","width":1200,"height":800}'::jsonb, 9, true),
+  ('gallery', 'g-11', '{"src":"/images/gallery/05.svg","alt":{"ja":"地域の方々との交流会","en":"Meeting with neighbors from the local community","id":"Silaturahmi dengan warga sekitar"},"category":"community","takenAt":"2026-06-20","width":1200,"height":800}'::jsonb, 10, true),
+  ('gallery', 'g-12', '{"src":"/images/gallery/04.svg","alt":{"ja":"イード・アル＝アドハーの子ども向けプログラム","en":"Children''s program on Eid al-Adha","id":"Program anak saat Iduladha"},"category":"eid","takenAt":"2026-05-27","width":1200,"height":1200}'::jsonb, 11, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: donation_accounts (3 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('donation_accounts', 'jpb', '{"currency":"JPY","method":"bank","bankName":"Japan Post Bank","bankNameLocalized":{"ja":"ゆうちょ銀行","en":"Japan Post Bank (Yucho)","id":"Japan Post Bank (Yucho)"},"branch":"〇一八 (ゼロイチハチ)","branchCode":"018","accountType":"普通 (Futsu)","accountNumber":"1234567","accountName":"アルムッタキーンブンカセンター","note":{"ja":"記号 10180 番号 12345671（ゆうちょ同士の振替用）","en":"Symbol 10180, number 12345671 for transfers between Yucho accounts","id":"Kigou 10180, bangou 12345671 untuk transfer sesama Yucho"},"primary":true}'::jsonb, 0, true),
+  ('donation_accounts', 'qris', '{"currency":"IDR","method":"qris","bankName":"QRIS","bankNameLocalized":{"ja":"QRIS（インドネシアのQR決済）","en":"QRIS (Indonesian QR payment)","id":"QRIS"},"accountNumber":"ID1024XXXXXXXX","accountName":"Al Muttaqin Cultural Center","qrImage":"/images/qris-placeholder.svg","note":{"ja":"GoPay・OVO・DANA・ShopeePay、インドネシア各銀行のモバイルバンキングに対応。","en":"Works with GoPay, OVO, DANA, ShopeePay and Indonesian mobile banking.","id":"Bisa lewat GoPay, OVO, DANA, ShopeePay, dan m-banking bank Indonesia."},"primary":true}'::jsonb, 1, true),
+  ('donation_accounts', 'bsi', '{"currency":"IDR","method":"bank","bankName":"Bank Syariah Indonesia","bankNameLocalized":{"ja":"インドネシア・シャリーア銀行（BSI）","en":"Bank Syariah Indonesia (BSI)","id":"Bank Syariah Indonesia (BSI)"},"branchCode":"451","accountNumber":"7123456789","accountName":"Al Muttaqin Cultural Center","note":{"ja":"インドネシア国内からの銀行振込用","en":"For bank transfers from inside Indonesia","id":"Untuk transfer bank dari dalam negeri Indonesia"}}'::jsonb, 2, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: donation_programs (5 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('donation_programs', 'operational', '{"slug":"infaq-operasional","title":{"ja":"運営インファーク","en":"Operational infaq","id":"Infaq operasional"},"description":{"ja":"光熱費、暖房、清掃、イマームの謝礼など、モスクを毎日開けるための費用。","en":"Utilities, heating, cleaning, and imam honorarium: everything that keeps the mosque open daily.","id":"Listrik, pemanas, kebersihan, dan honor imam: semua yang menjaga masjid tetap buka setiap hari."},"target":{"amount":400000,"currency":"JPY"},"raised":{"amount":186500,"currency":"JPY"},"status":"open","icon":"building"}'::jsonb, 0, true),
+  ('donation_programs', 'education', '{"slug":"pendidikan-anak-dan-muallaf","title":{"ja":"子どもとムアッラフの教育","en":"Children and new Muslim education","id":"Pendidikan anak dan muallaf"},"description":{"ja":"教材、教師の交通費、日本語のイスラーム入門書の制作。","en":"Teaching materials, teacher transport, and Japanese-language introductory books on Islam.","id":"Materi ajar, transportasi pengajar, dan pembuatan buku pengantar Islam berbahasa Jepang."},"target":{"amount":200000,"currency":"JPY"},"raised":{"amount":72000,"currency":"JPY"},"status":"open","icon":"graduation-cap"}'::jsonb, 1, true),
+  ('donation_programs', 'iftar', '{"slug":"iftar-ramadan-1448","title":{"ja":"ラマダーン1448 イフタール","en":"Ramadan 1448 iftar","id":"Iftar Ramadan 1448"},"description":{"ja":"毎日のイフタールを学生、技能実習生、改宗者に。1食500円。","en":"Daily iftar for students, trainees, and new Muslims. JPY 500 per meal.","id":"Buka puasa harian untuk pelajar, pemagang, dan muallaf. ¥500 per porsi."},"target":{"amount":450000,"currency":"JPY"},"raised":{"amount":0,"currency":"JPY"},"status":"open","icon":"moon"}'::jsonb, 2, true),
+  ('donation_programs', 'jumat-berkah', '{"slug":"jumat-berkah","title":{"ja":"金曜の食事会","en":"Friday community meal","id":"Jumat berkah"},"description":{"ja":"金曜礼拝のあと、学生や単身の技能実習生に温かい食事を。1食400円。","en":"A warm meal after Jumuah for students and trainees living alone. JPY 400 per portion.","id":"Makan siang hangat setelah salat Jumat untuk pelajar dan pemagang yang tinggal sendiri. ¥400 per porsi."},"target":{"amount":120000,"currency":"JPY"},"raised":{"amount":54800,"currency":"JPY"},"status":"open","icon":"utensils"}'::jsonb, 3, true),
+  ('donation_programs', 'construction', '{"slug":"wakaf-pembangunan","title":{"ja":"建設ワクフ（終了）","en":"Construction waqf (closed)","id":"Wakaf pembangunan (ditutup)"},"description":{"ja":"土地と建物のワクフは完了しました。ご協力に心から感謝いたします。","en":"The land and building waqf is complete. Thank you to everyone who contributed.","id":"Wakaf tanah dan bangunan telah lunas. Terima kasih kepada semua donatur."},"status":"completed","icon":"heart"}'::jsonb, 4, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: transparency_reports (6 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('transparency_reports', 'rep-2026-05', '{"period":"2026-05","title":{"ja":"2026年5月 月次報告","en":"May 2026 monthly report","id":"Laporan bulanan Mei 2026"},"currency":"JPY","openingBalance":91000,"income":[{"label":{"ja":"運営インファーク（ゆうちょ）","en":"Operational infaq (Japan Post Bank)","id":"Infaq operasional (Japan Post Bank)"},"amount":95400},{"label":{"ja":"運営インファーク（QRIS）","en":"Operational infaq (QRIS)","id":"Infaq operasional (QRIS)"},"amount":33900},{"label":{"ja":"金曜礼拝の献金箱","en":"Jumuah collection box","id":"Kotak infaq Jumat"},"amount":52600},{"label":{"ja":"教育プログラム寄付","en":"Education program donations","id":"Donasi program pendidikan"},"amount":15000}],"expense":[{"label":{"ja":"光熱費","en":"Utilities","id":"Listrik dan air"},"amount":36500},{"label":{"ja":"イマーム謝礼","en":"Imam honorarium","id":"Honor imam"},"amount":80000},{"label":{"ja":"清掃用品・備品","en":"Cleaning and supplies","id":"Kebersihan dan perlengkapan"},"amount":9700},{"label":{"ja":"教材・印刷","en":"Teaching materials and printing","id":"Materi ajar dan cetak"},"amount":11200},{"label":{"ja":"オープンモスク軽食","en":"Open Mosque Day refreshments","id":"Konsumsi Open Mosque Day"},"amount":22000}],"closingBalance":128500,"publishedAt":"2026-06-03T03:00:00.000Z","note":{"ja":"すべての数字は会計担当が確認済みです。詳細は事務局までお問い合わせください。","en":"All figures verified by the treasurer. Contact the office for details.","id":"Semua angka telah diverifikasi bendahara. Hubungi sekretariat untuk rincian."}}'::jsonb, 0, true),
+  ('transparency_reports', 'rep-2026-06', '{"period":"2026-06","title":{"ja":"2026年6月 月次報告","en":"June 2026 monthly report","id":"Laporan bulanan Juni 2026"},"currency":"JPY","openingBalance":128500,"income":[{"label":{"ja":"運営インファーク（ゆうちょ）","en":"Operational infaq (Japan Post Bank)","id":"Infaq operasional (Japan Post Bank)"},"amount":110200},{"label":{"ja":"運営インファーク（QRIS）","en":"Operational infaq (QRIS)","id":"Infaq operasional (QRIS)"},"amount":42800},{"label":{"ja":"金曜礼拝の献金箱","en":"Jumuah collection box","id":"Kotak infaq Jumat"},"amount":59400},{"label":{"ja":"イード・アル＝アドハー寄付","en":"Eid al-Adha donations","id":"Donasi Idul Adha"},"amount":30000}],"expense":[{"label":{"ja":"光熱費","en":"Utilities","id":"Listrik dan air"},"amount":39800},{"label":{"ja":"イマーム謝礼","en":"Imam honorarium","id":"Honor imam"},"amount":80000},{"label":{"ja":"清掃用品・備品","en":"Cleaning and supplies","id":"Kebersihan dan perlengkapan"},"amount":12100},{"label":{"ja":"教材・印刷","en":"Teaching materials and printing","id":"Materi ajar dan cetak"},"amount":7400},{"label":{"ja":"イード・アル＝アドハー行事","en":"Eid al-Adha event","id":"Kegiatan Idul Adha"},"amount":45000}],"closingBalance":186600,"publishedAt":"2026-07-04T03:00:00.000Z","note":{"ja":"すべての数字は会計担当が確認済みです。詳細は事務局までお問い合わせください。","en":"All figures verified by the treasurer. Contact the office for details.","id":"Semua angka telah diverifikasi bendahara. Hubungi sekretariat untuk rincian."}}'::jsonb, 1, true),
+  ('transparency_reports', 'rep-2026-07', '{"period":"2026-07","title":{"ja":"2026年7月 月次報告","en":"July 2026 monthly report","id":"Laporan bulanan Juli 2026"},"currency":"JPY","openingBalance":186600,"income":[{"label":{"ja":"運営インファーク（ゆうちょ）","en":"Operational infaq (Japan Post Bank)","id":"Infaq operasional (Japan Post Bank)"},"amount":98000},{"label":{"ja":"運営インファーク（QRIS）","en":"Operational infaq (QRIS)","id":"Infaq operasional (QRIS)"},"amount":36500},{"label":{"ja":"金曜礼拝の献金箱","en":"Jumuah collection box","id":"Kotak infaq Jumat"},"amount":54800},{"label":{"ja":"教育プログラム寄付","en":"Education program donations","id":"Donasi program pendidikan"},"amount":12000}],"expense":[{"label":{"ja":"光熱費","en":"Utilities","id":"Listrik dan air"},"amount":44200},{"label":{"ja":"イマーム謝礼","en":"Imam honorarium","id":"Honor imam"},"amount":80000},{"label":{"ja":"清掃用品・備品","en":"Cleaning and supplies","id":"Kebersihan dan perlengkapan"},"amount":10400},{"label":{"ja":"教材・印刷","en":"Teaching materials and printing","id":"Materi ajar dan cetak"},"amount":8600},{"label":{"ja":"ムハッラム勉強会","en":"Muharram study night","id":"Kajian Muharram"},"amount":19500}],"closingBalance":225200,"publishedAt":"2026-08-04T03:00:00.000Z","note":{"ja":"すべての数字は会計担当が確認済みです。詳細は事務局までお問い合わせください。","en":"All figures verified by the treasurer. Contact the office for details.","id":"Semua angka telah diverifikasi bendahara. Hubungi sekretariat untuk rincian."}}'::jsonb, 2, true),
+  ('transparency_reports', 'rep-2026-08', '{"period":"2026-08","title":{"ja":"2026年8月 月次報告","en":"August 2026 monthly report","id":"Laporan bulanan Agustus 2026"},"currency":"JPY","openingBalance":225200,"income":[{"label":{"ja":"運営インファーク（ゆうちょ）","en":"Operational infaq (Japan Post Bank)","id":"Infaq operasional (Japan Post Bank)"},"amount":105500},{"label":{"ja":"運営インファーク（QRIS）","en":"Operational infaq (QRIS)","id":"Infaq operasional (QRIS)"},"amount":51000},{"label":{"ja":"金曜礼拝の献金箱","en":"Jumuah collection box","id":"Kotak infaq Jumat"},"amount":57200},{"label":{"ja":"教育プログラム寄付","en":"Education program donations","id":"Donasi program pendidikan"},"amount":18000}],"expense":[{"label":{"ja":"光熱費","en":"Utilities","id":"Listrik dan air"},"amount":46900},{"label":{"ja":"イマーム謝礼","en":"Imam honorarium","id":"Honor imam"},"amount":80000},{"label":{"ja":"清掃用品・備品","en":"Cleaning and supplies","id":"Kebersihan dan perlengkapan"},"amount":11300},{"label":{"ja":"教材・印刷","en":"Teaching materials and printing","id":"Materi ajar dan cetak"},"amount":9800},{"label":{"ja":"夏休み子ども教室","en":"Summer children''s program","id":"Program anak liburan musim panas"},"amount":24000}],"closingBalance":284900,"publishedAt":"2026-09-03T03:00:00.000Z","note":{"ja":"すべての数字は会計担当が確認済みです。詳細は事務局までお問い合わせください。","en":"All figures verified by the treasurer. Contact the office for details.","id":"Semua angka telah diverifikasi bendahara. Hubungi sekretariat untuk rincian."}}'::jsonb, 3, true),
+  ('transparency_reports', 'rep-2026-09', '{"period":"2026-09","title":{"ja":"2026年9月 月次報告","en":"September 2026 monthly report","id":"Laporan bulanan September 2026"},"currency":"JPY","openingBalance":284900,"income":[{"label":{"ja":"運営インファーク（ゆうちょ）","en":"Operational infaq (Japan Post Bank)","id":"Infaq operasional (Japan Post Bank)"},"amount":118000},{"label":{"ja":"運営インファーク（QRIS）","en":"Operational infaq (QRIS)","id":"Infaq operasional (QRIS)"},"amount":39200},{"label":{"ja":"金曜礼拝の献金箱","en":"Jumuah collection box","id":"Kotak infaq Jumat"},"amount":61500},{"label":{"ja":"教育プログラム寄付","en":"Education program donations","id":"Donasi program pendidikan"},"amount":25000}],"expense":[{"label":{"ja":"光熱費","en":"Utilities","id":"Listrik dan air"},"amount":41300},{"label":{"ja":"イマーム謝礼","en":"Imam honorarium","id":"Honor imam"},"amount":80000},{"label":{"ja":"清掃用品・備品","en":"Cleaning and supplies","id":"Kebersihan dan perlengkapan"},"amount":9800},{"label":{"ja":"教材・印刷","en":"Teaching materials and printing","id":"Materi ajar dan cetak"},"amount":14600},{"label":{"ja":"オープンモスク軽食","en":"Open Mosque Day refreshments","id":"Konsumsi Open Mosque Day"},"amount":12500},{"label":{"ja":"空調メンテナンス","en":"Air-conditioning maintenance","id":"Perawatan AC"},"amount":58000}],"closingBalance":312400,"publishedAt":"2026-10-04T03:00:00.000Z","note":{"ja":"すべての数字は会計担当が確認済みです。詳細は事務局までお問い合わせください。","en":"All figures verified by the treasurer. Contact the office for details.","id":"Semua angka telah diverifikasi bendahara. Hubungi sekretariat untuk rincian."}}'::jsonb, 4, true),
+  ('transparency_reports', 'rep-2026-10', '{"period":"2026-10","title":{"ja":"2026年10月 月次報告","en":"October 2026 monthly report","id":"Laporan bulanan Oktober 2026"},"currency":"JPY","openingBalance":312400,"income":[{"label":{"ja":"運営インファーク（ゆうちょ）","en":"Operational infaq (Japan Post Bank)","id":"Infaq operasional (Japan Post Bank)"},"amount":142000},{"label":{"ja":"運営インファーク（QRIS）","en":"Operational infaq (QRIS)","id":"Infaq operasional (QRIS)"},"amount":44500},{"label":{"ja":"金曜礼拝の献金箱","en":"Jumuah collection box","id":"Kotak infaq Jumat"},"amount":68300},{"label":{"ja":"教育プログラム寄付","en":"Education program donations","id":"Donasi program pendidikan"},"amount":72000},{"label":{"ja":"金曜の食事会寄付","en":"Friday meal donations","id":"Donasi Jumat berkah"},"amount":54800}],"expense":[{"label":{"ja":"光熱費","en":"Utilities","id":"Listrik dan air"},"amount":38200},{"label":{"ja":"イマーム謝礼","en":"Imam honorarium","id":"Honor imam"},"amount":80000},{"label":{"ja":"清掃用品・備品","en":"Cleaning and supplies","id":"Kebersihan dan perlengkapan"},"amount":12650},{"label":{"ja":"教材・印刷","en":"Teaching materials and printing","id":"Materi ajar dan cetak"},"amount":21400},{"label":{"ja":"オープンモスク軽食","en":"Open Mosque Day refreshments","id":"Konsumsi Open Mosque Day"},"amount":18900},{"label":{"ja":"金曜の食事会の食材","en":"Friday meal groceries","id":"Bahan makanan Jumat berkah"},"amount":38600}],"closingBalance":484250,"publishedAt":"2026-11-02T03:00:00.000Z","note":{"ja":"すべての数字は会計担当が確認済みです。詳細は事務局までお問い合わせください。","en":"All figures verified by the treasurer. Contact the office for details.","id":"Semua angka telah diverifikasi bendahara. Hubungi sekretariat untuk rincian."}}'::jsonb, 5, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: programs (7 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('programs', 'tpa', '{"slug":"tpa","title":{"ja":"子どもクルアーン教室（TPA）","en":"Children''s Quran class (TPA)","id":"TPA (Taman Pendidikan Al-Qur''an)"},"excerpt":{"ja":"4歳から12歳の子どもがクルアーン読誦、ドゥアー、イスラームの基礎を学びます。","en":"Children aged 4 to 12 learn Quran reading, duas, and the basics of Islam.","id":"Anak usia 4-12 tahun belajar membaca Al-Qur''an, doa, dan dasar-dasar Islam."},"description":{"ja":[{"type":"p","text":"年齢別の3クラスで、イクロからクルアーン読誦、短い章の暗記、礼拝の実践までを学びます。"},{"type":"ul","items":["年少クラス（4〜6歳）：ひらがな・アラビア文字入門、短いドゥアー","年中クラス（7〜9歳）：イクロ、ジュズ・アンマの暗記","年長クラス（10〜12歳）：タジュウィード、礼拝とイスラームの基礎"]}],"en":[{"type":"p","text":"Three age-based classes from Iqra to Quran reading, memorising short surahs, and practising prayer."},{"type":"ul","items":["Juniors (4 to 6): Arabic letters and short duas","Middle (7 to 9): Iqra and Juz Amma memorisation","Seniors (10 to 12): tajwid, prayer, and basics of Islam"]}],"id":[{"type":"p","text":"Tiga kelas sesuai usia, dari Iqra sampai tahsin, hafalan surat pendek, dan praktik salat."},{"type":"ul","items":["Kelas kecil (4-6): huruf hijaiyah dan doa pendek","Kelas tengah (7-9): Iqra dan hafalan Juz Amma","Kelas besar (10-12): tajwid, salat, dan dasar Islam"]}]},"schedule":{"ja":"毎週日曜日 10:00〜11:30","en":"Every Sunday, 10:00 to 11:30","id":"Setiap Minggu, 10:00-11:30"},"audience":{"ja":"4〜12歳の子ども","en":"Children aged 4 to 12","id":"Anak usia 4-12 tahun"},"languages":["id","ja","en"],"icon":"book-open","registrationOpen":true,"contactPerson":"Koordinator Pendidikan"}'::jsonb, 0, true),
+  ('programs', 'muallaf-class', '{"slug":"kelas-muallaf","title":{"ja":"ムアッラフ講座","en":"New Muslim course","id":"Kelas muallaf"},"excerpt":{"ja":"日本語でイスラームの基礎を学ぶ全8回の講座。改宗を考えている方も歓迎。","en":"An eight-session course on the basics of Islam in Japanese, open to anyone considering Islam.","id":"Kursus 8 pertemuan tentang dasar Islam dalam bahasa Jepang, terbuka bagi yang sedang mempelajari Islam."},"description":{"ja":[{"type":"p","text":"信仰の柱、清め、礼拝、断食、日常の倫理を、日本語でやさしく学びます。一人ひとりに相談役（メンター）がつきます。"},{"type":"ol","items":["イスラームとは：神、預言者、啓典","信仰の六つの柱","清め（ウドゥー・グスル）","礼拝の方法と一日の流れ","断食とラマダーン","ザカートと喜捨","日本での食事・仕事・家族","シャハーダとその後の歩み"]},{"type":"callout","title":"途中参加できます","text":"各回は独立した内容です。見学だけでも歓迎します。"}],"en":[{"type":"p","text":"Pillars of faith, purification, prayer, fasting, and daily ethics taught gently in Japanese. Each participant is paired with a mentor."},{"type":"ol","items":["What is Islam: God, prophets, scripture","The six pillars of faith","Purification (wudu and ghusl)","How to pray and the daily rhythm","Fasting and Ramadan","Zakat and charity","Food, work, and family in Japan","The shahada and the steps after it"]},{"type":"callout","title":"Join any time","text":"Each session stands on its own. You are welcome to simply sit in and observe."}],"id":[{"type":"p","text":"Rukun iman, bersuci, salat, puasa, dan akhlak sehari-hari dalam bahasa Jepang yang mudah. Setiap peserta didampingi seorang mentor."},{"type":"ol","items":["Apa itu Islam: Allah, para nabi, kitab suci","Enam rukun iman","Bersuci (wudu dan mandi wajib)","Cara salat dan ritme harian","Puasa dan Ramadan","Zakat dan sedekah","Makanan, kerja, dan keluarga di Jepang","Syahadat dan langkah setelahnya"]},{"type":"callout","title":"Boleh bergabung kapan saja","text":"Setiap pertemuan berdiri sendiri. Sekadar menyimak pun dipersilakan."}]},"schedule":{"ja":"毎週日曜日 14:00〜15:30","en":"Every Sunday, 14:00 to 15:30","id":"Setiap Minggu, 14:00-15:30"},"audience":{"ja":"改宗者・入門者とそのご家族","en":"New Muslims, seekers, and their families","id":"Muallaf, pencari, dan keluarganya"},"languages":["ja"],"icon":"heart-handshake","registrationOpen":true,"contactPerson":"Dr. H. Ach Firman Wahyudi, S.E., M.Sc"}'::jsonb, 1, true),
+  ('programs', 'japanese-class', '{"slug":"kelas-bahasa-jepang","title":{"ja":"日本語クラス","en":"Japanese language class","id":"Kelas bahasa Jepang"},"excerpt":{"ja":"新しく日本に来たムスリムのための生活日本語。ボランティア講師が担当。","en":"Everyday Japanese for Muslims new to Japan, taught by volunteer teachers.","id":"Bahasa Jepang sehari-hari untuk muslim yang baru tiba, diajar relawan."},"description":{"ja":[{"type":"p","text":"市役所、病院、職場で使う日本語を中心に、初級と中級の2クラス。"}],"en":[{"type":"p","text":"Two levels, beginner and intermediate, focused on Japanese for city hall, hospitals, and the workplace."}],"id":[{"type":"p","text":"Dua tingkat, pemula dan menengah, fokus pada bahasa Jepang untuk balai kota, rumah sakit, dan tempat kerja."}]},"schedule":{"ja":"毎週水曜日 19:30〜21:00","en":"Every Wednesday, 19:30 to 21:00","id":"Setiap Rabu, 19:30-21:00"},"audience":{"ja":"日本語を学びたいムスリム","en":"Muslims who want to learn Japanese","id":"Muslim yang ingin belajar bahasa Jepang"},"languages":["ja","en","id"],"icon":"languages","registrationOpen":true,"contactPerson":"Koordinator Kelas Bahasa Jepang"}'::jsonb, 2, true),
+  ('programs', 'open-mosque', '{"slug":"open-mosque","title":{"ja":"オープンモスク","en":"Open Mosque","id":"Open Mosque"},"excerpt":{"ja":"毎月第3土曜日、どなたでもモスクを見学できる日。","en":"Every third Saturday, the mosque opens its doors to everyone.","id":"Setiap Sabtu ketiga, masjid terbuka untuk siapa saja."},"description":{"ja":[{"type":"p","text":"礼拝の見学、建物の案内、ハラール軽食、質疑応答。学校や団体の見学も受け付けています。"}],"en":[{"type":"p","text":"Prayer demonstration, building tour, halal snacks, and Q&A. School and group visits are welcome."}],"id":[{"type":"p","text":"Demo salat, tur gedung, camilan halal, dan tanya jawab. Kunjungan sekolah dan kelompok dipersilakan."}]},"schedule":{"ja":"毎月第3土曜日 13:00〜16:00","en":"Third Saturday of the month, 13:00 to 16:00","id":"Sabtu ketiga setiap bulan, 13:00-16:00"},"audience":{"ja":"近隣住民、学校、団体","en":"Neighbours, schools, and groups","id":"Warga sekitar, sekolah, dan kelompok"},"languages":["ja","en"],"icon":"door-open","registrationOpen":true,"contactPerson":"Tim Open Mosque"}'::jsonb, 3, true),
+  ('programs', 'school-visit', '{"slug":"kunjungan-sekolah","title":{"ja":"学校・団体見学","en":"School and group visits","id":"Kunjungan sekolah dan kelompok"},"excerpt":{"ja":"国際理解教育の一環として、学校や自治体からの見学を受け入れています。","en":"We welcome visits from schools and local organisations as part of intercultural education.","id":"Kami menerima kunjungan sekolah dan lembaga setempat sebagai bagian pendidikan lintas budaya."},"description":{"ja":[{"type":"p","text":"所要時間は60〜90分。礼拝の説明、イスラームとムスリムの生活についての講話、質疑応答を行います。"}],"en":[{"type":"p","text":"A 60 to 90 minute visit with a prayer explanation, a talk on Islam and Muslim life, and Q&A."}],"id":[{"type":"p","text":"Kunjungan 60-90 menit dengan penjelasan salat, ceramah tentang Islam dan kehidupan muslim, serta tanya jawab."}]},"schedule":{"ja":"平日・要予約","en":"Weekdays, by appointment","id":"Hari kerja, dengan perjanjian"},"audience":{"ja":"学校、大学、自治体、企業","en":"Schools, universities, municipalities, and companies","id":"Sekolah, universitas, pemerintah daerah, dan perusahaan"},"languages":["ja","en"],"icon":"school","registrationOpen":true,"contactPerson":"Dr. H. Ach Firman Wahyudi, S.E., M.Sc"}'::jsonb, 4, true),
+  ('programs', 'weekly-kajian', '{"slug":"kajian-pekanan","title":{"ja":"毎週の勉強会","en":"Weekly study circle","id":"Kajian pekanan"},"excerpt":{"ja":"毎週土曜日のマグリブ後、3言語で交互に開催。","en":"Every Saturday after Maghrib, rotating between three languages.","id":"Setiap Sabtu ba''da Maghrib, bergantian dalam tiga bahasa."},"description":{"ja":[{"type":"p","text":"アキーダ、フィクフ、シーラ、タフスィールをテーマごとに学びます。録画はYouTubeで公開。"}],"en":[{"type":"p","text":"Aqidah, fiqh, sirah, and tafsir by theme. Recordings are published on YouTube."}],"id":[{"type":"p","text":"Akidah, fikih, sirah, dan tafsir per tema. Rekaman dipublikasikan di YouTube."}]},"schedule":{"ja":"毎週土曜日 マグリブ後","en":"Every Saturday after Maghrib","id":"Setiap Sabtu ba''da Maghrib"},"audience":{"ja":"どなたでも","en":"Everyone","id":"Semua jamaah"},"languages":["id","ja","en"],"icon":"mic","registrationOpen":false,"contactPerson":"Koordinator Kajian"}'::jsonb, 5, true),
+  ('programs', 'youth', '{"slug":"youth","title":{"ja":"ユース（青少年）プログラム","en":"Youth programme","id":"Program remaja (Youth)"},"excerpt":{"ja":"13〜22歳のムスリム青少年のための学びと交流の場。月2回、土曜日の午後に開催。","en":"Learning and friendship for Muslim teens and students aged 13 to 22, twice a month on Saturday afternoons.","id":"Wadah belajar dan silaturahmi remaja muslim usia 13-22 tahun, dua kali sebulan pada Sabtu sore."},"description":{"ja":[{"type":"p","text":"学校や職場で少数派として暮らす若いムスリムが、安心して話し合い、学び、友だちをつくるためのプログラムです。"},{"type":"ul","items":["ハラカ（少人数の学習会）：アキーダ、シーラ、日本での信仰生活","メンタリング：進学・就職・家族についての相談","スポーツ・ボランティア・地域イベントへの参加"]},{"type":"p","text":"日本語、英語、インドネシア語が混ざった環境です。どの言語でも参加できます。"}],"en":[{"type":"p","text":"A programme where young Muslims who are a minority at school or work can talk freely, learn, and make friends."},{"type":"ul","items":["Halaqah (small study groups): aqidah, sirah, and living as a Muslim in Japan","Mentoring: study, career, and family questions","Sports, volunteering, and joining community events"]},{"type":"p","text":"Japanese, English, and Indonesian are mixed freely. Join in whichever language you prefer."}],"id":[{"type":"p","text":"Program bagi remaja muslim yang menjadi minoritas di sekolah atau tempat kerja agar bisa berdiskusi, belajar, dan berteman dengan nyaman."},{"type":"ul","items":["Halaqah (kelompok belajar kecil): akidah, sirah, dan hidup sebagai muslim di Jepang","Mentoring: konsultasi studi, karier, dan keluarga","Olahraga, kerja bakti, dan ikut acara komunitas"]},{"type":"p","text":"Bahasa Jepang, Inggris, dan Indonesia dipakai bergantian. Ikut saja dengan bahasa yang kamu suka."}]},"schedule":{"ja":"第2・第4土曜日 15:00〜17:00","en":"2nd and 4th Saturday, 15:00 to 17:00","id":"Sabtu ke-2 dan ke-4, 15:00-17:00"},"audience":{"ja":"13〜22歳のムスリム青少年","en":"Muslim youth aged 13 to 22","id":"Remaja muslim usia 13-22 tahun"},"languages":["ja","en","id"],"icon":"users","registrationOpen":true,"contactPerson":"Koordinator Youth"}'::jsonb, 6, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: rooms (2 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('rooms', 'hall', '{"name":{"ja":"多目的ホール","en":"Multipurpose hall","id":"Aula serbaguna"},"capacity":80,"description":{"ja":"結婚式（アカド・ニカー）、アキーカ、講演会、地域イベントに。","en":"For wedding contracts (akad nikah), aqiqah, talks, and community events.","id":"Untuk akad nikah, akikah, ceramah, dan acara komunitas."},"amenities":[{"ja":"音響・マイク","en":"Sound system and microphone","id":"Sound system dan mikrofon"},{"ja":"プロジェクター","en":"Projector","id":"Proyektor"},{"ja":"キッチン利用可","en":"Kitchen access","id":"Akses dapur"}],"availableFor":[{"ja":"アカド・ニカー","en":"Akad nikah","id":"Akad nikah"},{"ja":"アキーカ・タシャックラン","en":"Aqiqah and gatherings","id":"Akikah dan tasyakuran"},{"ja":"セミナー","en":"Seminars","id":"Seminar"}]}'::jsonb, 0, true),
+  ('rooms', 'classroom', '{"name":{"ja":"教室","en":"Classroom","id":"Ruang kelas"},"capacity":20,"description":{"ja":"少人数の勉強会、会議、個別相談に。","en":"For small study groups, meetings, and consultations.","id":"Untuk kelompok belajar kecil, rapat, dan konsultasi."},"amenities":[{"ja":"ホワイトボード","en":"Whiteboard","id":"Papan tulis"},{"ja":"Wi-Fi","en":"Wi-Fi","id":"Wi-Fi"}],"availableFor":[{"ja":"勉強会","en":"Study groups","id":"Kelompok belajar"},{"ja":"会議","en":"Meetings","id":"Rapat"}]}'::jsonb, 1, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: halal_places (17 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('halal_places', 'almuttaqin', '{"name":"Al Muttaqin Cultural Center","nameJa":"アルムッタキーン文化センター","type":"mosque","address":"Matsudo, Chiba","coordinates":{"lat":35.7876,"lng":139.9031},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=35.7876,139.9031","verified":true,"distanceKmFromMosque":0}'::jsonb, 0, true),
+  ('halal_places', 'masjid-nishi-chiba', '{"name":"Chiba Islamic Cultural Center (Masjid Nishi-Chiba)","nameJa":"千葉イスラム文化センター（西千葉マスジド）","type":"mosque","address":"2-6-2 Matsunami, Chuo-ku, Chiba 260-0044","coordinates":{"lat":35.6207,"lng":140.1085},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=35.6207,140.1085","verified":true,"distanceKmFromMosque":27}'::jsonb, 1, true),
+  ('halal_places', 'hira-masjid-gyotoku', '{"name":"Hira Masjid Gyotoku","nameJa":"ヒラー・マスジド行徳","type":"mosque","address":"Gyotoku, Ichikawa, Chiba","coordinates":{"lat":35.6843,"lng":139.9262},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=Hira+Masjid+Gyotoku","note":{"ja":"行徳駅から徒歩圏内。金曜礼拝あり","en":"Walking distance from Gyotoku Station; Jumuah held","id":"Dekat Stasiun Gyotoku; ada salat Jumat"},"verified":false}'::jsonb, 2, true),
+  ('halal_places', 'masjid-otsuka', '{"name":"Masjid Otsuka (Japan Islamic Trust)","nameJa":"マスジド大塚（日本イスラーム文化センター）","type":"mosque","address":"3-42-7 Minami-Otsuka, Toshima-ku, Tokyo 170-0005","coordinates":{"lat":35.7312,"lng":139.7298},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=Masjid+Otsuka+Tokyo","note":{"ja":"大塚駅から徒歩3分。ハラール食品店が隣接","en":"3 minutes from Otsuka Station; halal grocery next door","id":"3 menit dari Stasiun Otsuka; ada toko halal di sebelahnya"},"verified":true}'::jsonb, 3, true),
+  ('halal_places', 'masjid-asakusa', '{"name":"Masjid Darul Arqam Asakusa","nameJa":"浅草マスジド（ダールル・アルカム）","type":"mosque","address":"1-9-12 Higashi-Asakusa, Taito-ku, Tokyo 111-0025","coordinates":{"lat":35.7169,"lng":139.8019},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=Asakusa+Masjid+Darul+Arqam","note":{"ja":"インドネシア人コミュニティが多く集まる","en":"Popular with the Indonesian community","id":"Banyak dikunjungi komunitas Indonesia"},"verified":false}'::jsonb, 4, true),
+  ('halal_places', 'masjid-indonesia-tokyo', '{"name":"Masjid Indonesia Tokyo (Sekolah Republik Indonesia Tokyo)","nameJa":"東京インドネシアモスク（インドネシア学校内）","type":"mosque","address":"4-6-6 Meguro, Meguro-ku, Tokyo 153-0063","coordinates":{"lat":35.6297,"lng":139.7029},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=Masjid+Indonesia+Tokyo+Meguro","note":{"ja":"インドネシア語の説教。イードは大人数","en":"Khutbah in Indonesian; very busy on Eid","id":"Khutbah berbahasa Indonesia; sangat ramai saat Idulfitri"},"verified":false}'::jsonb, 5, true),
+  ('halal_places', 'prayer-room-skytree', '{"name":"Tokyo Skytree Town prayer room","nameJa":"東京スカイツリータウン 礼拝室","type":"prayer-room","address":"1-1-2 Oshiage, Sumida-ku, Tokyo (Solamachi)","coordinates":{"lat":35.7101,"lng":139.8107},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=Tokyo+Skytree+Town+prayer+room","note":{"ja":"インフォメーションで場所を確認","en":"Ask the information desk for the location","id":"Tanyakan lokasinya di pusat informasi"},"verified":false}'::jsonb, 6, true),
+  ('halal_places', 'prayer-room-lalaport-tokyo-bay', '{"name":"LaLaport TOKYO-BAY prayer room","nameJa":"ららぽーとTOKYO-BAY 礼拝室","type":"prayer-room","address":"2-1-1 Hamacho, Funabashi, Chiba 273-8530","coordinates":{"lat":35.6869,"lng":139.9881},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=LaLaport+TOKYO-BAY+prayer+room","note":{"ja":"南船橋駅直結のショッピングモール","en":"Shopping mall connected to Minami-Funabashi Station","id":"Mal belanja yang terhubung dengan Stasiun Minami-Funabashi"},"verified":false}'::jsonb, 7, true),
+  ('halal_places', 'prayer-room-narita-airport', '{"name":"Narita Airport prayer rooms (Terminals 1, 2, 3)","nameJa":"成田空港 礼拝室（第1・第2・第3ターミナル）","type":"prayer-room","address":"Narita International Airport, Narita, Chiba","coordinates":{"lat":35.7719,"lng":140.3929},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=Narita+Airport+prayer+room","note":{"ja":"各ターミナルにウドゥー設備付き礼拝室あり","en":"Each terminal has a prayer room with wudu facilities","id":"Tiap terminal punya musala dengan tempat wudu"},"verified":true}'::jsonb, 8, true),
+  ('halal_places', 'warung-matsudo', '{"name":"Warung Halal Matsudo","nameJa":"ワルン・ハラール松戸","type":"restaurant","address":"Matsudo (PLACEHOLDER)","coordinates":{"lat":35.786,"lng":139.901},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=halal+restaurant+matsudo","note":{"ja":"インドネシア家庭料理、礼拝スペースあり","en":"Indonesian home cooking with a prayer space","id":"Masakan rumahan Indonesia, ada musala"},"verified":false,"distanceKmFromMosque":0.3}'::jsonb, 9, true),
+  ('halal_places', 'halal-restaurant-kashiwa', '{"name":"Halal curry restaurant near Kashiwa Station","nameJa":"柏駅周辺のハラールカレー店","type":"restaurant","address":"Kashiwa Station east exit area, Kashiwa, Chiba (PLACEHOLDER)","coordinates":{"lat":35.8617,"lng":139.9718},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=halal+restaurant+kashiwa","note":{"ja":"南アジア系ハラール料理。店名は管理者が確認中","en":"South Asian halal menu; name to be confirmed by the committee","id":"Menu halal Asia Selatan; nama akan dikonfirmasi pengurus"},"verified":false}'::jsonb, 10, true),
+  ('halal_places', 'warung-kinshicho', '{"name":"Indonesian halal restaurant near Kinshicho","nameJa":"錦糸町周辺のインドネシア料理店","type":"restaurant","address":"Kinshicho, Sumida-ku, Tokyo (PLACEHOLDER)","coordinates":{"lat":35.6964,"lng":139.8142},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=halal+indonesian+restaurant+kinshicho","note":{"ja":"総武線で松戸から約30分","en":"About 30 minutes from Matsudo by train","id":"Sekitar 30 menit naik kereta dari Matsudo"},"verified":false}'::jsonb, 11, true),
+  ('halal_places', 'halal-mart-matsudo', '{"name":"Halal Food Mart Matsudo","nameJa":"ハラールフードマート松戸","type":"mart","address":"Near JR Matsudo Station east exit (PLACEHOLDER)","coordinates":{"lat":35.7895,"lng":139.9055},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=halal+food+matsudo","note":{"ja":"インドネシア・南アジア食材、ハラール肉","en":"Indonesian and South Asian groceries, halal meat","id":"Bahan makanan Indonesia dan Asia Selatan, daging halal"},"verified":false,"distanceKmFromMosque":0.4}'::jsonb, 12, true),
+  ('halal_places', 'gyomu-super-matsudo', '{"name":"Gyomu Super (Matsudo area)","nameJa":"業務スーパー 松戸周辺店舗","type":"mart","address":"Matsudo, Chiba (PLACEHOLDER)","coordinates":{"lat":35.7832,"lng":139.9068},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=業務スーパー+松戸","note":{"ja":"一部店舗にハラール認証の鶏肉・冷凍食品コーナー","en":"Some branches stock halal-certified chicken and frozen food","id":"Sebagian cabang menjual ayam dan makanan beku bersertifikat halal"},"verified":false}'::jsonb, 13, true),
+  ('halal_places', 'halal-mart-kashiwa', '{"name":"Halal grocery near Kashiwa Station","nameJa":"柏駅周辺のハラール食材店","type":"mart","address":"Kashiwa, Chiba (PLACEHOLDER)","coordinates":{"lat":35.8604,"lng":139.9735},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=halal+food+kashiwa","note":{"ja":"ハラール肉、スパイス、インドネシア食品","en":"Halal meat, spices, Indonesian products","id":"Daging halal, rempah, produk Indonesia"},"verified":false}'::jsonb, 14, true),
+  ('halal_places', 'kbri-tokyo', '{"name":"Embassy of the Republic of Indonesia (KBRI Tokyo)","nameJa":"インドネシア共和国大使館","type":"service","address":"5-2-9 Higashi-Gotanda, Shinagawa-ku, Tokyo 141-0022","coordinates":{"lat":35.6265,"lng":139.7222},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=Embassy+of+Indonesia+Tokyo","note":{"ja":"パスポート、領事サービス、緊急時の連絡先","en":"Passport and consular services; emergency contact","id":"Layanan paspor dan konsuler; kontak darurat WNI"},"verified":true}'::jsonb, 15, true),
+  ('halal_places', 'matsudo-city-hall', '{"name":"Matsudo City Hall","nameJa":"松戸市役所","type":"service","address":"387-5 Nemoto, Matsudo, Chiba 271-8588","coordinates":{"lat":35.7877,"lng":139.9034},"mapsUrl":"https://www.google.com/maps/search/?api=1&query=松戸市役所","note":{"ja":"転入届、マイナンバー、国民健康保険の窓口","en":"Moving-in registration, My Number, health insurance counters","id":"Loket lapor pindah, My Number, dan asuransi kesehatan"},"verified":true}'::jsonb, 16, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: board (6 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('board', 'sugimoto', '{"name":"Dr. H. Ach Firman Wahyudi, S.E., M.Sc","role":{"ja":"代表・ダーイー","en":"Chairman and Dai","id":"Ketua dan Dai"},"organization":"Chiba Islamic Culture Center"}'::jsonb, 0, true),
+  ('board', 'secretary', '{"name":"PLACEHOLDER: Sekretaris","role":{"ja":"事務局長","en":"Secretary General","id":"Sekretaris Umum"}}'::jsonb, 1, true),
+  ('board', 'treasurer', '{"name":"PLACEHOLDER: Bendahara","role":{"ja":"会計責任者","en":"Treasurer","id":"Bendahara"}}'::jsonb, 2, true),
+  ('board', 'education', '{"name":"PLACEHOLDER: Koordinator Pendidikan","role":{"ja":"教育担当","en":"Education Coordinator","id":"Koordinator Pendidikan"}}'::jsonb, 3, true),
+  ('board', 'muallaf', '{"name":"PLACEHOLDER: Koordinator Muallaf","role":{"ja":"ムアッラフ支援担当","en":"New Muslim Support Coordinator","id":"Koordinator Pembinaan Muallaf"}}'::jsonb, 4, true),
+  ('board', 'liaison', '{"name":"PLACEHOLDER: Penghubung Komunitas","role":{"ja":"コミュニティ連携担当","en":"Community Liaison","id":"Penghubung Komunitas"},"organization":"Dompet Dhuafa Japan"}'::jsonb, 5, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: facilities (8 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('facilities', 'prayer-hall', '{"name":{"ja":"礼拝ホール","en":"Prayer hall","id":"Ruang salat utama"},"description":{"ja":"男女別のスペースを備えた最大150名収容の礼拝ホール。","en":"A prayer hall for up to 150 people with separate spaces for men and women.","id":"Ruang salat untuk 150 jamaah dengan area terpisah untuk laki-laki dan perempuan."},"icon":"landmark"}'::jsonb, 0, true),
+  ('facilities', 'classroom', '{"name":{"ja":"教室","en":"Classrooms","id":"Ruang kelas"},"description":{"ja":"子どものクルアーン教室、ムアッラフ講座、日本語クラスに使用。","en":"Used for children''s Quran classes, convert courses, and Japanese language classes.","id":"Dipakai untuk TPA, kelas muallaf, dan kelas bahasa Jepang."},"icon":"book"}'::jsonb, 1, true),
+  ('facilities', 'wudu', '{"name":{"ja":"ウドゥー（清め）場","en":"Wudu area","id":"Tempat wudu"},"description":{"ja":"男女別の清め場とトイレ。","en":"Separate ablution areas and restrooms for men and women.","id":"Tempat wudu dan toilet terpisah untuk laki-laki dan perempuan."},"icon":"droplets"}'::jsonb, 2, true),
+  ('facilities', 'kitchen', '{"name":{"ja":"キッチン・集会スペース","en":"Kitchen and gathering space","id":"Dapur dan ruang kumpul"},"description":{"ja":"イフタールや地域イベントのための共用キッチン。","en":"A shared kitchen for iftar and community events.","id":"Dapur bersama untuk buka puasa dan acara komunitas."},"icon":"utensils"}'::jsonb, 3, true),
+  ('facilities', 'kids', '{"name":{"ja":"キッズスペース","en":"Kids corner","id":"Area anak"},"description":{"ja":"小さな子ども連れの家族のためのスペース。","en":"A corner for families with small children.","id":"Area untuk keluarga dengan anak kecil."},"icon":"baby"}'::jsonb, 4, true),
+  ('facilities', 'access', '{"name":{"ja":"バリアフリー","en":"Accessible entrance","id":"Akses ramah difabel"},"description":{"ja":"段差のない入口と車椅子対応トイレ。","en":"Step-free entrance and an accessible restroom.","id":"Pintu masuk tanpa tangga dan toilet ramah kursi roda."},"icon":"accessibility"}'::jsonb, 5, true),
+  ('facilities', 'parking', '{"name":{"ja":"駐車・駐輪スペース","en":"Parking and bicycle racks","id":"Parkir mobil dan sepeda"},"description":{"ja":"数台分の駐車スペースと駐輪場。金曜日とイベント時は公共交通機関をご利用ください。","en":"A few car spaces and bicycle racks. On Fridays and during events please come by public transport.","id":"Beberapa slot mobil dan rak sepeda. Pada hari Jumat dan saat acara mohon datang dengan transportasi umum."},"icon":"parking"}'::jsonb, 6, true),
+  ('facilities', 'wifi', '{"name":{"ja":"無料Wi-Fi","en":"Free Wi-Fi","id":"Wi-Fi gratis"},"description":{"ja":"来館者向けの無料Wi-Fi。パスワードは受付でご確認ください。","en":"Free Wi-Fi for visitors. Ask at the reception desk for the password.","id":"Wi-Fi gratis untuk pengunjung. Tanyakan kata sandinya di meja resepsionis."},"icon":"wifi"}'::jsonb, 7, true)
+on conflict (collection, item_key) do nothing;
+
+-- Koleksi: timeline (4 item)
+insert into content_items (collection, item_key, data, sort_order, published) values
+  ('timeline', 'item-01', '{"year":"2024","title":{"ja":"松戸にイスラムセンターを作る構想","en":"The idea of an Islamic center in Matsudo","id":"Gagasan pusat Islam di Matsudo"},"description":{"ja":"千葉イスラム文化センターが、松戸に住むムスリムと改宗者のための拠点づくりを提案。","en":"Chiba Islamic Culture Center proposes a home for Muslims and new converts living around Matsudo.","id":"Chiba Islamic Culture Center mengusulkan rumah bersama bagi muslim dan muallaf di sekitar Matsudo."}}'::jsonb, 0, true),
+  ('timeline', 'item-02', '{"year":"2025","title":{"ja":"準備委員会の発足と土地の選定","en":"Preparatory committee and site selection","id":"Panitia persiapan dan pemilihan lahan"},"description":{"ja":"松戸駅から徒歩圏内の土地を選定し、在日インドネシア人コミュニティと日本人ムスリムによる準備委員会が発足。","en":"A site within walking distance of Matsudo Station is chosen and a preparatory committee of Indonesian residents and Japanese Muslims is formed.","id":"Lahan dalam jarak jalan kaki dari Stasiun Matsudo dipilih dan panitia persiapan dari komunitas Indonesia serta muslim Jepang dibentuk."}}'::jsonb, 1, true),
+  ('timeline', 'item-03', '{"year":"2026","title":{"ja":"ドンペット・ドゥアファ・ジャパンとの協力協定","en":"Partnership with Dompet Dhuafa Japan","id":"Kolaborasi dengan Dompet Dhuafa Japan"},"description":{"ja":"協力協定を締結し、土地取得と建設のためのワクフ募金を開始。","en":"A partnership agreement is signed and a waqf campaign for land and construction begins.","id":"Kesepakatan kolaborasi ditandatangani dan penggalangan wakaf tanah serta bangunan dimulai."}}'::jsonb, 2, true),
+  ('timeline', 'item-04', '{"year":"2026","title":{"ja":"モスクの開所","en":"The mosque opens its doors","id":"Masjid mulai digunakan"},"description":{"ja":"建物が完成し、集団礼拝・学習会・ムアッラフ支援が始まる。","en":"The building is completed and congregational prayers, study circles, and convert support begin.","id":"Bangunan selesai; salat berjamaah, kajian, dan pembinaan muallaf dimulai."}}'::jsonb, 3, true)
+on conflict (collection, item_key) do nothing;
+
+
+-- ==========================================================================
+-- 5/5  Akun admin pertama (admin-user.sql)
+-- ==========================================================================
+
+-- Akun admin pertama (super_admin) untuk panel /admin.
+-- Jalankan SETELAH migrasi 0001-0003. Aman dijalankan ulang: bila akun sudah ada,
+-- kata sandinya TIDAK ditimpa; hanya dipastikan terdaftar sebagai super_admin aktif.
+--
+-- SEBELUM MENJALANKAN DI PROYEK BARU: ganti nilai v_password di bawah dengan kata sandi awal
+-- pilihan Anda (minimal 8 karakter). Repositori ini publik, jadi kata sandi tidak disimpan di sini.
+-- Setelah login pertama, ganti lagi lewat menu "Akun saya" (/admin/account); panel menampilkan
+-- peringatan sampai kata sandi awal diganti.
+
+do $$
+declare
+  v_email text := 'admin@almuttaqinculturalcenter.org';
+  v_password text := 'GANTI_KATA_SANDI_AWAL';
+  v_name text := 'Admin Al Muttaqin';
+  v_id uuid;
+  v_created boolean := false;
+begin
+  -- pgcrypto (crypt, gen_salt) berada di skema `extensions` pada proyek Supabase.
+  perform set_config('search_path', 'public, extensions', true);
+
+  select id into v_id from auth.users where email = v_email;
+
+  if v_id is null then
+    if v_password = 'GANTI_KATA_SANDI_AWAL' or length(v_password) < 8 then
+      raise exception 'Akun admin belum ada. Ganti nilai v_password (minimal 8 karakter) di bagian "Akun admin pertama" berkas SQL ini, lalu jalankan ulang.';
+    end if;
+
+    v_id := gen_random_uuid();
+    v_created := true;
+
+    insert into auth.users (
+      instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
+      raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
+      confirmation_token, recovery_token, email_change_token_new, email_change
+    ) values (
+      '00000000-0000-0000-0000-000000000000', v_id, 'authenticated', 'authenticated', v_email,
+      crypt(v_password, gen_salt('bf')), now(),
+      '{"provider": "email", "providers": ["email"]}'::jsonb,
+      jsonb_build_object('full_name', v_name), now(), now(),
+      '', '', '', ''
+    );
+
+    insert into auth.identities (
+      id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at
+    ) values (
+      gen_random_uuid(), v_id, v_id::text,
+      jsonb_build_object('sub', v_id::text, 'email', v_email, 'email_verified', true, 'phone_verified', false),
+      'email', now(), now(), now()
+    );
+  end if;
+
+  -- must_change_password hanya dinyalakan bila akun dibuat di sini dengan kata sandi awal di atas.
+  insert into public.admins (id, email, full_name, role, ui_locale, active, must_change_password)
+  values (v_id, v_email, v_name, 'super_admin', 'id', true, v_created)
+  on conflict (id) do update set role = 'super_admin', active = true;
+end $$;

@@ -96,7 +96,8 @@ export const profile: MosqueProfile = {
         id: "Mitra teknologi, pembuat situs web dan aplikasi",
       },
       url: "https://dekatlokal.com",
-      logo: { src: "/images/partners/dekatlokal.png", width: 609, height: 240 },
+      // Logo biru resmi DekatLokal (sumber: dekatlokal.com/image/brand/dekat-lokal.png).
+      logo: { src: "/images/partners/dekatlokal.png", width: 495, height: 149 },
     },
   ],
 };

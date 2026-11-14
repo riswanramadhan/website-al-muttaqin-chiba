@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { routing } from "@/i18n/routing";
+import { CMS_TAG } from "@/lib/data/supabase-adapter";
 
 /**
  * Dipanggil panel admin / webhook Supabase setelah konten diterbitkan (PRD §5: hanya konten
@@ -15,6 +16,8 @@ export async function POST(request: Request) {
   }
   const body = (await request.json().catch(() => ({}))) as { paths?: string[] };
   const paths = Array.isArray(body.paths) && body.paths.length ? body.paths : [""];
+  // Buang cache data Supabase lebih dulu agar halaman yang dibuat ulang membaca data terbaru.
+  revalidateTag(CMS_TAG, { expire: 0 });
   const revalidated: string[] = [];
   for (const path of paths) {
     for (const locale of routing.locales) {

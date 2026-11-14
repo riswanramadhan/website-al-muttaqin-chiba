@@ -64,7 +64,7 @@
   },
   "demo": {
     "title": "Mode demo: hubungkan Supabase",
-    "body": "Isi NEXT_PUBLIC_SUPABASE_URL dan NEXT_PUBLIC_SUPABASE_ANON_KEY di .env.local lalu jalankan migrasi supabase/migrations. Saat ini panel menampilkan data seed hanya-baca."
+    "body": "Isi NEXT_PUBLIC_SUPABASE_URL dan NEXT_PUBLIC_SUPABASE_ANON_KEY di .env.local, lalu jalankan supabase/setup-all.sql di SQL Editor Supabase. Saat ini panel menampilkan data bawaan hanya-baca."
   },
   "errors": {
     "demo": "Mode demo: perubahan tidak disimpan.",
@@ -81,7 +81,15 @@
     "url": "URL tidak valid",
     "youtubeId": "ID video YouTube 11 karakter",
     "endBeforeStart": "Waktu selesai harus setelah waktu mulai",
-    "titleRequired": "Judul bahasa Indonesia wajib diisi"
+    "titleRequired": "Judul bahasa Indonesia wajib diisi",
+    "tooLong": "Teks terlalu panjang",
+    "number": "Isi dengan angka yang valid",
+    "month": "Format bulan YYYY-MM",
+    "idRequired": "Teks bahasa Indonesia wajib diisi",
+    "keyTaken": "Kunci item sudah dipakai. Gunakan kunci lain.",
+    "fileTooLarge": "Berkas melebihi 5 MB setelah dikompres.",
+    "uploadFailed": "Gagal mengunggah berkas.",
+    "slugTaken": "Slug sudah dipakai konten lain. Gunakan slug berbeda."
   },
   "nav": {
     "dashboard": "Dasbor",
@@ -91,7 +99,7 @@
     "lectures": "Kajian video",
     "news": "Berita",
     "prayer": "Waktu salat",
-    "donations": "Donasi",
+    "donations": "Konfirmasi donasi",
     "inbox": "Kotak masuk",
     "push": "Notifikasi push",
     "admins": "Admin & peran",
@@ -100,8 +108,25 @@
       "main": "Utama",
       "content": "Konten",
       "service": "Layanan jamaah",
-      "system": "Sistem"
-    }
+      "system": "Sistem",
+      "site": "Halaman & info",
+      "donation": "Donasi"
+    },
+    "profile": "Profil & kontak",
+    "board": "Pengurus",
+    "facilities": "Fasilitas",
+    "timeline": "Sejarah",
+    "gallery": "Galeri foto",
+    "faqs": "FAQ",
+    "programs": "Program & kelas",
+    "rooms": "Ruangan",
+    "halal": "Tempat halal",
+    "video": "Video unggulan",
+    "promo": "Pop-up promo",
+    "accounts": "Rekening donasi",
+    "donationPrograms": "Program donasi",
+    "reports": "Laporan keuangan",
+    "account": "Akun saya"
   },
   "roles": {
     "super_admin": "Super admin",
@@ -173,7 +198,15 @@
     },
     "recentActivity": "Aktivitas terakhir",
     "noActivity": "Belum ada aktivitas tercatat.",
-    "viewAll": "Lihat semua"
+    "viewAll": "Lihat semua",
+    "refresh": {
+      "title": "Segarkan situs",
+      "description": "Situs publik memakai cache agar hemat dan cepat. Perubahan dari panel ini otomatis tampil. Tekan tombol ini hanya bila Anda mengubah data langsung di dasbor Supabase.",
+      "button": "Segarkan sekarang",
+      "done": "Cache dibersihkan. Halaman publik akan memuat data terbaru."
+    },
+    "manage": "Kelola isi situs",
+    "items": "{count} item"
   },
   "fields": {
     "slug": "Slug (URL)",
@@ -191,7 +224,7 @@
     "location": "Lokasi",
     "speaker": "Pembicara",
     "languages": "Bahasa pengantar",
-    "coverImage": "URL gambar sampul",
+    "coverImage": "Gambar sampul",
     "registrationRequired": "Perlu pendaftaran",
     "quota": "Kuota",
     "deadline": "Batas pendaftaran",
@@ -463,8 +496,8 @@
     "activate": "Aktifkan",
     "roleDescriptions": {
       "super_admin": "Semua akses termasuk kelola admin dan ekspor.",
-      "content_admin": "Kelola konten, jadwal, kotak masuk, dan push.",
-      "donation_admin": "Kelola konfirmasi donasi dan ekspor CSV donasi.",
+      "content_admin": "Kelola konten, halaman & info, jadwal, kotak masuk, dan push.",
+      "donation_admin": "Kelola konfirmasi donasi, rekening, program donasi, dan laporan keuangan.",
       "viewer": "Hanya melihat."
     }
   },
@@ -489,7 +522,11 @@
       "logout": "Keluar",
       "push": "Mengirim push",
       "invite": "Mengundang admin",
-      "export": "Mengekspor CSV"
+      "export": "Mengekspor CSV",
+      "reorder": "Mengubah urutan",
+      "upload": "Mengunggah berkas",
+      "refresh": "Menyegarkan situs",
+      "password": "Mengganti kata sandi"
     },
     "entities": {
       "announcements": "Pengumuman",
@@ -507,7 +544,302 @@
       "contact_messages": "Pesan kontak",
       "push": "Notifikasi push",
       "admins": "Admin",
-      "session": "Sesi"
+      "session": "Sesi",
+      "faqs": "FAQ",
+      "gallery": "Galeri",
+      "donation_accounts": "Rekening donasi",
+      "donation_programs": "Program donasi",
+      "transparency_reports": "Laporan keuangan",
+      "programs": "Program",
+      "rooms": "Ruangan",
+      "halal_places": "Tempat halal",
+      "board": "Pengurus",
+      "facilities": "Fasilitas",
+      "timeline": "Sejarah",
+      "site_settings": "Pengaturan situs",
+      "media": "Berkas media",
+      "site": "Situs publik"
+    }
+  },
+  "upload": {
+    "choose": "Pilih gambar",
+    "replace": "Ganti berkas",
+    "uploading": "Mengunggah...",
+    "urlPlaceholder": "atau tempel URL / jalur gambar, mis. /images/foto.jpg",
+    "hint": "JPG, PNG, atau WebP. Gambar otomatis diperkecil dan dikompres sebelum diunggah.",
+    "hintPdf": "Gambar (dikompres otomatis) atau PDF, maksimal 5 MB.",
+    "done": "Terunggah: {before} menjadi {after} ({width} x {height} px).",
+    "donePdf": "PDF terunggah ({size}).",
+    "invalidType": "Jenis berkas tidak didukung."
+  },
+  "account": {
+    "title": "Akun saya",
+    "subtitle": "Nama tampilan dan kata sandi untuk masuk ke panel admin.",
+    "profile": "Profil",
+    "profileHint": "Nama ini tampil di log aktivitas.",
+    "password": "Ganti kata sandi",
+    "passwordHint": "Minimal 8 karakter. Segera ganti kata sandi awal setelah login pertama.",
+    "currentPassword": "Kata sandi saat ini",
+    "newPassword": "Kata sandi baru",
+    "confirmPassword": "Ulangi kata sandi baru",
+    "changePassword": "Ganti kata sandi",
+    "passwordChanged": "Kata sandi berhasil diganti.",
+    "wrongPassword": "Kata sandi saat ini salah.",
+    "mismatch": "Kedua kata sandi baru tidak sama.",
+    "samePassword": "Kata sandi baru harus berbeda dari yang lama.",
+    "mustChange": "Akun ini masih memakai kata sandi awal. Ganti sekarang agar panel admin aman."
+  },
+  "cms": {
+    "listEmpty": "Belum ada isi. Tekan Tambah.",
+    "visibility": "Tampilan di situs",
+    "publishedHint": "Matikan untuk menyembunyikan item ini dari situs tanpa menghapusnya.",
+    "itemKey": "Kunci item",
+    "itemKeyHint": "Dibuat otomatis dari judul. Huruf kecil, angka, dan tanda hubung.",
+    "itemKeyLocked": "Kunci tidak dapat diubah setelah item dibuat.",
+    "saveAndRefresh": "Simpan & segarkan situs",
+    "shown": "Tampil",
+    "hidden": "Disembunyikan",
+    "show": "Tampilkan",
+    "hide": "Sembunyikan",
+    "fields": {
+      "coordinates": "Koordinat peta",
+      "lat": "Lintang (latitude)",
+      "lng": "Bujur (longitude)",
+      "question": "Pertanyaan",
+      "answer": "Jawaban",
+      "photo": "Foto",
+      "caption": "Keterangan foto",
+      "takenAt": "Tanggal foto",
+      "width": "Lebar (px)",
+      "height": "Tinggi (px)",
+      "icon": "Ikon",
+      "schedule": "Jadwal",
+      "audience": "Peserta",
+      "contactPerson": "Narahubung",
+      "registrationOpen": "Pendaftaran dibuka",
+      "capacity": "Kapasitas (orang)",
+      "amenities": "Perlengkapan",
+      "availableFor": "Bisa dipakai untuk",
+      "nameJa": "Nama dalam bahasa Jepang",
+      "placeType": "Jenis tempat",
+      "verified": "Sudah diverifikasi pengurus",
+      "address": "Alamat",
+      "mapsUrl": "Tautan Google Maps",
+      "distanceKm": "Jarak dari masjid (km)",
+      "organization": "Organisasi",
+      "position": "Jabatan",
+      "year": "Tahun",
+      "bankName": "Nama bank / metode",
+      "bankNameLocalized": "Nama bank per bahasa",
+      "currency": "Mata uang",
+      "method": "Metode",
+      "accountNumber": "Nomor rekening",
+      "accountName": "Nama pemilik rekening",
+      "branch": "Cabang",
+      "branchCode": "Kode cabang",
+      "accountType": "Jenis rekening",
+      "primary": "Rekening utama",
+      "qrImage": "Gambar QRIS",
+      "target": "Target",
+      "raised": "Terkumpul",
+      "period": "Periode (bulan)",
+      "openingBalance": "Saldo awal",
+      "closingBalance": "Saldo akhir",
+      "income": "Pemasukan",
+      "expense": "Pengeluaran",
+      "lineLabel": "Keterangan",
+      "amount": "Jumlah",
+      "reportFile": "Berkas laporan",
+      "mosqueName": "Nama masjid",
+      "shortName": "Nama pendek",
+      "foundedYear": "Tahun berdiri",
+      "legalName": "Nama resmi",
+      "tagline": "Slogan",
+      "postalCode": "Kode pos",
+      "city": "Kota",
+      "prefecture": "Prefektur",
+      "country": "Negara",
+      "openingHours": "Jam buka",
+      "phone": "Telepon",
+      "whatsapp": "Nomor WhatsApp",
+      "website": "Situs web",
+      "social": "Media sosial",
+      "youtube": "YouTube",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok",
+      "whatsappLink": "Tautan WhatsApp",
+      "nearestStations": "Stasiun terdekat",
+      "stationName": "Nama stasiun",
+      "walkMinutes": "Jalan kaki (menit)",
+      "lines": "Jalur kereta",
+      "partners": "Mitra",
+      "partnerRole": "Peran mitra",
+      "logo": "Logo",
+      "durationSeconds": "Durasi (detik)",
+      "videoTitle": "Judul video",
+      "channelName": "Nama kanal",
+      "channelUrl": "Tautan kanal",
+      "promoEnabled": "Tampilkan pop-up pada kunjungan pertama",
+      "poster": "Gambar poster",
+      "posterAlt": "Deskripsi poster",
+      "posterHref": "Tujuan saat diketuk",
+      "posterVersion": "Versi poster"
+    },
+    "hints": {
+      "coordinates": "Salin dari Google Maps: klik kanan lokasi, lalu klik angka koordinatnya.",
+      "caption": "Dibaca pembaca layar dan tampil sebagai keterangan.",
+      "dimensions": "Terisi otomatis saat foto diunggah.",
+      "qrImage": "Unggah gambar QRIS resmi. Kosongkan untuk rekening bank biasa.",
+      "target": "Kosongkan bila program tidak punya target.",
+      "raised": "Perbarui angka ini setelah mencocokkan donasi.",
+      "closingBalance": "Saldo awal ditambah pemasukan dikurangi pengeluaran.",
+      "reportFile": "Opsional: PDF atau gambar laporan yang bisa diunduh jamaah.",
+      "whatsapp": "Format internasional tanpa spasi, mis. +818012345678.",
+      "youtubeId": "11 karakter setelah v= pada tautan YouTube.",
+      "poster": "Poster tegak (rasio 4:5) tampil paling baik.",
+      "posterHref": "Jalur halaman tanpa kode bahasa, mis. /donate.",
+      "posterVersion": "Ubah (mis. v2) agar poster tampil lagi bagi semua pengunjung."
+    },
+    "options": {
+      "faqCategory": {
+        "general": "Umum",
+        "prayer": "Salat",
+        "donation": "Donasi",
+        "newcomer": "Pendatang baru",
+        "program": "Program",
+        "visit": "Kunjungan"
+      },
+      "galleryCategory": {
+        "building": "Bangunan",
+        "activity": "Kegiatan",
+        "community": "Komunitas",
+        "ramadan": "Ramadan",
+        "eid": "Idul Fitri / Adha"
+      },
+      "programIcon": {
+        "book-open": "Buku",
+        "heart-handshake": "Jabat hati",
+        "languages": "Bahasa",
+        "door-open": "Pintu terbuka",
+        "school": "Sekolah",
+        "mic": "Mikrofon",
+        "users": "Orang"
+      },
+      "placeType": {
+        "mosque": "Masjid",
+        "prayer-room": "Musala",
+        "restaurant": "Restoran",
+        "mart": "Toko",
+        "service": "Layanan"
+      },
+      "facilityIcon": {
+        "landmark": "Bangunan",
+        "users": "Orang",
+        "baby": "Anak",
+        "book": "Buku",
+        "utensils": "Dapur",
+        "parking": "Parkir",
+        "accessibility": "Aksesibilitas",
+        "wifi": "Wi-Fi",
+        "droplets": "Wudu"
+      },
+      "currency": {
+        "JPY": "Yen (JPY)",
+        "IDR": "Rupiah (IDR)"
+      },
+      "method": {
+        "bank": "Transfer bank",
+        "qris": "QRIS",
+        "ewallet": "Dompet digital"
+      },
+      "programStatus": {
+        "open": "Dibuka",
+        "closed": "Ditutup",
+        "completed": "Selesai"
+      },
+      "donationIcon": {
+        "building": "Bangunan",
+        "heart": "Hati",
+        "book-open": "Buku",
+        "graduation-cap": "Pendidikan",
+        "utensils": "Makanan",
+        "moon": "Bulan"
+      }
+    },
+    "collections": {
+      "faqs": {
+        "title": "FAQ",
+        "subtitle": "Pertanyaan yang sering diajukan di halaman FAQ dan beranda.",
+        "entity": "pertanyaan"
+      },
+      "gallery": {
+        "title": "Galeri foto",
+        "subtitle": "Foto masjid dan kegiatan di halaman Galeri dan beranda.",
+        "entity": "foto"
+      },
+      "programs": {
+        "title": "Program & kelas",
+        "subtitle": "TPA, kelas muallaf, kelas bahasa, dan program rutin lain.",
+        "entity": "program"
+      },
+      "rooms": {
+        "title": "Ruangan",
+        "subtitle": "Ruangan yang bisa dipinjam lewat halaman Peminjaman ruangan.",
+        "entity": "ruangan"
+      },
+      "halal-places": {
+        "title": "Tempat halal",
+        "subtitle": "Masjid, musala, restoran, dan toko halal di peta radar halal.",
+        "entity": "tempat"
+      },
+      "board": {
+        "title": "Pengurus",
+        "subtitle": "Susunan pengurus di halaman Tentang kami.",
+        "entity": "pengurus"
+      },
+      "facilities": {
+        "title": "Fasilitas",
+        "subtitle": "Daftar fasilitas masjid di halaman Tentang kami.",
+        "entity": "fasilitas"
+      },
+      "timeline": {
+        "title": "Sejarah",
+        "subtitle": "Linimasa perjalanan masjid di halaman Tentang kami.",
+        "entity": "peristiwa"
+      },
+      "donation-accounts": {
+        "title": "Rekening donasi",
+        "subtitle": "Rekening bank dan QRIS resmi di halaman Donasi.",
+        "entity": "rekening"
+      },
+      "donation-programs": {
+        "title": "Program donasi",
+        "subtitle": "Program infaq beserta target dan dana terkumpul.",
+        "entity": "program donasi"
+      },
+      "transparency-reports": {
+        "title": "Laporan keuangan",
+        "subtitle": "Laporan bulanan di halaman Transparansi.",
+        "entity": "laporan"
+      }
+    },
+    "settings": {
+      "profile": {
+        "title": "Profil & kontak",
+        "subtitle": "Identitas, alamat, kontak, dan media sosial masjid.",
+        "help": "Dipakai di kepala dan kaki situs, halaman Kontak, Tentang kami, peta, dan App Jamaah."
+      },
+      "video": {
+        "title": "Video unggulan",
+        "subtitle": "Video dokumenter di beranda dan halaman Tentang kami.",
+        "help": "Tempel ID video YouTube. Video diputar langsung dari YouTube sehingga tidak memakai kuota server."
+      },
+      "promo": {
+        "title": "Pop-up promo",
+        "subtitle": "Poster yang muncul sekali pada kunjungan pertama pengunjung.",
+        "help": "Ganti poster kapan saja. Naikkan versi agar pengunjung lama melihat poster baru."
+      }
     }
   }
 }

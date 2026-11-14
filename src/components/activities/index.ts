@@ -12,7 +12,9 @@ export type { NextLecture, LiveApiResponse } from "./live-status-banner";
 export { LectureBrowser } from "./lecture-browser"; // Client: { lectures: Lecture[]; locale: Locale }
 export { EventBrowser } from "./event-browser"; // Client: { upcoming: MosqueEvent[]; past: MosqueEvent[]; locale: Locale; initialTab?: "upcoming" | "past" }
 export { NewsBrowser } from "./news-browser"; // Client: { announcements: Announcement[]; posts: NewsPost[]; locale: Locale }
-export { EventRegistrationForm } from "./event-registration-form"; // Client: { eventSlug; eventTitle; locale; full; closed }
+// Formulir diekspor lewat pembungkus malas (lazy-forms.tsx) agar zod + react-hook-form hanya terunduh
+// di halaman yang benar-benar menampilkannya, bukan di setiap halaman yang mengimpor berkas indeks ini.
+export { EventRegistrationForm } from "./lazy-forms"; // Client: { eventSlug; eventTitle; locale; full; closed }
 export { AddToCalendar } from "./add-to-calendar"; // Server: { event: MosqueEvent; locale: Locale; siteUrl: string; size?: "sm" | "md" }
 export { ShareButton } from "./share-button"; // Client: { title; text?; url?; label?; iconOnly? } & ButtonProps
 export { AppLectureList } from "./app-lecture-list"; // Client: { lectures: Lecture[]; locale: Locale }

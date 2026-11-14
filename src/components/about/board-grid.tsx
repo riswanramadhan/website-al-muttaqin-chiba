@@ -2,6 +2,7 @@ import * as React from "react";
 import Image from "next/image";
 import type { BoardMember, Locale } from "@/lib/types";
 import { pick } from "@/lib/utils/i18n";
+import { shouldSkipOptimization } from "@/lib/utils/media";
 
 function initials(name: string): string {
   const clean = name.replace(/^PLACEHOLDER:\s*/i, "").trim();
@@ -23,7 +24,7 @@ export function BoardGrid({ members, locale, placeholderLabel }: { members: Boar
         return (
           <li key={m.id} className="card-surface flex items-center gap-4 p-5">
             {m.photo ? (
-              <Image src={m.photo} alt={name} width={56} height={56} className="size-14 shrink-0 rounded-full object-cover" />
+              <Image src={m.photo} alt={name} width={56} height={56} unoptimized={shouldSkipOptimization(m.photo)} className="size-14 shrink-0 rounded-full object-cover" />
             ) : (
               <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-accent text-base font-bold text-accent-foreground" aria-hidden>
                 {initials(m.name)}

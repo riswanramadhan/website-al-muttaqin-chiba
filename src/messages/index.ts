@@ -89,6 +89,20 @@ function mergeWithFallback(fallback: MessageTree, target: MessageTree): MessageT
   return out;
 }
 
+/**
+ * Namespace yang hanya dibaca di server (`getTranslations`). Tidak ada komponen browser yang
+ * memakainya lewat `useTranslations`, jadi tidak dikirim ke browser: setiap halaman publik menjadi
+ * sekitar 70 KB lebih kecil (sebelum kompresi) per bahasa. Tes `client-messages.test.ts` menjaga
+ * agar daftar ini tetap benar ketika kode berubah.
+ */
+export const SERVER_ONLY_NAMESPACES: readonly Namespace[] = ["admin", "footer", "metadata", "offline", "home", "about", "privacy", "jumuah", "transparency", "islam", "app"];
+
+/** Pesan untuk `NextIntlClientProvider`: semua namespace kecuali yang hanya dipakai server. */
+export function clientMessages<T extends Record<string, unknown>>(messages: T): Partial<T> {
+  const skip = new Set<string>(SERVER_ONLY_NAMESPACES);
+  return Object.fromEntries(Object.entries(messages).filter(([namespace]) => !skip.has(namespace))) as Partial<T>;
+}
+
 export async function loadMessages(locale: Locale): Promise<MessageTree> {
   if (locale === "en") return loadLocale("en");
   const [own, en] = await Promise.all([loadLocale(locale), loadLocale("en")]);

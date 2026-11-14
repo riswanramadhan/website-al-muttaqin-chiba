@@ -12,6 +12,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { RichText } from "@/components/ui/rich-text";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { AnnouncementList, NewsCard, ShareButton } from "@/components/activities";
+import { CoverImage } from "@/components/activities/cover-image";
 
 /** Apakah instant ISO sudah lewat (di luar komponen agar render tetap murni). */
 function isPast(iso: string): boolean {
@@ -92,6 +93,8 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ loc
           {!isAnnouncement && <span>{t("labels.author", { name: entry.item.author })}</span>}
           <ShareButton title={title} text={pick(item.excerpt, locale)} url={`/${locale}/news/${item.slug}`} label={t("labels.share")} variant="ghost" size="sm" className="-my-2" />
         </div>
+
+        {!isAnnouncement && entry.item.coverImage && <CoverImage src={entry.item.coverImage} alt={title} className="mt-8" />}
 
         <RichText blocks={pickBlocks(item.body, locale)} className="mt-8" />
 

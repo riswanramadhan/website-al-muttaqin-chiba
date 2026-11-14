@@ -6,6 +6,8 @@ import { IconCircle } from "@/components/ui/primitives";
 import { AdminPageHeader } from "@/components/admin/shell";
 import { QuickAnnouncement } from "@/components/admin/quick-announcement";
 import { ActivityList } from "@/components/admin/activity-list";
+import { RefreshSiteButton } from "@/components/admin/refresh-site-button";
+import { COLLECTIONS, SETTINGS } from "@/components/admin/cms/registry";
 import { getAdminT } from "@/components/admin/lang.server";
 import { getPanelContext, guardFor } from "@/components/admin/context.server";
 import { getDashboardStats, listActivity } from "@/components/admin/data";
@@ -67,6 +69,37 @@ export default async function AdminDashboardPage() {
           </div>
           <div className="mt-3">
             <ActivityList items={activity} />
+          </div>
+        </Card>
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+        <Card>
+          <CardTitle>{t("dashboard.manage")}</CardTitle>
+          <ul className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {SETTINGS.map((s) => (
+              <li key={s.key}>
+                <Link href={`/admin/settings/${s.slug}`} className="flex flex-col rounded-xl border border-border px-4 py-3 text-sm transition-colors hover:bg-surface">
+                  <span className="font-semibold">{t(`cms.settings.${s.slug}.title`)}</span>
+                  <span className="mt-0.5 text-xs text-muted-foreground">{t(`cms.settings.${s.slug}.subtitle`)}</span>
+                </Link>
+              </li>
+            ))}
+            {COLLECTIONS.map((c) => (
+              <li key={c.name}>
+                <Link href={`/admin/cms/${c.slug}`} className="flex flex-col rounded-xl border border-border px-4 py-3 text-sm transition-colors hover:bg-surface">
+                  <span className="font-semibold">{t(`cms.collections.${c.slug}.title`)}</span>
+                  <span className="mt-0.5 text-xs text-muted-foreground">{t(`cms.collections.${c.slug}.subtitle`)}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Card>
+        <Card>
+          <CardTitle>{t("dashboard.refresh.title")}</CardTitle>
+          <CardDescription className="mt-1.5">{t("dashboard.refresh.description")}</CardDescription>
+          <div className="mt-5">
+            <RefreshSiteButton guard={guardFor(ctx, ["content_admin", "donation_admin"])} />
           </div>
         </Card>
       </div>

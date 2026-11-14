@@ -1,5 +1,6 @@
 "use server";
 
+import { randomUUID } from "node:crypto";
 import { createAction } from "@/lib/actions";
 import { getProfile } from "@/lib/data";
 import { buildWhatsAppUrl, composeMessage } from "@/lib/whatsapp";
@@ -30,19 +31,19 @@ export const sendContactMessage = createAction<ContactMessageData, ContactMessag
   rateLimit: { max: 3, windowMs: 10 * 60_000 },
   handler: async (data, ctx) => {
     if (ctx.supabase) {
-      const { data: row, error } = await ctx.supabase
+      const id = randomUUID();
+      const { error } = await ctx.supabase
         .from("contact_messages")
         .insert({
+          id,
           full_name: data.name,
           email: data.email,
           subject: data.subject,
           message: data.message,
           locale: data.locale,
-        })
-        .select("id")
-        .single<{ id: string }>();
+        });
       if (error) throw error;
-      return { fallback: "none", id: row.id };
+      return { fallback: "none", id };
     }
 
     const profile = await getProfile();

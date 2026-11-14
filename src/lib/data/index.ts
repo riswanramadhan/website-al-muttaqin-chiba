@@ -27,6 +27,7 @@ import type {
   NewsPost,
   PrayerConfig,
   Program,
+  PromoPopup,
   QuranSurahMeta,
   Room,
   SearchDocument,
@@ -49,6 +50,7 @@ import { programs, rooms } from "@/data/programs";
 import { hijriImportantDates } from "@/data/hijri-dates";
 import { hadiths } from "@/data/hadith";
 import { surahs } from "@/data/quran-meta";
+import { promoPopup } from "@/data/promo";
 import { tokyoDateKey, tokyoParts, addDays } from "@/lib/utils/i18n";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import * as remote from "@/lib/data/supabase-adapter";
@@ -57,26 +59,95 @@ function sortByDateDesc<T extends { publishedAt: string }>(items: T[]): T[] {
   return [...items].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 
+/** Nama koleksi CMS di tabel content_items (lihat supabase/migrations/0003_cms.sql). */
+export type CollectionName =
+  | "faqs"
+  | "gallery"
+  | "donation_accounts"
+  | "donation_programs"
+  | "transparency_reports"
+  | "programs"
+  | "rooms"
+  | "halal_places"
+  | "board"
+  | "facilities"
+  | "timeline";
+
+/** Kunci pengaturan situs di tabel site_settings. */
+export type SettingKey = "profile" | "featured_video" | "promo_popup";
+
+/**
+ * Item koleksi dari Supabase; `id` selalu diisi dari item_key. Supabase aktif berarti database
+ * menjadi sumber kebenaran (koleksi kosong tampil kosong); seed hanya dipakai bila Supabase
+ * belum dikonfigurasi atau query gagal.
+ */
+async function collection<T>(name: CollectionName, seed: T[]): Promise<T[]> {
+  if (!isSupabaseConfigured()) return seed;
+  const rows = await remote.fetchCollection(name);
+  // Query gagal dan cache kosong: data keuangan contoh (nomor rekening, angka laporan) tidak
+  // boleh tampil sebagai data asli, jadi koleksi donasi ditampilkan kosong, bukan seed.
+  if (!rows) return FINANCIAL_COLLECTIONS.has(name) ? [] : seed;
+  return rows.map((row) => ({ ...row.data, id: row.key }) as T);
+}
+
+const FINANCIAL_COLLECTIONS: ReadonlySet<CollectionName> = new Set(["donation_accounts", "donation_programs", "transparency_reports"]);
+
+/** Pengaturan tunggal: nilai tersimpan ditimpakan di atas bawaan agar kolom baru tetap terisi. */
+async function setting<T extends object>(key: SettingKey, seed: T): Promise<T> {
+  if (!isSupabaseConfigured()) return seed;
+  const stored = await remote.fetchSetting(key);
+  if (!stored?.value) return seed;
+  return { ...seed, ...(stored.value as Partial<T>) };
+}
+
+/** Data bawaan (seed) sebuah koleksi: dipakai panel admin pada mode demo. */
+export function getSeedCollection(name: CollectionName): object[] {
+  const seeds: Record<CollectionName, object[]> = {
+    faqs,
+    gallery,
+    donation_accounts: donationAccounts,
+    donation_programs: donationPrograms,
+    transparency_reports: transparencyReports,
+    programs,
+    rooms,
+    halal_places: halalPlaces,
+    board,
+    facilities,
+    timeline,
+  };
+  return seeds[name];
+}
+
+/** Nilai bawaan (seed) sebuah pengaturan: isian awal formulir admin sebelum pernah disimpan. */
+export function getSeedSetting(key: SettingKey): object {
+  const seeds: Record<SettingKey, object> = { profile, featured_video: documentary, promo_popup: promoPopup };
+  return seeds[key];
+}
+
 export async function getProfile(): Promise<MosqueProfile> {
-  return profile;
+  return setting("profile", profile);
 }
 
 export async function getBoard(): Promise<BoardMember[]> {
-  return board;
+  return collection("board", board);
 }
 
 export async function getTimeline(): Promise<TimelineItem[]> {
-  return timeline;
+  return collection("timeline", timeline);
 }
 
 export async function getFacilities(): Promise<Facility[]> {
-  return facilities;
+  return collection("facilities", facilities);
+}
+
+export async function getPromoPopup(): Promise<PromoPopup> {
+  return setting("promo_popup", promoPopup);
 }
 
 export async function getPrayerConfig(): Promise<PrayerConfig> {
   if (isSupabaseConfigured()) {
-    const cfg = await remote.fetchPrayerConfig();
-    if (cfg) return cfg;
+    const stored = await remote.fetchPrayerConfig();
+    if (stored?.config) return { ...prayerConfig, ...stored.config };
   }
   return prayerConfig;
 }
@@ -152,7 +223,7 @@ export async function getLectureBySlug(slug: string): Promise<Lecture | undefine
 
 /** Video dokumenter Al Muttaqin (beranda dan halaman Tentang kami). */
 export async function getDocumentary(): Promise<FeaturedVideo> {
-  return documentary;
+  return setting("featured_video", documentary);
 }
 
 export async function getNews(opts: { limit?: number; category?: NewsPost["category"] } = {}): Promise<NewsPost[]> {
@@ -168,19 +239,21 @@ export async function getNewsBySlug(slug: string): Promise<NewsPost | undefined>
 }
 
 export async function getDonationAccounts(): Promise<DonationAccount[]> {
-  return donationAccounts;
+  return collection("donation_accounts", donationAccounts);
 }
 
 export async function getDonationPrograms(): Promise<DonationProgram[]> {
-  return donationPrograms;
+  return collection("donation_programs", donationPrograms);
 }
 
 export async function getTransparencyReports(): Promise<TransparencyReport[]> {
-  return [...transparencyReports].sort((a, b) => b.period.localeCompare(a.period));
+  const list = await collection("transparency_reports", transparencyReports);
+  return [...list].sort((a, b) => b.period.localeCompare(a.period));
 }
 
 export async function getFaqs(category?: FaqCategory): Promise<FaqItem[]> {
-  return category ? faqs.filter((f) => f.category === category) : faqs;
+  const list = await collection("faqs", faqs);
+  return category ? list.filter((f) => f.category === category) : list;
 }
 
 export async function getDictionary(): Promise<DictionaryEntry[]> {
@@ -192,7 +265,7 @@ export async function getHaramIngredients(): Promise<HaramIngredient[]> {
 }
 
 export async function getHalalPlaces(): Promise<HalalPlace[]> {
-  return halalPlaces;
+  return collection("halal_places", halalPlaces);
 }
 
 export async function getDuas(category?: DuaCategory): Promise<Dua[]> {
@@ -200,19 +273,19 @@ export async function getDuas(category?: DuaCategory): Promise<Dua[]> {
 }
 
 export async function getGallery(): Promise<GalleryItem[]> {
-  return gallery;
+  return collection("gallery", gallery);
 }
 
 export async function getPrograms(): Promise<Program[]> {
-  return programs;
+  return collection("programs", programs);
 }
 
 export async function getProgramBySlug(slug: string): Promise<Program | undefined> {
-  return programs.find((p) => p.slug === slug);
+  return (await getPrograms()).find((p) => p.slug === slug);
 }
 
 export async function getRooms(): Promise<Room[]> {
-  return rooms;
+  return collection("rooms", rooms);
 }
 
 export async function getHijriImportantDates(): Promise<HijriImportantDate[]> {
@@ -236,11 +309,14 @@ export async function getSurahMeta(number: number): Promise<QuranSurahMeta | und
 
 /** Indeks pencarian global: halaman statis ditambah konten dinamis. */
 export async function getSearchIndex(): Promise<SearchDocument[]> {
-  const [ann, ev, lec, nw] = await Promise.all([
+  const [ann, ev, lec, nw, faqs, programs, halalPlaces] = await Promise.all([
     getAnnouncements({ includeExpired: true }),
     getEvents(),
     getLectures(),
     getNews(),
+    getFaqs(),
+    getPrograms(),
+    getHalalPlaces(),
   ]);
   const docs: SearchDocument[] = [];
   for (const a of ann) docs.push({ id: `a-${a.id}`, type: "announcement", title: a.title, excerpt: a.excerpt, href: `/news/${a.slug}` });

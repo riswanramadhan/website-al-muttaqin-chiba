@@ -56,6 +56,21 @@ react-hook-form + zod, Leaflet (react-leaflet), Supabase (opsional; tanpa env me
 - Metadata: tiap halaman mengekspor `generateMetadata` dengan judul & deskripsi terjemahan.
 - Tanpa `any`; jalankan `npm run typecheck`, `npm run lint`, `npm test`, `npm run build` sebelum selesai.
 
+## CMS panel admin (konten dari Supabase)
+- Dengan Supabase aktif, database adalah sumber kebenaran; `src/data/*` hanya seed awal dan fallback tanpa Supabase.
+- Koleksi (FAQ, galeri, program, ruangan, tempat halal, pengurus, fasilitas, sejarah, rekening/program donasi, laporan)
+  tersimpan di `content_items`; pengaturan tunggal (profil, video unggulan, pop-up promo) di `site_settings`.
+- Menambah/mengubah kolom formulir admin: edit `src/components/admin/cms/registry.ts` (FieldDef). Formulir, validasi Zod,
+  dan penyimpanan mengikuti. Tes `fields.test.ts` memastikan seed tetap lolos skema dan tidak ada kolom yang hilang.
+- Pembacaan publik di-cache (`unstable_cache`, tag `cms`) di `src/lib/data/supabase-adapter.ts`; setiap mutasi admin wajib
+  memanggil `revalidatePublic()` dari `src/actions/admin/shared.ts`.
+- Unggah gambar selalu lewat `<ImageUpload>` (kompres di browser, signed upload URL); tampilkan unggahan dengan
+  `unoptimized={shouldSkipOptimization(src)}` dari `@/lib/utils/media`.
+- Ringan: komponen formulir (zod + react-hook-form) diekspor dari `lazy-forms.tsx` modulnya, bukan langsung dari `index.ts`;
+  namespace pesan yang hanya dipakai server didaftarkan di `SERVER_ONLY_NAMESPACES` (`src/messages/index.ts`).
+- Mengubah skema: tambah berkas di `supabase/migrations/`, daftarkan di `scripts/build-sql.mjs`, jalankan `pnpm db:sql`,
+  lalu uji (lihat README, bagian Menyiapkan Supabase).
+
 ## Komponen tersedia (`src/components`)
 - `ui/button` (`Button`, `buttonVariants`: primary | secondary | outline | ghost | soft | link | inverse |
   outlineInverse | destructive; size sm | md | lg | icon), `ui/badge`, `ui/card` (`Card variant="default|muted|dark|brand"`),

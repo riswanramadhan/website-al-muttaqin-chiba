@@ -14,6 +14,7 @@ import { Progress } from "@/components/ui/primitives";
 import { RichText } from "@/components/ui/rich-text";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { AddToCalendar, EventCard, EventRegistrationForm, ShareButton, registrationState } from "@/components/activities";
+import { CoverImage } from "@/components/activities/cover-image";
 
 export async function generateStaticParams() {
   const events = await getEvents();
@@ -88,6 +89,8 @@ export default async function EventDetailPage({ params }: { params: Promise<{ lo
               {event.recurring && <p className="mt-1 text-muted-foreground">{pick(event.recurring, locale)}</p>}
             </div>
           </div>
+
+          {event.coverImage && <CoverImage src={event.coverImage} alt={title} className="mt-8" />}
 
           <section className="mt-8" aria-labelledby="event-about">
             <h2 id="event-about" className="text-xl font-bold">

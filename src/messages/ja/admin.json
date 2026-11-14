@@ -64,7 +64,7 @@
   },
   "demo": {
     "title": "デモモード：Supabaseを接続してください",
-    "body": ".env.local に NEXT_PUBLIC_SUPABASE_URL と NEXT_PUBLIC_SUPABASE_ANON_KEY を設定し、supabase/migrations を実行してください。現在は読み取り専用のサンプルデータを表示しています。"
+    "body": ".env.local に NEXT_PUBLIC_SUPABASE_URL と NEXT_PUBLIC_SUPABASE_ANON_KEY を設定し、Supabase の SQL Editor で supabase/setup-all.sql を実行してください。現在は初期データを閲覧のみで表示しています。"
   },
   "errors": {
     "demo": "デモモード：変更は保存されません。",
@@ -81,7 +81,15 @@
     "url": "URLが正しくありません",
     "youtubeId": "YouTube動画IDは11文字です",
     "endBeforeStart": "終了時刻は開始時刻より後にしてください",
-    "titleRequired": "インドネシア語のタイトルは必須です"
+    "titleRequired": "インドネシア語のタイトルは必須です",
+    "tooLong": "文字数が多すぎます",
+    "number": "正しい数値を入力してください",
+    "month": "月の形式は YYYY-MM です",
+    "idRequired": "インドネシア語の入力は必須です",
+    "keyTaken": "この項目キーは使用済みです。別のキーにしてください。",
+    "fileTooLarge": "圧縮後のファイルが 5 MB を超えています。",
+    "uploadFailed": "アップロードに失敗しました。",
+    "slugTaken": "このスラッグは他のコンテンツで使用されています。別のスラッグにしてください。"
   },
   "nav": {
     "dashboard": "ダッシュボード",
@@ -91,7 +99,7 @@
     "lectures": "講話動画",
     "news": "ニュース",
     "prayer": "礼拝時間",
-    "donations": "寄付",
+    "donations": "寄付の確認",
     "inbox": "受信箱",
     "push": "プッシュ通知",
     "admins": "管理者と権限",
@@ -100,8 +108,25 @@
       "main": "メイン",
       "content": "コンテンツ",
       "service": "信徒サービス",
-      "system": "システム"
-    }
+      "system": "システム",
+      "site": "ページ・情報",
+      "donation": "寄付"
+    },
+    "profile": "基本情報・連絡先",
+    "board": "役員",
+    "facilities": "施設",
+    "timeline": "沿革",
+    "gallery": "フォトギャラリー",
+    "faqs": "よくある質問",
+    "programs": "プログラム・教室",
+    "rooms": "部屋",
+    "halal": "ハラールスポット",
+    "video": "注目動画",
+    "promo": "ポップアップ告知",
+    "accounts": "寄付口座",
+    "donationPrograms": "寄付プログラム",
+    "reports": "会計報告",
+    "account": "マイアカウント"
   },
   "roles": {
     "super_admin": "スーパー管理者",
@@ -173,7 +198,15 @@
     },
     "recentActivity": "最近の操作",
     "noActivity": "操作履歴はまだありません。",
-    "viewAll": "すべて表示"
+    "viewAll": "すべて表示",
+    "refresh": {
+      "title": "サイトを更新",
+      "description": "公開サイトは節約と高速化のためキャッシュを使います。このパネルでの変更は自動で反映されます。Supabase のダッシュボードで直接データを変更した場合のみ押してください。",
+      "button": "今すぐ更新",
+      "done": "キャッシュを消去しました。公開ページは最新データを読み込みます。"
+    },
+    "manage": "サイト内容の管理",
+    "items": "{count}件"
   },
   "fields": {
     "slug": "スラッグ（URL）",
@@ -191,7 +224,7 @@
     "location": "場所",
     "speaker": "講師",
     "languages": "使用言語",
-    "coverImage": "カバー画像URL",
+    "coverImage": "カバー画像",
     "registrationRequired": "要申込",
     "quota": "定員",
     "deadline": "申込締切",
@@ -463,8 +496,8 @@
     "activate": "有効にする",
     "roleDescriptions": {
       "super_admin": "管理者の管理と出力を含むすべての権限。",
-      "content_admin": "コンテンツ、予定、受信箱、プッシュ通知の管理。",
-      "donation_admin": "寄付報告の管理と寄付CSVの出力。",
+      "content_admin": "コンテンツ、ページ情報、日程、受信箱、プッシュ通知を管理します。",
+      "donation_admin": "寄付の確認、口座、寄付プログラム、会計報告を管理します。",
       "viewer": "閲覧のみ。"
     }
   },
@@ -489,7 +522,11 @@
       "logout": "ログアウト",
       "push": "プッシュ送信",
       "invite": "管理者招待",
-      "export": "CSV出力"
+      "export": "CSV出力",
+      "reorder": "並び順を変更",
+      "upload": "ファイルをアップロード",
+      "refresh": "サイトを更新",
+      "password": "パスワードを変更"
     },
     "entities": {
       "announcements": "お知らせ",
@@ -507,7 +544,302 @@
       "contact_messages": "問い合わせ",
       "push": "プッシュ通知",
       "admins": "管理者",
-      "session": "セッション"
+      "session": "セッション",
+      "faqs": "よくある質問",
+      "gallery": "ギャラリー",
+      "donation_accounts": "寄付口座",
+      "donation_programs": "寄付プログラム",
+      "transparency_reports": "会計報告",
+      "programs": "プログラム",
+      "rooms": "部屋",
+      "halal_places": "ハラールスポット",
+      "board": "役員",
+      "facilities": "施設",
+      "timeline": "沿革",
+      "site_settings": "サイト設定",
+      "media": "メディアファイル",
+      "site": "公開サイト"
+    }
+  },
+  "upload": {
+    "choose": "画像を選択",
+    "replace": "ファイルを変更",
+    "uploading": "アップロード中...",
+    "urlPlaceholder": "または画像の URL / パスを貼り付け（例: /images/photo.jpg）",
+    "hint": "JPG・PNG・WebP。アップロード前に自動で縮小・圧縮されます。",
+    "hintPdf": "画像（自動圧縮）または PDF、最大 5 MB。",
+    "done": "アップロード完了: {before} から {after}（{width} x {height} px）。",
+    "donePdf": "PDF をアップロードしました（{size}）。",
+    "invalidType": "対応していないファイル形式です。"
+  },
+  "account": {
+    "title": "マイアカウント",
+    "subtitle": "管理パネルにログインするための表示名とパスワード。",
+    "profile": "プロフィール",
+    "profileHint": "この名前は操作履歴に表示されます。",
+    "password": "パスワード変更",
+    "passwordHint": "8文字以上。初回ログイン後、初期パスワードをすぐに変更してください。",
+    "currentPassword": "現在のパスワード",
+    "newPassword": "新しいパスワード",
+    "confirmPassword": "新しいパスワード（確認）",
+    "changePassword": "パスワードを変更",
+    "passwordChanged": "パスワードを変更しました。",
+    "wrongPassword": "現在のパスワードが正しくありません。",
+    "mismatch": "新しいパスワードが一致しません。",
+    "samePassword": "新しいパスワードは現在のものと異なる必要があります。",
+    "mustChange": "このアカウントは初期パスワードのままです。安全のため今すぐ変更してください。"
+  },
+  "cms": {
+    "listEmpty": "まだ項目がありません。「追加」を押してください。",
+    "visibility": "サイトでの表示",
+    "publishedHint": "オフにすると、削除せずにサイトから非表示にできます。",
+    "itemKey": "項目キー",
+    "itemKeyHint": "タイトルから自動生成されます。小文字・数字・ハイフンのみ。",
+    "itemKeyLocked": "項目キーは作成後に変更できません。",
+    "saveAndRefresh": "保存してサイトを更新",
+    "shown": "表示中",
+    "hidden": "非表示",
+    "show": "表示する",
+    "hide": "非表示にする",
+    "fields": {
+      "coordinates": "地図の座標",
+      "lat": "緯度",
+      "lng": "経度",
+      "question": "質問",
+      "answer": "回答",
+      "photo": "写真",
+      "caption": "写真の説明",
+      "takenAt": "撮影日",
+      "width": "幅 (px)",
+      "height": "高さ (px)",
+      "icon": "アイコン",
+      "schedule": "日程",
+      "audience": "対象",
+      "contactPerson": "担当者",
+      "registrationOpen": "申込受付中",
+      "capacity": "収容人数",
+      "amenities": "設備",
+      "availableFor": "利用用途",
+      "nameJa": "日本語名",
+      "placeType": "種別",
+      "verified": "運営が確認済み",
+      "address": "住所",
+      "mapsUrl": "Google マップのリンク",
+      "distanceKm": "モスクからの距離 (km)",
+      "organization": "所属団体",
+      "position": "役職",
+      "year": "年",
+      "bankName": "銀行名・決済方法",
+      "bankNameLocalized": "言語別の銀行名",
+      "currency": "通貨",
+      "method": "方法",
+      "accountNumber": "口座番号",
+      "accountName": "口座名義",
+      "branch": "支店",
+      "branchCode": "支店コード",
+      "accountType": "口座種別",
+      "primary": "メイン口座",
+      "qrImage": "QRIS 画像",
+      "target": "目標額",
+      "raised": "集まった額",
+      "period": "対象月",
+      "openingBalance": "期首残高",
+      "closingBalance": "期末残高",
+      "income": "収入",
+      "expense": "支出",
+      "lineLabel": "項目名",
+      "amount": "金額",
+      "reportFile": "報告書ファイル",
+      "mosqueName": "モスク名",
+      "shortName": "略称",
+      "foundedYear": "設立年",
+      "legalName": "正式名称",
+      "tagline": "キャッチコピー",
+      "postalCode": "郵便番号",
+      "city": "市区町村",
+      "prefecture": "都道府県",
+      "country": "国",
+      "openingHours": "開館時間",
+      "phone": "電話",
+      "whatsapp": "WhatsApp 番号",
+      "website": "ウェブサイト",
+      "social": "SNS",
+      "youtube": "YouTube",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok",
+      "whatsappLink": "WhatsApp リンク",
+      "nearestStations": "最寄り駅",
+      "stationName": "駅名",
+      "walkMinutes": "徒歩（分）",
+      "lines": "路線",
+      "partners": "パートナー",
+      "partnerRole": "パートナーの役割",
+      "logo": "ロゴ",
+      "durationSeconds": "長さ（秒）",
+      "videoTitle": "動画タイトル",
+      "channelName": "チャンネル名",
+      "channelUrl": "チャンネルのリンク",
+      "promoEnabled": "初回訪問時にポップアップを表示",
+      "poster": "ポスター画像",
+      "posterAlt": "ポスターの説明",
+      "posterHref": "タップ時の移動先",
+      "posterVersion": "ポスターのバージョン"
+    },
+    "hints": {
+      "coordinates": "Google マップで場所を右クリックし、座標の数値をクリックしてコピーします。",
+      "caption": "スクリーンリーダーで読み上げられ、説明として表示されます。",
+      "dimensions": "写真をアップロードすると自動入力されます。",
+      "qrImage": "公式の QRIS 画像をアップロードします。銀行口座の場合は空欄にしてください。",
+      "target": "目標がないプログラムは空欄にしてください。",
+      "raised": "寄付を照合した後に更新してください。",
+      "closingBalance": "期首残高 + 収入 - 支出。",
+      "reportFile": "任意：信徒がダウンロードできる PDF または画像。",
+      "whatsapp": "国際形式・スペースなし（例: +818012345678）。",
+      "youtubeId": "YouTube リンクの v= の後ろ 11 文字。",
+      "poster": "縦長（4:5）のポスターが最もきれいに表示されます。",
+      "posterHref": "言語コードなしのページパス（例: /donate）。",
+      "posterVersion": "変更（例: v2）すると全訪問者に再表示されます。"
+    },
+    "options": {
+      "faqCategory": {
+        "general": "一般",
+        "prayer": "礼拝",
+        "donation": "寄付",
+        "newcomer": "新しく来た方",
+        "program": "プログラム",
+        "visit": "見学"
+      },
+      "galleryCategory": {
+        "building": "建物",
+        "activity": "活動",
+        "community": "コミュニティ",
+        "ramadan": "ラマダン",
+        "eid": "イード"
+      },
+      "programIcon": {
+        "book-open": "本",
+        "heart-handshake": "支え合い",
+        "languages": "言語",
+        "door-open": "開いた扉",
+        "school": "学校",
+        "mic": "マイク",
+        "users": "人々"
+      },
+      "placeType": {
+        "mosque": "モスク",
+        "prayer-room": "礼拝室",
+        "restaurant": "レストラン",
+        "mart": "食料品店",
+        "service": "サービス"
+      },
+      "facilityIcon": {
+        "landmark": "建物",
+        "users": "人々",
+        "baby": "子ども",
+        "book": "本",
+        "utensils": "キッチン",
+        "parking": "駐車場",
+        "accessibility": "バリアフリー",
+        "wifi": "Wi-Fi",
+        "droplets": "ウドゥー"
+      },
+      "currency": {
+        "JPY": "日本円 (JPY)",
+        "IDR": "ルピア (IDR)"
+      },
+      "method": {
+        "bank": "銀行振込",
+        "qris": "QRIS",
+        "ewallet": "電子マネー"
+      },
+      "programStatus": {
+        "open": "受付中",
+        "closed": "終了",
+        "completed": "達成"
+      },
+      "donationIcon": {
+        "building": "建物",
+        "heart": "ハート",
+        "book-open": "本",
+        "graduation-cap": "教育",
+        "utensils": "食事",
+        "moon": "月"
+      }
+    },
+    "collections": {
+      "faqs": {
+        "title": "よくある質問",
+        "subtitle": "FAQ ページとトップページに表示される質問。",
+        "entity": "質問"
+      },
+      "gallery": {
+        "title": "フォトギャラリー",
+        "subtitle": "ギャラリーとトップページのモスク・活動写真。",
+        "entity": "写真"
+      },
+      "programs": {
+        "title": "プログラム・教室",
+        "subtitle": "TPA、改宗者クラス、語学教室などの定期プログラム。",
+        "entity": "プログラム"
+      },
+      "rooms": {
+        "title": "部屋",
+        "subtitle": "施設予約ページで借りられる部屋。",
+        "entity": "部屋"
+      },
+      "halal-places": {
+        "title": "ハラールスポット",
+        "subtitle": "ハラールマップに表示するモスク、礼拝室、飲食店、食料品店。",
+        "entity": "スポット"
+      },
+      "board": {
+        "title": "役員",
+        "subtitle": "「私たちについて」ページの役員一覧。",
+        "entity": "役員"
+      },
+      "facilities": {
+        "title": "施設",
+        "subtitle": "「私たちについて」ページの施設一覧。",
+        "entity": "施設"
+      },
+      "timeline": {
+        "title": "沿革",
+        "subtitle": "「私たちについて」ページのモスクの歩み。",
+        "entity": "出来事"
+      },
+      "donation-accounts": {
+        "title": "寄付口座",
+        "subtitle": "寄付ページの公式銀行口座と QRIS。",
+        "entity": "口座"
+      },
+      "donation-programs": {
+        "title": "寄付プログラム",
+        "subtitle": "インファークのプログラム、目標額と集まった額。",
+        "entity": "寄付プログラム"
+      },
+      "transparency-reports": {
+        "title": "会計報告",
+        "subtitle": "透明性ページの月次報告。",
+        "entity": "報告"
+      }
+    },
+    "settings": {
+      "profile": {
+        "title": "基本情報・連絡先",
+        "subtitle": "モスクの名称、住所、連絡先、SNS。",
+        "help": "ヘッダー・フッター、連絡先、私たちについて、地図、ジャマーアプリで使われます。"
+      },
+      "video": {
+        "title": "注目動画",
+        "subtitle": "トップページと「私たちについて」のドキュメンタリー動画。",
+        "help": "YouTube の動画 ID を貼り付けます。動画は YouTube から直接再生され、サーバー容量を使いません。"
+      },
+      "promo": {
+        "title": "ポップアップ告知",
+        "subtitle": "初回訪問時に一度だけ表示されるポスター。",
+        "help": "ポスターはいつでも変更できます。バージョンを上げると既存の訪問者にも新しいポスターが表示されます。"
+      }
     }
   }
 }

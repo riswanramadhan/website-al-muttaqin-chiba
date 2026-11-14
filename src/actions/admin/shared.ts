@@ -1,8 +1,8 @@
 import "server-only";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import type { ZodType } from "zod";
 import { AdminError, requireAdmin, type AdminRole, type AdminSession } from "@/lib/supabase/admin";
-import { siteUrl } from "@/lib/site";
+import { CMS_TAG } from "@/lib/data/supabase-adapter";
 
 /**
  * Pembungkus Server Action admin (PRD-09): requireAdmin(roles) -> validasi Zod -> handler.
@@ -42,28 +42,15 @@ export async function runAdminAction<Input, Output>(options: {
   }
 }
 
-const LOCALES = ["ja", "en", "id"] as const;
-
 /**
- * Segarkan halaman publik pada ketiga bahasa. `revalidatePath` langsung sudah cukup (satu
- * aplikasi); bila REVALIDATE_SECRET ada, endpoint /api/revalidate juga dipanggil (opsional).
+ * Segarkan situs publik setelah admin menyimpan. Data Supabase di-cache dengan tag `cms`
+ * (lihat src/lib/data/supabase-adapter.ts): `updateTag` membuang cache itu sehingga permintaan
+ * berikutnya membaca data baru, dan `revalidatePath("/", "layout")` menandai semua halaman
+ * statis untuk dibuat ulang saat dikunjungi lagi (bukan sekaligus, jadi tetap hemat).
+ * Endpoint /api/revalidate tetap tersedia untuk pemicu dari luar (mis. webhook Supabase).
  */
-export async function revalidatePublic(paths: string[]): Promise<void> {
-  for (const path of paths) {
-    for (const locale of LOCALES) revalidatePath(`/${locale}${path}`);
-  }
-  revalidatePath("/admin", "layout");
-
-  const secret = process.env.REVALIDATE_SECRET;
-  if (!secret) return;
-  try {
-    await fetch(`${siteUrl}/api/revalidate`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${secret}` },
-      body: JSON.stringify({ paths }),
-      signal: AbortSignal.timeout(4000),
-    });
-  } catch (error) {
-    console.warn("[admin] /api/revalidate tidak terjangkau:", error instanceof Error ? error.message : error);
-  }
+export async function revalidatePublic(_paths: string[] = []): Promise<void> {
+  void _paths;
+  updateTag(CMS_TAG);
+  revalidatePath("/", "layout");
 }

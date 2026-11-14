@@ -17,7 +17,13 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    formats: ["image/avif", "image/webp"],
+    // Hemat kuota Image Optimization (Vercel Hobby): satu format, lebih sedikit ukuran turunan,
+    // dan hasil optimasi disimpan 31 hari. Unggahan admin (Supabase Storage) sudah dikompres di
+    // browser dan ditampilkan `unoptimized`, jadi tidak pernah lewat pengoptimal ini.
+    formats: ["image/webp"],
+    deviceSizes: [640, 828, 1200, 1920],
+    imageSizes: [64, 128, 256, 384],
+    minimumCacheTTL: 2678400,
     remotePatterns: [
       { protocol: "https", hostname: "i.ytimg.com" },
       { protocol: "https", hostname: "**.supabase.co" },
