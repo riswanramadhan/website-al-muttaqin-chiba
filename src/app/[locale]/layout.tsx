@@ -5,13 +5,15 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import type { Locale } from "@/lib/types";
-import { getPrayerConfig, getProfile } from "@/lib/data";
+import { getPrayerConfig, getProfile, getPromoPopup } from "@/lib/data";
+import { pick } from "@/lib/utils/i18n";
+import { clientMessages } from "@/messages";
 import { ThemeProvider, themeInitScript } from "@/components/shared/theme-provider";
 import { ToastProvider } from "@/components/ui/toast";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PwaProvider } from "@/components/shared/pwa-provider";
 import { PwaRuntime } from "@/components/pwa/pwa-runtime";
-import { DonationPosterPopup } from "@/components/promo/donation-poster-popup";
+import { DonationPosterPopupLazy } from "@/components/promo/donation-poster-popup-lazy";
 import { siteUrl } from "@/lib/site";
 import "../globals.css";
 
@@ -72,7 +74,7 @@ export default async function LocaleLayout({ children, params }: { children: Rea
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
 
-  const [messages, config, profile] = await Promise.all([getMessages(), getPrayerConfig(), getProfile()]);
+  const [messages, config, profile, promo] = await Promise.all([getMessages(), getPrayerConfig(), getProfile(), getPromoPopup()]);
 
   return (
     <html lang={locale} suppressHydrationWarning className={`${jakarta.variable} ${notoJp.variable} ${amiri.variable}`}>
@@ -80,14 +82,14 @@ export default async function LocaleLayout({ children, params }: { children: Rea
         {/* Skrip tema di awal <body> (bukan <head> manual) agar hidrasi <head> React tidak bentrok
             dengan metadata Next; tetap berjalan sebelum konten dilukis sehingga tidak berkedip. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        <NextIntlClientProvider messages={messages} locale={locale as Locale} timeZone="Asia/Tokyo">
+        <NextIntlClientProvider messages={clientMessages(messages)} locale={locale as Locale} timeZone="Asia/Tokyo">
           <ThemeProvider prayerConfig={config} coordinates={profile.coordinates}>
             <TooltipProvider delayDuration={200}>
               <ToastProvider>
                 <PwaProvider>
                   {children}
                   <PwaRuntime />
-                  <DonationPosterPopup />
+                  <DonationPosterPopupLazy popup={promo} alt={pick(promo.alt, locale as Locale)} />
                 </PwaProvider>
               </ToastProvider>
             </TooltipProvider>

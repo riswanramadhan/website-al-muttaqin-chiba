@@ -31,7 +31,8 @@ const optionalText = (max: number) =>
 
 export const programRegistrationSchema = z
   .object({
-    programId: z.enum(PROGRAM_IDS, { error: "common.validation.required" }),
+    // Id program berbentuk slug; program baru dari panel admin ikut diterima.
+    programId: z.string().regex(/^[a-z0-9][a-z0-9-]{0,79}$/, "common.validation.required"),
     fullName: nameSchema,
     participantName: optionalText(80),
     participantAge: z.preprocess(

@@ -64,7 +64,7 @@
   },
   "demo": {
     "title": "Demo mode: connect Supabase",
-    "body": "Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local and run supabase/migrations. The panel currently shows read-only seed data."
+    "body": "Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local, then run supabase/setup-all.sql in the Supabase SQL Editor. The panel currently shows read-only built-in data."
   },
   "errors": {
     "demo": "Demo mode: changes are not saved.",
@@ -81,7 +81,15 @@
     "url": "Invalid URL",
     "youtubeId": "YouTube video ID is 11 characters",
     "endBeforeStart": "End time must be after start time",
-    "titleRequired": "Indonesian title is required"
+    "titleRequired": "Indonesian title is required",
+    "tooLong": "Text is too long",
+    "number": "Enter a valid number",
+    "month": "Month format is YYYY-MM",
+    "idRequired": "Indonesian text is required",
+    "keyTaken": "This item key is already used. Choose another one.",
+    "fileTooLarge": "The file is larger than 5 MB after compression.",
+    "uploadFailed": "Upload failed.",
+    "slugTaken": "This slug is already used by other content. Choose a different slug."
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -91,7 +99,7 @@
     "lectures": "Lecture videos",
     "news": "News",
     "prayer": "Prayer times",
-    "donations": "Donations",
+    "donations": "Donation confirmations",
     "inbox": "Inbox",
     "push": "Push notifications",
     "admins": "Admins & roles",
@@ -100,8 +108,25 @@
       "main": "Main",
       "content": "Content",
       "service": "Community services",
-      "system": "System"
-    }
+      "system": "System",
+      "site": "Pages & info",
+      "donation": "Donations"
+    },
+    "profile": "Profile & contact",
+    "board": "Board",
+    "facilities": "Facilities",
+    "timeline": "History",
+    "gallery": "Photo gallery",
+    "faqs": "FAQ",
+    "programs": "Programs & classes",
+    "rooms": "Rooms",
+    "halal": "Halal places",
+    "video": "Featured video",
+    "promo": "Promo pop-up",
+    "accounts": "Donation accounts",
+    "donationPrograms": "Donation programs",
+    "reports": "Financial reports",
+    "account": "My account"
   },
   "roles": {
     "super_admin": "Super admin",
@@ -173,7 +198,15 @@
     },
     "recentActivity": "Recent activity",
     "noActivity": "No activity recorded yet.",
-    "viewAll": "View all"
+    "viewAll": "View all",
+    "refresh": {
+      "title": "Refresh site",
+      "description": "The public site is cached to stay fast and cheap. Changes made in this panel appear automatically. Use this button only after editing data directly in the Supabase dashboard.",
+      "button": "Refresh now",
+      "done": "Cache cleared. Public pages will load the latest data."
+    },
+    "manage": "Manage site content",
+    "items": "{count} items"
   },
   "fields": {
     "slug": "Slug (URL)",
@@ -191,7 +224,7 @@
     "location": "Location",
     "speaker": "Speaker",
     "languages": "Languages",
-    "coverImage": "Cover image URL",
+    "coverImage": "Cover image",
     "registrationRequired": "Registration required",
     "quota": "Quota",
     "deadline": "Registration deadline",
@@ -463,8 +496,8 @@
     "activate": "Activate",
     "roleDescriptions": {
       "super_admin": "Full access including admin management and exports.",
-      "content_admin": "Manage content, schedules, inbox, and push.",
-      "donation_admin": "Manage donation confirmations and donation CSV exports.",
+      "content_admin": "Manages content, pages and info, schedules, inbox, and push.",
+      "donation_admin": "Manages donation confirmations, accounts, donation programs, and financial reports.",
       "viewer": "View only."
     }
   },
@@ -489,7 +522,11 @@
       "logout": "Signed out",
       "push": "Sent push",
       "invite": "Invited admin",
-      "export": "Exported CSV"
+      "export": "Exported CSV",
+      "reorder": "Reordered",
+      "upload": "Uploaded a file",
+      "refresh": "Refreshed the site",
+      "password": "Changed password"
     },
     "entities": {
       "announcements": "Announcements",
@@ -507,7 +544,302 @@
       "contact_messages": "Contact messages",
       "push": "Push notifications",
       "admins": "Admins",
-      "session": "Session"
+      "session": "Session",
+      "faqs": "FAQ",
+      "gallery": "Gallery",
+      "donation_accounts": "Donation accounts",
+      "donation_programs": "Donation programs",
+      "transparency_reports": "Financial reports",
+      "programs": "Programs",
+      "rooms": "Rooms",
+      "halal_places": "Halal places",
+      "board": "Board",
+      "facilities": "Facilities",
+      "timeline": "History",
+      "site_settings": "Site settings",
+      "media": "Media file",
+      "site": "Public site"
+    }
+  },
+  "upload": {
+    "choose": "Choose image",
+    "replace": "Replace file",
+    "uploading": "Uploading...",
+    "urlPlaceholder": "or paste an image URL / path, e.g. /images/photo.jpg",
+    "hint": "JPG, PNG, or WebP. Images are resized and compressed automatically before upload.",
+    "hintPdf": "Image (compressed automatically) or PDF, up to 5 MB.",
+    "done": "Uploaded: {before} reduced to {after} ({width} x {height} px).",
+    "donePdf": "PDF uploaded ({size}).",
+    "invalidType": "Unsupported file type."
+  },
+  "account": {
+    "title": "My account",
+    "subtitle": "Display name and password for signing in to the admin panel.",
+    "profile": "Profile",
+    "profileHint": "This name appears in the activity log.",
+    "password": "Change password",
+    "passwordHint": "At least 8 characters. Change the initial password right after your first sign-in.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Repeat new password",
+    "changePassword": "Change password",
+    "passwordChanged": "Password changed.",
+    "wrongPassword": "The current password is incorrect.",
+    "mismatch": "The new passwords do not match.",
+    "samePassword": "The new password must differ from the current one.",
+    "mustChange": "This account still uses the initial password. Change it now to keep the admin panel secure."
+  },
+  "cms": {
+    "listEmpty": "Nothing here yet. Press Add.",
+    "visibility": "Visibility on the site",
+    "publishedHint": "Turn off to hide this item from the site without deleting it.",
+    "itemKey": "Item key",
+    "itemKeyHint": "Generated from the title. Lowercase letters, digits, and hyphens.",
+    "itemKeyLocked": "The key cannot be changed after the item is created.",
+    "saveAndRefresh": "Save & refresh site",
+    "shown": "Shown",
+    "hidden": "Hidden",
+    "show": "Show",
+    "hide": "Hide",
+    "fields": {
+      "coordinates": "Map coordinates",
+      "lat": "Latitude",
+      "lng": "Longitude",
+      "question": "Question",
+      "answer": "Answer",
+      "photo": "Photo",
+      "caption": "Photo caption",
+      "takenAt": "Date taken",
+      "width": "Width (px)",
+      "height": "Height (px)",
+      "icon": "Icon",
+      "schedule": "Schedule",
+      "audience": "Audience",
+      "contactPerson": "Contact person",
+      "registrationOpen": "Registration open",
+      "capacity": "Capacity (people)",
+      "amenities": "Amenities",
+      "availableFor": "Available for",
+      "nameJa": "Name in Japanese",
+      "placeType": "Place type",
+      "verified": "Verified by the committee",
+      "address": "Address",
+      "mapsUrl": "Google Maps link",
+      "distanceKm": "Distance from the mosque (km)",
+      "organization": "Organization",
+      "position": "Position",
+      "year": "Year",
+      "bankName": "Bank name / method",
+      "bankNameLocalized": "Bank name per language",
+      "currency": "Currency",
+      "method": "Method",
+      "accountNumber": "Account number",
+      "accountName": "Account holder",
+      "branch": "Branch",
+      "branchCode": "Branch code",
+      "accountType": "Account type",
+      "primary": "Primary account",
+      "qrImage": "QRIS image",
+      "target": "Target",
+      "raised": "Raised",
+      "period": "Period (month)",
+      "openingBalance": "Opening balance",
+      "closingBalance": "Closing balance",
+      "income": "Income",
+      "expense": "Expenses",
+      "lineLabel": "Label",
+      "amount": "Amount",
+      "reportFile": "Report file",
+      "mosqueName": "Mosque name",
+      "shortName": "Short name",
+      "foundedYear": "Founded year",
+      "legalName": "Legal name",
+      "tagline": "Tagline",
+      "postalCode": "Postal code",
+      "city": "City",
+      "prefecture": "Prefecture",
+      "country": "Country",
+      "openingHours": "Opening hours",
+      "phone": "Phone",
+      "whatsapp": "WhatsApp number",
+      "website": "Website",
+      "social": "Social media",
+      "youtube": "YouTube",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "tiktok": "TikTok",
+      "whatsappLink": "WhatsApp link",
+      "nearestStations": "Nearest stations",
+      "stationName": "Station name",
+      "walkMinutes": "Walk (minutes)",
+      "lines": "Train lines",
+      "partners": "Partners",
+      "partnerRole": "Partner role",
+      "logo": "Logo",
+      "durationSeconds": "Duration (seconds)",
+      "videoTitle": "Video title",
+      "channelName": "Channel name",
+      "channelUrl": "Channel link",
+      "promoEnabled": "Show the pop-up on first visit",
+      "poster": "Poster image",
+      "posterAlt": "Poster description",
+      "posterHref": "Destination when tapped",
+      "posterVersion": "Poster version"
+    },
+    "hints": {
+      "coordinates": "Copy from Google Maps: right-click the location, then click the coordinates.",
+      "caption": "Read by screen readers and shown as the caption.",
+      "dimensions": "Filled automatically when a photo is uploaded.",
+      "qrImage": "Upload the official QRIS image. Leave empty for regular bank accounts.",
+      "target": "Leave empty if the program has no target.",
+      "raised": "Update this figure after matching donations.",
+      "closingBalance": "Opening balance plus income minus expenses.",
+      "reportFile": "Optional: a PDF or image of the report that visitors can download.",
+      "whatsapp": "International format without spaces, e.g. +818012345678.",
+      "youtubeId": "The 11 characters after v= in the YouTube link.",
+      "poster": "A portrait poster (4:5 ratio) looks best.",
+      "posterHref": "Page path without the language code, e.g. /donate.",
+      "posterVersion": "Change it (e.g. v2) to show the poster again to every visitor."
+    },
+    "options": {
+      "faqCategory": {
+        "general": "General",
+        "prayer": "Prayer",
+        "donation": "Donation",
+        "newcomer": "Newcomers",
+        "program": "Programs",
+        "visit": "Visiting"
+      },
+      "galleryCategory": {
+        "building": "Building",
+        "activity": "Activities",
+        "community": "Community",
+        "ramadan": "Ramadan",
+        "eid": "Eid"
+      },
+      "programIcon": {
+        "book-open": "Book",
+        "heart-handshake": "Helping hands",
+        "languages": "Languages",
+        "door-open": "Open door",
+        "school": "School",
+        "mic": "Microphone",
+        "users": "People"
+      },
+      "placeType": {
+        "mosque": "Mosque",
+        "prayer-room": "Prayer room",
+        "restaurant": "Restaurant",
+        "mart": "Shop",
+        "service": "Service"
+      },
+      "facilityIcon": {
+        "landmark": "Building",
+        "users": "People",
+        "baby": "Children",
+        "book": "Book",
+        "utensils": "Kitchen",
+        "parking": "Parking",
+        "accessibility": "Accessibility",
+        "wifi": "Wi-Fi",
+        "droplets": "Ablution"
+      },
+      "currency": {
+        "JPY": "Yen (JPY)",
+        "IDR": "Rupiah (IDR)"
+      },
+      "method": {
+        "bank": "Bank transfer",
+        "qris": "QRIS",
+        "ewallet": "E-wallet"
+      },
+      "programStatus": {
+        "open": "Open",
+        "closed": "Closed",
+        "completed": "Completed"
+      },
+      "donationIcon": {
+        "building": "Building",
+        "heart": "Heart",
+        "book-open": "Book",
+        "graduation-cap": "Education",
+        "utensils": "Food",
+        "moon": "Moon"
+      }
+    },
+    "collections": {
+      "faqs": {
+        "title": "FAQ",
+        "subtitle": "Frequently asked questions on the FAQ page and homepage.",
+        "entity": "question"
+      },
+      "gallery": {
+        "title": "Photo gallery",
+        "subtitle": "Photos of the mosque and activities on the Gallery page and homepage.",
+        "entity": "photo"
+      },
+      "programs": {
+        "title": "Programs & classes",
+        "subtitle": "TPA, new Muslim class, language classes, and other regular programs.",
+        "entity": "program"
+      },
+      "rooms": {
+        "title": "Rooms",
+        "subtitle": "Rooms that can be booked from the Room booking page.",
+        "entity": "room"
+      },
+      "halal-places": {
+        "title": "Halal places",
+        "subtitle": "Mosques, prayer rooms, restaurants, and shops on the halal map.",
+        "entity": "place"
+      },
+      "board": {
+        "title": "Board",
+        "subtitle": "Committee members on the About page.",
+        "entity": "board member"
+      },
+      "facilities": {
+        "title": "Facilities",
+        "subtitle": "Mosque facilities on the About page.",
+        "entity": "facility"
+      },
+      "timeline": {
+        "title": "History",
+        "subtitle": "Timeline of the mosque on the About page.",
+        "entity": "milestone"
+      },
+      "donation-accounts": {
+        "title": "Donation accounts",
+        "subtitle": "Official bank accounts and QRIS on the Donate page.",
+        "entity": "account"
+      },
+      "donation-programs": {
+        "title": "Donation programs",
+        "subtitle": "Infaq programs with targets and funds raised.",
+        "entity": "donation program"
+      },
+      "transparency-reports": {
+        "title": "Financial reports",
+        "subtitle": "Monthly reports on the Transparency page.",
+        "entity": "report"
+      }
+    },
+    "settings": {
+      "profile": {
+        "title": "Profile & contact",
+        "subtitle": "Mosque identity, address, contact, and social media.",
+        "help": "Used in the header and footer, Contact, About, the map, and the Jamaah App."
+      },
+      "video": {
+        "title": "Featured video",
+        "subtitle": "Documentary video on the homepage and About page.",
+        "help": "Paste the YouTube video ID. The video plays straight from YouTube, so it uses no server quota."
+      },
+      "promo": {
+        "title": "Promo pop-up",
+        "subtitle": "A poster shown once on a visitor's first visit.",
+        "help": "Replace the poster at any time. Raise the version so returning visitors see the new poster."
+      }
     }
   }
 }

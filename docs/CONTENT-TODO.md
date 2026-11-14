@@ -4,6 +4,11 @@ Situs sudah berjalan penuh dengan data contoh. Daftar di bawah adalah nilai PLAC
 harus diganti pengurus sebelum launch. Lokasi file disebutkan agar mudah dicari; setelah Supabase
 aktif, sebagian besar bisa diubah dari panel admin.
 
+> Setelah Supabase aktif, isi lewat panel admin (`/admin`), bukan lewat berkas di bawah:
+> Profil & kontak, Pengurus, Rekening donasi, Program donasi, Laporan keuangan, Galeri foto, Program & kelas,
+> Tempat halal, FAQ, Waktu salat, Jadwal Jumat, Pengumuman, Agenda, Kajian video, Berita. Nama berkas di bawah
+> hanya menunjukkan asal data contohnya.
+
 ## Identitas & kontak (`src/data/profile.ts`)
 - [ ] Alamat jalan lengkap, kode pos, dan koordinat persis masjid (saat ini pusat kota Matsudo: 35.7876, 139.9031)
 - [ ] Nomor telepon dan WhatsApp pengurus

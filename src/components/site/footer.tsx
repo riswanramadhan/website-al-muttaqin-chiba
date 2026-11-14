@@ -8,6 +8,7 @@ import type { Locale } from "@/lib/types";
 import { getPrayerConfig, getProfile } from "@/lib/data";
 import { METHOD_LABELS } from "@/lib/prayer";
 import { pick } from "@/lib/utils/i18n";
+import { shouldSkipOptimization } from "@/lib/utils/media";
 import { NAV_GROUPS } from "@/components/site/nav-config";
 import { LogoMark } from "@/components/site/logo";
 import { buttonVariants } from "@/components/ui/button";
@@ -120,7 +121,7 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
               {profile.partners.map((p) => {
                 const content = p.logo ? (
                   <span className="flex h-11 items-center rounded-xl bg-white px-3 py-1.5 shadow-sm ring-1 ring-black/5 transition-transform duration-200 group-hover:-translate-y-0.5">
-                    <Image src={p.logo.src} alt={p.name} width={p.logo.width} height={p.logo.height} className="h-full w-auto object-contain" />
+                    <Image src={p.logo.src} alt={p.name} width={p.logo.width} height={p.logo.height} unoptimized={shouldSkipOptimization(p.logo.src)} className="h-full w-auto object-contain" />
                   </span>
                 ) : (
                   <span className="flex h-11 items-center rounded-xl border border-hero-foreground/15 bg-hero-foreground/5 px-3 font-semibold">{p.name}</span>

@@ -10,15 +10,12 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/compone
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/primitives";
 import { cn } from "@/lib/utils/cn";
+import { shouldSkipOptimization } from "@/lib/utils/media";
 
 type Category = GalleryItem["category"];
 const CATEGORIES: Category[] = ["building", "activity", "community", "ramadan", "eid"];
 
 const SIZES = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
-
-function isSvg(src: string) {
-  return /\.svg($|\?)/i.test(src);
-}
 
 /**
  * Galeri foto (PRD-03a): grid masonry responsif, filter kategori, dan lightbox `Dialog`
@@ -96,7 +93,7 @@ export function GalleryGrid({ items, locale, limit, className }: { items: Galler
                     height={item.height}
                     sizes={SIZES}
                     loading="lazy"
-                    unoptimized={isSvg(item.src)}
+                    unoptimized={shouldSkipOptimization(item.src)}
                     className="h-auto w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                   />
                   <span className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-hero/80 to-transparent p-4 text-hero-foreground opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
@@ -125,7 +122,7 @@ export function GalleryGrid({ items, locale, limit, className }: { items: Galler
                 width={current.width}
                 height={current.height}
                 sizes="(min-width: 1024px) 64rem, 100vw"
-                unoptimized={isSvg(current.src)}
+                unoptimized={shouldSkipOptimization(current.src)}
                 priority
                 className="mx-auto h-auto max-h-[70dvh] w-auto max-w-full object-contain"
               />

@@ -8,7 +8,9 @@ export { PartnersStrip } from "./partners-strip"; // Server: { locale: Locale }
 export { StatsRow } from "./stats-row"; // Server: { locale: Locale; tone?: "default" | "inverse" }
 
 // Tambahan internal modul (boleh dipakai modul lain bila perlu).
-export { ContactForm } from "./contact-form"; // Client: { defaultSubject?: ContactSubject }
+// Formulir diekspor lewat pembungkus malas (lazy-forms.tsx) agar zod + react-hook-form hanya terunduh
+// di halaman yang benar-benar menampilkannya, bukan di setiap halaman yang mengimpor berkas indeks ini.
+export { ContactForm } from "./lazy-forms"; // Client: { defaultSubject?: ContactSubject }
 export { BoardGrid } from "./board-grid";
 export { Timeline } from "./timeline";
 export { FacilitiesGrid } from "./facilities-grid";

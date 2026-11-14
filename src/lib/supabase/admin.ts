@@ -22,6 +22,8 @@ export type AdminProfile = {
   role: AdminRole;
   ui_locale: string;
   active: boolean;
+  /** True selama kata sandi awal (admin-user.sql) belum diganti. */
+  must_change_password: boolean;
 };
 
 export type AdminSession = { user: User; admin: AdminProfile };
@@ -75,6 +77,7 @@ function mapAdmin(row: Record<string, unknown>): AdminProfile {
     role: isAdminRole(row.role) ? row.role : "viewer",
     ui_locale: String(row.ui_locale ?? "id"),
     active: row.active !== false,
+    must_change_password: row.must_change_password === true,
   };
 }
 

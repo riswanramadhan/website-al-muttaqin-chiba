@@ -5,6 +5,7 @@ import { ExternalLink, Handshake } from "lucide-react";
 import type { Locale } from "@/lib/types";
 import { getProfile } from "@/lib/data";
 import { pick } from "@/lib/utils/i18n";
+import { shouldSkipOptimization } from "@/lib/utils/media";
 import { IconCircle } from "@/components/ui/primitives";
 
 /** Mitra pengelola dan pendukung (PRD-03a), dibaca dari `profile.partners`. */
@@ -28,7 +29,7 @@ export async function PartnersStrip({ locale, className }: { locale: Locale; cla
           <li key={p.name} className="card-surface flex flex-col gap-4 p-6">
             {p.logo ? (
               <div className="flex h-20 items-center justify-center rounded-2xl border border-border bg-white px-6 py-3">
-                <Image src={p.logo.src} alt={p.name} width={p.logo.width} height={p.logo.height} className="h-full w-auto max-w-full object-contain" />
+                <Image src={p.logo.src} alt={p.name} width={p.logo.width} height={p.logo.height} unoptimized={shouldSkipOptimization(p.logo.src)} className="h-full w-auto max-w-full object-contain" />
               </div>
             ) : (
               <div className="flex h-20 items-center justify-center rounded-2xl border border-border bg-surface">

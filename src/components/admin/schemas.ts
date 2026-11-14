@@ -197,3 +197,16 @@ export const loginSchema = z.object({
 export type LoginInput = z.infer<typeof loginSchema>;
 
 export const magicLinkSchema = z.object({ email: z.string().trim().email("errors.invalidEmail") });
+
+export const accountProfileSchema = z.object({ fullName: z.string().trim().min(2, "errors.required").max(80) });
+export type AccountProfileInput = z.infer<typeof accountProfileSchema>;
+
+export const accountPasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, "errors.required"),
+    newPassword: z.string().min(8, "errors.password").max(72, "errors.tooLong"),
+    confirmPassword: z.string().min(1, "errors.required"),
+  })
+  .refine((v) => v.newPassword === v.confirmPassword, { message: "account.mismatch", path: ["confirmPassword"] })
+  .refine((v) => v.newPassword !== v.currentPassword, { message: "account.samePassword", path: ["newPassword"] });
+export type AccountPasswordInput = z.infer<typeof accountPasswordSchema>;

@@ -12,6 +12,7 @@ import { useFieldError } from "@/components/admin/use-admin-action";
 import { LocalizedInput, LocalizedTextarea } from "@/components/admin/localized-input";
 import { LocalizedBlockEditor } from "@/components/admin/block-editor";
 import { FormSection } from "@/components/admin/form-bar";
+import { ImageUpload } from "@/components/admin/cms/image-upload";
 import { ContentFormActions, useContentSave, type Guard } from "@/components/admin/content-form-shared";
 
 const CATEGORIES = ["news", "report", "article", "press"] as const;
@@ -87,9 +88,13 @@ export function NewsForm({ initial, guard }: { initial: NewsRecord | null; guard
           <Field label={t("fields.author")} htmlFor="author" optionalLabel={t("common.optional")}>
             <Input id="author" disabled={disabled} {...register("author")} />
           </Field>
-          <Field label={t("fields.coverImage")} htmlFor="coverImage" optionalLabel={t("common.optional")}>
-            <Input id="coverImage" disabled={disabled} placeholder="/images/..." {...register("coverImage")} />
-          </Field>
+          <Controller
+            control={control}
+            name="coverImage"
+            render={({ field }) => (
+              <ImageUpload id="coverImage" className="sm:col-span-2" label={t("fields.coverImage")} value={field.value} folder="covers" preset="photo" disabled={disabled} onChange={(src) => field.onChange(src)} />
+            )}
+          />
           <Field label={t("fields.tags")} htmlFor="tags" hint={t("fields.tagsHint")}>
             <Input id="tags" disabled={disabled} {...register("tags")} />
           </Field>

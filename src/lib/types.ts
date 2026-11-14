@@ -407,6 +407,17 @@ export type QuranSurahMeta = {
   numberOfAyahs: number;
 };
 
+/** Pop-up poster promosi pada kunjungan pertama (dikelola admin di Pengaturan > Pop-up promo). */
+export type PromoPopup = {
+  enabled: boolean;
+  image: { src: string; width: number; height: number };
+  alt: LocalizedText;
+  /** Tujuan saat poster diketuk, relatif tanpa prefix locale (mis. "/donate"). */
+  href: string;
+  /** Ubah nilainya agar poster tampil sekali lagi untuk semua pengunjung. */
+  version: string;
+};
+
 /** Hasil pencarian global. */
 export type SearchDocument = {
   id: string;

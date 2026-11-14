@@ -11,7 +11,9 @@ export const dynamic = "force-dynamic";
 export default async function PanelLayout({ children }: { children: React.ReactNode }) {
   const ctx = await getPanelContext();
   if (!ctx.demo && !ctx.session) redirect("/admin/login");
-  const user = ctx.session ? { name: ctx.session.admin.full_name, email: ctx.session.admin.email, role: ctx.session.admin.role } : null;
+  const user = ctx.session
+    ? { name: ctx.session.admin.full_name, email: ctx.session.admin.email, role: ctx.session.admin.role, mustChangePassword: ctx.session.admin.must_change_password }
+    : null;
   return (
     <AdminShell user={user} demo={ctx.demo}>
       {children}

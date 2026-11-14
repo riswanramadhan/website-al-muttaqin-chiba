@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { createServerSupabase, logActivity, type AdminSession } from "@/lib/supabase/admin";
+import { removeUnusedMedia } from "@/lib/supabase/media";
 import { runAdminAction, revalidatePublic, type AdminActionResult } from "@/actions/admin/shared";
 import {
   announcementSchema,
@@ -139,10 +140,13 @@ async function upsertRow(entity: ContentEntity, id: string | undefined, row: Row
   const supabase = await createServerSupabase();
   if (!supabase) throw new Error("supabase");
   const table = ENTITIES[entity].table;
+  // Baris lama dibaca dulu agar gambar sampul yang diganti bisa dihapus dari Storage.
+  const before = id ? (await supabase.from(table).select("*").eq("id", id).maybeSingle()).data : null;
   const query = id ? supabase.from(table).update(row).eq("id", id).select("id").single() : supabase.from(table).insert(row).select("id").single();
   const { data, error } = await query;
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(error.code === "23505" ? "errors.slugTaken" : error.message);
   const newId = String((data as Row).id);
+  if (before) await removeUnusedMedia(supabase, before, row);
   await logActivity(session.admin.id, id ? "update" : "create", table, newId, { slug: row.slug ?? row.date ?? null, status });
   await revalidatePublic(ENTITIES[entity].publicPaths(typeof row.slug === "string" ? row.slug : undefined));
   return { id: newId };
@@ -215,7 +219,7 @@ export async function setContentStatus(raw: unknown): Promise<AdminActionResult<
         d.entity === "jumuah"
           ? { published: d.status === "published" }
           : { status: d.status, ...(d.status === "published" ? { published_at: new Date().toISOString() } : {}) };
-      const { data, error } = await supabase.from(table).update(patch).eq("id", d.id).select("slug").maybeSingle();
+      const { data, error } = await supabase.from(table).update(patch).eq("id", d.id).select("*").maybeSingle();
       if (error) throw new Error(error.message);
       const slug = data && typeof (data as Row).slug === "string" ? String((data as Row).slug) : undefined;
       const action = d.status === "published" ? "publish" : d.status === "archived" ? "archive" : "unpublish";
@@ -237,8 +241,9 @@ export async function deleteContent(raw: unknown): Promise<AdminActionResult<und
       const supabase = await createServerSupabase();
       if (!supabase) throw new Error("supabase");
       const table = ENTITIES[d.entity].table;
-      const { data, error } = await supabase.from(table).delete().eq("id", d.id).select("slug").maybeSingle();
+      const { data, error } = await supabase.from(table).delete().eq("id", d.id).select("*").maybeSingle();
       if (error) throw new Error(error.message);
+      if (data) await removeUnusedMedia(supabase, data, null);
       const slug = data && typeof (data as Row).slug === "string" ? String((data as Row).slug) : undefined;
       await logActivity(s.admin.id, "delete", table, d.id, { slug: slug ?? null });
       await revalidatePublic(ENTITIES[d.entity].publicPaths(slug));

@@ -136,14 +136,16 @@ export default async function ProgramDetailPage({ params }: { params: Promise<Pa
               </Card>
             </dl>
 
-            <div>
-              <h2 className="text-2xl font-bold">{t("detail.requirements")}</h2>
-              <div className="card-surface mt-4 px-6">
-                {REQ_KEYS.map((k, i) => (
-                  <NumberedItem key={k} index={i + 1} title={t(`requirements.${program.id}.${k}.title`)} description={t(`requirements.${program.id}.${k}.text`)} />
-                ))}
+            {REQ_KEYS.every((k) => t.has(`requirements.${program.id}.${k}.title`)) && (
+              <div>
+                <h2 className="text-2xl font-bold">{t("detail.requirements")}</h2>
+                <div className="card-surface mt-4 px-6">
+                  {REQ_KEYS.map((k, i) => (
+                    <NumberedItem key={k} index={i + 1} title={t(`requirements.${program.id}.${k}.title`)} description={t(`requirements.${program.id}.${k}.text`)} />
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {special && (
               <div>

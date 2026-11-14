@@ -1,8 +1,10 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { getTranslations } from "next-intl/server";
 import { createAction } from "@/lib/actions";
 import { getEventBySlug, getProfile } from "@/lib/data";
+import { EVENTS_TAG } from "@/lib/data/supabase-adapter";
 import { buildWhatsAppUrl, composeMessage } from "@/lib/whatsapp";
 import { formatDateTime, pick } from "@/lib/utils/i18n";
 import { registrationSchema, type RegistrationOutput, type RegistrationResult, type RegistrationStatus } from "@/components/activities/registration-schema";
@@ -20,7 +22,14 @@ const action = createAction<RegistrationOutput, RegistrationResult>({
     const event = await getEventBySlug(data.eventSlug);
     if (!event) throw new Error(`event not found: ${data.eventSlug}`);
 
-    const reg = event.registration;
+    // Kuota diperiksa terhadap hitungan TERBARU di database, bukan salinan cache, agar dua
+    // pendaftar berurutan tidak sama-sama lolos saat kursi tinggal satu.
+    let reg = event.registration;
+    if (ctx.supabase) {
+      const { data: fresh } = await ctx.supabase.from("events").select("registration").eq("slug", data.eventSlug).eq("status", "published").maybeSingle();
+      const latest = (fresh as { registration?: typeof reg } | null)?.registration;
+      if (latest) reg = latest;
+    }
     const full = reg.quota !== undefined && (reg.registered ?? 0) >= reg.quota;
     const status: RegistrationStatus = full ? "waitlist" : "registered";
 
@@ -35,6 +44,8 @@ const action = createAction<RegistrationOutput, RegistrationResult>({
         locale: ctx.locale,
       });
       if (error) throw error;
+      // Trigger database memperbarui jumlah pendaftar; cache konten disegarkan di latar belakang.
+      revalidateTag(EVENTS_TAG, "max");
       return { status, fallback: null };
     }
 

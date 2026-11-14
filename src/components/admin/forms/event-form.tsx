@@ -12,6 +12,7 @@ import { useFieldError } from "@/components/admin/use-admin-action";
 import { LocalizedInput, LocalizedTextarea } from "@/components/admin/localized-input";
 import { LocalizedBlockEditor } from "@/components/admin/block-editor";
 import { FormSection } from "@/components/admin/form-bar";
+import { ImageUpload } from "@/components/admin/cms/image-upload";
 import { ContentFormActions, useContentSave, type Guard } from "@/components/admin/content-form-shared";
 
 const CATEGORIES = ["kajian", "tpa", "muallaf", "community", "culture", "ramadan", "eid", "class", "open-mosque"] as const;
@@ -122,9 +123,13 @@ export function EventForm({ initial, guard }: { initial: EventRecord | null; gua
               ))}
             </div>
           </div>
-          <Field label={t("fields.coverImage")} htmlFor="coverImage" optionalLabel={t("common.optional")}>
-            <Input id="coverImage" disabled={disabled} placeholder="/images/..." {...register("coverImage")} />
-          </Field>
+          <Controller
+            control={control}
+            name="coverImage"
+            render={({ field }) => (
+              <ImageUpload id="coverImage" className="sm:col-span-2" label={t("fields.coverImage")} value={field.value} folder="covers" preset="photo" disabled={disabled} onChange={(src) => field.onChange(src)} />
+            )}
+          />
         </div>
         <label className="flex items-center gap-3 text-sm">
           <Checkbox disabled={disabled} {...register("featured")} />

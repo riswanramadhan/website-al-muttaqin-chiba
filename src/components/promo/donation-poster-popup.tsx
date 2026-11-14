@@ -9,48 +9,33 @@ import { Link } from "@/i18n/navigation";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils/cn";
+import type { PromoPopup } from "@/lib/types";
+import { markPromoSeen, promoSeenKey, readPromoSeen } from "@/components/promo/seen";
 
-/** Ganti versi kunci ini bila poster diganti agar tampil sekali lagi untuk semua pengunjung. */
-const SEEN_KEY = "acc-promo-poster-donasi-v1";
 const AUTO_CLOSE_MS = 5000;
 const OPEN_DELAY_MS = 700;
-const POSTER_SRC = "/images/promo/poster-donasi.jpg";
-
-function readSeen(): boolean {
-  try {
-    return window.localStorage.getItem(SEEN_KEY) !== null;
-  } catch {
-    return false;
-  }
-}
-
-function markSeen() {
-  try {
-    window.localStorage.setItem(SEEN_KEY, new Date().toISOString());
-  } catch {
-    // mode privat / penyimpanan diblokir: poster bisa tampil lagi, tidak masalah.
-  }
-}
 
 /**
  * Pop-up poster donasi pada akses pertama: tampil sekali per perangkat (localStorage),
  * menutup otomatis setelah 5 detik (bilah progres), bisa ditutup dengan tombol X / Esc /
  * ketuk latar. Mengetuk poster atau tombol membuka halaman Infaq.
  */
-export function DonationPosterPopup() {
+export function DonationPosterPopup({ popup, alt }: { popup: PromoPopup; alt: string }) {
   const t = useTranslations("donate");
+  const { enabled, image, href, version } = popup;
+  const seenKey = promoSeenKey(version);
   const reduce = useReducedMotion();
   const [open, setOpen] = React.useState(false);
 
   // Akses pertama: unduh poster dulu agar langsung tampil utuh, lalu buka (minimal setelah jeda singkat).
   React.useEffect(() => {
-    if (readSeen()) return;
+    if (!enabled || !image.src || readPromoSeen(seenKey)) return;
     let cancelled = false;
     let delayDone = false;
     let imageDone = false;
     const show = () => {
       if (cancelled || !delayDone || !imageDone) return;
-      markSeen();
+      markPromoSeen(seenKey);
       setOpen(true);
     };
     const img = new window.Image();
@@ -58,7 +43,7 @@ export function DonationPosterPopup() {
       imageDone = true;
       show();
     };
-    img.src = POSTER_SRC;
+    img.src = image.src;
     const timer = window.setTimeout(() => {
       delayDone = true;
       show();
@@ -67,7 +52,7 @@ export function DonationPosterPopup() {
       cancelled = true;
       window.clearTimeout(timer);
     };
-  }, []);
+  }, [enabled, image.src, seenKey]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -85,8 +70,8 @@ export function DonationPosterPopup() {
         <DialogDescription className="sr-only">{t("promo.description")}</DialogDescription>
 
         <div className="relative overflow-hidden rounded-3xl bg-card shadow-[0_30px_80px_-20px_rgb(0_0_0/0.6)] ring-1 ring-white/10">
-          <Link href="/donate" onClick={() => setOpen(false)} className="block focus-visible:ring-inset" aria-label={t("promo.cta")}>
-            <Image src={POSTER_SRC} alt={t("promo.alt")} width={1080} height={1350} unoptimized className="block h-auto w-full" />
+          <Link href={href} onClick={() => setOpen(false)} className="block focus-visible:ring-inset" aria-label={t("promo.cta")}>
+            <Image src={image.src} alt={alt || t("promo.alt")} width={image.width || 1080} height={image.height || 1350} unoptimized className="block h-auto w-full" />
           </Link>
           {/* Bilah waktu tutup otomatis */}
           <div className="absolute inset-x-0 top-0 h-1 bg-black/20" aria-hidden>

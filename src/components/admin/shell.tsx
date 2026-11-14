@@ -4,22 +4,38 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  Banknote,
   Bell,
+  CalendarClock,
   CalendarDays,
+  CircleQuestionMark,
+  CircleUserRound,
   Clock,
+  Contact,
+  DoorOpen,
   ExternalLink,
+  FileChartColumn,
+  GraduationCap,
   HandCoins,
+  IdCard,
+  Images,
   Inbox,
+  Landmark,
   Languages,
   LayoutDashboard,
   LogOut,
+  MapPinned,
   Megaphone,
   Menu,
   Mic,
+  Milestone,
   Newspaper,
+  Presentation,
   ScrollText,
+  Target,
+  TriangleAlert,
   Users,
-  CalendarClock,
+  Video,
 } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 import type { AdminRole } from "@/lib/supabase/admin";
@@ -47,9 +63,24 @@ const ICONS: Record<AdminNavIcon, React.ComponentType<{ className?: string }>> =
   push: Bell,
   admins: Users,
   activity: ScrollText,
+  profile: Contact,
+  board: IdCard,
+  facilities: Landmark,
+  timeline: Milestone,
+  gallery: Images,
+  faqs: CircleQuestionMark,
+  programs: GraduationCap,
+  rooms: DoorOpen,
+  halal: MapPinned,
+  video: Video,
+  promo: Presentation,
+  accounts: Banknote,
+  donationPrograms: Target,
+  reports: FileChartColumn,
+  account: CircleUserRound,
 };
 
-export type AdminShellUser = { name: string; email: string; role: AdminRole } | null;
+export type AdminShellUser = { name: string; email: string; role: AdminRole; mustChangePassword?: boolean } | null;
 
 function NavList({ role, onNavigate }: { role: AdminRole | null; onNavigate?: () => void }) {
   const pathname = usePathname();
@@ -65,7 +96,7 @@ function NavList({ role, onNavigate }: { role: AdminRole | null; onNavigate?: ()
             <ul className="flex flex-col gap-0.5">
               {items.map((item) => {
                 const Icon = ICONS[item.icon];
-                const active = item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href);
+                const active = item.href === "/admin" ? pathname === "/admin" : pathname === item.href || pathname.startsWith(`${item.href}/`);
                 return (
                   <li key={item.key}>
                     <Link
@@ -187,6 +218,15 @@ export function AdminShell({ user, demo, children }: { user: AdminShellUser; dem
           </div>
         </header>
         {demo && <DemoBanner />}
+        {user?.mustChangePassword && (
+          <div role="alert" className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-warning/30 bg-warning/10 px-4 py-3 text-sm sm:px-6">
+            <TriangleAlert className="size-4 shrink-0 text-warning" aria-hidden />
+            <span className="min-w-0 flex-1">{t("account.mustChange")}</span>
+            <Link href="/admin/account" className="font-semibold text-brand hover:underline">
+              {t("account.changePassword")}
+            </Link>
+          </div>
+        )}
         <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
           <div className="mx-auto w-full max-w-6xl">{children}</div>
         </main>

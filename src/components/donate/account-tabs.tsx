@@ -7,6 +7,7 @@ import { Download, Landmark, QrCode, Wallet } from "lucide-react";
 import type { DonationAccount, Locale } from "@/lib/types";
 import { pick } from "@/lib/utils/i18n";
 import { cn } from "@/lib/utils/cn";
+import { shouldSkipOptimization } from "@/lib/utils/media";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { CopyButton } from "@/components/ui/copy-button";
@@ -66,7 +67,7 @@ function AccountCard({ account, locale, compact }: { account: DonationAccount; l
   const bankLabel = pick(account.bankNameLocalized, locale) || account.bankName;
   const note = pick(account.note, locale);
   const Icon = account.method === "qris" ? QrCode : account.method === "ewallet" ? Wallet : Landmark;
-  const isSvg = account.qrImage?.toLowerCase().endsWith(".svg") ?? false;
+  const skipOptimization = shouldSkipOptimization(account.qrImage);
 
   return (
     <article className="card-surface flex h-full flex-col gap-4 p-5" aria-label={bankLabel}>
@@ -90,7 +91,7 @@ function AccountCard({ account, locale, compact }: { account: DonationAccount; l
             alt={t("qrisAlt")}
             width={compact ? 240 : 220}
             height={compact ? 240 : 220}
-            unoptimized={isSvg}
+            unoptimized={skipOptimization}
             className="size-56 rounded-lg bg-background p-2"
           />
           <a href={account.qrImage} download className={buttonVariants({ variant: "outline", size: "sm" })}>
